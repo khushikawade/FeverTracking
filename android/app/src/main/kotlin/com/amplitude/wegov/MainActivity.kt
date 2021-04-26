@@ -1,0 +1,6 @@
+package com.feverTracking.app
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
