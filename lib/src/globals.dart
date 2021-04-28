@@ -35,6 +35,8 @@ var showSwipeDemo;
 
 String sortKey = "asc";
 
+String deviceType;
+
 var PharmacyHistory;
 
 String currentRoute = "chatlobby";

@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   shared_preferences: ^0.5.7+3
   image_cropper: ^1.1.0
+  device_info: ^0.4.2+9
 
 
 
@@ -49,18 +50,20 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   fonts:
-    - family: HBXapp
+    - family: FeverTracking
       fonts:
-        - asset: assets/fonts/HBXapp.ttf
-
-    - family: Quicksand
+        - asset: assets/fonts/FeverTracking.ttf
+    - family: SF-UI-DISPLAY
       fonts:
-        - asset: assets/fonts/fonts/Quicksand-Bold.ttf
-          #-fontweight : 600
-        - asset: assets/fonts/fonts/Quicksand-Light.ttf
-        - asset: assets/fonts/fonts/Quicksand-Medium.ttf
-        - asset: assets/fonts/fonts/Quicksand-Regular.ttf
-        - asset: assets/fonts/fonts/Quicksand-SemiBold.ttf
+        - asset: assets/fonts/SF-UI-Display-Black.ttf
+        - asset: assets/fonts/SF-UI-Display-Bold.ttf
+        - asset: assets/fonts/SF-UI-Display-Heavy.ttf
+        - asset: assets/fonts/SF-UI-Display-Light.ttf
+        - asset: assets/fonts/SF-UI-Display-Medium.ttf
+        - asset: assets/fonts/SF-UI-Display-Regular.ttf
+        - asset: assets/fonts/SF-UI-Display-Semibold.ttf
+        - asset: assets/fonts/SF-UI-Display-Thin.ttf
+        - asset: assets/fonts/SF-UI-Display-Ultralight.ttf
         
 
   # To add assets to your application, add an assets section, like this:

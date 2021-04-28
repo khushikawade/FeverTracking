@@ -1,4 +1,6 @@
 PODS:
+  - device_info (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - image_cropper (0.0.3):
     - Flutter
@@ -8,6 +10,7 @@ PODS:
   - TOCropViewController (2.5.5)
 
 DEPENDENCIES:
+  - device_info (from `.symlinks/plugins/device_info/ios`)
   - Flutter (from `Flutter`)
   - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
@@ -17,6 +20,8 @@ SPEC REPOS:
     - TOCropViewController
 
 EXTERNAL SOURCES:
+  device_info:
+    :path: ".symlinks/plugins/device_info/ios"
   Flutter:
     :path: Flutter
   image_cropper:
@@ -25,6 +30,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
 SPEC CHECKSUMS:
+  device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   image_cropper: c8f9b4157933c7bb965a66d1c5e6c8fd408c6eb4
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
