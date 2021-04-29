@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/src/modules/home/home_screen.dart';
 import 'package:mobile_app/src/modules/login/pageview_screen/screen1.dart';
 import 'package:mobile_app/src/modules/login/pageview_screen/screen2.dart';
 import 'package:mobile_app/src/modules/login/pageview_screen/screen3.dart';
@@ -101,7 +102,10 @@ class IntroPageState extends State<IntroPage> {
   // get Started Button
   Widget getStartedButton() {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      },
       child: Container(
         width: double.infinity,
         margin: EdgeInsets.only(left: 25, right: 25),

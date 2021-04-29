@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/modules/home/home_screen.dart';
 
 class Screen1 extends StatefulWidget {
   @override
@@ -14,16 +15,22 @@ class Screen1State extends State<Screen1> {
         elevation: 0,
         backgroundColor: Colors.white,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 25),
-            child: Text(
-              'Skip',
-              style: TextStyle(
-                  color: Color(0xff463DC7),
-                  letterSpacing: 0,
-                  fontSize: globals.deviceType == 'phone' ? 17 : 25,
-                  fontFamily: 'SF UI Display Semibold',
-                  fontWeight: FontWeight.w600),
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 25),
+              child: Text(
+                'Skip',
+                style: TextStyle(
+                    color: Color(0xff463DC7),
+                    letterSpacing: 0,
+                    fontSize: globals.deviceType == 'phone' ? 17 : 25,
+                    fontFamily: 'SF UI Display Semibold',
+                    fontWeight: FontWeight.w600),
+              ),
             ),
           )
         ],
