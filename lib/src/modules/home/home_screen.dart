@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/src/globals.dart' as globals;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -13,6 +14,46 @@ class HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         elevation: 5,
         backgroundColor: Color(0xff463DC7),
+        centerTitle: true,
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Home',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Color(0xffFFFFFF),
+                  letterSpacing: 0,
+                  fontSize: globals.deviceType == 'phone' ? 20 : 28,
+                  fontFamily: 'SF UI Display Semibold',
+                  fontWeight: FontWeight.w600),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Apr 23, 2021',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Color(0xffFFFFFF).withOpacity(0.6),
+                      letterSpacing: 0.08,
+                      fontSize: globals.deviceType == 'phone' ? 13 : 21,
+                      fontFamily: 'SF UI Display Regular',
+                      fontWeight: FontWeight.normal),
+                ),
+                // Icon(
+                //   Icons.arrow_drop_down,
+                //   color: Color(0xffB5B1E8),
+                //   size: 22,
+                // )
+              ],
+            )
+          ],
+        ),
         leading: Padding(
           padding: const EdgeInsets.only(left: 5),
           child: IconButton(
