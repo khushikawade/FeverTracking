@@ -26,6 +26,8 @@ dependencies:
   shared_preferences: ^0.5.7+3
   image_cropper: ^1.1.0
   device_info: ^0.4.2+9
+  flutter_switch: ^0.2.2
+
 
 
 
@@ -50,9 +52,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   fonts:
-    - family: FeverTracking
+    - family: FeverTrackingIcons
       fonts:
-        - asset: assets/fonts/FeverTracking.ttf
+        - asset: assets/fonts/FeverTrackingIcons.ttf
     - family: SF-UI-DISPLAY
       fonts:
         - asset: assets/fonts/SF-UI-Display-Black.ttf
