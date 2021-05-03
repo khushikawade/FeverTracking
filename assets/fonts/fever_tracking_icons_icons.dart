@@ -42,5 +42,10 @@ class FeverTrackingIcons {
   static const IconData welcome_01 = IconData(0xe80e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData welcome_02 = IconData(0xe80f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData welcome_03 = IconData(0xe810, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData reminder_ico = IconData(0xe811, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData heart_ico = IconData(0xe812, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData stethoscope_ico = IconData(0xe813, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData medicine_ico = IconData(0xe814, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData gripper_ico = IconData(0xe815, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData group_add = IconData(0xe81f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

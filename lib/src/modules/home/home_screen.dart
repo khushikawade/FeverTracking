@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/home/menu_screen.dart';
 import 'package:mobile_app/src/modules/logs/log.dart';
-import 'package:mobile_app/src/modules/medicines/medicines.dart';
+import 'package:mobile_app/src/modules/medicines/medicine.dart';
+
 import 'package:mobile_app/src/modules/profile/setting.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,45 +20,78 @@ class HomeScreenState extends State<HomeScreen> {
           elevation: 5,
           backgroundColor: Color(0xff463DC7),
           centerTitle: true,
-          title: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Home',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Color(0xffFFFFFF),
-                    letterSpacing: 0,
-                    fontSize: globals.deviceType == 'phone' ? 20 : 28,
-                    fontFamily: 'SF UI Display Semibold',
-                    fontWeight: FontWeight.w600),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'Apr 23, 2021',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color(0xffFFFFFF).withOpacity(0.6),
-                        letterSpacing: 0.08,
-                        fontSize: globals.deviceType == 'phone' ? 13 : 21,
-                        fontFamily: 'SF UI Display Regular',
-                        fontWeight: FontWeight.normal),
-                  ),
-                  Icon(
-                    Icons.arrow_drop_down,
-                    color: Color(0xffB5B1E8),
-                    size: 18,
-                  )
-                ],
-              )
-            ],
-          ),
+          title: selectedIndex == 0
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Home',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Color(0xffFFFFFF),
+                          letterSpacing: 0,
+                          fontSize: globals.deviceType == 'phone' ? 20 : 28,
+                          fontFamily: 'SF UI Display Semibold',
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Apr 23, 2021',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Color(0xffFFFFFF).withOpacity(0.6),
+                              letterSpacing: 0.08,
+                              fontSize: globals.deviceType == 'phone' ? 13 : 21,
+                              fontFamily: 'SF UI Display Regular',
+                              fontWeight: FontWeight.normal),
+                        ),
+                        Icon(
+                          Icons.arrow_drop_down,
+                          color: Color(0xffB5B1E8),
+                          size: 18,
+                        )
+                      ],
+                    )
+                  ],
+                )
+              : selectedIndex == 1
+                  ? Text(
+                      'Logs',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Color(0xffFFFFFF),
+                          letterSpacing: 0,
+                          fontSize: globals.deviceType == 'phone' ? 20 : 28,
+                          fontFamily: 'SF UI Display Semibold',
+                          fontWeight: FontWeight.w600),
+                    )
+                  : selectedIndex == 2
+                      ? Text(
+                          'Medicines',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Color(0xffFFFFFF),
+                              letterSpacing: 0,
+                              fontSize: globals.deviceType == 'phone' ? 20 : 28,
+                              fontFamily: 'SF UI Display Semibold',
+                              fontWeight: FontWeight.w600),
+                        )
+                      : Text(
+                          'Settings',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Color(0xffFFFFFF),
+                              letterSpacing: 0,
+                              fontSize: globals.deviceType == 'phone' ? 20 : 28,
+                              fontFamily: 'SF UI Display Semibold',
+                              fontWeight: FontWeight.w600),
+                        ),
           leading: Padding(
             padding: const EdgeInsets.only(left: 5),
             child: IconButton(

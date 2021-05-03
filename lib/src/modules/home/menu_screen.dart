@@ -96,7 +96,9 @@ class _MenuScreenState extends State<MenuScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: textColor,
+                      color: widget.selectedIndex == 0
+                          ? textColor
+                          : textColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
                       fontSize: 20),
                 ),
@@ -134,7 +136,9 @@ class _MenuScreenState extends State<MenuScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: textColor.withOpacity(0.61),
+                      color: widget.selectedIndex == 1
+                          ? textColor
+                          : textColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
                       fontSize: 20),
                 ),
@@ -172,7 +176,9 @@ class _MenuScreenState extends State<MenuScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: textColor.withOpacity(0.61),
+                      color: widget.selectedIndex == 2
+                          ? textColor
+                          : textColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
                       fontSize: 20),
                 ),
@@ -213,7 +219,9 @@ class _MenuScreenState extends State<MenuScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: textColor.withOpacity(0.61),
+                      color: widget.selectedIndex == 3
+                          ? textColor
+                          : textColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
                       fontSize: 20),
                 ),
