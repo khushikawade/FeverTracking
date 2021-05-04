@@ -22,7 +22,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
         body: ListView.separated(
           separatorBuilder: (BuildContext context, int index) {
             return Container(
-              height: 0.7,
+              height: 0.5,
               margin: EdgeInsets.only(left: 16),
               color: Color.fromRGBO(0, 0, 0, 0.25),
             );
