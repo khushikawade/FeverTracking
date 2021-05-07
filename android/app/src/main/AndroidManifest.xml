@@ -19,11 +19,6 @@
         android:label="FeverTracking"
         android:icon="@mipmap/ic_launcher"
         >
-        
-        <activity
-    android:name="com.yalantis.ucrop.UCropActivity"
-    android:screenOrientation="portrait"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
    
         <activity
             android:name=".MainActivity"
@@ -59,19 +54,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-           <!-- For open_file plugin -->
-         <provider
-                android:name="androidx.core.content.FileProvider"
-                android:authorities="${applicationId}.fileProvider"
-                android:exported="false"
-                android:grantUriPermissions="true"
-                tools:replace="android:authorities">
-            <meta-data
-                    android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/filepaths"
-                    tools:replace="android:resource" />
-        </provider>
-
-
+           
     </application>
 </manifest>

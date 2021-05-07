@@ -2,40 +2,27 @@ PODS:
   - device_info (0.0.1):
     - Flutter
   - Flutter (1.0.0)
-  - image_cropper (0.0.3):
-    - Flutter
-    - TOCropViewController (~> 2.5.4)
   - shared_preferences (0.0.1):
     - Flutter
-  - TOCropViewController (2.5.5)
 
 DEPENDENCIES:
   - device_info (from `.symlinks/plugins/device_info/ios`)
   - Flutter (from `Flutter`)
-  - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
-
-SPEC REPOS:
-  trunk:
-    - TOCropViewController
 
 EXTERNAL SOURCES:
   device_info:
     :path: ".symlinks/plugins/device_info/ios"
   Flutter:
     :path: Flutter
-  image_cropper:
-    :path: ".symlinks/plugins/image_cropper/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
 SPEC CHECKSUMS:
   device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  image_cropper: c8f9b4157933c7bb965a66d1c5e6c8fd408c6eb4
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
-  TOCropViewController: da59f531f8ac8a94ef6d6c0fc34009350f9e8bfe
 
-PODFILE CHECKSUM: 3366ba792e3d9164f3f8678572a9dcc77caa3632
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
 COCOAPODS: 1.10.0

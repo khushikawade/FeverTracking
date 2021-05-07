@@ -45,7 +45,7 @@ class _LogPageState extends State<LogPage> {
               ],
             ),
             child: Icon(
-              const IconData(0xea16, fontFamily: 'FeverTracking'),
+              const IconData(0xe806, fontFamily: 'FeverTrackingIcons'),
               color: Colors.white,
               size: 25,
             ),

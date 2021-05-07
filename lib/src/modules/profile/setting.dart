@@ -62,23 +62,16 @@ class _SettingPageState extends State<SettingPage> {
             padding: EdgeInsets.only(top: 7, bottom: 7),
             child: ListTile(
               leading: Container(
-                height: 30,
-                width: 30,
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: iconBackgroundColor,
-                  border: Border.all(width: 0.0, color: Colors.white54),
-                  borderRadius: BorderRadius.all(Radius.circular(
-                          20.0) //                 <--- border radius here
-                      ),
+                    color: iconBackgroundColor, shape: BoxShape.circle),
+                child: Icon(
+                  const IconData(0xe811, fontFamily: 'FeverTrackingIcons'),
+                  color: iconsColor,
+                  size: 26,
                 ),
-                // child: Icon(
-                //   const IconData(0xe808, fontFamily: 'FeverTracking'),
-                //   color: iconsColor,
-                //   size: 15,
-                // ),
               ),
-              minLeadingWidth: 30,
+              //minLeadingWidth: 30,
               title: Text(
                 "Reminders",
                 style: TextStyle(
@@ -128,22 +121,16 @@ class _SettingPageState extends State<SettingPage> {
             padding: EdgeInsets.only(top: 7, bottom: 7),
             child: ListTile(
               leading: Container(
-                width: 30,
-                height: 30,
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: iconBackgroundColor,
-                  border: Border.all(width: 0.0, color: Colors.white54),
-                  borderRadius: BorderRadius.all(Radius.circular(
-                          20.0) //                 <--- border radius here
-                      ),
+                    color: iconBackgroundColor, shape: BoxShape.circle),
+                child: Icon(
+                  const IconData(0xe813, fontFamily: 'FeverTrackingIcons'),
+                  color: iconsColor,
+                  size: 24,
                 ),
-                // child: Icon(
-                //   const IconData(0xe813, fontFamily: 'FeverTracking'),
-                //   color: iconsColor,
-                // ),
               ),
-              minLeadingWidth: 30,
+              //minLeadingWidth: 30,
               title: Text(
                 "Symptoms",
                 style: TextStyle(
@@ -172,22 +159,17 @@ class _SettingPageState extends State<SettingPage> {
             padding: EdgeInsets.only(top: 7, bottom: 7),
             child: ListTile(
               leading: Container(
-                width: 30,
-                height: 30,
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: iconBackgroundColor,
-                  border: Border.all(width: 0.0, color: Colors.white54),
-                  borderRadius: BorderRadius.all(Radius.circular(
-                          20.0) //                 <--- border radius here
-                      ),
+                    color: iconBackgroundColor, shape: BoxShape.circle),
+                child: Icon(
+                  const IconData(0xe812, fontFamily: 'FeverTrackingIcons'),
+                  color: iconsColor,
+                  size: 26,
                 ),
-                // child: Icon(
-                //   const IconData(0xe803, fontFamily: 'FeverTracking'),
-                //   color: iconsColor,
-                // ),
               ),
-              minLeadingWidth: 30,
+
+              //minLeadingWidth: 30,
               title: Text(
                 "Health",
                 style: TextStyle(
@@ -319,7 +301,6 @@ class _SettingPageState extends State<SettingPage> {
                   Container(
                     margin: const EdgeInsets.all(0),
                     width: 110,
-                    height: 30,
                     child: CupertinoSegmentedControl(
                       padding: EdgeInsets.symmetric(horizontal: 0.0),
                       children: {
