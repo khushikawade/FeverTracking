@@ -108,10 +108,6 @@ class _MedicinesPageState extends State<MedicinesPage> {
                 color: Color.fromRGBO(0, 0, 0, 0.25),
               )
             : Container()
-        // index == (item - 1)
-        //     ? Divider(indent: 1, height: 1.0, color: Colors.black)
-        //     : Divider(
-        //         indent: 20, height: 1, color: dividerColor.withOpacity(0.2)),
       ]),
     );
   }

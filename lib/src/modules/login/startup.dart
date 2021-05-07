@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
+
 import 'package:mobile_app/src/modules/login/intro_page.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/globals.dart' as globals;
@@ -42,7 +43,7 @@ class _StartupPageState extends State<StartupPage> {
   getDeviceType() async {
     if (Platform.isAndroid) {
       final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
-      //globals.deviceType = data.size.shortestSide < 600 ? 'tablet' :'tablet';
+      // globals.deviceType = data.size.shortestSide < 600 ? 'tablet' :'tablet';
       globals.deviceType = data.size.shortestSide < 600 ? 'phone' : 'tablet';
       print("Device Type : ${globals.deviceType}");
     } else {
