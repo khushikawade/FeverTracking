@@ -152,7 +152,7 @@ class IntroPageState extends State<IntroPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: globals.deviceType == 'phone' ? 16 : 24,
-                    color: Color(0xffFFFFFF),
+                    color: Theme.of(context).hintColor,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'SF UI Display Bold'),
               ),

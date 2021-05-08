@@ -13,7 +13,7 @@ class Screen2State extends State<Screen2> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         actions: [
           InkWell(
             onTap: () {
@@ -76,7 +76,7 @@ class Screen2State extends State<Screen2> {
           'In medicine, monitoring is the observation of a disease, condition or one or several medical parameters over time.',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Color(0xff333333),
+              color: Theme.of(context).accentColor,
               letterSpacing: 0,
               fontSize: globals.deviceType == 'phone' ? 17 : 25,
               fontFamily: 'SF UI Display Regular',

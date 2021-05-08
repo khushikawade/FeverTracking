@@ -51,7 +51,7 @@ class Screen3State extends State<Screen3> {
           'A primary caregiver is the person who takes primary responsibility for someone who cannot care fully for himself or herself.',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Color(0xff333333),
+              color: Theme.of(context).accentColor,
               letterSpacing: 0,
               fontSize: globals.deviceType == 'phone' ? 17 : 25,
               fontFamily: 'SF UI Display Regular',

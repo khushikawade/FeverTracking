@@ -13,7 +13,7 @@ class Screen1State extends State<Screen1> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         actions: [
           InkWell(
             onTap: () {
@@ -76,7 +76,7 @@ class Screen1State extends State<Screen1> {
           'Running a fever during the onset of Monsoon could have been passed off as the seasonal flu or viral fever earlier.',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Color(0xff333333),
+              color: Theme.of(context).accentColor,
               letterSpacing: 0,
               fontSize: globals.deviceType == 'phone' ? 17 : 25,
               fontFamily: 'SF UI Display Regular',

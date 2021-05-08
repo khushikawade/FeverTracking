@@ -76,7 +76,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 letterSpacing: 0,
-                color: listTittleColor,
+                color: Theme.of(context).textSelectionColor,
                 fontFamily: "SF UI Display Bold",
                 fontSize: globals.deviceType == 'phone' ? 17 : 25),
           ),

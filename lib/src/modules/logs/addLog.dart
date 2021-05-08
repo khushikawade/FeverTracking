@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:intl/intl.dart';
+import 'package:mobile_app/src/modules/graphdata/user_temp_grap.dart';
 import 'package:mobile_app/src/styles/theme.dart';
 
 class AddLogPage extends StatefulWidget {
@@ -13,12 +14,9 @@ class AddLogPage extends StatefulWidget {
 }
 
 class _AddLogPageState extends State<AddLogPage> {
-  Color backGroundColor = Color(0xFFFFFFFF);
   Color dropdowniconColor = Color(0XFFB5B1E8);
-  Color textColor = Color(0xFFFFFFFF);
   Color dividerColor = Color(0xffC4CADF).withOpacity(0.25);
-
-  Color listTextColor = Color(0xFF030303);
+  // Color listTextColor = Color(0xFF030303);
   Color headingTextColor = Color(0xFF000000);
   Color iconsColor = Color(0xFFd6d6d6);
   Color arrowIconsColor = Color(0xFF000000);
@@ -38,7 +36,7 @@ class _AddLogPageState extends State<AddLogPage> {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(13), topRight: Radius.circular(13))),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         context: context,
         builder: (context) => Container(
             height: height ?? MediaQuery.of(context).size.height / 3,
@@ -66,19 +64,66 @@ class _AddLogPageState extends State<AddLogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 5,
+        backgroundColor: Color(0xff463DC7),
+        centerTitle: true,
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Add Log',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Theme.of(context).hintColor,
+                  letterSpacing: 0,
+                  fontSize: globals.deviceType == 'phone' ? 20 : 28,
+                  fontFamily: 'SF UI Display Semibold',
+                  fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.close,
+            size: 30.0,
+            color: Colors.white,
+          ),
+        ),
+        actions: [
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pop(1);
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Icon(
+                IconData(59809, fontFamily: "MaterialIcons"),
+                color: Color(0xffFFFFFF),
+                size: 24,
+              ),
+            ),
+          ),
+        ],
+      ),
       body: Container(
         color: Theme.of(context).backgroundColor,
         child: Column(children: [
-          SizedBox(
-            height: 28,
-          ),
-          Container(
-            height: 1,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: dividerColor,
-            ),
-          ),
+          // SizedBox(
+          //   height: 2.0,
+          // ),
+          // Container(
+          //   height: 1,
+          //   width: MediaQuery.of(context).size.width,
+          //   decoration: BoxDecoration(
+          //     color: Theme.of(context).dividerColor,
+          //   ),
+          // ),
           Container(
             padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
             child: ListTile(
@@ -86,7 +131,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 "Time",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: listTextColor,
+                    color: Theme.of(context).accentColor,
                     fontFamily: "SF UI Display Regular Bold",
                     fontSize: globals.deviceType == "phone" ? 17 : 25),
               ),
@@ -144,7 +189,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 "Postion",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: listTextColor,
+                    color: Theme.of(context).accentColor,
                     fontFamily: "SF UI Display Regular Bold",
                     fontSize: globals.deviceType == "phone" ? 17 : 25),
               ),
@@ -188,7 +233,7 @@ class _AddLogPageState extends State<AddLogPage> {
               leading: Text(
                 "Temp",
                 style: TextStyle(
-                    color: listTextColor,
+                    color: Theme.of(context).accentColor,
                     fontFamily: "SF UI Display Regular",
                     fontSize: globals.deviceType == "phone" ? 17 : 25),
               ),
@@ -234,7 +279,7 @@ class _AddLogPageState extends State<AddLogPage> {
               leading: Text(
                 "Symptoms",
                 style: TextStyle(
-                    color: listTextColor,
+                    color: Theme.of(context).accentColor,
                     fontFamily: "SF UI Display Regular",
                     fontSize: 17),
               ),
@@ -270,7 +315,7 @@ class _AddLogPageState extends State<AddLogPage> {
               leading: Text(
                 "Add Medicine Log",
                 style: TextStyle(
-                    color: listTextColor,
+                    color: Theme.of(context).accentColor,
                     fontFamily: "SF UI Display Regular",
                     fontSize: globals.deviceType == "phone" ? 17 : 25),
               ),
@@ -317,7 +362,7 @@ class _AddLogPageState extends State<AddLogPage> {
               leading: Text(
                 "Add Notes here",
                 style: TextStyle(
-                    color: listTextColor,
+                    color: Theme.of(context).accentColor,
                     fontFamily: "SF UI Display Regular",
                     fontSize: globals.deviceType == "phone" ? 17 : 25),
               ),

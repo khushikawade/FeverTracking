@@ -75,7 +75,7 @@ class _SettingPageState extends State<SettingPage> {
               title: Text(
                 "Reminders",
                 style: TextStyle(
-                    color: listTextColor,
+                    color: Theme.of(context).textSelectionColor,
                     letterSpacing: 0,
                     fontFamily: "SF UI Display Regular",
                     fontSize: globals.deviceType == 'phone' ? 17 : 25),
@@ -134,7 +134,7 @@ class _SettingPageState extends State<SettingPage> {
               title: Text(
                 "Symptoms",
                 style: TextStyle(
-                    color: listTextColor,
+                    color: Theme.of(context).textSelectionColor,
                     fontFamily: "SF UI Display Regular",
                     fontSize: globals.deviceType == 'phone' ? 17 : 25),
               ),
@@ -173,7 +173,7 @@ class _SettingPageState extends State<SettingPage> {
               title: Text(
                 "Health",
                 style: TextStyle(
-                    color: listTextColor,
+                    color: Theme.of(context).textSelectionColor,
                     fontFamily: "SF UI Display Regular",
                     fontSize: globals.deviceType == 'phone' ? 17 : 25),
               ),

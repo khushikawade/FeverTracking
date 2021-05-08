@@ -9,7 +9,6 @@ class LogPage extends StatefulWidget {
 class _LogPageState extends State<LogPage> {
   Color screenbackGroundColor = Color(0XFFF7F8F9);
   Color listbackGroundColor = Color(0XFFFFFFFF);
-  Color dividerColor = Color(0XFF000000);
   Color listTittleColor = Color(0XFF030303);
   Color listSubtitleColor = Color(0XFF666666);
   Color tralingTextColor = Color(0XFF463DC7);
@@ -89,7 +88,7 @@ class _LogPageState extends State<LogPage> {
                       "100.7 F",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: listTittleColor,
+                          color: Theme.of(context).textSelectionColor,
                           fontFamily: "SF UI Display Bold",
                           fontSize: globals.deviceType == 'phone' ? 17 : 25),
                     ),
