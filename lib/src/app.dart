@@ -34,7 +34,8 @@ class AppState extends State<AppTemplate> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FeverTracking',
-      theme: appTheme(),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.lightTheme,
       // routes: routes,
       home: StartupPage(),
 

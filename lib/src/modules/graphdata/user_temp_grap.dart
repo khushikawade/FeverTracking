@@ -1,7 +1,8 @@
 import 'package:charts_flutter/flutter.dart' as charts;
-
+import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/modules/logs/addLog.dart';
+import 'package:mobile_app/src/styles/theme.dart';
 
 class UserTemperaturePage extends StatefulWidget {
   @override
@@ -25,22 +26,22 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
             children: [
               Container(
                 height: 44,
-                color: Color(0xff463DC7),
+                color: Theme.of(context).primaryColor,
                 child: TabBar(
                   tabs: tabcontent,
-                  indicatorColor: Color(0xffFAA45F),
+                  indicatorColor: Theme.of(context).accentColor,
                   indicatorWeight: 4,
-                  // indicatorSize: 32,
+
                   // labelColor: Colors.white,
                   labelStyle: TextStyle(
                       fontSize: 14.0,
-                      color: Colors.white,
+                      color: AppTheme.titleColor,
                       fontWeight: FontWeight.w600,
-                      fontFamily: 'SF UI Display Semibold'), //For Selected tab
+                      fontFamily: 'SF UI Display Semibold'),
                   unselectedLabelStyle: TextStyle(
                       fontSize: 14.0,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white.withOpacity(0.50),
+                      color: AppTheme.titleColor.withOpacity(0.50),
                       fontFamily:
                           'SF UI Display Semibold'), //For Un-selected Tabs
                 ),
@@ -63,36 +64,6 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
             ],
           )),
     );
-    // floatingActionButton: GestureDetector(
-    //   onTap: () {
-    //     Navigator.push(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => AddLogPage()),
-    //     );
-    //   },
-    //   child: Container(
-    //     padding: EdgeInsets.all(15),
-    //     decoration: BoxDecoration(
-    //       color: Color(0XFFFAA45F),
-    //       borderRadius: BorderRadius.all(
-    //         Radius.circular(100),
-    //       ),
-    //       boxShadow: [
-    //         BoxShadow(
-    //           color: Color.fromARGB(250, 164, 95, 60),
-    //           spreadRadius: 0,
-    //           blurRadius: 10,
-    //           offset: Offset(0, 4),
-    //         ),
-    //       ],
-    //     ),
-    //     child: Icon(
-    //       const IconData(0xea16, fontFamily: 'FeverTracking'),
-    //       color: Colors.white,
-    //       size: 25,
-    //     ),
-    //   ),
-    // ));
   }
 
   Widget graphWidget() {
@@ -109,8 +80,7 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                   style: TextStyle(
                       fontFamily: "SF UI Display Regular",
                       fontSize: 10.0,
-                      color: Color(0XFF666666),
-                      // color: Color(0xff0FFFFFF),
+                      color: AppTheme.graphTextColor,
                       fontWeight: FontWeight.bold),
                 ),
                 Row(
@@ -121,10 +91,10 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                         width: 4,
                         height: 4,
                         decoration: BoxDecoration(
-                            color: Color(0XFFF4B042),
+                            color: AppTheme.graphIndictor1,
                             shape: BoxShape.rectangle,
                             border: Border.all(
-                              color: Color(0XFFF4B042),
+                              color: AppTheme.graphIndictor1,
                             ))),
                     SizedBox(
                       width: 2.5,
@@ -134,7 +104,7 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                       style: TextStyle(
                           fontFamily: "SF UI Display Regular",
                           fontSize: 10.0,
-                          color: Color(0XFF666666),
+                          color: AppTheme.graphTextColor,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -144,10 +114,10 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                         width: 4,
                         height: 4,
                         decoration: BoxDecoration(
-                            color: Color(0XFF4EB4F4),
+                            color: AppTheme.graphIndictor2,
                             shape: BoxShape.rectangle,
                             border: Border.all(
-                              color: Color(0XFF4EB4F4),
+                              color: AppTheme.graphIndictor2,
                             ))),
                     SizedBox(
                       width: 2.5,
@@ -157,7 +127,7 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                       style: TextStyle(
                           fontFamily: "SF UI Display Regular",
                           fontSize: 10.0,
-                          color: Color(0XFF666666),
+                          color: AppTheme.graphTextColor,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -167,10 +137,10 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                         width: 4,
                         height: 4,
                         decoration: BoxDecoration(
-                            color: Color(0XFFDF3F3F),
+                            color: AppTheme.graphIndictor3,
                             shape: BoxShape.rectangle,
                             border: Border.all(
-                              color: Color(0XFFDF3F3F),
+                              color: AppTheme.graphIndictor3,
                             ))),
                     SizedBox(
                       width: 2.5,
@@ -180,14 +150,14 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                       style: TextStyle(
                           fontFamily: "SF UI Display Regular",
                           fontSize: 10.0,
-                          color: Color(0XFF666666),
+                          color: AppTheme.graphTextColor,
                           fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ]),
               Container(
-                color: Color(0xffFFFFFF).withOpacity(.4),
+                color: Theme.of(context).backgroundColor.withOpacity(.4),
                 child: SizedBox(
                   height: 250,
                   width: double.infinity,
@@ -204,7 +174,7 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                     style: TextStyle(
                       fontFamily: "SF UI Display Regular",
                       fontSize: 13.0,
-                      color: Color(0XFF6D6D72),
+                      color: AppTheme.graphTextColor2,
                     ),
                   ),
                   Text(
@@ -212,7 +182,7 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                     style: TextStyle(
                       fontFamily: "SF UI Display Regular",
                       fontSize: 12.0,
-                      color: Color(0XFF666666),
+                      color: AppTheme.graphTextColor,
                     ),
                   ),
                 ],
@@ -250,10 +220,8 @@ class TemperatureGraph extends StatefulWidget {
   State<StatefulWidget> createState() => new _SelectionCallbackState();
   final ax134 = charts.NumericAxisSpec(
       renderSpec: charts.GridlineRendererSpec(
-    labelStyle: charts.TextStyleSpec(
-        fontSize: 10,
-        color: charts.MaterialPalette
-            .white), //chnage white color as per your requirement.
+    labelStyle:
+        charts.TextStyleSpec(fontSize: 10, color: charts.MaterialPalette.white),
   ));
   static List<charts.Series<TemperatureDataClass, DateTime>>
       _createSampleData() {
@@ -385,9 +353,7 @@ class _SelectionCallbackState extends State<TemperatureGraph> {
                 ),
               ),
             ),
-
             animate: widget.animate,
-            // domainAxis: ax134,
             selectionModels: [
               new charts.SelectionModelConfig(
                 type: charts.SelectionModelType.info,
@@ -442,26 +408,13 @@ class HeartGraphClass extends StatelessWidget {
 
     final labels = charts.BasicNumericTickFormatterSpec((num value) {
       var index = value.floor();
-      print('--- tick for $value in $string with $index ---');
+
       return (index < string.length)
           ? '${string[index]}'
           : 'overflow ${string.length} $index';
     });
 
     return new charts.TimeSeriesChart(seriesList,
-
-        //  domainAxis: new charts.OrdinalAxisSpec(
-        //     renderSpec: new charts.SmallTickRendererSpec(
-
-        //         // Tick and Label styling here.
-        //         labelStyle: new charts.TextStyleSpec(
-        //             fontSize: 18, // size in Pts.
-        //             color: charts.MaterialPalette.black),
-
-        //         // Change the line colors to match text color.
-        //         lineStyle: new charts.LineStyleSpec(
-        //             color: charts.MaterialPalette.black))),
-
         defaultRenderer:
             new charts.LineRendererConfig(includeArea: true, stacked: true),
         animate: animate,

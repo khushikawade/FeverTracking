@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/home/home_screen.dart';
+import 'package:mobile_app/src/overrides.dart' as overrides;
+import 'package:mobile_app/src/styles/theme.dart';
 
 class Screen2 extends StatefulWidget {
   @override
@@ -25,7 +27,7 @@ class Screen2State extends State<Screen2> {
               child: Text(
                 'Skip',
                 style: TextStyle(
-                    color: Color(0xff463DC7),
+                    color: AppTheme.textColor2,
                     letterSpacing: 0,
                     fontSize: globals.deviceType == 'phone' ? 17 : 25,
                     fontFamily: 'SF UI Display Semibold',
@@ -39,7 +41,7 @@ class Screen2State extends State<Screen2> {
         width: double.infinity,
         height: double.infinity,
         alignment: Alignment.center,
-        color: Colors.white,
+        color: Theme.of(context).backgroundColor,
         padding: EdgeInsets.only(left: 30, right: 30),
         child: makeWidget(),
       ),
@@ -63,7 +65,7 @@ class Screen2State extends State<Screen2> {
           'Regularly track the parameters with symptoms',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Color(0xff0F0F0F),
+              color: AppTheme.contentColor1,
               letterSpacing: 0,
               fontSize: globals.deviceType == 'phone' ? 24 : 32,
               fontFamily: 'SF UI Display Bold',
@@ -76,7 +78,7 @@ class Screen2State extends State<Screen2> {
           'In medicine, monitoring is the observation of a disease, condition or one or several medical parameters over time.',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Theme.of(context).accentColor,
+              color: AppTheme.contentColor2,
               letterSpacing: 0,
               fontSize: globals.deviceType == 'phone' ? 17 : 25,
               fontFamily: 'SF UI Display Regular',

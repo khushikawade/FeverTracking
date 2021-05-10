@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:mobile_app/src/overrides.dart' as overrides;
+import 'package:mobile_app/src/styles/theme.dart';
 
 class SettingPage extends StatefulWidget {
   @override
@@ -9,31 +11,18 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  Color backGroundColor = Color(0xFFFFFFFF);
-  Color dropdowniconColor = Color(0XFFB5B1E8);
-  Color textColor = Color(0xFFFFFFFF);
-  Color dividerColor = Color.fromRGBO(0, 0, 0, 0.25);
-  Color listTextColor = Color(0xFF030303);
-  Color headingTextColor = Color(0xFF000000);
-  Color iconsColor = Color(0xFFd6d6d6);
-  Color upperWidgetBackgroundColor = Color(0xFFFFFFFF).withOpacity(0.4);
-  Color iconBackgroundColor = Color(0xff929292);
-  Color toggleSwitchActiveColor = Color(0XFF4CD964);
   bool _lights = false;
   int _selectedIndexValue;
   bool isSwitched = false;
-  var textValue = 'Switch is OFF';
 
   void toggleSwitch(bool value) {
     if (isSwitched == false) {
       setState(() {
         isSwitched = true;
-        textValue = 'Switch Button is ON';
       });
     } else {
       setState(() {
         isSwitched = false;
-        textValue = 'Switch Button is OFF';
       });
     }
   }
@@ -42,7 +31,7 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: backGroundColor,
+        color: Theme.of(context).backgroundColor,
         child: Column(children: [
           SizedBox(
             height: 35,
@@ -55,7 +44,7 @@ class _SettingPageState extends State<SettingPage> {
             height: 0.7,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color: dividerColor,
+              color: AppTheme.dividerColor,
             ),
           ),
           Container(
@@ -64,10 +53,11 @@ class _SettingPageState extends State<SettingPage> {
               leading: Container(
                 padding: EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                    color: iconBackgroundColor, shape: BoxShape.circle),
+                    color: AppTheme.iconBackgroundColor,
+                    shape: BoxShape.circle),
                 child: Icon(
                   const IconData(0xe811, fontFamily: 'FeverTrackingIcons'),
-                  color: iconsColor,
+                  color: AppTheme.iconColor1,
                   size: 26,
                 ),
               ),
@@ -75,7 +65,7 @@ class _SettingPageState extends State<SettingPage> {
               title: Text(
                 "Reminders",
                 style: TextStyle(
-                    color: Theme.of(context).textSelectionColor,
+                    color: AppTheme.textColor1,
                     letterSpacing: 0,
                     fontFamily: "SF UI Display Regular",
                     fontSize: globals.deviceType == 'phone' ? 17 : 25),
@@ -108,13 +98,13 @@ class _SettingPageState extends State<SettingPage> {
           //   height: 1,
           //   indent: 80,
           //   endIndent: 10,
-          //   color: dividerColor,
+          //   color: AppTheme.dividerColor,
           // ),
           Container(
             height: 0.7,
             margin: EdgeInsets.only(left: 65),
             decoration: BoxDecoration(
-              color: dividerColor,
+              color: AppTheme.dividerColor,
             ),
           ),
           Container(
@@ -123,24 +113,24 @@ class _SettingPageState extends State<SettingPage> {
               leading: Container(
                 padding: EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                    color: iconBackgroundColor, shape: BoxShape.circle),
+                    color: AppTheme.iconBackgroundColor,
+                    shape: BoxShape.circle),
                 child: Icon(
                   const IconData(0xe813, fontFamily: 'FeverTrackingIcons'),
-                  color: iconsColor,
+                  color: AppTheme.iconColor1,
                   size: 24,
                 ),
               ),
-              //minLeadingWidth: 30,
               title: Text(
                 "Symptoms",
                 style: TextStyle(
-                    color: Theme.of(context).textSelectionColor,
+                    color: AppTheme.textColor1,
                     fontFamily: "SF UI Display Regular",
                     fontSize: globals.deviceType == 'phone' ? 17 : 25),
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                color: Color(0xFF536274),
+                color: AppTheme.iconsColor3,
                 size: 15,
               ),
               selected: true,
@@ -152,7 +142,7 @@ class _SettingPageState extends State<SettingPage> {
             margin: EdgeInsets.only(left: 65),
             // width: MediaQuery.of(context).size.width * 60,
             decoration: BoxDecoration(
-              color: dividerColor,
+              color: AppTheme.dividerColor,
             ),
           ),
           Container(
@@ -161,25 +151,24 @@ class _SettingPageState extends State<SettingPage> {
               leading: Container(
                 padding: EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                    color: iconBackgroundColor, shape: BoxShape.circle),
+                    color: AppTheme.iconBackgroundColor,
+                    shape: BoxShape.circle),
                 child: Icon(
                   const IconData(0xe812, fontFamily: 'FeverTrackingIcons'),
-                  color: iconsColor,
+                  color: AppTheme.iconColor1,
                   size: 26,
                 ),
               ),
-
-              //minLeadingWidth: 30,
               title: Text(
                 "Health",
                 style: TextStyle(
-                    color: Theme.of(context).textSelectionColor,
+                    color: AppTheme.textColor1,
                     fontFamily: "SF UI Display Regular",
                     fontSize: globals.deviceType == 'phone' ? 17 : 25),
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                color: Color(0xFF536274),
+                color: AppTheme.iconsColor3,
                 size: 15,
               ),
               selected: true,
@@ -190,7 +179,7 @@ class _SettingPageState extends State<SettingPage> {
             height: 0.7,
             margin: EdgeInsets.only(left: 65),
             decoration: BoxDecoration(
-              color: dividerColor,
+              color: AppTheme.dividerColor,
             ),
           ),
         ]),
@@ -201,7 +190,7 @@ class _SettingPageState extends State<SettingPage> {
   Widget upperitemWidget() {
     return Container(
       decoration: BoxDecoration(
-        color: upperWidgetBackgroundColor,
+        color: Theme.of(context).backgroundColor.withOpacity(0.4),
       ),
       child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -220,7 +209,6 @@ class _SettingPageState extends State<SettingPage> {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      // color: Color.fromRGBO(0, 0, 0, 0.2),
                       borderRadius: BorderRadius.all(
                         Radius.circular(47.06),
                       ),
@@ -257,13 +245,13 @@ class _SettingPageState extends State<SettingPage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: headingTextColor,
+                            color: AppTheme.headingTextColor,
                             fontFamily: "SF UI Display Bold",
                             fontSize: globals.deviceType == 'phone' ? 18 : 26),
                       ),
                       Icon(
                         Icons.arrow_drop_down_sharp,
-                        color: dropdowniconColor,
+                        color: AppTheme.dropdowniconColor,
                         size: 28,
                       )
                     ],
@@ -280,7 +268,7 @@ class _SettingPageState extends State<SettingPage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             // fontWeight: FontWeight.w600,
-                            color: headingTextColor,
+                            color: AppTheme.headingTextColor,
                             letterSpacing: 0,
                             fontFamily: "SF UI Display Regulars",
                             fontSize: globals.deviceType == 'phone' ? 14 : 22),
@@ -289,7 +277,7 @@ class _SettingPageState extends State<SettingPage> {
                         "Disable",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Color(0XFF463DC7),
+                            color: AppTheme.textColor2,
                             fontFamily: "SF UI Display Regular",
                             fontSize: globals.deviceType == 'phone' ? 14 : 22),
                       ),

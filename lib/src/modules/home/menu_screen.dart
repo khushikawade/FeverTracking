@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/src/overrides.dart' as overrides;
+import 'package:mobile_app/src/styles/theme.dart';
 
 class MenuScreen extends StatefulWidget {
   int selectedIndex;
@@ -10,12 +12,8 @@ class MenuScreen extends StatefulWidget {
 
 class _MenuScreenState extends State<MenuScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  Color backGroundColor = Color(0xff463DC7);
+
   int selectedIndex = 0;
-  Color dividerColor1 = Color(0xff463DC7);
-  Color dividerColor2 = Color(0xFFFFFFFF);
-  Color textColor = Color(0xFFFFFFFF);
-  Color dropIconColor = Color(0XFFB5B1E8);
   int index = 0;
 
   @override
@@ -29,23 +27,22 @@ class _MenuScreenState extends State<MenuScreen> {
           child: Icon(
             Icons.close,
             size: 30.0,
-            color: Colors.white,
+            // color: Colors.white,
           ),
         ),
         automaticallyImplyLeading: false,
-        backgroundColor: backGroundColor,
+        // backgroundColor: backGroundColor,
         elevation: 0,
         titleSpacing: 0.0,
       ),
       key: _scaffoldKey,
       body: menuWidget(),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
   Widget menuWidget() {
     return Container(
-      color: backGroundColor,
+      color: Theme.of(context).primaryColor,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -74,13 +71,13 @@ class _MenuScreenState extends State<MenuScreen> {
                   textAlign: TextAlign.right,
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
-                      color: textColor,
+                      color: AppTheme.titleColor,
                       fontFamily: "SF UI Display Bold",
                       fontSize: 22),
                 ),
                 Icon(
                   Icons.arrow_drop_down_sharp,
-                  color: dropIconColor,
+                  color: AppTheme.dropIconColor,
                   size: 30.0,
                 ),
               ],
@@ -97,8 +94,8 @@ class _MenuScreenState extends State<MenuScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: widget.selectedIndex == 0
-                          ? textColor
-                          : textColor.withOpacity(0.61),
+                          ? AppTheme.titleColor
+                          : AppTheme.titleColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
                       fontSize: 20),
                 ),
@@ -113,10 +110,10 @@ class _MenuScreenState extends State<MenuScreen> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          dividerColor1.withOpacity(0),
-                          dividerColor2.withOpacity(0.51),
-                          dividerColor2.withOpacity(0.51),
-                          dividerColor1.withOpacity(1),
+                          AppTheme.menuScreendividerColor1.withOpacity(0),
+                          AppTheme.menuScreendividerColor2.withOpacity(0.51),
+                          AppTheme.menuScreendividerColor2.withOpacity(0.51),
+                          AppTheme.menuScreendividerColor1.withOpacity(1),
                         ],
                       ),
                     ),
@@ -137,8 +134,8 @@ class _MenuScreenState extends State<MenuScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: widget.selectedIndex == 1
-                          ? textColor
-                          : textColor.withOpacity(0.61),
+                          ? AppTheme.titleColor
+                          : AppTheme.titleColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
                       fontSize: 20),
                 ),
@@ -153,10 +150,10 @@ class _MenuScreenState extends State<MenuScreen> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          dividerColor1.withOpacity(0),
-                          dividerColor2.withOpacity(0.51),
-                          dividerColor2.withOpacity(0.51),
-                          dividerColor1.withOpacity(1),
+                          AppTheme.menuScreendividerColor1.withOpacity(0),
+                          AppTheme.menuScreendividerColor2.withOpacity(0.51),
+                          AppTheme.menuScreendividerColor2.withOpacity(0.51),
+                          AppTheme.menuScreendividerColor1.withOpacity(1),
                         ],
                       ),
                     ),
@@ -177,8 +174,8 @@ class _MenuScreenState extends State<MenuScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: widget.selectedIndex == 2
-                          ? textColor
-                          : textColor.withOpacity(0.61),
+                          ? AppTheme.titleColor
+                          : AppTheme.titleColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
                       fontSize: 20),
                 ),
@@ -193,12 +190,12 @@ class _MenuScreenState extends State<MenuScreen> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          dividerColor1.withOpacity(0),
+                          AppTheme.menuScreendividerColor1.withOpacity(0),
                           // Colors.black,
-                          dividerColor2.withOpacity(0.51),
-                          dividerColor2.withOpacity(0.51),
-                          dividerColor2.withOpacity(0.51),
-                          dividerColor1.withOpacity(1),
+                          AppTheme.menuScreendividerColor2.withOpacity(0.51),
+                          // AppTheme.menuScreendividerColor2.withOpacity(0.51),
+                          AppTheme.menuScreendividerColor2.withOpacity(0.51),
+                          AppTheme.menuScreendividerColor1.withOpacity(1),
                           // Colors.orange,
                         ],
                       ),
@@ -220,8 +217,8 @@ class _MenuScreenState extends State<MenuScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: widget.selectedIndex == 3
-                          ? textColor
-                          : textColor.withOpacity(0.61),
+                          ? AppTheme.titleColor
+                          : AppTheme.titleColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
                       fontSize: 20),
                 ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/overrides.dart' as overrides;
+import 'package:mobile_app/src/styles/theme.dart';
 
 class Screen3 extends StatefulWidget {
   @override
@@ -14,7 +16,7 @@ class Screen3State extends State<Screen3> {
         width: double.infinity,
         height: double.infinity,
         alignment: Alignment.center,
-        color: Colors.white,
+        color: Theme.of(context).backgroundColor,
         padding: EdgeInsets.only(left: 30, right: 30),
         child: makeWidget(),
       ),
@@ -38,7 +40,7 @@ class Screen3State extends State<Screen3> {
           'Send all the data to doctor or caregiver in a PDF',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Color(0xff0F0F0F),
+              color: AppTheme.contentColor1,
               letterSpacing: 0,
               fontSize: globals.deviceType == 'phone' ? 24 : 32,
               fontFamily: 'SF UI Display Bold',
@@ -51,7 +53,7 @@ class Screen3State extends State<Screen3> {
           'A primary caregiver is the person who takes primary responsibility for someone who cannot care fully for himself or herself.',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Theme.of(context).accentColor,
+              color: AppTheme.contentColor2,
               letterSpacing: 0,
               fontSize: globals.deviceType == 'phone' ? 17 : 25,
               fontFamily: 'SF UI Display Regular',

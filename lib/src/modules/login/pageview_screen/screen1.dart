@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/home/home_screen.dart';
+import 'package:mobile_app/src/overrides.dart' as overrides;
+import 'package:mobile_app/src/styles/theme.dart';
 
 class Screen1 extends StatefulWidget {
   @override
@@ -25,7 +27,7 @@ class Screen1State extends State<Screen1> {
               child: Text(
                 'Skip',
                 style: TextStyle(
-                    color: Color(0xff463DC7),
+                    color: AppTheme.textColor2,
                     letterSpacing: 0,
                     fontSize: globals.deviceType == 'phone' ? 17 : 25,
                     fontFamily: 'SF UI Display Semibold',
@@ -39,7 +41,7 @@ class Screen1State extends State<Screen1> {
         width: double.infinity,
         height: double.infinity,
         alignment: Alignment.center,
-        color: Colors.white,
+        color: Theme.of(context).backgroundColor,
         padding: EdgeInsets.only(left: 30, right: 30),
         child: makeWidget(),
       ),
@@ -63,7 +65,7 @@ class Screen1State extends State<Screen1> {
           'Easy way to track health parameters',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Color(0xff0F0F0F),
+              color: AppTheme.contentColor1,
               letterSpacing: 0,
               fontSize: globals.deviceType == 'phone' ? 24 : 32,
               fontFamily: 'SF UI Display Bold',
@@ -76,7 +78,7 @@ class Screen1State extends State<Screen1> {
           'Running a fever during the onset of Monsoon could have been passed off as the seasonal flu or viral fever earlier.',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Theme.of(context).accentColor,
+              color: AppTheme.contentColor2,
               letterSpacing: 0,
               fontSize: globals.deviceType == 'phone' ? 17 : 25,
               fontFamily: 'SF UI Display Regular',

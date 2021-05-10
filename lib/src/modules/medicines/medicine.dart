@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/overrides.dart' as overrides;
+import 'package:mobile_app/src/styles/theme.dart';
 
 class MedicinesPage extends StatefulWidget {
   @override
@@ -7,18 +9,13 @@ class MedicinesPage extends StatefulWidget {
 }
 
 class _MedicinesPageState extends State<MedicinesPage> {
-  Color screenbackGroundColor = Color(0XFFF7F7F7);
-  Color listbackGroundColor = Color(0XFFFFFFFF);
-  Color dividerColor = Color(0XFF000000);
-  Color listTittleColor = Color(0XFF030303);
-  Color listSubtitleColor = Color(0XFF8F8E94);
-  Color tralingIconColor = Color(0XFFe2e2e2);
-  Color iconsColor = Color(0xFF708090);
-  Color flottingButtonColor = Color(0XFF463DC7);
+  // Color flottingButtonColor = Color(0XFF463DC7);
+  // Color dividerColor = Color(0XFF000000);
+  // Color listTittleColor = Color(0XFF030303);
 
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: screenbackGroundColor,
+        backgroundColor: AppTheme.screenbackGroundColor,
         body: ListView.separated(
           separatorBuilder: (BuildContext context, int index) {
             return Container(
@@ -37,13 +34,13 @@ class _MedicinesPageState extends State<MedicinesPage> {
           child: Container(
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
-              color: flottingButtonColor,
+              color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.all(
                 Radius.circular(100),
               ),
               boxShadow: [
                 BoxShadow(
-                  color: flottingButtonColor.withOpacity(0.6),
+                  color: Theme.of(context).primaryColor.withOpacity(0.6),
                   spreadRadius: 0,
                   blurRadius: 10,
                   offset: Offset(0, 4),
@@ -52,7 +49,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
             ),
             child: Icon(
               const IconData(0xe806, fontFamily: 'FeverTrackingIcons'),
-              color: Colors.white,
+              color: AppTheme.iconColor,
               size: 25,
             ),
           ),
@@ -61,13 +58,13 @@ class _MedicinesPageState extends State<MedicinesPage> {
 
   Widget itemWidget1(int index) {
     return Container(
-      color: listbackGroundColor,
+      color: AppTheme.listbackGroundColor,
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         ListTile(
           leading: Container(
             child: Icon(
               const IconData(0xe814, fontFamily: 'FeverTrackingIcons'),
-              color: iconsColor,
+              color: AppTheme.iconsColor,
               size: 45,
             ),
           ),
@@ -76,7 +73,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 letterSpacing: 0,
-                color: Theme.of(context).textSelectionColor,
+                color: AppTheme.textColor1,
                 fontFamily: "SF UI Display Bold",
                 fontSize: globals.deviceType == 'phone' ? 17 : 25),
           ),
@@ -85,7 +82,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
             child: Text(
               "3 Times per day",
               style: TextStyle(
-                  color: listSubtitleColor,
+                  color: AppTheme.listSubtitleColor,
                   letterSpacing: 0,
                   fontFamily: "SF UI Display ",
                   fontSize: globals.deviceType == "phone" ? 15 : 23),
@@ -95,7 +92,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
             padding: EdgeInsets.only(right: 12),
             child: Icon(
               const IconData(0xe815, fontFamily: 'FeverTrackingIcons'),
-              color: tralingIconColor,
+              color: AppTheme.tralingIconColor,
               size: 9,
             ),
           ),

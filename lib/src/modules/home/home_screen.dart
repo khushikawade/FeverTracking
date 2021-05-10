@@ -8,7 +8,7 @@ import 'package:mobile_app/src/modules/logs/log.dart';
 import 'package:mobile_app/src/modules/medicines/medicine.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:mobile_app/src/modules/profile/setting.dart';
-import 'package:mobile_app/src/styles/colors_file.dart';
+import 'package:mobile_app/src/styles/theme.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -22,7 +22,7 @@ class HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 5,
-        backgroundColor: Colour.AppbarBackgroundColor,
+        backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
         title: selectedIndex == 0
             ? Column(
@@ -34,7 +34,7 @@ class HomeScreenState extends State<HomeScreen> {
                     'Home',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Theme.of(context).hintColor,
+                        color: AppTheme.titleColor,
                         letterSpacing: 0,
                         fontSize: globals.deviceType == 'phone' ? 20 : 28,
                         fontFamily: 'SF UI Display Semibold',
@@ -49,7 +49,7 @@ class HomeScreenState extends State<HomeScreen> {
                         'Apr 23, 2021',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Color(0xffFFFFFF).withOpacity(0.6),
+                            color: AppTheme.titleColor.withOpacity(0.6),
                             letterSpacing: 0.08,
                             fontSize: globals.deviceType == 'phone' ? 13 : 21,
                             fontFamily: 'SF UI Display Regular',
@@ -69,7 +69,7 @@ class HomeScreenState extends State<HomeScreen> {
                     'Logs',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Theme.of(context).hintColor,
+                        color: AppTheme.titleColor,
                         letterSpacing: 0,
                         fontSize: globals.deviceType == 'phone' ? 20 : 28,
                         fontFamily: 'SF UI Display Semibold',
@@ -80,7 +80,7 @@ class HomeScreenState extends State<HomeScreen> {
                         'Medicines',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Theme.of(context).hintColor,
+                            color: AppTheme.titleColor,
                             letterSpacing: 0,
                             fontSize: globals.deviceType == 'phone' ? 20 : 28,
                             fontFamily: 'SF UI Display Semibold',
@@ -90,7 +90,7 @@ class HomeScreenState extends State<HomeScreen> {
                         'Settings',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Theme.of(context).hintColor,
+                            color: AppTheme.titleColor,
                             letterSpacing: 0,
                             fontSize: globals.deviceType == 'phone' ? 20 : 28,
                             fontFamily: 'SF UI Display Semibold',
@@ -108,13 +108,12 @@ class HomeScreenState extends State<HomeScreen> {
               if (index != null) {
                 setState(() {
                   selectedIndex = index;
-                  print("Selected Index : ${selectedIndex}");
                 });
               }
             },
             icon: Icon(
               IconData(0xe804, fontFamily: "FeverTrackingIcons"),
-              color: Color(0xffFFFFFF),
+              // color: AppTheme.iconColor,
               size: 24,
             ),
           ),
@@ -150,7 +149,7 @@ class HomeScreenState extends State<HomeScreen> {
                                   ? 0xe809
                                   : 0xe802,
                           fontFamily: "FeverTrackingIcons"),
-                      color: Color(0xffFFFFFF),
+                      // color:AppTheme.iconColor,
                       size: 24,
                     ),
                   ),
@@ -159,11 +158,6 @@ class HomeScreenState extends State<HomeScreen> {
       ),
       body: selectedIndex == 0
           ? UserTemperaturePage()
-          // Container(
-          //     color: Colors.red,
-          //     width: double.infinity,
-          //     height: double.infinity,
-          //   )
           : selectedIndex == 1
               ? LogPage()
               : selectedIndex == 2
@@ -180,14 +174,13 @@ class HomeScreenState extends State<HomeScreen> {
                 if (index != null) {
                   setState(() {
                     selectedIndex = index;
-                    print("Selected Index : ${selectedIndex}");
                   });
                 }
               },
               child: Container(
                 padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                  color: Color(0XFFFAA45F),
+                  color: Theme.of(context).accentColor,
                   borderRadius: BorderRadius.all(
                     Radius.circular(100),
                   ),
@@ -202,7 +195,7 @@ class HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Icon(
                   const IconData(0xea16, fontFamily: 'FeverTracking'),
-                  color: Colors.white,
+                  // color: AppTheme.iconColor,
                   size: 25,
                 ),
               ),

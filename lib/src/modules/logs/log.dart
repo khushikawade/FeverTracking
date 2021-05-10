@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/overrides.dart' as overrides;
+import 'package:mobile_app/src/styles/theme.dart';
 
 class LogPage extends StatefulWidget {
   @override
@@ -7,17 +9,14 @@ class LogPage extends StatefulWidget {
 }
 
 class _LogPageState extends State<LogPage> {
-  Color screenbackGroundColor = Color(0XFFF7F8F9);
-  Color listbackGroundColor = Color(0XFFFFFFFF);
-  Color listTittleColor = Color(0XFF030303);
-  Color listSubtitleColor = Color(0XFF666666);
-  Color tralingTextColor = Color(0XFF463DC7);
-  Color leadingiconsColor = Color(0xFF708090);
-  Color flottingButtonColor = Color(0XFF463DC7);
+  // Color flottingButtonColor = Color(0XFF463DC7);
+  // Color listTittleColor = Color(0XFF030303);
+  // Color listSubtitleColor = Color(0XFF666666);
+  // Color tralingTextColor = Color(0XFF463DC7);
 
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: screenbackGroundColor,
+        backgroundColor: AppTheme.screenbackGroundColor,
         body: ListView.builder(
           padding: EdgeInsets.only(top: 10),
           itemCount: 4,
@@ -30,13 +29,13 @@ class _LogPageState extends State<LogPage> {
           child: Container(
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
-              color: flottingButtonColor,
+              color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.all(
                 Radius.circular(100),
               ),
               boxShadow: [
                 BoxShadow(
-                  color: flottingButtonColor.withOpacity(0.6),
+                  color: Theme.of(context).primaryColor.withOpacity(0.6),
                   spreadRadius: 0,
                   blurRadius: 10,
                   offset: Offset(0, 4),
@@ -45,7 +44,7 @@ class _LogPageState extends State<LogPage> {
             ),
             child: Icon(
               const IconData(0xe806, fontFamily: 'FeverTrackingIcons'),
-              color: Colors.white,
+              color: AppTheme.iconColor,
               size: 25,
             ),
           ),
@@ -57,7 +56,7 @@ class _LogPageState extends State<LogPage> {
         margin: EdgeInsets.only(left: 16, right: 16, top: 5, bottom: 5),
         padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
         decoration: BoxDecoration(
-          color: listbackGroundColor,
+          color: AppTheme.listbackGroundColor,
           borderRadius: BorderRadius.circular(4),
           boxShadow: [
             BoxShadow(
@@ -75,7 +74,7 @@ class _LogPageState extends State<LogPage> {
           children: <Widget>[
             Icon(
               const IconData(0xea10, fontFamily: 'FeverTracking'),
-              color: leadingiconsColor,
+              color: AppTheme.leadingiconsColor,
             ),
             SizedBox(width: 20),
             Expanded(
@@ -88,7 +87,7 @@ class _LogPageState extends State<LogPage> {
                       "100.7 F",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Theme.of(context).textSelectionColor,
+                          color: AppTheme.textColor1,
                           fontFamily: "SF UI Display Bold",
                           fontSize: globals.deviceType == 'phone' ? 17 : 25),
                     ),
@@ -101,7 +100,7 @@ class _LogPageState extends State<LogPage> {
                         Text(
                           "Meds: ",
                           style: TextStyle(
-                              color: listSubtitleColor,
+                              color: AppTheme.subtitleTextColor,
                               fontWeight: FontWeight.w700,
                               fontFamily: "SF UI Display Semibold",
                               fontSize:
@@ -113,7 +112,7 @@ class _LogPageState extends State<LogPage> {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: listSubtitleColor,
+                                color: AppTheme.subtitleTextColor,
                                 fontFamily: "SF UI Display Regular",
                                 fontSize:
                                     globals.deviceType == 'phone' ? 14 : 22),
@@ -130,7 +129,7 @@ class _LogPageState extends State<LogPage> {
                         Text(
                           "Symptoms: ",
                           style: TextStyle(
-                              color: listSubtitleColor,
+                              color: AppTheme.subtitleTextColor,
                               fontWeight: FontWeight.w700,
                               fontFamily: "SF UI Display Semibold",
                               fontSize:
@@ -142,7 +141,7 @@ class _LogPageState extends State<LogPage> {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: listSubtitleColor,
+                                color: AppTheme.subtitleTextColor,
                                 fontFamily: "SF UI Display Regular",
                                 fontSize:
                                     globals.deviceType == 'phone' ? 14 : 22),
@@ -159,7 +158,7 @@ class _LogPageState extends State<LogPage> {
               child: Text(
                 "Just Now ",
                 style: TextStyle(
-                    color: tralingTextColor,
+                    color: AppTheme.textColor2,
                     fontWeight: FontWeight.normal,
                     fontFamily: "SF UI Display Regular",
                     fontSize: globals.deviceType == 'phone' ? 12 : 20),

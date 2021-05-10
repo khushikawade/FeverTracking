@@ -4,6 +4,8 @@ import 'package:mobile_app/src/modules/login/pageview_screen/screen1.dart';
 import 'package:mobile_app/src/modules/login/pageview_screen/screen2.dart';
 import 'package:mobile_app/src/modules/login/pageview_screen/screen3.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/overrides.dart' as overrides;
+import 'package:mobile_app/src/styles/theme.dart';
 
 class IntroPage extends StatefulWidget {
   @override
@@ -124,7 +126,7 @@ class IntroPageState extends State<IntroPage> {
             )
           ],*/
           borderRadius: BorderRadius.circular(3),
-          color: Color(0xffFAA45F),
+          color: Theme.of(context).accentColor,
         ),
         child:
             /*state is Loading
@@ -152,7 +154,7 @@ class IntroPageState extends State<IntroPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: globals.deviceType == 'phone' ? 16 : 24,
-                    color: Theme.of(context).hintColor,
+                    color: AppTheme.titleColor,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'SF UI Display Bold'),
               ),
@@ -170,8 +172,9 @@ class IntroPageState extends State<IntroPage> {
       height: isActive ? 10 : 10,
       width: isActive ? 10 : 10,
       decoration: BoxDecoration(
-          color:
-              index <= currentPageValue ? Color(0xffFAA45F) : Color(0xffCCCCCC),
+          color: index <= currentPageValue
+              ? Theme.of(context).accentColor
+              : Color(0xffCCCCCC),
           borderRadius: BorderRadius.all(Radius.circular(12))),
     );
   }
