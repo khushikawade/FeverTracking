@@ -69,7 +69,6 @@ class _StartupPageState extends State<StartupPage> {
 
   @override
   Widget build(BuildContext context) {
-    // globals.context = context;
     return Scaffold(
         body: Container(
             width: double.infinity,

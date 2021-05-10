@@ -53,6 +53,7 @@ class AppTheme {
   // AddLog Color
   static const Color subHeadingTextColor = Color(0xFF6D6D72);
   static const Color subHeadingbackgroundcolor = Color(0xFFEFEFF4);
+  static const Color subHeadingbackgroundcolor2 = Color(0XFFC7C7C7);
   static const Color arrowIconsColor = Color(0xFF000000);
   static const Color iconColor1 = Color(0xfffcfcfc);
 

@@ -191,12 +191,9 @@ class _MenuScreenState extends State<MenuScreen> {
                       gradient: LinearGradient(
                         colors: [
                           AppTheme.menuScreendividerColor1.withOpacity(0),
-                          // Colors.black,
                           AppTheme.menuScreendividerColor2.withOpacity(0.51),
-                          // AppTheme.menuScreendividerColor2.withOpacity(0.51),
                           AppTheme.menuScreendividerColor2.withOpacity(0.51),
                           AppTheme.menuScreendividerColor1.withOpacity(1),
-                          // Colors.orange,
                         ],
                       ),
                     ),

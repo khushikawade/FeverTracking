@@ -31,29 +31,6 @@ class IntroPageState extends State<IntroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   backgroundColor: Colors.white,
-      //   actions: [
-      //     currentPageValue == 2
-      //         ? Container(
-      //             width: 0,
-      //             height: 0,
-      //           )
-      //         : Padding(
-      //             padding: const EdgeInsets.only(right: 25),
-      //             child: Text(
-      //               'Skip',
-      //               style: TextStyle(
-      //                   color: Color(0xff463DC7),
-      //                   letterSpacing: 0,
-      //                   fontSize: globals.deviceType == 'phone' ? 17 : 25,
-      //                   fontFamily: 'SF UI Display Semibold',
-      //                   fontWeight: FontWeight.w600),
-      //             ),
-      //           )
-      //   ],
-      // ),
       body: introSliderView(),
     );
   }
@@ -112,7 +89,6 @@ class IntroPageState extends State<IntroPage> {
         width: double.infinity,
         margin: EdgeInsets.only(left: 25, right: 25),
         height: 50,
-        //alignment: Alignment.center,
         padding: EdgeInsets.only(top: 0, bottom: 0, left: 16, right: 16),
         decoration: BoxDecoration(
           boxShadow: [

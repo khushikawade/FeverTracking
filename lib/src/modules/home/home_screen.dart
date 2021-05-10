@@ -57,7 +57,7 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                       Icon(
                         Icons.arrow_drop_down,
-                        color: Color(0xffB5B1E8),
+                        color: AppTheme.dropdowniconColor,
                         size: 18,
                       )
                     ],
@@ -112,7 +112,7 @@ class HomeScreenState extends State<HomeScreen> {
               }
             },
             icon: Icon(
-              IconData(0xe804, fontFamily: "FeverTrackingIcons"),
+              const IconData(0xe804, fontFamily: "FeverTrackingIcons"),
               // color: AppTheme.iconColor,
               size: 24,
             ),
@@ -124,36 +124,83 @@ class HomeScreenState extends State<HomeScreen> {
                   height: 0,
                   width: 0,
                 )
-              : Padding(
-                  padding: const EdgeInsets.only(right: 5),
-                  child: IconButton(
-                    onPressed: () async {
-                      // if (selectedIndex == 3) {
-                      //   updateProfileSuccess = await Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => EditProfileScreen()),
-                      //   );
-                      //   if (updateProfileSuccess != null && updateProfileSuccess) {
-                      //     print("Result : ${updateProfileSuccess}");
-                      //     setState(() {});
-                      //   }
-                      // }
-                      //Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      IconData(
-                          selectedIndex == 0
-                              ? 0xe800
-                              : selectedIndex == 1
-                                  ? 0xe809
-                                  : 0xe802,
-                          fontFamily: "FeverTrackingIcons"),
-                      // color:AppTheme.iconColor,
-                      size: 24,
-                    ),
-                  ),
-                ),
+              : selectedIndex == 0
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: IconButton(
+                        onPressed: () async {
+                          // if (selectedIndex == 3) {
+                          //   updateProfileSuccess = await Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => EditProfileScreen()),
+                          //   );
+                          //   if (updateProfileSuccess != null && updateProfileSuccess) {
+                          //     print("Result : ${updateProfileSuccess}");
+                          //     setState(() {});
+                          //   }
+                          // }
+                          //Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          const IconData(0xe800,
+                              fontFamily: "FeverTrackingIcons"),
+                          // color:AppTheme.iconColor,
+                          size: 24,
+                        ),
+                      ),
+                    )
+                  : selectedIndex == 1
+                      ? Padding(
+                          padding: const EdgeInsets.only(right: 5),
+                          child: IconButton(
+                            onPressed: () async {
+                              // if (selectedIndex == 3) {
+                              //   updateProfileSuccess = await Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => EditProfileScreen()),
+                              //   );
+                              //   if (updateProfileSuccess != null && updateProfileSuccess) {
+                              //     print("Result : ${updateProfileSuccess}");
+                              //     setState(() {});
+                              //   }
+                              // }
+                              //Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              const IconData(0xe809,
+                                  fontFamily: "FeverTrackingIcons"),
+                              // color:AppTheme.iconColor,
+                              size: 24,
+                            ),
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.only(right: 5),
+                          child: IconButton(
+                            onPressed: () async {
+                              // if (selectedIndex == 3) {
+                              //   updateProfileSuccess = await Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => EditProfileScreen()),
+                              //   );
+                              //   if (updateProfileSuccess != null && updateProfileSuccess) {
+                              //     print("Result : ${updateProfileSuccess}");
+                              //     setState(() {});
+                              //   }
+                              // }
+                              //Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              const IconData(0xe802,
+                                  fontFamily: "FeverTrackingIcons"),
+                              // color:AppTheme.iconColor,
+                              size: 24,
+                            ),
+                          ),
+                        )
         ],
       ),
       body: selectedIndex == 0
@@ -194,10 +241,15 @@ class HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 child: Icon(
-                  const IconData(0xea16, fontFamily: 'FeverTracking'),
-                  // color: AppTheme.iconColor,
-                  size: 25,
+                  Icons.add,
+                  size: 25.0,
+                  // color: Colors.white,
                 ),
+                //  Icon(
+                //   const IconData(0xea16, fontFamily: 'FeverTracking'),
+                //   // color: AppTheme.iconColor,
+                //   size: 25,
+                // ),
               ),
             )
           : Container(

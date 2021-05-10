@@ -18,12 +18,6 @@ class _AddLogPageState extends State<AddLogPage> {
   String time;
   String dateTime;
 
-  // Color listTralingTextColor = Color(0xFF463DC7);
-  // Color dividerColor = Color(0xffC4CADF).withOpacity(0.25);
-  // Color listTextColor = Color(0xFF030303);
-  // Color headingTextColor = Color(0xFF000000);
-  // Color iconsColor = Color(0xFFd6d6d6);
-
   DateTime selectedDate = DateTime.now();
   String now = DateFormat('yyyy-MM-dd , kk:mm').format(DateTime.now());
 
@@ -101,7 +95,7 @@ class _AddLogPageState extends State<AddLogPage> {
             child: Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Icon(
-                IconData(59809, fontFamily: "MaterialIcons"),
+                const IconData(59809, fontFamily: "MaterialIcons"),
                 color: AppTheme.iconColor,
                 size: 24,
               ),
@@ -323,7 +317,7 @@ class _AddLogPageState extends State<AddLogPage> {
               color: AppTheme.subHeadingbackgroundcolor,
               boxShadow: [
                 const BoxShadow(
-                  color: Color(0XFFC7C7C7),
+                  color: AppTheme.subHeadingbackgroundcolor2,
                   spreadRadius: 0,
                   blurRadius: 0,
                   offset: Offset(0, -0.5),
