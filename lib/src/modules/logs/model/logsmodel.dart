@@ -1,7 +1,8 @@
 import 'package:hive/hive.dart';
 
-// part 'contact.g.dart';
+part 'logsmodel.g.dart';
 
+@HiveType(typeId: 0)
 @HiveType()
 class LogsModel {
   @HiveField(0)

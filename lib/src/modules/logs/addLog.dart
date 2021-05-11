@@ -387,9 +387,11 @@ class _AddLogPageState extends State<AddLogPage> {
   DateTime selectedDate = DateTime.now();
   String now = DateFormat('yyyy-MM-dd , kk:mm').format(DateTime.now());
 
-  void addLog(LogsModel Log) {
-    final contactsBox = Hive.box('contacts');
-    contactsBox.add(Log);
+  void addLog(LogsModel log) async {
+    final contactsBox = await Hive.openBox('log');
+    contactsBox.add(log);
+    print('${contactsBox.values}');
+    print(contactsBox.getAt(0));
   }
 
   Future<void> bottomSheet(BuildContext context, Widget child,
@@ -461,8 +463,8 @@ class _AddLogPageState extends State<AddLogPage> {
         actions: [
           InkWell(
             onTap: () {
-              final Log = LogsModel(dateTime, postion, temp);
-              addLog(Log);
+              final log = LogsModel(dateTime, postion, temp);
+              addLog(log);
               Navigator.of(context).pop(1);
             },
             child: Padding(

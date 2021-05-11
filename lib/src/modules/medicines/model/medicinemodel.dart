@@ -1,13 +1,13 @@
-import 'package:hive/hive.dart';
+// import 'package:hive/hive.dart';
 
-// part 'contact.g.dart';
+// // part 'contact.g.dart';
 
-@HiveType()
-class MedicineModel {
-  @HiveField(0)
-  String medicineName;
-  @HiveField(1)
-  int frequencyMedicine;
+// @HiveType()
+// class MedicineModel {
+//   @HiveField(0)
+//   String medicineName;
+//   @HiveField(1)
+//   int frequencyMedicine;
 
-  MedicineModel(this.medicineName, this.frequencyMedicine);
-}
+//   MedicineModel(this.medicineName, this.frequencyMedicine);
+// }
