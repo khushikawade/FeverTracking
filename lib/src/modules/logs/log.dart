@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
+import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/modules/logs/addLog.dart';
+import 'package:mobile_app/src/modules/logs/model/logsmodel.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
+import 'package:mobile_app/src/utilities/strings.dart';
+import 'package:mobile_app/src/widgets/loaderWidget.dart';
+import 'package:mobile_app/src/widgets/timeago.dart';
 
 class LogPage extends StatefulWidget {
   @override
@@ -9,23 +17,40 @@ class LogPage extends StatefulWidget {
 }
 
 class _LogPageState extends State<LogPage> {
-  // Color flottingButtonColor = Color(0XFF463DC7);
-  // Color listTittleColor = Color(0XFF030303);
-  // Color listSubtitleColor = Color(0XFF666666);
-  // Color tralingTextColor = Color(0XFF463DC7);
+  var logsList;
+  @override
+  void initState() {
+    super.initState();
+
+    //getList();
+  }
+
+  // get List Data
+  getList() async {
+    logsList = await DbServices().getListData(Strings.hiveLogName);
+    // List<LogsModel> list = hiveBox.get(Strings.hiveLogName);
+    print("Data : ${logsList.length}");
+    setState(() {});
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppTheme.screenbackGroundColor,
-        body: ListView.builder(
-          padding: EdgeInsets.only(top: 10),
-          itemCount: 4,
-          itemBuilder: (BuildContext context, int index) {
-            return itemWidget(index);
-          },
-        ),
+        body: makeWidget(),
         floatingActionButton: GestureDetector(
-          onTap: () {},
+          onTap: () async {
+            bool result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddLogPage(
+                          fromHomePage: false,
+                        )));
+
+            if (result != null && result) {
+              setState(() {});
+              //getList();
+            }
+          },
           child: Container(
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
@@ -51,7 +76,60 @@ class _LogPageState extends State<LogPage> {
         ));
   }
 
-  Widget itemWidget(int index) {
+  // make logs scrren list
+  Widget makeWidget() {
+    return FutureBuilder(
+        future: DbServices().getListData(Strings.hiveLogName),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return snapshot.data != null && snapshot.data.length > 0
+                ? ListView.builder(
+                    padding: EdgeInsets.only(top: 10, bottom: 100),
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return itemWidget(index, snapshot.data);
+                    },
+                  )
+                : Center(
+                    child: Text(
+                      'No Logs Found!!',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.textColor1,
+                          fontFamily: "SF UI Display Regular",
+                          fontSize: globals.deviceType == 'phone' ? 17 : 25),
+                    ),
+                  );
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return CustomLoader();
+          } else
+            return Scaffold();
+        });
+    // return logsList != null && logsList.length > 0
+    //     ? ListView.builder(
+    //         padding: EdgeInsets.only(top: 10),
+    //         itemCount: logsList.length,
+    //         itemBuilder: (BuildContext context, int index) {
+    //           return itemWidget(index, logsList);
+    //         },
+    //       )
+    //     : Center(
+    //         child: Text(
+    //           'No Logs Found!!',
+    //           style: TextStyle(
+    //               fontWeight: FontWeight.w600,
+    //               color: AppTheme.textColor1,
+    //               fontFamily: "SF UI Display Regular",
+    //               fontSize: globals.deviceType == 'phone' ? 17 : 25),
+    //         ),
+    //       );
+  }
+
+  Widget itemWidget(int index, items) {
+    if (index == items.length - 1) {
+      print(DateFormat('HH:mm').format(items[index].dateTime));
+      print(DateFormat('HH:mm').format(DateTime.now()));
+    }
     return Container(
         margin: EdgeInsets.only(left: 16, right: 16, top: 5, bottom: 5),
         padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
@@ -73,7 +151,7 @@ class _LogPageState extends State<LogPage> {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Icon(
-              const IconData(0xea10, fontFamily: 'FeverTracking'),
+              const IconData(0xea10, fontFamily: 'FeverTrackingIcons'),
               color: AppTheme.leadingiconsColor,
             ),
             SizedBox(width: 20),
@@ -84,7 +162,10 @@ class _LogPageState extends State<LogPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "100.7 F",
+                      items[index].temprature != null &&
+                              items[index].temprature.isNotEmpty
+                          ? items[index].temprature
+                          : '',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: AppTheme.textColor1,
@@ -108,7 +189,10 @@ class _LogPageState extends State<LogPage> {
                         ),
                         Expanded(
                           child: Text(
-                            "Crossin 5mg",
+                            items[index].temprature != null &&
+                                    items[index].temprature.isNotEmpty
+                                ? items[index].temprature
+                                : '',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -137,7 +221,10 @@ class _LogPageState extends State<LogPage> {
                         ),
                         Expanded(
                           child: Text(
-                            "Headache, Runny Nose",
+                            items[index].symptoms != null &&
+                                    items[index].symptoms.isNotEmpty
+                                ? items[index].symptoms
+                                : '',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -156,7 +243,22 @@ class _LogPageState extends State<LogPage> {
             ),
             Container(
               child: Text(
-                "Just Now ",
+                items[index].dateTime != null
+                    ? DateFormat('HH:mm').format(items[index].dateTime) ==
+                            DateFormat('HH:mm').format(DateTime.now())
+                        ? 'Just Now'
+                        : DateFormat.jm().format(items[index].dateTime)
+                    // ? StringExtension.displayTimeAgoFromTimestamp(
+                    //             items[index].dateTime.toLocal().toString())
+                    //         .contains("Now")
+                    //     ? "Now"
+                    //     : StringExtension.displayTimeAgoFromTimestamp(
+                    //                 items[index].dateTime.toLocal().toString())
+                    //             .contains("min")
+                    //         ? globals.getUSADateFormat(items[index].dateTime)
+                    //         : StringExtension.displayTimeAgoFromTimestamp(
+                    //             items[index].dateTime.toLocal().toString())
+                    : '',
                 style: TextStyle(
                     color: AppTheme.textColor2,
                     fontWeight: FontWeight.normal,

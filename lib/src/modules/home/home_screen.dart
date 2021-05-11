@@ -142,20 +142,7 @@ class HomeScreenState extends State<HomeScreen> {
                   ? Padding(
                       padding: const EdgeInsets.only(right: 5),
                       child: IconButton(
-                        onPressed: () async {
-                          // if (selectedIndex == 3) {
-                          //   updateProfileSuccess = await Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => EditProfileScreen()),
-                          //   );
-                          //   if (updateProfileSuccess != null && updateProfileSuccess) {
-                          //     print("Result : ${updateProfileSuccess}");
-                          //     setState(() {});
-                          //   }
-                          // }
-                          //Navigator.pop(context);
-                        },
+                        onPressed: () async {},
                         icon: Icon(
                           const IconData(0xe800,
                               fontFamily: "FeverTrackingIcons"),
@@ -244,7 +231,10 @@ class HomeScreenState extends State<HomeScreen> {
               onTap: () async {
                 int index = await Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AddLogPage()),
+                  MaterialPageRoute(
+                      builder: (context) => AddLogPage(
+                            fromHomePage: true,
+                          )),
                 );
 
                 if (index != null) {
@@ -270,15 +260,10 @@ class HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 child: Icon(
-                  Icons.add,
-                  size: 25.0,
-                  // color: Colors.white,
+                  const IconData(0xe806, fontFamily: 'FeverTrackingIcons'),
+                  color: AppTheme.iconColor,
+                  size: 25,
                 ),
-                //  Icon(
-                //   const IconData(0xea16, fontFamily: 'FeverTracking'),
-                //   // color: AppTheme.iconColor,
-                //   size: 25,
-                // ),
               ),
             )
           : Container(
