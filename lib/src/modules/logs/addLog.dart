@@ -362,16 +362,15 @@
 //   }
 // }
 
-import 'dart:convert';
-import 'dart:ffi';
 import 'package:mobile_app/src/modules/logs/model/logsmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
-import 'package:mobile_app/src/modules/logs/model/logsmodel.dart';
+
 import 'package:mobile_app/src/styles/theme.dart';
+import 'package:mobile_app/src/globals.dart' as globals;
 
 class AddLogPage extends StatefulWidget {
   @override
@@ -381,7 +380,7 @@ class AddLogPage extends StatefulWidget {
 class _AddLogPageState extends State<AddLogPage> {
   String time;
   String dateTime;
-  String deviceType = "Phone";
+  //String deviceType = "Phone";
   String postion = "underarm";
   String temp = "97  \u00B0C";
 
@@ -443,7 +442,7 @@ class _AddLogPageState extends State<AddLogPage> {
               style: TextStyle(
                   color: AppTheme.title,
                   letterSpacing: 0,
-                  fontSize: deviceType == 'phone' ? 20 : 28,
+                  fontSize: globals.deviceType == 'phone' ? 20 : 28,
                   fontFamily: 'SF UI Display Semibold',
                   fontWeight: FontWeight.w600),
             ),
@@ -489,7 +488,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 style: TextStyle(
                     color: AppTheme.textColor1,
                     fontFamily: "SF UI Display Regular Bold",
-                    fontSize: deviceType == "phone" ? 17 : 25),
+                    fontSize: globals.deviceType == "phone" ? 17 : 25),
               ),
               trailing: Wrap(
                 alignment: WrapAlignment.center,
@@ -500,14 +499,16 @@ class _AddLogPageState extends State<AddLogPage> {
                           style: TextStyle(
                               color: AppTheme.textColor2,
                               fontFamily: "SF UI Display Regular",
-                              fontSize: deviceType == "phone" ? 17 : 25),
+                              fontSize:
+                                  globals.deviceType == "phone" ? 17 : 25),
                         )
                       : Text(
                           "$dateTime",
                           style: TextStyle(
                               color: AppTheme.textColor2,
                               fontFamily: "SF UI Display Regular",
-                              fontSize: deviceType == "phone" ? 17 : 25),
+                              fontSize:
+                                  globals.deviceType == "phone" ? 17 : 25),
                         ),
                   SizedBox(
                     width: 10,
@@ -517,7 +518,7 @@ class _AddLogPageState extends State<AddLogPage> {
                     child: Icon(
                       Icons.arrow_forward_ios,
                       color: AppTheme.arrowIconsColor.withOpacity(0.2),
-                      size: deviceType == 'phone' ? 15 : 23,
+                      size: globals.deviceType == 'phone' ? 15 : 23,
                     ),
                   ),
                 ],
@@ -545,7 +546,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 style: TextStyle(
                     color: AppTheme.textColor1,
                     fontFamily: "SF UI Display Regular Bold",
-                    fontSize: deviceType == "phone" ? 17 : 25),
+                    fontSize: globals.deviceType == "phone" ? 17 : 25),
               ),
               trailing: Wrap(
                 alignment: WrapAlignment.center,
@@ -555,7 +556,7 @@ class _AddLogPageState extends State<AddLogPage> {
                     style: TextStyle(
                         color: AppTheme.textColor2,
                         fontFamily: "SF UI Display Regular",
-                        fontSize: deviceType == "phone" ? 17 : 25),
+                        fontSize: globals.deviceType == "phone" ? 17 : 25),
                   ),
                   SizedBox(
                     width: 10,
@@ -565,7 +566,7 @@ class _AddLogPageState extends State<AddLogPage> {
                     child: Icon(
                       Icons.arrow_forward_ios,
                       color: AppTheme.arrowIconsColor.withOpacity(0.2),
-                      size: deviceType == 'phone' ? 15 : 23,
+                      size: globals.deviceType == 'phone' ? 15 : 23,
                     ),
                   ),
                 ],
@@ -589,7 +590,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 style: TextStyle(
                     color: AppTheme.textColor1,
                     fontFamily: "SF UI Display Regular",
-                    fontSize: deviceType == "phone" ? 17 : 25),
+                    fontSize: globals.deviceType == "phone" ? 17 : 25),
               ),
               trailing: Wrap(
                 alignment: WrapAlignment.center,
@@ -599,7 +600,7 @@ class _AddLogPageState extends State<AddLogPage> {
                     style: TextStyle(
                         color: AppTheme.textColor2,
                         fontFamily: "SF UI Display Regular",
-                        fontSize: deviceType == "phone" ? 17 : 25),
+                        fontSize: globals.deviceType == "phone" ? 17 : 25),
                   ),
                   SizedBox(
                     width: 10,
@@ -640,7 +641,7 @@ class _AddLogPageState extends State<AddLogPage> {
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: AppTheme.arrowIconsColor.withOpacity(0.25),
-                size: deviceType == 'phone' ? 15 : 23,
+                size: globals.deviceType == 'phone' ? 15 : 23,
               ),
               selected: true,
               onTap: () {},
@@ -659,7 +660,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 style: TextStyle(
                     color: AppTheme.subHeadingTextColor,
                     fontFamily: "SF UI Display Regular",
-                    fontSize: deviceType == "phone" ? 13 : 21),
+                    fontSize: globals.deviceType == "phone" ? 13 : 21),
               ),
             ),
           ),
@@ -671,12 +672,12 @@ class _AddLogPageState extends State<AddLogPage> {
                 style: TextStyle(
                     color: AppTheme.textColor1,
                     fontFamily: "SF UI Display Regular",
-                    fontSize: deviceType == "phone" ? 17 : 25),
+                    fontSize: globals.deviceType == "phone" ? 17 : 25),
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: AppTheme.arrowIconsColor.withOpacity(0.25),
-                size: deviceType == 'phone' ? 15 : 23,
+                size: globals.deviceType == 'phone' ? 15 : 23,
               ),
               selected: true,
               onTap: () {},
@@ -703,7 +704,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 style: TextStyle(
                     color: AppTheme.subHeadingTextColor,
                     fontFamily: "SF UI Display Regular",
-                    fontSize: deviceType == "phone" ? 13 : 21),
+                    fontSize: globals.deviceType == "phone" ? 13 : 21),
               ),
             ),
           ),
@@ -715,7 +716,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 style: TextStyle(
                     color: AppTheme.textColor1,
                     fontFamily: "SF UI Display Regular",
-                    fontSize: deviceType == "phone" ? 17 : 25),
+                    fontSize: globals.deviceType == "phone" ? 17 : 25),
               ),
               selected: true,
               onTap: () {},

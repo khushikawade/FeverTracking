@@ -1,4 +1,0 @@
-#Mon May 10 16:04:42 IST 2021
-base.0=E\:\\FeverTracking\\YashSirGitClone\\feverTracking_mobile_app\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
