@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 
@@ -267,7 +266,6 @@ class _SettingPageState extends State<SettingPage> {
                         "Passcode :",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            // fontWeight: FontWeight.w600,
                             color: AppTheme.headingTextColor,
                             letterSpacing: 0,
                             fontFamily: "SF UI Display Regulars",

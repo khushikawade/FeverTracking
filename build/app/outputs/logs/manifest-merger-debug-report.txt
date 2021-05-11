@@ -6,6 +6,7 @@ INJECTED from E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\android\
 INJECTED from E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:1-59:12
 MERGED from E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:1-59:12
 MERGED from [:shared_preferences] E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:path_provider] E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:device_info] E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\build\device_info\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\hp\.gradle\caches\transforms-2\files-2.1\855e189398db5ba3aedc575c2e553262\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\hp\.gradle\caches\transforms-2\files-2.1\92902a21c5cebbbb4bd075c2e70e029d\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
@@ -137,6 +138,8 @@ INJECTED from E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\android\
 INJECTED from E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml
 MERGED from [:shared_preferences] E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences] E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:device_info] E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\build\device_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:device_info] E:\FeverTracking\YashSirGitClone\feverTracking_mobile_app\build\device_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\hp\.gradle\caches\transforms-2\files-2.1\855e189398db5ba3aedc575c2e553262\multidex-2.0.0\AndroidManifest.xml:20:5-43

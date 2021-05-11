@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/graphdata/user_temp_grap.dart';
 
@@ -10,12 +11,25 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:mobile_app/src/modules/profile/setting.dart';
 import 'package:mobile_app/src/styles/theme.dart';
 
+import 'package:path_provider/path_provider.dart' as path_provider;
+
+import 'package:mobile_app/src/modules/logs/addLog.dart';
+import 'package:mobile_app/src/modules/logs/model/logsmodel.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   HomeScreenState createState() => HomeScreenState();
 }
 
 class HomeScreenState extends State<HomeScreen> {
+  Future<void> init(Function onDoneInitializing) async {
+    final appDocumentDirectory =
+        await path_provider.getApplicationDocumentsDirectory();
+    Hive.init(appDocumentDirectory.path);
+    // Hive.registerAdapter(ContactAdapter());
+    final logBox = await Hive.openBox('LogHive');
+  }
+
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -206,7 +220,22 @@ class HomeScreenState extends State<HomeScreen> {
       body: selectedIndex == 0
           ? UserTemperaturePage()
           : selectedIndex == 1
-              ? LogPage()
+              ? FutureBuilder(
+                  future: Hive.openBox(
+                    'Logs',
+                    compactionStrategy: (int total, int deleted) {
+                      return deleted > 20;
+                    },
+                  ),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasError)
+                        return Text(snapshot.error.toString());
+                      else
+                        return LogPage();
+                    } else
+                      return Scaffold();
+                  })
               : selectedIndex == 2
                   ? MedicinesPage()
                   : SettingPage(),
@@ -257,5 +286,12 @@ class HomeScreenState extends State<HomeScreen> {
               width: 0,
             ),
     );
+  }
+
+  @override
+  void dispose() {
+    Hive.box('Logs').compact();
+    Hive.close();
+    super.dispose();
   }
 }
