@@ -380,7 +380,7 @@ class AddLogPage extends StatefulWidget {
 class _AddLogPageState extends State<AddLogPage> {
   String time;
   String dateTime;
-  //String deviceType = "Phone";
+
   String postion = "underarm";
   String temp = "97  \u00B0C";
 
