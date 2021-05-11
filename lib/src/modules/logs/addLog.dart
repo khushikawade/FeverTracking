@@ -383,6 +383,7 @@ class _AddLogPageState extends State<AddLogPage> {
   //String deviceType = "Phone";
   String postion = "underarm";
   String temp = "97  \u00B0C";
+  String symptoms = "Cold, cuff,fever";
 
   DateTime selectedDate = DateTime.now();
   String now = DateFormat('yyyy-MM-dd , kk:mm').format(DateTime.now());
@@ -413,9 +414,10 @@ class _AddLogPageState extends State<AddLogPage> {
       initialDateTime: DateTime.now(),
       onDateTimeChanged: (DateTime newdate) {
         print(newdate);
-        setState(() {
-          dateTime = DateFormat("yyyy-MM-dd , kk:mm").format(newdate);
-        });
+        //setState(() {
+        dateTime = DateFormat("yyyy-MM-dd , kk:mm").format(newdate);
+        print("Date : ${dateTime}");
+//});
       },
       use24hFormat: true,
       maximumDate: new DateTime(2021, 12, 30),
@@ -463,7 +465,7 @@ class _AddLogPageState extends State<AddLogPage> {
         actions: [
           InkWell(
             onTap: () {
-              final log = LogsModel(dateTime, postion, temp);
+              final log = LogsModel(dateTime, postion, temp, symptoms);
               addLog(log);
               Navigator.of(context).pop(1);
             },

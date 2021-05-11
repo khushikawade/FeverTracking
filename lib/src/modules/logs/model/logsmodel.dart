@@ -17,5 +17,5 @@ class LogsModel {
   // String addMedinceLog;
   // @HiveField(4)
   // String addNotehere;
-  LogsModel(this.position, this.temprature, this.symptoms);
+  LogsModel(this.dateTime, this.position, this.temprature, this.symptoms);
 }

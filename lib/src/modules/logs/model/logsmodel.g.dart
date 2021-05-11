@@ -20,6 +20,7 @@ class LogsModelAdapter extends TypeAdapter<LogsModel> {
       fields[1] as String,
       fields[2] as String,
       fields[3] as String,
+      fields[4] as String,
     )..dateTime = fields[0] as String;
   }
 
