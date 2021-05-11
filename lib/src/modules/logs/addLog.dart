@@ -388,7 +388,7 @@ class _AddLogPageState extends State<AddLogPage> {
   DateTime dateTime;
   //String deviceType = "Phone";
   String postion = "underarm";
-  String temp = "97  \u00B0C";
+  String temp = "97 \u00B0C";
   String symptoms = "Cold, cuff,fever";
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
