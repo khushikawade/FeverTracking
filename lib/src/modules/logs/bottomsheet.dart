@@ -696,3 +696,212 @@
 //   //   });
 //   // }
 // }
+
+// // import 'package:flutter/material.dart';
+
+// // class Buttomsheet extends StatelessWidget {
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     return MaterialApp(
+// //       title: 'Flutter Demo',
+// //       theme: ThemeData(
+// //         primarySwatch: Colors.blue,
+// //       ),
+// //       home: ButtomSheetPage(),
+// //     );
+// //   }
+// // }
+
+// // class ButtomSheetPage extends StatefulWidget {
+// //   _ButtomSheetPageState createState() => _ButtomSheetPageState();
+// // }
+
+// // class _ButtomSheetPageState extends State<ButtomSheetPage> {
+// //   String _selectedItem = '';
+
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     return Scaffold(
+// //       body: Center(
+// //         child: Column(
+// //           mainAxisAlignment: MainAxisAlignment.center,
+// //           children: <Widget>[
+// //             RaisedButton(
+// //               child: Text('Show'),
+// //               onPressed: () => _onButtonPressed(),
+// //             ),
+// //             Text(
+// //               _selectedItem,
+// //               style: TextStyle(fontSize: 30),
+// //             ),
+// //           ],
+// //         ),
+// //       ),
+// //     );
+// //   }
+
+// //   void _onButtonPressed() {
+// //     showModalBottomSheet(
+// //         context: context,
+// //         builder: (context) {
+// //           return Container(
+// //             color: Color(0xFF737373),
+// //             height: 180,
+// //             child: Container(
+// //               child: _buildBottomNavigationMenu(),
+// //               decoration: BoxDecoration(
+// //                 color: Theme.of(context).canvasColor,
+// //                 borderRadius: BorderRadius.only(
+// //                   topLeft: const Radius.circular(10),
+// //                   topRight: const Radius.circular(10),
+// //                 ),
+// //               ),
+// //             ),
+// //           );
+// //         });
+// //   }
+
+// //   Column _buildBottomNavigationMenu() {
+// //     return Column(
+// //       children: <Widget>[
+// //         ListTile(
+// //           leading: Icon(Icons.ac_unit),
+// //           title: Text('forehead'),
+// //           onTap: () => _selectItem('forehead'),
+// //         ),
+// //         ListTile(
+// //           leading: Icon(Icons.accessibility_new),
+// //           title: Text('Ear'),
+// //           onTap: () => _selectItem('Ear'),
+// //         ),
+// //         ListTile(
+// //           leading: Icon(Icons.assessment),
+// //           title: Text('Mouth'),
+// //           onTap: () => _selectItem('Mouth'),
+// //         ),
+// //       ],
+// //     );
+// //   }
+
+// //   void _selectItem(String name) {
+// //     Navigator.pop(context);
+// //     setState(() {
+// //       _selectedItem = name;
+// //     });
+// //   }
+// // }
+
+import 'package:flutter/material.dart';
+
+class Buttomsheet extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: ButtomSheetPage(),
+    );
+  }
+}
+
+class ButtomSheetPage extends StatefulWidget {
+  _ButtomSheetPageState createState() => _ButtomSheetPageState();
+}
+
+class _ButtomSheetPageState extends State<ButtomSheetPage> {
+  String _selectedItem = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(
+              child: Text('Show'),
+              onPressed: () => _showModalSheet(),
+            ),
+            Text(
+              _selectedItem,
+              style: TextStyle(fontSize: 30),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<CheckBoxData> checkboxDataList = [
+    new CheckBoxData(id: '1', displayId: 'check1', checked: true),
+    new CheckBoxData(id: '2', displayId: 'check2', checked: false),
+    new CheckBoxData(id: '3', displayId: 'check3', checked: true),
+  ];
+
+  void _showModalSheet() {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter state2) {
+            return SingleChildScrollView(
+              child: LimitedBox(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: checkboxDataList.map<Widget>(
+                    (data) {
+                      return Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            CheckboxListTile(
+                              value: true,
+                              title: Text(data.displayId),
+                              controlAffinity: ListTileControlAffinity.leading,
+                              onChanged: (bool val) {
+                                state2(() {
+                                  data.checked = !data.checked;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ).toList(),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class CheckBoxData {
+  String id;
+  String displayId;
+  bool checked;
+
+  CheckBoxData({
+    this.id,
+    this.displayId,
+    this.checked,
+  });
+
+  factory CheckBoxData.fromJson(Map<String, dynamic> json) => CheckBoxData(
+        id: json["id"] == null ? null : json["id"],
+        displayId: json["displayId"] == null ? null : json["displayId"],
+        checked: json["checked"] == null ? null : json["checked"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id == null ? null : id,
+        "displayId": displayId == null ? null : displayId,
+        "checked": checked == null ? null : checked,
+      };
+}
