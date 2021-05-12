@@ -8,6 +8,7 @@ import 'package:mobile_app/src/modules/logs/model/logsmodel.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
+import 'package:mobile_app/src/utils/utility.dart';
 import 'package:mobile_app/src/widgets/loaderWidget.dart';
 import 'package:mobile_app/src/widgets/timeago.dart';
 
@@ -244,20 +245,15 @@ class _LogPageState extends State<LogPage> {
             Container(
               child: Text(
                 items[index].dateTime != null
-                    ? DateFormat('HH:mm').format(items[index].dateTime) ==
-                            DateFormat('HH:mm').format(DateTime.now())
-                        ? 'Just Now'
-                        : DateFormat.jm().format(items[index].dateTime)
-                    // ? StringExtension.displayTimeAgoFromTimestamp(
-                    //             items[index].dateTime.toLocal().toString())
-                    //         .contains("Now")
-                    //     ? "Now"
-                    //     : StringExtension.displayTimeAgoFromTimestamp(
-                    //                 items[index].dateTime.toLocal().toString())
-                    //             .contains("min")
-                    //         ? globals.getUSADateFormat(items[index].dateTime)
-                    //         : StringExtension.displayTimeAgoFromTimestamp(
-                    //             items[index].dateTime.toLocal().toString())
+                    ? Utility.timeAgoSinceDate(items[index].dateTime)
+                    // DateFormat('HH:mm').format(items[index].dateTime) ==
+                    //         DateFormat('HH:mm').format(DateTime.now())
+                    //     ? 'Just Now'
+                    //     : DateFormat('yyyy-MM-dd')
+                    //                 .format(items[index].dateTime) ==
+                    //             DateFormat('yyyy-MM-dd').format(DateTime.now())
+                    //         ? DateFormat.MMMEd().format(items[index].dateTime)
+                    //         : DateFormat.jm().format(items[index].dateTime)
                     : '',
                 style: TextStyle(
                     color: AppTheme.textColor2,
