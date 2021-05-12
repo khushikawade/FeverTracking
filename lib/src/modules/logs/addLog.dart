@@ -386,8 +386,8 @@ class AddLogPage extends StatefulWidget {
 class _AddLogPageState extends State<AddLogPage> {
   String time;
 
-  List<String> tempList = [];
-  List<String> sypmtoms = ["Hadache"];
+  List<String> sypmtomsTempList = [];
+  String sypmtoms = '';
   String celsiusORfahrenheit = "celsius";
   List<String> fahrenheittempratureList = [
     "99.5",
@@ -457,12 +457,14 @@ class _AddLogPageState extends State<AddLogPage> {
     "105.9",
   ];
 
+  List<String> postionList = ["Ear", "ForeHead", "Underarm", "Mouth"];
+
   var distinctIds;
   DateTime dateTime;
   //String deviceType = "Phone";
-  String postion = "underarm";
-  String temp = "97 \u00B0C";
-  String symptoms = "Cold, cuff,fever";
+  String postion = "";
+  String temp = "";
+  // String symptoms = "";
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   DateTime selectedDate = DateTime.now();
@@ -509,9 +511,8 @@ class _AddLogPageState extends State<AddLogPage> {
 //});
       },
       use24hFormat: true,
-      maximumDate: new DateTime(2021, 12, 30),
       minimumYear: 2010,
-      maximumYear: 2021,
+      // maximumYear: 2021,
       minuteInterval: 1,
       mode: CupertinoDatePickerMode.dateAndTime,
     );
@@ -578,7 +579,7 @@ class _AddLogPageState extends State<AddLogPage> {
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(
               onPressed: () {
-                final log = LogsModel(dateTime, postion, temp, symptoms);
+                final log = LogsModel(dateTime, postion, temp, sypmtoms);
                 addLog(log);
               },
               icon: Icon(
@@ -687,7 +688,7 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
               selected: true,
               onTap: () {
-                _onButtonPressed();
+                _settingModalBottomSheet(context, postionList, 0);
               },
             ),
           ),
@@ -735,7 +736,7 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
               selected: true,
               onTap: () {
-                _settingModalBottomSheet(context, fahrenheittempratureList);
+                _settingModalBottomSheet(context, fahrenheittempratureList, 1);
               },
             ),
           ),
@@ -746,21 +747,31 @@ class _AddLogPageState extends State<AddLogPage> {
               color: AppTheme.dividerColor.withOpacity(0.25),
             ),
           ),
-          Container(
-            padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-            child: ListTile(
-              leading: Text(
-                "Symptoms",
-                style: TextStyle(
-                    color: AppTheme.textColor1,
-                    fontFamily: "SF UI Display Regular",
-                    fontSize: 17),
-              ),
-              trailing: Wrap(
-                alignment: WrapAlignment.center,
-                children: <Widget>[
+          InkWell(
+            onTap: () {
+              _showSymtomModalSheet();
+            },
+            child: Container(
+              padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Text(
+                      "Symptoms",
+                      style: TextStyle(
+                          color: AppTheme.textColor1,
+                          fontFamily: "SF UI Display Regular",
+                          fontSize: 17),
+                    ),
+                  ),
                   Text(
-                    "${sypmtoms[0]}",
+                    "${sypmtoms}",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                     style: TextStyle(
                         color: AppTheme.textColor2,
                         fontFamily: "SF UI Display Regular",
@@ -781,10 +792,6 @@ class _AddLogPageState extends State<AddLogPage> {
                   ),
                 ],
               ),
-              selected: true,
-              onTap: () {
-                _showSymtomModalSheet();
-              },
             ),
           ),
           Container(
@@ -896,10 +903,7 @@ class _AddLogPageState extends State<AddLogPage> {
         });
   }
 
-  _settingModalBottomSheet(
-    context,
-    obj,
-  ) {
+  _settingModalBottomSheet(context, obj, int value) {
     //final List _arr = obj.keys.toList();
     showModalBottomSheet(
         context: context,
@@ -921,7 +925,7 @@ class _AddLogPageState extends State<AddLogPage> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          onTap: () => _selectTemp(i),
+                          onTap: () => _selectTemp(i, value),
                         ))
                     .toList()),
           );
@@ -949,7 +953,7 @@ class _AddLogPageState extends State<AddLogPage> {
         ListTile(
           leading: Icon(const IconData(0xe1e2, fontFamily: 'MaterialIcons')),
           title: Text('Underarm'),
-          onTap: () => _selectItem('Mouth'),
+          onTap: () => _selectItem('Underarm'),
         ),
       ],
     );
@@ -980,9 +984,10 @@ class _AddLogPageState extends State<AddLogPage> {
                                 state2(() {
                                   data.checked = !data.checked;
                                   // print(data.displayId);
-                                  if (tempList.length < 3) {
-                                    tempList.add(data.displayId);
-                                    distinctIds = tempList.toSet().toList();
+                                  if (sypmtomsTempList.length < 3) {
+                                    sypmtomsTempList.add(data.displayId);
+                                    distinctIds =
+                                        sypmtomsTempList.toSet().toList();
                                     print(distinctIds);
                                   }
                                 });
@@ -1004,11 +1009,16 @@ class _AddLogPageState extends State<AddLogPage> {
   }
 
   void _closeModal(void value) {
+    for (int i = 0; i < checkboxDataList.length; i++) {
+      if (checkboxDataList[i].checked) {
+        checkboxDataList[i].checked = false;
+      }
+    }
     setState(() {
-      sypmtoms = [''];
-      sypmtoms = distinctIds;
-      distinctIds = [''];
-      tempList = [''];
+      sypmtoms = '';
+      sypmtoms = distinctIds.join(', ');
+      distinctIds = [];
+      sypmtomsTempList = [];
     });
     print('modal closed');
   }
@@ -1039,10 +1049,14 @@ class _AddLogPageState extends State<AddLogPage> {
     });
   }
 
-  void _selectTemp(String t) {
+  void _selectTemp(String t, int value) {
     Navigator.pop(context);
     setState(() {
-      temp = t;
+      if (value == 1) {
+        temp = t;
+      } else {
+        postion = t;
+      }
     });
   }
 }

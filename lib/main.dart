@@ -10,7 +10,7 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDirectory = Platform.isAndroid
-      ? await path_provider.getDownloadsDirectory()
+      ? await path_provider.getApplicationDocumentsDirectory()
       : await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
 
