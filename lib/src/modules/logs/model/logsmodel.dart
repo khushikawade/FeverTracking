@@ -6,7 +6,7 @@ part 'logsmodel.g.dart';
 @HiveType()
 class LogsModel {
   @HiveField(0)
-  String dateTime;
+  DateTime dateTime;
   @HiveField(1)
   String position;
   @HiveField(2)

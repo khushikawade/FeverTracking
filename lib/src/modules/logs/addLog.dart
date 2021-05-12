@@ -362,6 +362,7 @@
 //   }
 // }
 
+import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/modules/logs/model/logsmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -371,15 +372,20 @@ import 'package:hive/hive.dart';
 
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/utilities/strings.dart';
+import 'package:mobile_app/src/utils/utility.dart';
 
 class AddLogPage extends StatefulWidget {
+  bool fromHomePage;
+
+  AddLogPage({Key key, this.fromHomePage}) : super(key: key);
   @override
   _AddLogPageState createState() => _AddLogPageState();
 }
 
 class _AddLogPageState extends State<AddLogPage> {
   String time;
-  String dateTime;
+
   List<String> tempList = [];
   List<String> sypmtoms = ["Hadache"];
   String celsiusORfahrenheit = "celsius";
@@ -451,19 +457,30 @@ class _AddLogPageState extends State<AddLogPage> {
     "105.9",
   ];
 
-  String postion = "Underarm";
-  String temp = "97.0";
-  String symptoms = "Cold, cuff,fever";
   var distinctIds;
+  DateTime dateTime;
+  //String deviceType = "Phone";
+  String postion = "underarm";
+  String temp = "97 \u00B0C";
+  String symptoms = "Cold, cuff,fever";
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   DateTime selectedDate = DateTime.now();
   String now = DateFormat('yyyy-MM-dd , kk:mm').format(DateTime.now());
 
   void addLog(LogsModel log) async {
-    final contactsBox = await Hive.openBox('log');
-    contactsBox.add(log);
-    print('${contactsBox.values}');
-    print(contactsBox.getAt(0));
+    bool isSuccess = await DbServices().addData(log, Strings.hiveLogName);
+
+    if (isSuccess != null && isSuccess) {
+      Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
+      Future.delayed(const Duration(seconds: 3), () {
+        if (widget.fromHomePage != null && widget.fromHomePage) {
+          Navigator.of(context).pop(1);
+        } else {
+          Navigator.of(context).pop(true);
+        }
+      });
+    }
   }
 
   Future<void> bottomSheet(BuildContext context, Widget child,
@@ -486,7 +503,8 @@ class _AddLogPageState extends State<AddLogPage> {
       onDateTimeChanged: (DateTime newdate) {
         print(newdate);
         //setState(() {
-        dateTime = DateFormat("yyyy-MM-dd , kk:mm").format(newdate);
+        //dateTime = DateFormat("yyyy-MM-dd , kk:mm").format(newdate);
+        dateTime = newdate;
         print("Date : ${dateTime}");
 //});
       },
@@ -523,6 +541,7 @@ class _AddLogPageState extends State<AddLogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         elevation: 5,
         // backgroundColor: Color(0xff463DC7),
@@ -555,15 +574,14 @@ class _AddLogPageState extends State<AddLogPage> {
           ),
         ),
         actions: [
-          InkWell(
-            onTap: () {
-              final log = LogsModel(dateTime, postion, temp, symptoms);
-              addLog(log);
-              Navigator.of(context).pop(1);
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: Icon(
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              onPressed: () {
+                final log = LogsModel(dateTime, postion, temp, symptoms);
+                addLog(log);
+              },
+              icon: Icon(
                 const IconData(59809, fontFamily: "MaterialIcons"),
                 color: AppTheme.iconColor,
                 size: 24,
