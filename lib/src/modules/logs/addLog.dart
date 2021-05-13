@@ -1,368 +1,5 @@
-// import 'dart:convert';
-// import 'dart:ffi';
-
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:mobile_app/src/globals.dart' as globals;
-// import 'package:intl/intl.dart';
-// import 'package:mobile_app/src/modules/graphdata/user_temp_grap.dart';
-// import 'package:mobile_app/src/styles/theme.dart';
-// import 'package:mobile_app/src/overrides.dart' as overrides;
-
-// class AddLogPage extends StatefulWidget {
-//   @override
-//   _AddLogPageState createState() => _AddLogPageState();
-// }
-
-// class _AddLogPageState extends State<AddLogPage> {
-//   String time;
-//   String dateTime;
-
-//   DateTime selectedDate = DateTime.now();
-//   String now = DateFormat('yyyy-MM-dd , kk:mm').format(DateTime.now());
-
-//   Future<void> bottomSheet(BuildContext context, Widget child,
-//       {double height}) {
-//     return showModalBottomSheet(
-//         isScrollControlled: false,
-//         shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.only(
-//                 topLeft: Radius.circular(13), topRight: Radius.circular(13))),
-//         backgroundColor: Theme.of(context).backgroundColor,
-//         context: context,
-//         builder: (context) => Container(
-//             height: height ?? MediaQuery.of(context).size.height / 3,
-//             child: child));
-//   }
-
-//   Widget datetimePicker() {
-//     return CupertinoDatePicker(
-//       initialDateTime: DateTime.now(),
-//       onDateTimeChanged: (DateTime newdate) {
-//         print(newdate);
-//         setState(() {
-//           dateTime = DateFormat("yyyy-MM-dd , kk:mm").format(newdate);
-//         });
-//       },
-//       use24hFormat: true,
-//       maximumDate: new DateTime(2021, 12, 30),
-//       minimumYear: 2010,
-//       maximumYear: 2021,
-//       minuteInterval: 1,
-//       mode: CupertinoDatePickerMode.dateAndTime,
-//     );
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         elevation: 5,
-//         // backgroundColor: Color(0xff463DC7),
-//         centerTitle: true,
-//         title: Column(
-//           mainAxisAlignment: MainAxisAlignment.start,
-//           mainAxisSize: MainAxisSize.min,
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           children: [
-//             Text(
-//               'Add Log',
-//               textAlign: TextAlign.center,
-//               style: TextStyle(
-//                   color: AppTheme.title,
-//                   letterSpacing: 0,
-//                   fontSize: globals.deviceType == 'phone' ? 20 : 28,
-//                   fontFamily: 'SF UI Display Semibold',
-//                   fontWeight: FontWeight.w600),
-//             ),
-//           ],
-//         ),
-//         leading: InkWell(
-//           onTap: () {
-//             Navigator.pop(context);
-//           },
-//           child: Icon(
-//             Icons.close,
-//             size: 30.0,
-//             color: AppTheme.iconColor,
-//           ),
-//         ),
-//         actions: [
-//           InkWell(
-//             onTap: () {
-//               Navigator.of(context).pop(1);
-//             },
-//             child: Padding(
-//               padding: const EdgeInsets.only(right: 10),
-//               child: Icon(
-//                 const IconData(59809, fontFamily: "MaterialIcons"),
-//                 color: AppTheme.iconColor,
-//                 size: 24,
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//       body: Container(
-//         color: Theme.of(context).backgroundColor,
-//         child: Column(children: [
-//           Container(
-//             padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-//             child: ListTile(
-//               leading: Text(
-//                 "Time",
-//                 textAlign: TextAlign.center,
-//                 style: TextStyle(
-//                     color: AppTheme.textColor1,
-//                     fontFamily: "SF UI Display Regular Bold",
-//                     fontSize: globals.deviceType == "phone" ? 17 : 25),
-//               ),
-//               trailing: Wrap(
-//                 alignment: WrapAlignment.center,
-//                 children: <Widget>[
-//                   dateTime == null
-//                       ? Text(
-//                           "$now",
-//                           style: TextStyle(
-//                               color: AppTheme.textColor2,
-//                               fontFamily: "SF UI Display Regular",
-//                               fontSize:
-//                                   globals.deviceType == "phone" ? 17 : 25),
-//                         )
-//                       : Text(
-//                           "$dateTime",
-//                           style: TextStyle(
-//                               color: AppTheme.textColor2,
-//                               fontFamily: "SF UI Display Regular",
-//                               fontSize:
-//                                   globals.deviceType == "phone" ? 17 : 25),
-//                         ),
-//                   SizedBox(
-//                     width: 10,
-//                   ),
-//                   Padding(
-//                     padding: const EdgeInsets.only(top: 02),
-//                     child: Icon(
-//                       Icons.arrow_forward_ios,
-//                       color: AppTheme.arrowIconsColor.withOpacity(0.2),
-//                       size: globals.deviceType == 'phone' ? 15 : 23,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               selected: true,
-//               onTap: () {
-//                 bottomSheet(context, datetimePicker());
-//                 print(dateTime);
-//               },
-//             ),
-//           ),
-//           Container(
-//             height: 1,
-//             margin: EdgeInsets.only(left: 20),
-//             decoration: BoxDecoration(
-//               color: AppTheme.dividerColor.withOpacity(0.25),
-//             ),
-//           ),
-//           Container(
-//             padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-//             child: ListTile(
-//               leading: Text(
-//                 "Postion",
-//                 textAlign: TextAlign.center,
-//                 style: TextStyle(
-//                     color: AppTheme.textColor1,
-//                     fontFamily: "SF UI Display Regular Bold",
-//                     fontSize: globals.deviceType == "phone" ? 17 : 25),
-//               ),
-//               trailing: Wrap(
-//                 alignment: WrapAlignment.center,
-//                 children: <Widget>[
-//                   Text(
-//                     "Underarm",
-//                     style: TextStyle(
-//                         color: AppTheme.textColor2,
-//                         fontFamily: "SF UI Display Regular",
-//                         fontSize: globals.deviceType == "phone" ? 17 : 25),
-//                   ),
-//                   SizedBox(
-//                     width: 10,
-//                   ),
-//                   Padding(
-//                     padding: const EdgeInsets.only(top: 02),
-//                     child: Icon(
-//                       Icons.arrow_forward_ios,
-//                       color: AppTheme.arrowIconsColor.withOpacity(0.2),
-//                       size: globals.deviceType == 'phone' ? 15 : 23,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               selected: true,
-//               onTap: () {},
-//             ),
-//           ),
-//           Container(
-//             height: 1,
-//             margin: EdgeInsets.only(left: 20),
-//             decoration: BoxDecoration(
-//               color: AppTheme.dividerColor.withOpacity(0.25),
-//             ),
-//           ),
-//           Container(
-//             padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-//             child: ListTile(
-//               leading: Text(
-//                 "Temp",
-//                 style: TextStyle(
-//                     color: AppTheme.textColor1,
-//                     fontFamily: "SF UI Display Regular",
-//                     fontSize: globals.deviceType == "phone" ? 17 : 25),
-//               ),
-//               trailing: Wrap(
-//                 alignment: WrapAlignment.center,
-//                 children: <Widget>[
-//                   Text(
-//                     "97  \u00B0C",
-//                     style: TextStyle(
-//                         color: AppTheme.textColor2,
-//                         fontFamily: "SF UI Display Regular",
-//                         fontSize: globals.deviceType == "phone" ? 17 : 25),
-//                   ),
-//                   SizedBox(
-//                     width: 10,
-//                   ),
-//                   Padding(
-//                     padding: const EdgeInsets.only(
-//                       top: 02,
-//                     ),
-//                     child: Icon(
-//                       Icons.arrow_forward_ios,
-//                       color: AppTheme.arrowIconsColor.withOpacity(0.25),
-//                       size: 15,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               selected: true,
-//               onTap: () {},
-//             ),
-//           ),
-//           Container(
-//             height: 1,
-//             margin: EdgeInsets.only(left: 20),
-//             decoration: BoxDecoration(
-//               color: AppTheme.dividerColor.withOpacity(0.25),
-//             ),
-//           ),
-//           Container(
-//             padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-//             child: ListTile(
-//               leading: Text(
-//                 "Symptoms",
-//                 style: TextStyle(
-//                     color: AppTheme.textColor1,
-//                     fontFamily: "SF UI Display Regular",
-//                     fontSize: 17),
-//               ),
-//               trailing: Icon(
-//                 Icons.arrow_forward_ios,
-//                 color: AppTheme.arrowIconsColor.withOpacity(0.25),
-//                 size: globals.deviceType == 'phone' ? 15 : 23,
-//               ),
-//               selected: true,
-//               onTap: () {},
-//             ),
-//           ),
-//           Container(
-//             padding: EdgeInsets.only(top: 10, bottom: 10),
-//             width: MediaQuery.of(context).size.width,
-//             decoration: BoxDecoration(
-//               color: AppTheme.subHeadingbackgroundcolor,
-//             ),
-//             child: Padding(
-//               padding: const EdgeInsets.only(left: 18.0),
-//               child: Text(
-//                 "Medicines Log",
-//                 style: TextStyle(
-//                     color: AppTheme.subHeadingTextColor,
-//                     fontFamily: "SF UI Display Regular",
-//                     fontSize: globals.deviceType == "phone" ? 13 : 21),
-//               ),
-//             ),
-//           ),
-//           Container(
-//             padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-//             child: ListTile(
-//               leading: Text(
-//                 "Add Medicine Log",
-//                 style: TextStyle(
-//                     color: AppTheme.textColor1,
-//                     fontFamily: "SF UI Display Regular",
-//                     fontSize: globals.deviceType == "phone" ? 17 : 25),
-//               ),
-//               trailing: Icon(
-//                 Icons.arrow_forward_ios,
-//                 color: AppTheme.arrowIconsColor.withOpacity(0.25),
-//                 size: globals.deviceType == 'phone' ? 15 : 23,
-//               ),
-//               selected: true,
-//               onTap: () {},
-//             ),
-//           ),
-//           Container(
-//             padding: EdgeInsets.only(top: 10, bottom: 10),
-//             width: MediaQuery.of(context).size.width,
-//             decoration: BoxDecoration(
-//               color: AppTheme.subHeadingbackgroundcolor,
-//               boxShadow: [
-//                 const BoxShadow(
-//                   color: AppTheme.subHeadingbackgroundcolor2,
-//                   spreadRadius: 0,
-//                   blurRadius: 0,
-//                   offset: Offset(0, -0.5),
-//                 ),
-//               ],
-//             ),
-//             child: Padding(
-//               padding: const EdgeInsets.only(left: 20.0),
-//               child: Text(
-//                 "Note",
-//                 style: TextStyle(
-//                     color: AppTheme.subHeadingTextColor,
-//                     fontFamily: "SF UI Display Regular",
-//                     fontSize: globals.deviceType == "phone" ? 13 : 21),
-//               ),
-//             ),
-//           ),
-//           Container(
-//             padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-//             child: ListTile(
-//               leading: Text(
-//                 "Add note here",
-//                 style: TextStyle(
-//                     color: AppTheme.textColor1,
-//                     fontFamily: "SF UI Display Regular",
-//                     fontSize: globals.deviceType == "phone" ? 17 : 25),
-//               ),
-//               selected: true,
-//               onTap: () {},
-//             ),
-//           ),
-//           Container(
-//             height: 1,
-//             margin: EdgeInsets.only(left: 20),
-//             decoration: BoxDecoration(
-//               color: AppTheme.dividerColor.withOpacity(0.25),
-//             ),
-//           ),
-//         ]),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:mobile_app/src/db/db_services.dart';
+import 'package:mobile_app/src/modules/logs/addnote.dart';
 import 'package:mobile_app/src/modules/logs/model/logsmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -385,7 +22,6 @@ class AddLogPage extends StatefulWidget {
 
 class _AddLogPageState extends State<AddLogPage> {
   String time;
-
   List<String> sypmtomsTempList = [];
   String sypmtoms = '';
   String celsiusORfahrenheit = "celsius";
@@ -457,25 +93,49 @@ class _AddLogPageState extends State<AddLogPage> {
     "105.9",
   ];
 
-  List<String> postionList = ["Ear", "ForeHead", "Underarm", "Mouth"];
+  List<String> postionList = [
+    "Ear",
+    "ForeHead",
+    "Underarm",
+    "Mouth",
+    "Neck",
+    "Rectum"
+  ];
+
+  List<CheckBoxData> checkboxDataList = [
+    new CheckBoxData(id: '1', displayId: 'Sweating', checked: false),
+    new CheckBoxData(
+        id: '2', displayId: 'Chills and shivering', checked: false),
+    new CheckBoxData(id: '3', displayId: 'Headache', checked: false),
+    new CheckBoxData(id: '4', displayId: 'Muscle Aches', checked: false),
+    new CheckBoxData(id: '5', displayId: 'Loss of Appetite', checked: false),
+    new CheckBoxData(id: '6', displayId: 'Irritability', checked: false),
+    new CheckBoxData(id: '7', displayId: 'Dehydration', checked: false),
+    new CheckBoxData(id: '8', displayId: 'General Weakness', checked: false),
+    new CheckBoxData(
+        id: '9', displayId: 'Loss of Taste or Smell', checked: false),
+    new CheckBoxData(id: '10', displayId: 'Cough ', checked: false),
+    new CheckBoxData(id: '11', displayId: 'Short of Breath ', checked: false),
+    new CheckBoxData(id: '12', displayId: 'Runny Noise ', checked: false),
+    new CheckBoxData(id: '13', displayId: 'Sore Throat ', checked: false),
+  ];
 
   var distinctIds;
   DateTime dateTime;
-  //String deviceType = "Phone";
+  var addNoteText = '';
   String postion = "";
   String temp = "";
-  // String symptoms = "";
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   DateTime selectedDate = DateTime.now();
   String now = DateFormat('yyyy-MM-dd , kk:mm').format(DateTime.now());
 
+  // DATABASE CODE
   void addLog(LogsModel log) async {
     bool isSuccess = await DbServices().addData(log, Strings.hiveLogName);
 
     if (isSuccess != null && isSuccess) {
       Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
-      Future.delayed(const Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 1), () {
         if (widget.fromHomePage != null && widget.fromHomePage) {
           Navigator.of(context).pop(1);
         } else {
@@ -504,40 +164,18 @@ class _AddLogPageState extends State<AddLogPage> {
       initialDateTime: DateTime.now(),
       onDateTimeChanged: (DateTime newdate) {
         print(newdate);
-        //setState(() {
-        //dateTime = DateFormat("yyyy-MM-dd , kk:mm").format(newdate);
-        dateTime = newdate;
-        print("Date : ${dateTime}");
-//});
+        setState(() {
+          //dateTime = DateFormat("yyyy-MM-dd , kk:mm").format(newdate);
+          dateTime = newdate;
+          print("Date : ${dateTime}");
+        });
       },
       use24hFormat: true,
       minimumYear: 2010,
-      // maximumYear: 2021,
       minuteInterval: 1,
       mode: CupertinoDatePickerMode.dateAndTime,
     );
   }
-
-//   int startIndex = 0;  UNCOMMENT
-// int endIndex = 3;
-//  subList = myList.sublist(startIndex, endIndex);
-
-  List<CheckBoxData> checkboxDataList = [
-    new CheckBoxData(id: '1', displayId: 'Sweating', checked: false),
-    new CheckBoxData(
-        id: '2', displayId: 'Chills and shivering', checked: false),
-    new CheckBoxData(id: '3', displayId: 'Headache', checked: false),
-    new CheckBoxData(id: '4', displayId: 'Muscle Aches', checked: false),
-    new CheckBoxData(id: '5', displayId: 'Loss of Appetite', checked: false),
-    new CheckBoxData(id: '6', displayId: 'Irritability', checked: false),
-    new CheckBoxData(id: '7', displayId: 'Dehydration', checked: false),
-    new CheckBoxData(id: '8', displayId: 'General Weakness', checked: false),
-    new CheckBoxData(
-        id: '9', displayId: 'Loss of Taste or Smell', checked: false),
-    new CheckBoxData(id: '10', displayId: 'Cough ', checked: false),
-    new CheckBoxData(
-        id: '11', displayId: 'Shortness of Breath ', checked: false),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -579,8 +217,16 @@ class _AddLogPageState extends State<AddLogPage> {
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(
               onPressed: () {
-                final log = LogsModel(dateTime, postion, temp, sypmtoms);
-                addLog(log);
+                if ((dateTime != null) &&
+                    (postion.isNotEmpty) &&
+                    (temp.isNotEmpty) &&
+                    (sypmtoms.isNotEmpty)) {
+                  final log = LogsModel(dateTime, postion, temp, sypmtoms);
+                  addLog(log);
+                } else {
+                  Utility.showSnackBar(
+                      _scaffoldKey, 'Please Fill All Required Field ', context);
+                }
               },
               icon: Icon(
                 const IconData(59809, fontFamily: "MaterialIcons"),
@@ -688,7 +334,7 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
               selected: true,
               onTap: () {
-                _settingModalBottomSheet(context, postionList, 0);
+                postionAndTemperatureBottomSheet(context, postionList, 0);
               },
             ),
           ),
@@ -712,13 +358,18 @@ class _AddLogPageState extends State<AddLogPage> {
               trailing: Wrap(
                 alignment: WrapAlignment.center,
                 children: <Widget>[
-                  Text(
-                    "$temp " + "\u2109",
-                    style: TextStyle(
-                        color: AppTheme.textColor2,
-                        fontFamily: "SF UI Display Regular",
-                        fontSize: globals.deviceType == "phone" ? 17 : 25),
-                  ),
+                  temp == ''
+                      ? Text(
+                          "$temp",
+                        )
+                      : Text(
+                          "$temp " + "\u2109",
+                          style: TextStyle(
+                              color: AppTheme.textColor2,
+                              fontFamily: "SF UI Display Regular",
+                              fontSize:
+                                  globals.deviceType == "phone" ? 17 : 25),
+                        ),
                   SizedBox(
                     width: 10,
                   ),
@@ -736,7 +387,8 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
               selected: true,
               onTap: () {
-                _settingModalBottomSheet(context, fahrenheittempratureList, 1);
+                postionAndTemperatureBottomSheet(
+                    context, fahrenheittempratureList, 1);
               },
             ),
           ),
@@ -752,7 +404,7 @@ class _AddLogPageState extends State<AddLogPage> {
               _showSymtomModalSheet();
             },
             child: Container(
-              padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
+              padding: EdgeInsets.all(20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -768,15 +420,17 @@ class _AddLogPageState extends State<AddLogPage> {
                           fontSize: 17),
                     ),
                   ),
-                  Text(
-                    "${sypmtoms}",
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: TextStyle(
-                        color: AppTheme.textColor2,
-                        fontFamily: "SF UI Display Regular",
-                        fontSize: globals.deviceType == "phone" ? 17 : 25),
-                  ),
+                  Container(
+                      width: 150,
+                      child: Text(
+                        "$sypmtoms",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: AppTheme.textColor2,
+                            fontFamily: "SF UI Display Regular",
+                            fontSize: globals.deviceType == "phone" ? 17 : 25),
+                      )),
                   SizedBox(
                     width: 10,
                   ),
@@ -855,18 +509,49 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
             ),
           ),
-          Container(
-            padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-            child: ListTile(
-              leading: Text(
-                "Add note here",
-                style: TextStyle(
-                    color: AppTheme.textColor1,
-                    fontFamily: "SF UI Display Regular",
-                    fontSize: globals.deviceType == "phone" ? 17 : 25),
+          InkWell(
+            onTap: () async {
+              var result = await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddNote()),
+              );
+              setState(() {
+                addNoteText = result;
+              });
+            },
+            child: Container(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                      width: (MediaQuery.of(context).size.width * 0.85),
+                      child: Text(
+                        addNoteText == '' ? "Add note here" : addNoteText,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: AppTheme.textColor1,
+                            fontFamily: "SF UI Display Regular",
+                            fontSize: globals.deviceType == "phone" ? 17 : 25),
+                      )),
+                  SizedBox(
+                    width: (MediaQuery.of(context).size.width * 0.015),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 02,
+                    ),
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppTheme.arrowIconsColor.withOpacity(0.25),
+                      size: 15,
+                    ),
+                  ),
+                ],
               ),
-              selected: true,
-              onTap: () {},
             ),
           ),
           Container(
@@ -881,82 +566,45 @@ class _AddLogPageState extends State<AddLogPage> {
     );
   }
 
-  void _onButtonPressed() async {
-    await showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (context) {
-          return Container(
-            color: Color(0xFF737373),
-            height: 180,
-            child: Container(
-              child: _buildBottomNavigationMenu(),
-              decoration: BoxDecoration(
-                color: Theme.of(context).canvasColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(10),
-                  topRight: const Radius.circular(10),
-                ),
-              ),
-            ),
-          );
-        });
-  }
-
-  _settingModalBottomSheet(context, obj, int value) {
-    //final List _arr = obj.keys.toList();
+  postionAndTemperatureBottomSheet(context, obj, int value) {
     showModalBottomSheet(
         context: context,
         isDismissible: true,
         enableDrag: true,
-        backgroundColor: Color(0xffffffff),
+        backgroundColor: Theme.of(context).backgroundColor,
         builder: (BuildContext bc) {
           return SingleChildScrollView(
             child: new Wrap(
                 children: obj
-                    .map<Widget>((i) => new ListTile(
-                          leading: new Icon(Icons.music_note),
-                          title: new Text(
-                            '$i',
-                            style: TextStyle(
-                              color: Color(0xff463DC7),
-                              fontSize: 17.0,
-                              fontFamily: 'SF UI Display Regular',
-                              fontWeight: FontWeight.w600,
-                            ),
+                    .map<Widget>(
+                      (i) => new ListTile(
+                        // leading: new Icon(Icons.music_note),UNCOMMENT
+                        title: new Text(
+                          '$i',
+                          style: TextStyle(
+                            color: AppTheme.textColor1,
+                            fontSize: 17.0,
+                            fontFamily: 'SF UI Display Regular',
+                            fontWeight: FontWeight.w600,
                           ),
-                          onTap: () => _selectTemp(i, value),
-                        ))
+                        ),
+                        onTap: () => _selectTemp(i, value),
+                      ),
+                    )
                     .toList()),
           );
         });
   }
 
-  ListView _buildBottomNavigationMenu() {
-    return ListView(
-      children: <Widget>[
-        ListTile(
-          leading: Icon(const IconData(0xe1e2, fontFamily: 'MaterialIcons')),
-          title: Text('Forehead'),
-          onTap: () => _selectItem('Forehead'),
-        ),
-        ListTile(
-          leading: Icon(const IconData(0xe1e2, fontFamily: 'MaterialIcons')),
-          title: Text('Ear'),
-          onTap: () => _selectItem('Ear'),
-        ),
-        ListTile(
-          leading: Icon(const IconData(0xe1e2, fontFamily: 'MaterialIcons')),
-          title: Text('Mouth'),
-          onTap: () => _selectItem('Mouth'),
-        ),
-        ListTile(
-          leading: Icon(const IconData(0xe1e2, fontFamily: 'MaterialIcons')),
-          title: Text('Underarm'),
-          onTap: () => _selectItem('Underarm'),
-        ),
-      ],
-    );
+  void _selectTemp(String t, int value) {
+    Navigator.pop(context);
+    setState(() {
+      if (value == 1) {
+        temp = t;
+      } else {
+        postion = t;
+      }
+    });
   }
 
   void _showSymtomModalSheet() {
@@ -983,7 +631,7 @@ class _AddLogPageState extends State<AddLogPage> {
                               onChanged: (bool val) {
                                 state2(() {
                                   data.checked = !data.checked;
-                                  // print(data.displayId);
+
                                   if (sypmtomsTempList.length < 3) {
                                     sypmtomsTempList.add(data.displayId);
                                     distinctIds =
@@ -993,6 +641,13 @@ class _AddLogPageState extends State<AddLogPage> {
                                 });
                               },
                             ),
+                            // Container(
+                            //   height: 1,
+                            //   margin: EdgeInsets.only(left: 40),
+                            //   decoration: BoxDecoration(
+                            //     color: AppTheme.dividerColor.withOpacity(0.25),
+                            //   ),
+                            // ),
                           ],
                         ),
                       );
@@ -1021,43 +676,6 @@ class _AddLogPageState extends State<AddLogPage> {
       sypmtomsTempList = [];
     });
     print('modal closed');
-  }
-  // ListView _buildBottomNavigationMenu() {
-  //   return ListView(
-  //     children: <Widget>[
-  //       ListView.builder(
-  //         scrollDirection: Axis.vertical,
-  //         shrinkWrap: true,
-  //         itemCount: frahenitempratureList.length,
-  //         itemBuilder: (context, index) {
-  //           return Text('${frahenitempratureList[index]}');
-  //         },
-  //       )
-  //       // ListTile(
-  //       //   leading: Icon(const IconData(0xe1e2, fontFamily: 'MaterialIcons')),
-  //       //   title: Text('Underarm'),
-  //       //   onTap: () => _selectItem('Mouth'),
-  //       // ),
-  //     ],
-  //   );
-  // }
-
-  void _selectItem(String name) {
-    Navigator.pop(context);
-    setState(() {
-      postion = name;
-    });
-  }
-
-  void _selectTemp(String t, int value) {
-    Navigator.pop(context);
-    setState(() {
-      if (value == 1) {
-        temp = t;
-      } else {
-        postion = t;
-      }
-    });
   }
 }
 

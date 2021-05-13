@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'modules/login/ui/login-page.dart';
 
+var notetittleText = '';
+var noteText = '';
 var context;
 var username;
 var password;
