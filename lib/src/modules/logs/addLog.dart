@@ -223,7 +223,8 @@ class _AddLogPageState extends State<AddLogPage> {
                     (postion.isNotEmpty) &&
                     (temp.isNotEmpty) &&
                     (sypmtoms.isNotEmpty)) {
-                  final log = LogsModel(dateTime, postion, temp, sypmtoms);
+                  final log = LogsModel(dateTime, postion, temp, sypmtoms,
+                      medicineList != null ? medicineList[0] : null);
                   addLog(log);
                 } else {
                   Utility.showSnackBar(
