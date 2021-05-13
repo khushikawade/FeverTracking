@@ -1,8 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile_app/src/db/db_services.dart';
+import 'package:mobile_app/src/modules/logs/addnote.dart';
+import 'package:mobile_app/src/modules/medicines/model/medicinemodel.dart';
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/utilities/strings.dart';
+import 'package:mobile_app/src/utils/utility.dart';
+
+List<String> frequencyList = [
+  "Once per day",
+  "Twice per day",
+  "3 times per day",
+  "4 times per day",
+  "6 times per day",
+  "As needed"
+];
+
+List<String> unitList = ["cc", "g", "mcg", "mg", "ml", "oz"];
 
 class AddMedicine extends StatefulWidget {
   @override
@@ -12,37 +28,33 @@ class AddMedicine extends StatefulWidget {
 class _AddMedicineState extends State<AddMedicine> {
   String selectedUnit = "";
   String selectedFrequency = "";
+  String addNoteText = '';
   TextEditingController medicineController = TextEditingController();
   TextEditingController dosageController = TextEditingController();
-  List<String> frequencyList = [
-    "Once per day",
-    "Twice per day",
-    "3 times per day",
-    "4 times per day",
-    "6 times per day",
-    "As needed"
-  ];
-
-  List<String> unitList = ["cc", "g", "mcg", "mg", "ml", "oz"];
 
   var distinctIds;
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  // void addLog(LogsModel log) async {
-  //   bool isSuccess = await DbServices().addData(log, Strings.hiveLogName);
+  @override
+  void initState() {
+    super.initState();
 
-  //   if (isSuccess != null && isSuccess) {
-  //     Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
-  //     Future.delayed(const Duration(seconds: 3), () {
-  //       if (widget.fromHomePage != null && widget.fromHomePage) {
-  //         Navigator.of(context).pop(1);
-  //       } else {
-  //         Navigator.of(context).pop(true);
-  //       }
-  //     });
-  //   }
-  // }
+    selectedUnit = unitList[0];
+    selectedFrequency = frequencyList[0];
+  }
+
+  void addMedicine(MedicineModel log) async {
+    bool isSuccess =
+        await DbServices().addData(log, Strings.createMedicineName);
+
+    if (isSuccess != null && isSuccess) {
+      Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.of(context).pop(true);
+      });
+    }
+  }
 
   Future<void> bottomSheet(BuildContext context, Widget child,
       {double height}) {
@@ -98,8 +110,23 @@ class _AddMedicineState extends State<AddMedicine> {
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(
               onPressed: () {
-                // final log = LogsModel(dateTime, postion, temp, sypmtoms);
-                // addLog(log);
+                String medicineName = medicineController.text;
+                String dosage = dosageController.text;
+                if (medicineName != null &&
+                    medicineName.isNotEmpty &&
+                    dosage != null &&
+                    dosage.isNotEmpty) {
+                  final medicineModel = MedicineModel(
+                      medicineName,
+                      '${dosage} $selectedUnit',
+                      selectedUnit,
+                      selectedFrequency,
+                      addNoteText);
+                  addMedicine(medicineModel);
+                } else {
+                  Utility.showSnackBar(
+                      _scaffoldKey, 'Please Fill All Required Field ', context);
+                }
               },
               icon: Icon(
                 const IconData(59809, fontFamily: "MaterialIcons"),
@@ -179,6 +206,8 @@ class _AddMedicineState extends State<AddMedicine> {
                   child: TextField(
                     textAlign: TextAlign.end,
                     controller: dosageController,
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
                     decoration: InputDecoration(
                       hintText: '0',
                       border: InputBorder.none,
@@ -217,6 +246,13 @@ class _AddMedicineState extends State<AddMedicine> {
                   ),
                 )
               ],
+            ),
+          ),
+          Container(
+            height: 1,
+            margin: EdgeInsets.only(left: 20),
+            decoration: BoxDecoration(
+              color: AppTheme.dividerColor.withOpacity(0.25),
             ),
           ),
           Container(
@@ -339,18 +375,49 @@ class _AddMedicineState extends State<AddMedicine> {
               ),
             ),
           ),
-          Container(
-            padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-            child: ListTile(
-              leading: Text(
-                "Add note here",
-                style: TextStyle(
-                    color: AppTheme.textColor1,
-                    fontFamily: "SF UI Display Regular",
-                    fontSize: globals.deviceType == "phone" ? 17 : 25),
+          InkWell(
+            onTap: () async {
+              var result = await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddNote()),
+              );
+              setState(() {
+                addNoteText = result;
+              });
+            },
+            child: Container(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                      width: (MediaQuery.of(context).size.width * 0.85),
+                      child: Text(
+                        addNoteText == '' ? "Add note here" : addNoteText,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: AppTheme.textColor1,
+                            fontFamily: "SF UI Display Regular",
+                            fontSize: globals.deviceType == "phone" ? 17 : 25),
+                      )),
+                  SizedBox(
+                    width: (MediaQuery.of(context).size.width * 0.015),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 02,
+                    ),
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppTheme.arrowIconsColor.withOpacity(0.25),
+                      size: 15,
+                    ),
+                  ),
+                ],
               ),
-              selected: true,
-              onTap: () {},
             ),
           ),
           Container(

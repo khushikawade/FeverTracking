@@ -22,14 +22,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  Future<void> init(Function onDoneInitializing) async {
-    final appDocumentDirectory =
-        await path_provider.getApplicationDocumentsDirectory();
-    Hive.init(appDocumentDirectory.path);
-    // Hive.registerAdapter(ContactAdapter());
-    final logBox = await Hive.openBox('LogHive');
-  }
-
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -224,7 +216,9 @@ class HomeScreenState extends State<HomeScreen> {
                       return Scaffold();
                   })
               : selectedIndex == 2
-                  ? MedicinesPage()
+                  ? MedicinesPage(
+                      fromHomePage: true,
+                    )
                   : SettingPage(),
       floatingActionButton: selectedIndex == 0
           ? GestureDetector(

@@ -6,9 +6,8 @@ class DbServices {
   // add Data using this method
   Future<bool> addData(model, tableName) async {
     try {
-      final hiveBox = await Hive.openBox(Strings.hiveLogName);
+      final hiveBox = await Hive.openBox(tableName);
       hiveBox.add(model);
-      // hiveBox.put(Strings.hiveLogName, model);
 
       return true;
     } catch (e) {
@@ -23,9 +22,8 @@ class DbServices {
   // get List Object using this method
   Future<List> getListData(tableName) async {
     try {
-      var hiveBox = await Hive.openBox(Strings.hiveLogName);
+      var hiveBox = await Hive.openBox(tableName);
       var list = hiveBox.values.toList();
-      print(list.length);
       return list;
     } catch (e) {
       if (e.toString().contains("Failed host lookup")) {

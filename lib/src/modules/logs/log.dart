@@ -22,16 +22,6 @@ class _LogPageState extends State<LogPage> {
   @override
   void initState() {
     super.initState();
-
-    //getList();
-  }
-
-  // get List Data
-  getList() async {
-    logsList = await DbServices().getListData(Strings.hiveLogName);
-    // List<LogsModel> list = hiveBox.get(Strings.hiveLogName);
-    print("Data : ${logsList.length}");
-    setState(() {});
   }
 
   Widget build(BuildContext context) {
