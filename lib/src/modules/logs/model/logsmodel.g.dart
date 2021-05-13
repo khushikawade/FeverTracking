@@ -22,6 +22,7 @@ class LogsModelAdapter extends TypeAdapter<LogsModel> {
       fields[2] as String,
       fields[3] as String,
       fields[4] as dynamic,
+      fields[4] as String,
     );
   }
 

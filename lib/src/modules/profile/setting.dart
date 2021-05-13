@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/Symptoms/symptom.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 
@@ -133,7 +134,12 @@ class _SettingPageState extends State<SettingPage> {
                 size: 15,
               ),
               selected: true,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SymptomsListPage()));
+              },
             ),
           ),
           Container(

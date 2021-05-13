@@ -3,7 +3,6 @@ import 'package:mobile_app/src/modules/logs/addnote.dart';
 import 'package:mobile_app/src/modules/logs/model/logsmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 import 'package:mobile_app/src/modules/medicines/medicine.dart';
@@ -28,86 +27,86 @@ class _AddLogPageState extends State<AddLogPage> {
   String celsiusORfahrenheit = "celsius";
   var medicineList = [];
   List<String> fahrenheittempratureList = [
-    "99.5",
-    "99.6",
-    "99.7",
-    "99.8",
-    "99.9",
-    "100.0",
-    "100.1",
-    "100.2",
-    "100.3",
-    "100.4",
-    "100.5",
-    "100.6",
-    "100.7",
-    "100.8",
-    "100.9",
-    "101.0",
-    "101.1",
-    "101.2",
-    "101.3",
-    "101.4",
-    "101.5",
-    "101.6",
-    "101.7",
-    "101.8",
-    "101.9",
-    "102.0",
-    "102.1",
-    "102.2",
-    "102.3",
-    "102.4",
-    "102.5",
-    "102.6",
-    "102.7",
-    "102.8",
-    "102.9",
-    "103.0",
-    "103.1",
-    "103.2",
-    "103.3",
-    "103.4",
-    "103.5",
-    "103.6",
-    "103.7",
-    "103.8",
-    "103.9",
-    "104.0",
-    "104.1",
-    "104.2",
-    "104.3",
-    "104.4",
-    "104.5",
-    "104.6",
-    "104.7",
-    "104.8",
-    "104.9",
-    "105.0",
-    "105.1",
-    "105.2",
-    "105.3",
-    "105.4",
-    "105.5",
-    "105.6",
-    "105.7",
-    "105.8",
-    "105.9",
+    "99.5 " "\u2109",
+    "99.6 " "\u2109",
+    "99.7 " "\u2109",
+    "99.8 " "\u2109",
+    "99.9 " "\u2109",
+    "100.0 " "\u2109",
+    "100.1 " "\u2109",
+    "100.2 " "\u2109",
+    "100.3 " "\u2109",
+    "100.4 " "\u2109",
+    "100.5 " "\u2109",
+    "100.6 " "\u2109",
+    "100.7 " "\u2109",
+    "100.8 " "\u2109",
+    "100.9 " "\u2109",
+    "101.0 " "\u2109",
+    "101.1 " "\u2109",
+    "101.2 " "\u2109",
+    "101.3 " "\u2109",
+    "101.4 " "\u2109",
+    "101.5 " "\u2109",
+    "101.6 " "\u2109",
+    "101.7 " "\u2109",
+    "101.8 " "\u2109",
+    "101.9 " "\u2109",
+    "102.0 " "\u2109",
+    "102.1 " "\u2109",
+    "102.2 " "\u2109",
+    "102.3 " "\u2109",
+    "102.4 " "\u2109",
+    "102.5 " "\u2109",
+    "102.6 " "\u2109",
+    "102.7 " "\u2109",
+    "102.8 " "\u2109",
+    "102.9 " "\u2109",
+    "103.0 " "\u2109",
+    "103.1 " "\u2109",
+    "103.2 " "\u2109",
+    "103.3 " "\u2109",
+    "103.4 " "\u2109",
+    "103.5 " "\u2109",
+    "103.6 " "\u2109",
+    "103.7 " "\u2109",
+    "103.8 " "\u2109",
+    "103.9 " "\u2109",
+    "104.0 " "\u2109",
+    "104.1 " "\u2109",
+    "104.2 " "\u2109",
+    "104.3 " "\u2109",
+    "104.4 " "\u2109",
+    "104.5 " "\u2109",
+    "104.6 " "\u2109",
+    "104.7 " "\u2109",
+    "104.8 " "\u2109",
+    "104.9 " "\u2109",
+    "105.0 " "\u2109",
+    "105.1 " "\u2109",
+    "105.2 " "\u2109",
+    "105.3 " "\u2109",
+    "105.4 " "\u2109",
+    "105.5 " "\u2109",
+    "105.6 " "\u2109",
+    "105.7 " "\u2109",
+    "105.8 " "\u2109",
+    "105.9 " "\u2109",
   ];
 
   List<String> postionList = [
-    "Ear",
-    "ForeHead",
-    "Underarm",
-    "Mouth",
-    "Neck",
-    "Rectum"
+    " Ear ",
+    " ForeHead ",
+    " Underarm ",
+    " Mouth ",
+    " Neck ",
+    " Rectum "
   ];
 
   List<CheckBoxData> checkboxDataList = [
     new CheckBoxData(id: '1', displayId: 'Sweating', checked: false),
     new CheckBoxData(
-        id: '2', displayId: 'Chills and shivering', checked: false),
+        id: '2', displayId: 'Chills and Shivering', checked: false),
     new CheckBoxData(id: '3', displayId: 'Headache', checked: false),
     new CheckBoxData(id: '4', displayId: 'Muscle Aches', checked: false),
     new CheckBoxData(id: '5', displayId: 'Loss of Appetite', checked: false),
@@ -124,7 +123,7 @@ class _AddLogPageState extends State<AddLogPage> {
 
   var distinctIds;
   DateTime dateTime;
-  var addNoteText = '';
+  String addNoteText = "";
   String postion = "";
   String temp = "";
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -145,6 +144,13 @@ class _AddLogPageState extends State<AddLogPage> {
         }
       });
     }
+  }
+
+  getList() async {
+    var logsList = await DbServices().getListData(Strings.hiveLogName);
+    // List<LogsModel> list = hiveBox.get(Strings.hiveLogName);
+    print("Data : ${logsList[2].addNotehere}");
+    setState(() {});
   }
 
   Future<void> bottomSheet(BuildContext context, Widget child,
@@ -223,8 +229,13 @@ class _AddLogPageState extends State<AddLogPage> {
                     (postion.isNotEmpty) &&
                     (temp.isNotEmpty) &&
                     (sypmtoms.isNotEmpty)) {
-                  final log = LogsModel(dateTime, postion, temp, sypmtoms,
-                      medicineList != null ? medicineList[0] : null);
+                  final log = LogsModel(
+                      dateTime,
+                      postion,
+                      temp,
+                      sypmtoms,
+                      medicineList != null ? medicineList[0] : null,
+                      addNoteText);
                   addLog(log);
                 } else {
                   Utility.showSnackBar(
@@ -259,7 +270,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 children: <Widget>[
                   dateTime == null
                       ? Text(
-                          "$now",
+                          "",
                           style: TextStyle(
                               color: AppTheme.textColor2,
                               fontFamily: "SF UI Display Regular",
@@ -363,10 +374,10 @@ class _AddLogPageState extends State<AddLogPage> {
                 children: <Widget>[
                   temp == ''
                       ? Text(
-                          "$temp",
+                          "",
                         )
                       : Text(
-                          "$temp " + "\u2109",
+                          "$temp ",
                           style: TextStyle(
                               color: AppTheme.textColor2,
                               fontFamily: "SF UI Display Regular",
@@ -552,7 +563,8 @@ class _AddLogPageState extends State<AddLogPage> {
                 MaterialPageRoute(builder: (context) => AddNote()),
               );
               setState(() {
-                addNoteText = result;
+                print(result);
+                if (result != addNoteText && result != '') addNoteText = result;
               });
             },
             child: Container(
