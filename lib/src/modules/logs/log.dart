@@ -30,7 +30,7 @@ class _LogPageState extends State<LogPage> {
   getList() async {
     logsList = await DbServices().getListData(Strings.hiveLogName);
     // List<LogsModel> list = hiveBox.get(Strings.hiveLogName);
-    print("Data : ${logsList.length}");
+    print("Data : ${logsList}");
     setState(() {});
   }
 
