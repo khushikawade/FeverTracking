@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
+import 'package:mobile_app/src/modules/medicines/medicine.dart';
+
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/utilities/strings.dart';
@@ -23,6 +25,7 @@ class _AddLogPageState extends State<AddLogPage> {
   List<String> sypmtomsTempList = [];
   String sypmtoms = '';
   String celsiusORfahrenheit = "celsius";
+  var medicineList = [];
   List<String> fahrenheittempratureList = [
     "99.5 " "\u2109",
     "99.6 " "\u2109",
@@ -247,7 +250,7 @@ class _AddLogPageState extends State<AddLogPage> {
       ),
       body: Container(
         color: Theme.of(context).backgroundColor,
-        child: Column(children: [
+        child: ListView(children: [
           Container(
             padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
             child: ListTile(
@@ -475,22 +478,55 @@ class _AddLogPageState extends State<AddLogPage> {
           ),
           Container(
             padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-            child: ListTile(
-              leading: Text(
-                "Add Medicine Log",
-                style: TextStyle(
-                    color: AppTheme.textColor1,
-                    fontFamily: "SF UI Display Regular",
-                    fontSize: globals.deviceType == "phone" ? 17 : 25),
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: AppTheme.arrowIconsColor.withOpacity(0.25),
-                size: globals.deviceType == 'phone' ? 15 : 23,
-              ),
-              selected: true,
-              onTap: () {},
-            ),
+            child: ListView.separated(
+                separatorBuilder: (context, index) {
+                  return Container(
+                    height: 0.6,
+                    color: Color.fromRGBO(0, 0, 0, 0.25),
+                  );
+                },
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: medicineList != null ? medicineList.length + 1 : 1,
+                itemBuilder: (context, index) {
+                  if (medicineList != null) {
+                    if (index == medicineList.length) {
+                      return addMedicineWidget();
+                    } else {
+                      return selectedMedicineWidget(medicineList, index);
+                    }
+                  } else {
+                    return addMedicineWidget();
+                  }
+                }),
+            // child: ListTile(
+            //   leading: Text(
+            //     "Add Medicine Log",
+            //     style: TextStyle(
+            //         color: AppTheme.textColor1,
+            //         fontFamily: "SF UI Display Regular",
+            //         fontSize: globals.deviceType == "phone" ? 17 : 25),
+            //   ),
+            //   trailing: Icon(
+            //     Icons.arrow_forward_ios,
+            //     color: AppTheme.arrowIconsColor.withOpacity(0.25),
+            //     size: globals.deviceType == 'phone' ? 15 : 23,
+            //   ),
+            //   selected: true,
+            //   onTap: () async {
+            //     var medicineModel = await Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => MedicinesPage(
+            //                   fromHomePage: false,
+            //                 )));
+
+            //                 if(medicineModel != null) {
+            //                   medicineList.add(medicineModel);
+            //                   ffsd
+            //                 }
+            //   },
+            // ),
           ),
           Container(
             padding: EdgeInsets.only(top: 10, bottom: 10),
@@ -572,6 +608,103 @@ class _AddLogPageState extends State<AddLogPage> {
           ),
         ]),
       ),
+    );
+  }
+
+  // make selected medicine item view
+  Widget selectedMedicineWidget(medicineItems, index) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          InkWell(
+            onTap: () {
+              medicineList.removeAt(index);
+              setState(() {});
+            },
+            child: Container(
+              padding: EdgeInsets.all(2),
+              alignment: Alignment.center,
+              child: Icon(
+                Icons.remove,
+                size: 16,
+                color: Colors.grey,
+              ),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.red, width: 1)),
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Expanded(
+            child: Text(
+              medicineItems[index].medicineName != null &&
+                      medicineItems[index].medicineName.isNotEmpty
+                  ? medicineItems[index].medicineName
+                  : '',
+              style: TextStyle(
+                  color: AppTheme.textColor2,
+                  fontFamily: "SF UI Display Regular Bold",
+                  fontSize: globals.deviceType == "phone" ? 13 : 21),
+            ),
+          ),
+          Text(
+            medicineItems[index].dosage != null &&
+                    medicineItems[index].dosage.isNotEmpty
+                ? medicineItems[index].dosage
+                : '',
+            style: TextStyle(
+                color: AppTheme.textColor2,
+                fontFamily: "SF UI Display Regular Bold",
+                fontSize: globals.deviceType == "phone" ? 13 : 21),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Icon(
+            Icons.arrow_forward_ios,
+            color: AppTheme.arrowIconsColor.withOpacity(0.25),
+            size: globals.deviceType == 'phone' ? 15 : 23,
+          ),
+        ],
+      ),
+    );
+  }
+
+  // add Medicine Widget
+  Widget addMedicineWidget() {
+    return ListTile(
+      leading: Text(
+        "Add Medicine Log",
+        style: TextStyle(
+            color: AppTheme.textColor1,
+            fontFamily: "SF UI Display Regular",
+            fontSize: globals.deviceType == "phone" ? 17 : 25),
+      ),
+      trailing: Icon(
+        Icons.arrow_forward_ios,
+        color: AppTheme.arrowIconsColor.withOpacity(0.25),
+        size: globals.deviceType == 'phone' ? 15 : 23,
+      ),
+      selected: true,
+      onTap: () async {
+        var medicineModel = await Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MedicinesPage(
+                      fromHomePage: false,
+                    )));
+
+        if (medicineModel != null) {
+          medicineList.add(medicineModel);
+          setState(() {});
+        }
+      },
     );
   }
 
@@ -680,7 +813,7 @@ class _AddLogPageState extends State<AddLogPage> {
     }
     setState(() {
       sypmtoms = '';
-      sypmtoms = distinctIds.join(', ');
+      sypmtoms = distinctIds != null ? distinctIds.join(', ') : '';
       distinctIds = [];
       sypmtomsTempList = [];
     });
