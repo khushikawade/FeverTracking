@@ -1,4 +1,5 @@
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:intl/intl.dart';
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:flutter/material.dart';
@@ -18,6 +19,18 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
     Tab(text: 'Month'),
     Tab(text: 'Custom'),
   ];
+
+  var logsList;
+
+  getList() async {
+    logsList = await DbServices().getListData(Strings.hiveLogName);
+    for (int i = 1; i < logsList.length; i++)
+      debugPrint("${logsList[i].temprature}");
+
+    // print("${logsList[0].symptomName}");
+
+    // setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -194,6 +207,13 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                 width: double.infinity,
                 child: HeartGraphClass.withSampleData(),
               ),
+              ElevatedButton(
+                child: Text('GET DATA'),
+                onPressed: () {
+                  print('Pressed');
+                  getList();
+                },
+              )
             ],
           ),
         ),
@@ -207,6 +227,7 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
 
 class TemperatureGraph extends StatefulWidget {
   final List<charts.Series> seriesList;
+
   final bool animate;
 
   TemperatureGraph(this.seriesList, {this.animate});
@@ -221,91 +242,98 @@ class TemperatureGraph extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => new _SelectionCallbackState();
 
-  var logsList;
-  getList() async {
-    logsList = await DbServices().getListData(Strings.hiveLogName);
-
-    print("${logsList[1].symptomName}");
-    // setState(() {});
-  }
-
   final ax134 = charts.NumericAxisSpec(
       renderSpec: charts.GridlineRendererSpec(
     labelStyle:
         charts.TextStyleSpec(fontSize: 10, color: charts.MaterialPalette.white),
   ));
+  static getLogList() async {
+    var logsList = await DbServices().getListData(Strings.hiveLogName);
+    return logsList;
+  }
+
   static List<charts.Series<TemperatureDataClass, DateTime>>
       _createSampleData() {
-    final tempraturedata1 = [
-      new TemperatureDataClass(new DateTime(2017, 10, 21), 110),
-      new TemperatureDataClass(new DateTime(2017, 10, 23), 120),
-      new TemperatureDataClass(new DateTime(2017, 10, 25), 110),
-      new TemperatureDataClass(new DateTime(2017, 10, 27), 119),
-      new TemperatureDataClass(new DateTime(2017, 10, 30), 110),
-      new TemperatureDataClass(new DateTime(2017, 11, 2), 110),
-      new TemperatureDataClass(new DateTime(2017, 11, 4), 108),
-      new TemperatureDataClass(new DateTime(2017, 11, 5), 110),
-      new TemperatureDataClass(new DateTime(2017, 11, 7), 105),
-      new TemperatureDataClass(new DateTime(2017, 11, 9), 102),
-      new TemperatureDataClass(new DateTime(2017, 11, 11), 112),
-      new TemperatureDataClass(new DateTime(2017, 11, 12), 102),
-      new TemperatureDataClass(new DateTime(2017, 11, 15), 119),
-      new TemperatureDataClass(new DateTime(2017, 11, 17), 112),
-      new TemperatureDataClass(new DateTime(2017, 11, 19), 113),
-      new TemperatureDataClass(new DateTime(2017, 11, 21), 90),
-      new TemperatureDataClass(new DateTime(2017, 11, 23), 85),
-      new TemperatureDataClass(new DateTime(2017, 11, 25), 86),
-      new TemperatureDataClass(new DateTime(2017, 11, 27), 87),
-      new TemperatureDataClass(new DateTime(2017, 11, 31), 99),
-      new TemperatureDataClass(new DateTime(2017, 12, 1), 89),
-      new TemperatureDataClass(new DateTime(2017, 12, 2), 79),
-      new TemperatureDataClass(new DateTime(2017, 12, 4), 87),
-      new TemperatureDataClass(new DateTime(2017, 12, 5), 95),
-      new TemperatureDataClass(new DateTime(2017, 12, 7), 85),
-      new TemperatureDataClass(new DateTime(2017, 12, 9), 95),
-      new TemperatureDataClass(new DateTime(2017, 12, 11), 102),
-      new TemperatureDataClass(new DateTime(2017, 12, 14), 92),
-      new TemperatureDataClass(new DateTime(2017, 12, 16), 95),
-      new TemperatureDataClass(new DateTime(2017, 12, 19), 102),
-      new TemperatureDataClass(new DateTime(2017, 12, 21), 105),
-      new TemperatureDataClass(new DateTime(2017, 12, 24), 115),
-    ];
+    var logsList = getLogList();
+    var tempraturedata1;
+    if (logsList != null && logsList.length > 0) {
+      for (int i = 0; i < logsList.length; i++) {
+        tempraturedata1.add(TemperatureDataClass(
+            DateTime.parse(
+                DateFormat('dd-MM-yyyy').format(logsList[i].dateTime)),
+            int.parse(logsList[i].temprature)));
+      }
+    }
+    // final tempraturedata1 = [
+    //   new TemperatureDataClass(new DateTime(2017, 10, 21), 0),
+    //   new TemperatureDataClass(new DateTime(2017, 10, 23), 1),
+    //   new TemperatureDataClass(new DateTime(2017, 10, 25), 2),
+    //   new TemperatureDataClass(new DateTime(2017, 10, 27), 1),
+    //   new TemperatureDataClass(new DateTime(2017, 10, 30), 2),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 2), 3),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 4), 4),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 5), 4),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 7), 4),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 9), 3),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 11), 3),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 12), 3),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 15), 3),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 17), 5),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 19), 5),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 21), 4),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 23), 4),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 25), 4),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 27), 5),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 31), 5),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 1), 5),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 2), 6),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 4), 7),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 5), 8),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 7), 9),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 9), 10),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 11), 11),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 14), 12),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 16), 13),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 19), 14),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 21), 15),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 24), 16),
+    // ];
 
-    final tempraturedata2 = [
-      new TemperatureDataClass(new DateTime(2017, 10, 21), 82),
-      new TemperatureDataClass(new DateTime(2017, 10, 23), 92),
-      new TemperatureDataClass(new DateTime(2017, 10, 25), 82),
-      new TemperatureDataClass(new DateTime(2017, 10, 27), 99),
-      new TemperatureDataClass(new DateTime(2017, 10, 30), 102),
-      new TemperatureDataClass(new DateTime(2017, 11, 2), 92),
-      new TemperatureDataClass(new DateTime(2017, 11, 4), 106),
-      new TemperatureDataClass(new DateTime(2017, 11, 5), 82),
-      new TemperatureDataClass(new DateTime(2017, 11, 7), 94),
-      new TemperatureDataClass(new DateTime(2017, 11, 9), 92),
-      new TemperatureDataClass(new DateTime(2017, 11, 11), 102),
-      new TemperatureDataClass(new DateTime(2017, 11, 12), 92),
-      new TemperatureDataClass(new DateTime(2017, 11, 15), 109),
-      new TemperatureDataClass(new DateTime(2017, 11, 17), 102),
-      new TemperatureDataClass(new DateTime(2017, 11, 19), 103),
-      new TemperatureDataClass(new DateTime(2017, 11, 21), 106),
-      new TemperatureDataClass(new DateTime(2017, 11, 23), 100),
-      new TemperatureDataClass(new DateTime(2017, 11, 25), 92),
-      new TemperatureDataClass(new DateTime(2017, 11, 27), 94),
-      new TemperatureDataClass(new DateTime(2017, 11, 29), 96),
-      new TemperatureDataClass(new DateTime(2017, 11, 31), 92),
-      new TemperatureDataClass(new DateTime(2017, 12, 1), 90),
-      new TemperatureDataClass(new DateTime(2017, 12, 3), 89),
-      new TemperatureDataClass(new DateTime(2017, 12, 4), 96),
-      new TemperatureDataClass(new DateTime(2017, 12, 5), 102),
-      new TemperatureDataClass(new DateTime(2017, 12, 7), 104),
-      new TemperatureDataClass(new DateTime(2017, 12, 9), 92),
-      new TemperatureDataClass(new DateTime(2017, 12, 11), 75),
-      new TemperatureDataClass(new DateTime(2017, 12, 14), 92),
-      new TemperatureDataClass(new DateTime(2017, 12, 16), 109),
-      new TemperatureDataClass(new DateTime(2017, 12, 19), 102),
-      new TemperatureDataClass(new DateTime(2017, 12, 21), 102),
-      new TemperatureDataClass(new DateTime(2017, 12, 24), 106),
-    ];
+    // final tempraturedata2 = [
+    //   new TemperatureDataClass(new DateTime(2017, 10, 21), 5),
+    //   new TemperatureDataClass(new DateTime(2017, 10, 23), 5),
+    //   new TemperatureDataClass(new DateTime(2017, 10, 25), 2),
+    //   new TemperatureDataClass(new DateTime(2017, 10, 27), 2),
+    //   new TemperatureDataClass(new DateTime(2017, 10, 30), 3),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 2), 3),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 4), 3),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 5), 3),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 7), 5),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 9), 5),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 11), 5),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 12), 5),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 15), 5),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 17), 6),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 19), 7),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 21), 8),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 23), 9),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 25), 11),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 27), 10),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 29), 11),
+    //   new TemperatureDataClass(new DateTime(2017, 11, 31), 12),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 1), 13),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 3), 14),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 4), 15),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 5), 16),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 7), 17),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 9), 18),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 11), 19),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 14), 20),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 16), 21),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 19), 22),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 21), 23),
+    //   new TemperatureDataClass(new DateTime(2017, 12, 24), 23),
+    // ];
 
     return [
       new charts.Series<TemperatureDataClass, DateTime>(
@@ -320,7 +348,7 @@ class TemperatureGraph extends StatefulWidget {
         colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff41AFF4)),
         domainFn: (TemperatureDataClass obj, _) => obj.time,
         measureFn: (TemperatureDataClass obj, _) => obj.temp,
-        data: tempraturedata2,
+        data: tempraturedata1,
       )
     ];
   }
@@ -349,19 +377,96 @@ class _SelectionCallbackState extends State<TemperatureGraph> {
     });
   }
 
-  // List<charts.TickSpec<num>> _createTickSpec() {
-  //   List<charts.TickSpec<num>> _tickProvidSpecs =
-  //       new List<charts.TickSpec<num>>();
-  //   double d = 97.0;
-  //   while (d <= 100.0) {
-  //     _tickProvidSpecs.add(new charts.TickSpec(d,
-  //         label: '$d%', style: charts.TextStyleSpec(fontSize: 14)));
-  //     d += 0.1;
-  //   }
-  // }
+  List<charts.TickSpec<num>> _createTickSpec() {
+    List<charts.TickSpec<num>> _tickProvidSpecs =
+        new List<charts.TickSpec<num>>();
+    double d = 90.0;
+    while (d <= 95.0) {
+      _tickProvidSpecs.add(new charts.TickSpec(d,
+          label: '$d%', style: charts.TextStyleSpec(fontSize: 8)));
+      d += 0.5;
+    }
+    return _tickProvidSpecs;
+  }
+
+  final staticTicks = <charts.TickSpec<String>>[
+    new charts.TickSpec(
+        // Value must match the domain value.
+        '2014',
+        // Optional label for this tick, defaults to domain value if not set.
+        label: 'Year 2014',
+        // The styling for this tick.
+        style: new charts.TextStyleSpec(
+            color: new charts.Color(r: 0x4C, g: 0xAF, b: 0x50))),
+    // If no text style is specified - the style from renderSpec will be used
+    // if one is specified.
+    new charts.TickSpec('99.0'),
+    new charts.TickSpec('100.0'),
+    new charts.TickSpec('102.0'),
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final List<dynamic> string = [
+      97.1,
+      97.2,
+      97.3,
+      97.4,
+      97.5,
+      97.6,
+      97.8,
+      97.9,
+      98.0,
+      98.1,
+      98.2,
+      98.3,
+      98.4,
+      98.5,
+      98.6,
+      98.7,
+      98.8,
+      98.9,
+      99.0,
+      99.1,
+      99.2,
+      99.3,
+      99.4,
+      99.5,
+      99.6,
+      99.7,
+      99.8,
+      99.9,
+      100.0,
+      100.1,
+      100.2,
+      100.3,
+      100.4,
+      100.5,
+      100.6,
+      100.7,
+      100.8,
+      100.9,
+      101.0,
+      101.1,
+      101.2,
+      101.3,
+      101.4,
+      101.5,
+      101.6,
+      101.7,
+      101.8,
+      101.9,
+      102.0
+    ];
+
+    final labels = charts.BasicNumericTickFormatterSpec((num value) {
+      var index = value.floor();
+
+      return (index < string.length)
+          ? '${string[index]}'
+          : 'overflow ${string.length} $index';
+    });
+
     final children = <Widget>[
       new SizedBox(
           height: 225.0,
@@ -373,6 +478,30 @@ class _SelectionCallbackState extends State<TemperatureGraph> {
             //     _createTickSpec(),
             //   ),
             // ),
+
+            primaryMeasureAxis: new charts.NumericAxisSpec(
+              tickFormatterSpec: labels,
+              tickProviderSpec: new charts.BasicNumericTickProviderSpec(
+                zeroBound: false,
+                dataIsInWholeNumbers: false,
+                desiredTickCount: 12,
+              ),
+            ),
+
+            // primaryMeasureAxis: new charts.NumericAxisSpec(
+            //     // viewport: new charts.NumericExtents(2017, 2021),
+            //     tickProviderSpec: new charts.BasicNumericTickProviderSpec(
+            //       zeroBound: false,
+            //       dataIsInWholeNumbers: false,
+            //       desiredTickCount: 11,
+            //     ),
+            //     // tickFormatterSpec: charts.BasicNumericTickFormatterSpec(
+            //     //   _formaterYear,
+            //     // ),
+            //     renderSpec: charts.GridlineRendererSpec(
+            //       tickLengthPx: 0,
+            //       labelOffsetFromAxisPx: 12,
+            //     )),
             domainAxis: new charts.DateTimeAxisSpec(
               renderSpec: charts.GridlineRendererSpec(
                 labelStyle: new charts.TextStyleSpec(
