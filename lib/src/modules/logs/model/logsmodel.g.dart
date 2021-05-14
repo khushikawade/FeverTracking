@@ -28,7 +28,7 @@ class LogsModelAdapter extends TypeAdapter<LogsModel> {
   @override
   void write(BinaryWriter writer, LogsModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.dateTime)
       ..writeByte(1)
@@ -36,7 +36,9 @@ class LogsModelAdapter extends TypeAdapter<LogsModel> {
       ..writeByte(2)
       ..write(obj.temprature)
       ..writeByte(3)
-      ..write(obj.symptoms);
+      ..write(obj.symptoms)
+      ..writeByte(4)
+      ..write(obj.addNotehere);
   }
 
   @override

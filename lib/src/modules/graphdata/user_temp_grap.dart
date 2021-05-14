@@ -1,8 +1,10 @@
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/modules/logs/addLog.dart';
 import 'package:mobile_app/src/styles/theme.dart';
+import 'package:mobile_app/src/utilities/strings.dart';
 
 class UserTemperaturePage extends StatefulWidget {
   @override
@@ -218,6 +220,15 @@ class TemperatureGraph extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => new _SelectionCallbackState();
+
+  var logsList;
+  getList() async {
+    logsList = await DbServices().getListData(Strings.hiveLogName);
+
+    print("${logsList[1].symptomName}");
+    // setState(() {});
+  }
+
   final ax134 = charts.NumericAxisSpec(
       renderSpec: charts.GridlineRendererSpec(
     labelStyle:
@@ -338,6 +349,17 @@ class _SelectionCallbackState extends State<TemperatureGraph> {
     });
   }
 
+  // List<charts.TickSpec<num>> _createTickSpec() {
+  //   List<charts.TickSpec<num>> _tickProvidSpecs =
+  //       new List<charts.TickSpec<num>>();
+  //   double d = 97.0;
+  //   while (d <= 100.0) {
+  //     _tickProvidSpecs.add(new charts.TickSpec(d,
+  //         label: '$d%', style: charts.TextStyleSpec(fontSize: 14)));
+  //     d += 0.1;
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     final children = <Widget>[
@@ -345,6 +367,12 @@ class _SelectionCallbackState extends State<TemperatureGraph> {
           height: 225.0,
           child: new charts.TimeSeriesChart(
             widget.seriesList,
+            // UNCOMMENT   MAKE Y AXIS  POINT  DOUBLE (0.0)
+            // primaryMeasureAxis: new charts.NumericAxisSpec(
+            //   tickProviderSpec: new charts.StaticNumericTickProviderSpec(
+            //     _createTickSpec(),
+            //   ),
+            // ),
             domainAxis: new charts.DateTimeAxisSpec(
               renderSpec: charts.GridlineRendererSpec(
                 labelStyle: new charts.TextStyleSpec(
@@ -414,12 +442,29 @@ class HeartGraphClass extends StatelessWidget {
           : 'overflow ${string.length} $index';
     });
 
+    // List<charts.TickSpec<num>> _createTickSpec() {
+    //   List<charts.TickSpec<num>> _tickProvidSpecs =
+    //       new List<charts.TickSpec<num>>();
+    //   double d = 97;
+    //   while (d <= 102) {
+    //     _tickProvidSpecs.add(new charts.TickSpec(d,
+    //         label: '$d%', style: charts.TextStyleSpec(fontSize: 14)));
+    //     d += 0.1;
+    //   }
+    // }
+
     return new charts.TimeSeriesChart(seriesList,
         defaultRenderer:
             new charts.LineRendererConfig(includeArea: true, stacked: true),
         animate: animate,
         primaryMeasureAxis:
             new charts.NumericAxisSpec(tickFormatterSpec: labels),
+
+        // primaryMeasureAxis: new charts.NumericAxisSpec(
+        //   tickProviderSpec: new charts.StaticNumericTickProviderSpec(
+        //     _createTickSpec(),
+        //   ),
+        // ),
         domainAxis: new charts.DateTimeAxisSpec(
           renderSpec: charts.GridlineRendererSpec(
             labelStyle: new charts.TextStyleSpec(

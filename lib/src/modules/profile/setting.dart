@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
-import 'package:mobile_app/Symptoms/symptom.dart';
+import 'package:mobile_app/src/modules/Symptoms/symptom.dart';
+
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 
