@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
+import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/graphdata/user_temp_grap.dart';
+import 'package:mobile_app/src/modules/home/createPDF.dart';
 
 import 'package:mobile_app/src/modules/home/menu_screen.dart';
-import 'package:mobile_app/src/modules/home/pdf_viewer_page.dart';
+
 import 'package:mobile_app/src/modules/logs/addLog.dart';
 import 'package:mobile_app/src/modules/logs/log.dart';
 import 'package:mobile_app/src/modules/medicines/medicine.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
+
 import 'package:mobile_app/src/modules/profile/setting.dart';
 import 'package:mobile_app/src/styles/theme.dart';
+import 'package:mobile_app/src/utilities/strings.dart';
 
-import 'package:path_provider/path_provider.dart' as path_provider;
+import 'package:progress_dialog/progress_dialog.dart';
+import 'dart:io';
 
-import 'package:mobile_app/src/modules/logs/addLog.dart';
-import 'package:mobile_app/src/modules/logs/model/logsmodel.dart';
+import 'package:share/share.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -24,6 +28,21 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
+  var logsList;
+
+  @override
+  void initState() {
+    getLogs();
+    super.initState();
+  }
+
+  // get Logs List
+  getLogs() async {
+    logsList = await DbServices().getListData(Strings.hiveLogName);
+    print("Lenght : ${logsList.length}");
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,11 +167,12 @@ class HomeScreenState extends State<HomeScreen> {
                       ? Padding(
                           padding: const EdgeInsets.only(right: 5),
                           child: IconButton(
-                            onPressed: () async {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PdfViewerPage()));
+                            onPressed: () {
+                              generatePDFFile();
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => PdfViewerPage()));
                             },
                             icon: Icon(
                               const IconData(0xe809,
@@ -265,5 +285,70 @@ class HomeScreenState extends State<HomeScreen> {
     Hive.box('Logs').compact();
     Hive.close();
     super.dispose();
+  }
+
+  // generate Pdf File
+  generatePDFFile() async {
+    var columns = [
+      "Temperature",
+      "Symptoms",
+      "Position",
+      "Date",
+      "Dosage",
+      "Description"
+    ];
+    ProgressDialog dialog = new ProgressDialog(context);
+    await dialog.show();
+
+    File pdfFile = await generatePDF(columns, _generateTableData());
+    if (pdfFile != null) {
+      print(pdfFile.path);
+      _onShare(pdfFile, context);
+    }
+    await dialog.hide();
+  }
+
+  _onShare(File pdfFile, BuildContext context) async {
+    await Share.shareFiles([pdfFile.path],
+        subject: 'Log File', text: 'Log File');
+  }
+
+  _generateTableData() {
+    List<List<String>> data = new List();
+    for (dynamic d in logsList != null && logsList.length > 0 ? logsList : null)
+      data.add(<String>[
+        d.temprature != null && d.temprature.isNotEmpty
+            ? d.temprature.toString()
+            : '',
+        d.symptoms != null && d.symptoms.isNotEmpty
+            ? d.symptoms.toString()
+            : "",
+        d.position != null && d.position.isNotEmpty
+            ? d.position.toString()
+            : '',
+        d.dateTime != null
+            ? DateFormat('dd-MM-yyyy')
+                .format(DateTime.parse(d.dateTime.toString()))
+                .toString()
+            : '',
+        d.addMedinceLog != null
+            ? d.addMedinceLog.medicineName != null &&
+                    d.addMedinceLog.medicineName.isNotEmpty &&
+                    d.addMedinceLog.dosage != null &&
+                    d.addMedinceLog.dosage.isNotEmpty
+                ? '${d.addMedinceLog.medicineName}, ${d.addMedinceLog.dosage}'
+                : d.addMedinceLog.medicineName != null &&
+                        d.addMedinceLog.medicineName.isNotEmpty
+                    ? '${d.addMedinceLog.medicineName}'
+                    : d.addMedinceLog.dosage != null &&
+                            d.addMedinceLog.dosage.isNotEmpty
+                        ? '${d.addMedinceLog.dosage}'
+                        : ''
+            : "",
+        d.addNotehere != null && d.addNotehere.isNotEmpty
+            ? d.addNotehere.toString()
+            : '',
+      ]);
+    return data;
   }
 }
