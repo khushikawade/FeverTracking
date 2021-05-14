@@ -15,6 +15,7 @@ import 'package:mobile_app/src/modules/medicines/medicine.dart';
 import 'package:mobile_app/src/modules/profile/setting.dart';
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
+import 'package:mobile_app/src/utils/utility.dart';
 
 import 'package:progress_dialog/progress_dialog.dart';
 import 'dart:io';
@@ -29,6 +30,7 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   var logsList;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -44,8 +46,15 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void didUpdateWidget(covariant HomeScreen oldWidget) {
+    getLogs();
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         elevation: 5,
         backgroundColor: Theme.of(context).primaryColor,
@@ -168,7 +177,13 @@ class HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.only(right: 5),
                           child: IconButton(
                             onPressed: () {
-                              generatePDFFile();
+                              if (logsList != null && logsList.length > 0) {
+                                generatePDFFile();
+                              } else {
+                                Utility.showSnackBar(
+                                    _scaffoldKey, 'No Logs Found', context);
+                              }
+
                               // Navigator.push(
                               //     context,
                               //     MaterialPageRoute(
@@ -212,22 +227,29 @@ class HomeScreenState extends State<HomeScreen> {
       body: selectedIndex == 0
           ? UserTemperaturePage()
           : selectedIndex == 1
-              ? FutureBuilder(
-                  future: Hive.openBox(
-                    'Logs',
-                    compactionStrategy: (int total, int deleted) {
-                      return deleted > 20;
-                    },
-                  ),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      if (snapshot.hasError)
-                        return Text(snapshot.error.toString());
-                      else
-                        return LogPage();
-                    } else
-                      return Scaffold();
-                  })
+              ? LogPage(
+                  onUpdateWidget: (bool result) {
+                    if (result != null && result) {
+                      getLogs();
+                    }
+                  },
+                )
+              // ? FutureBuilder(
+              //     future: Hive.openBox(
+              //       'Logs',
+              //       compactionStrategy: (int total, int deleted) {
+              //         return deleted > 20;
+              //       },
+              //     ),
+              //     builder: (BuildContext context, AsyncSnapshot snapshot) {
+              //       if (snapshot.connectionState == ConnectionState.done) {
+              //         if (snapshot.hasError)
+              //           return Text(snapshot.error.toString());
+              //         else
+              //           return LogPage();
+              //       } else
+              //         return Scaffold();
+              //     })
               : selectedIndex == 2
                   ? MedicinesPage(
                       fromHomePage: true,
@@ -290,7 +312,7 @@ class HomeScreenState extends State<HomeScreen> {
   // generate Pdf File
   generatePDFFile() async {
     var columns = [
-      "Temperature",
+      "Temp(${Strings.feranahiteString})",
       "Symptoms",
       "Position",
       "Date",

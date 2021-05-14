@@ -13,6 +13,8 @@ import 'package:mobile_app/src/widgets/loaderWidget.dart';
 import 'package:mobile_app/src/widgets/timeago.dart';
 
 class LogPage extends StatefulWidget {
+  Function onUpdateWidget;
+  LogPage({Key key, this.onUpdateWidget}) : super(key: key);
   @override
   _LogPageState createState() => _LogPageState();
 }
@@ -39,6 +41,7 @@ class _LogPageState extends State<LogPage> {
                         )));
 
             if (result != null && result) {
+              widget.onUpdateWidget(true);
               setState(() {});
               //getList();
             }
@@ -156,7 +159,7 @@ class _LogPageState extends State<LogPage> {
                     Text(
                       items[index].temprature != null &&
                               items[index].temprature.isNotEmpty
-                          ? items[index].temprature
+                          ? '${items[index].temprature} ${Strings.feranahiteString}'
                           : '',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,

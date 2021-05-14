@@ -31,6 +31,8 @@ class _AddMedicineState extends State<AddMedicine> {
   String addNoteText = '';
   TextEditingController medicineController = TextEditingController();
   TextEditingController dosageController = TextEditingController();
+  FocusNode dosageFocus = new FocusNode();
+  FocusNode medicineFocus = new FocusNode();
 
   var distinctIds;
 
@@ -157,6 +159,7 @@ class _AddMedicineState extends State<AddMedicine> {
             child: Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: TextField(
+                focusNode: medicineFocus,
                 controller: medicineController,
                 decoration: InputDecoration(
                   hintText: 'Enter Medicine Name',
@@ -206,6 +209,7 @@ class _AddMedicineState extends State<AddMedicine> {
                   child: TextField(
                     textAlign: TextAlign.end,
                     controller: dosageController,
+                    focusNode: dosageFocus,
                     keyboardType:
                         TextInputType.numberWithOptions(decimal: true),
                     decoration: InputDecoration(
@@ -291,6 +295,8 @@ class _AddMedicineState extends State<AddMedicine> {
               ),
               selected: true,
               onTap: () {
+                dosageFocus.unfocus();
+                medicineFocus.unfocus();
                 _settingModalBottomSheet(context, unitList, 0);
               },
             ),
@@ -339,6 +345,8 @@ class _AddMedicineState extends State<AddMedicine> {
               ),
               selected: true,
               onTap: () {
+                dosageFocus.unfocus();
+                medicineFocus.unfocus();
                 _settingModalBottomSheet(context, frequencyList, 1);
               },
             ),
@@ -377,6 +385,8 @@ class _AddMedicineState extends State<AddMedicine> {
           ),
           InkWell(
             onTap: () async {
+              dosageFocus.unfocus();
+              medicineFocus.unfocus();
               var result = await Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => AddNote()),
@@ -392,19 +402,16 @@ class _AddMedicineState extends State<AddMedicine> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Container(
-                      width: (MediaQuery.of(context).size.width * 0.85),
-                      child: Text(
-                        addNoteText == '' ? "Add note here" : addNoteText,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: AppTheme.textColor1,
-                            fontFamily: "SF UI Display Regular",
-                            fontSize: globals.deviceType == "phone" ? 17 : 25),
-                      )),
-                  SizedBox(
-                    width: (MediaQuery.of(context).size.width * 0.015),
+                  Expanded(
+                    child: Text(
+                      addNoteText == '' ? "Add note here" : addNoteText,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: TextStyle(
+                          color: AppTheme.textColor1,
+                          fontFamily: "SF UI Display Regular",
+                          fontSize: globals.deviceType == "phone" ? 17 : 25),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
