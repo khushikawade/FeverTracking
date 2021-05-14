@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/modules/home/createPDF.dart';
+import 'package:mobile_app/src/utilities/strings.dart';
+import 'package:mobile_app/src/utils/utility.dart';
 import 'package:pdf/pdf.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -7,20 +11,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 
-List<dynamic> _generatePDFData() {
-  return [
-    {"userId": 1, "name": "John Doe", "email": "john@john.com"},
-    {"userId": 2, "name": "John Doe", "email": "john@john.com"},
-    {"userId": 3, "name": "John Doe", "email": "john@john.com"},
-    {"userId": 4, "name": "John Doe", "email": "john@john.com"},
-    {"userId": 5, "name": "John Doe", "email": "john@john.com"},
-    {"userId": 6, "name": "John Doe", "email": "john@john.com"},
-    {"userId": 7, "name": "John Doe", "email": "john@john.com"},
-    {"userId": 8, "name": "John Doe", "email": "john@john.com"},
-    {"userId": 9, "name": "John Doe", "email": "john@john.com"},
-    {"userId": 10, "name": "John Doe", "email": "john@john.com"}
-  ];
-}
+// List<dynamic> _generatePDFData() {
+//   return [
+//     {"userId": 1, "name": "John Doe", "email": "john@john.com"},
+//     {"userId": 2, "name": "John Doe", "email": "john@john.com"},
+//     {"userId": 3, "name": "John Doe", "email": "john@john.com"},
+//     {"userId": 4, "name": "John Doe", "email": "john@john.com"},
+//     {"userId": 5, "name": "John Doe", "email": "john@john.com"},
+//     {"userId": 6, "name": "John Doe", "email": "john@john.com"},
+//     {"userId": 7, "name": "John Doe", "email": "john@john.com"},
+//     {"userId": 8, "name": "John Doe", "email": "john@john.com"},
+//     {"userId": 9, "name": "John Doe", "email": "john@john.com"},
+//     {"userId": 10, "name": "John Doe", "email": "john@john.com"}
+//   ];
+// }
 
 class PdfViewerPage extends StatefulWidget {
   @override
@@ -28,6 +32,20 @@ class PdfViewerPage extends StatefulWidget {
 }
 
 class _PdfViewerPageState extends State<PdfViewerPage> {
+  var logsList;
+  @override
+  void initState() {
+    getLogs();
+    super.initState();
+  }
+
+  // get Logs List
+  getLogs() async {
+    logsList = await DbServices().getListData(Strings.hiveLogName);
+    print("Lenght : ${logsList.length}");
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,9 +85,16 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
             padding: const EdgeInsets.only(right: 5),
             child: IconButton(
               onPressed: () {
-                var columns = ["Id", "Name", "Email"];
+                var columns = [
+                  "Temperature",
+                  "Symptoms",
+                  "Position",
+                  "Date",
+                  "Dosage",
+                  "Description"
+                ];
                 generatePDF(columns, _generateTableData()).then((value) {
-                  if (value)
+                  if (value != null)
                     print("Success -----------");
                   else
                     print("Fail -----------");
@@ -101,8 +126,10 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
             sortAscending: true,
             columns: tableColumns(),
             rows: List.generate(
-              _generatePDFData().length,
-              (index) => _getDataRow(_generatePDFData()[index]),
+              logsList != null && logsList.length > 0 ? logsList.length : 0,
+              (index) => _getDataRow(logsList != null && logsList.length > 0
+                  ? logsList[index]
+                  : null),
             ),
           ),
         ));
@@ -113,15 +140,52 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
     return DataRow(
       cells: <DataCell>[
         DataCell(Text(
-          data['userId'].toString(),
+          data.temprature != null && data.temprature.isNotEmpty
+              ? data.temprature.toString()
+              : '',
           style: TextStyle(fontSize: 14),
         )),
         DataCell(Text(
-          data['name'].toString(),
+          data.symptoms != null && data.symptoms.isNotEmpty
+              ? data.symptoms.toString()
+              : "",
           style: TextStyle(fontSize: 14),
         )),
         DataCell(Text(
-          data['email'].toString(),
+          data.position != null && data.position.isNotEmpty
+              ? data.position.toString()
+              : '',
+          style: TextStyle(fontSize: 14),
+        )),
+        DataCell(Text(
+          data.dateTime != null
+              ? DateFormat('dd-MM-yyyy')
+                  .format(DateTime.parse(data.dateTime.toString()))
+                  .toString()
+              : '',
+          style: TextStyle(fontSize: 14),
+        )),
+        DataCell(Text(
+          data.addMedinceLog != null
+              ? data.addMedinceLog.medicineName != null &&
+                      data.addMedinceLog.medicineName.isNotEmpty &&
+                      data.addMedinceLog.dosage != null &&
+                      data.addMedinceLog.dosage.isNotEmpty
+                  ? '${data.addMedinceLog.medicineName}, ${data.addMedinceLog.dosage}'
+                  : data.addMedinceLog.medicineName != null &&
+                          data.addMedinceLog.medicineName.isNotEmpty
+                      ? '${data.addMedinceLog.medicineName}'
+                      : data.addMedinceLog.dosage != null &&
+                              data.addMedinceLog.dosage.isNotEmpty
+                          ? '${data.addMedinceLog.dosage}'
+                          : ''
+              : "",
+          style: TextStyle(fontSize: 14),
+        )),
+        DataCell(Text(
+          data.addNotehere != null && data.addNotehere.isNotEmpty
+              ? data.addNotehere.toString()
+              : '',
           style: TextStyle(fontSize: 14),
         )),
       ],
@@ -135,7 +199,7 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
         label: Padding(
           padding: EdgeInsets.only(top: 3, bottom: 3),
           child: Text(
-            "Id",
+            "Temperature",
             style: TextStyle(
               color: Colors.black87,
               fontWeight: FontWeight.bold,
@@ -148,7 +212,7 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
         label: Padding(
           padding: EdgeInsets.only(top: 3, bottom: 3),
           child: Text(
-            "Name",
+            "Symptoms",
             style: TextStyle(
               color: Colors.black87,
               fontWeight: FontWeight.bold,
@@ -161,7 +225,7 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
         label: Padding(
           padding: EdgeInsets.only(top: 3, bottom: 3),
           child: Text(
-            "Email",
+            "Position",
             style: TextStyle(
               color: Colors.black87,
               fontWeight: FontWeight.bold,
@@ -169,14 +233,85 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
             ),
           ),
         ),
-      )
+      ),
+      DataColumn(
+        label: Padding(
+          padding: EdgeInsets.only(top: 3, bottom: 3),
+          child: Text(
+            "Date",
+            style: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+      DataColumn(
+        label: Padding(
+          padding: EdgeInsets.only(top: 3, bottom: 3),
+          child: Text(
+            "Dosage",
+            style: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+      DataColumn(
+        label: Padding(
+          padding: EdgeInsets.only(top: 3, bottom: 3),
+          child: Text(
+            "Description",
+            style: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
     ];
   }
 
   _generateTableData() {
     List<List<String>> data = new List();
-    for (dynamic d in _generatePDFData())
-      data.add(<String>[d['userId'].toString(), d['name'], d['email']]);
+    for (dynamic d in logsList != null && logsList.length > 0 ? logsList : null)
+      data.add(<String>[
+        d.temprature != null && d.temprature.isNotEmpty
+            ? d.temprature.toString()
+            : '',
+        d.symptoms != null && d.symptoms.isNotEmpty
+            ? d.symptoms.toString()
+            : "",
+        d.position != null && d.position.isNotEmpty
+            ? d.position.toString()
+            : '',
+        d.dateTime != null
+            ? DateFormat('dd-MM-yyyy')
+                .format(DateTime.parse(d.dateTime.toString()))
+                .toString()
+            : '',
+        d.addMedinceLog != null
+            ? d.addMedinceLog.medicineName != null &&
+                    d.addMedinceLog.medicineName.isNotEmpty &&
+                    d.addMedinceLog.dosage != null &&
+                    d.addMedinceLog.dosage.isNotEmpty
+                ? '${d.addMedinceLog.medicineName}, ${d.addMedinceLog.dosage}'
+                : d.addMedinceLog.medicineName != null &&
+                        d.addMedinceLog.medicineName.isNotEmpty
+                    ? '${d.addMedinceLog.medicineName}'
+                    : d.addMedinceLog.dosage != null &&
+                            d.addMedinceLog.dosage.isNotEmpty
+                        ? '${d.addMedinceLog.dosage}'
+                        : ''
+            : "",
+        d.addNotehere != null && d.addNotehere.isNotEmpty
+            ? d.addNotehere.toString()
+            : '',
+      ]);
     return data;
   }
 }

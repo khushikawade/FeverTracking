@@ -22,7 +22,7 @@ class LogsModelAdapter extends TypeAdapter<LogsModel> {
       fields[2] as String,
       fields[3] as String,
       fields[4] as dynamic,
-      fields[4] as String,
+      fields[5] as String,
     );
   }
 
@@ -39,8 +39,9 @@ class LogsModelAdapter extends TypeAdapter<LogsModel> {
       ..writeByte(3)
       ..write(obj.symptoms)
       ..writeByte(4)
-      ..write(obj.addNotehere)
-      ..write(obj.addMedinceLog);
+      ..write(obj.addMedinceLog)
+      ..writeByte(5)
+      ..write(obj.addNotehere);
   }
 
   @override

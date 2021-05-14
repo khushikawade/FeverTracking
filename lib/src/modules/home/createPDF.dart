@@ -8,18 +8,18 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-const PdfColor green = PdfColor.fromInt(0xffe06c6c); //darker background color
-const PdfColor lightGreen =
-    PdfColor.fromInt(0xffedabab); //light background color
+const PdfColor blue = PdfColor.fromInt(0xff463DC7); //darker background color
+const PdfColor lightblue =
+    PdfColor.fromInt(0xffFAA45F); //light background color
 
 const _darkColor = PdfColor.fromInt(0xff242424);
 const _lightColor = PdfColor.fromInt(0xff9D9D9D);
-const PdfColor baseColor = PdfColor.fromInt(0xffD32D2D);
+const PdfColor baseColor = PdfColor.fromInt(0xff463DC7);
 const PdfColor _baseTextColor = PdfColor.fromInt(0xffffffff);
-const PdfColor accentColor = PdfColor.fromInt(0xfff1c0c0);
+const PdfColor accentColor = PdfColor.fromInt(0xff463DC7);
 
 //create pdf file
-Future<bool> generatePDF(
+Future<File> generatePDF(
     List<String> columns, List<List<String>> tableData) async {
   final PageTheme pageTheme = await _myPageTheme(PdfPageFormat.a3);
 
@@ -29,7 +29,7 @@ Future<bool> generatePDF(
   pdf.addPage(
     pw.Page(
       //pageFormat: PdfPageFormat.a4,
-      pageTheme: pageTheme,
+      // pageTheme: pageTheme,
       build: (pw.Context context) => pw.Column(
           mainAxisAlignment: pw.MainAxisAlignment.start,
           crossAxisAlignment: pw.CrossAxisAlignment.end,
@@ -155,7 +155,7 @@ Future<bool> generatePDF(
     //         ])
   );
 
-  bool result = await downloadPDfFile("sample", pdf);
+  File result = await downloadPDfFile("sample", pdf);
   return result;
 }
 
@@ -171,9 +171,12 @@ downloadPDfFile(String docname, Document pdf) async {
 
   //File('$downloadsDir/$_fileName.pdf').writeAsBytesSync();
 
-  await File('$downloadsDir/$_fileName.pdf').writeAsBytes(await pdf.save());
+  File file =
+      await File('$downloadsDir/$_fileName.pdf').writeAsBytes(await pdf.save());
 
-  return true;
+  //await File('$downloadsDir/$_fileName.pdf').writeAsBytes(await pdf.save());
+
+  return file;
 }
 
 Future<String> _getPathToDownload() async {
@@ -210,17 +213,17 @@ Future<PageTheme> _myPageTheme(PdfPageFormat format) async {
           size: PdfPoint(format.width, format.height),
           painter: (PdfGraphics canvas, PdfPoint size) {
             context.canvas
-              ..setColor(lightGreen)
+              ..setColor(lightblue)
               ..moveTo(0, size.y)
               ..lineTo(0, size.y - 230)
               ..lineTo(60, size.y)
               ..fillPath()
-              ..setColor(green)
+              ..setColor(blue)
               ..moveTo(0, size.y)
               ..lineTo(0, size.y - 100)
               ..lineTo(100, size.y)
               ..fillPath()
-              ..setColor(lightGreen)
+              ..setColor(lightblue)
               ..moveTo(30, size.y)
               ..lineTo(110, size.y - 50)
               ..lineTo(150, size.y)
@@ -229,12 +232,12 @@ Future<PageTheme> _myPageTheme(PdfPageFormat format) async {
               ..lineTo(size.x, 230)
               ..lineTo(size.x - 60, 0)
               ..fillPath()
-              ..setColor(green)
+              ..setColor(blue)
               ..moveTo(size.x, 0)
               ..lineTo(size.x, 100)
               ..lineTo(size.x - 100, 0)
               ..fillPath()
-              ..setColor(lightGreen)
+              ..setColor(lightblue)
               ..moveTo(size.x - 30, 0)
               ..lineTo(size.x - 110, 50)
               ..lineTo(size.x - 150, 0)
@@ -249,21 +252,31 @@ Future<PageTheme> _myPageTheme(PdfPageFormat format) async {
 //pdf header body
 Widget pdfHeader() {
   return Container(
+      alignment: Alignment.topLeft,
       decoration: BoxDecoration(
-          color: PdfColor.fromInt(0xffffffff),
-          borderRadius: BorderRadius.circular(6)),
-      margin: EdgeInsets.only(bottom: 8, top: 8),
+          color: PdfColors.white, borderRadius: BorderRadius.circular(6)),
+      margin: EdgeInsets.only(bottom: 10, top: 10),
       padding: EdgeInsets.fromLTRB(10, 7, 10, 4),
-      child: Column(children: [
-        Text(
-          "DevByBit",
-          style: TextStyle(
-              fontSize: 16, color: _darkColor, fontWeight: FontWeight.bold),
-        ),
-        Text("+254 700 123456",
-            style: TextStyle(fontSize: 14, color: _darkColor)),
-        Text("Nairobi, Kenya",
-            style: TextStyle(fontSize: 14, color: _darkColor)),
-        Divider(color: accentColor),
-      ]));
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(children: [
+              Text("Patient Name : ",
+                  style: TextStyle(fontSize: 14, color: _darkColor)),
+              Text(
+                "DevByBit",
+                style: TextStyle(
+                    fontSize: 16,
+                    color: _darkColor,
+                    fontWeight: FontWeight.bold),
+              )
+            ]),
+            Text("Contact No. : +254 700 123456",
+                style: TextStyle(fontSize: 14, color: _darkColor)),
+            Text("Address : Nairobi, Kenya",
+                style: TextStyle(fontSize: 14, color: _darkColor)),
+            Divider(color: accentColor),
+          ]));
 }
