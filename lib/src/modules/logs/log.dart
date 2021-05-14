@@ -19,6 +19,7 @@ class LogPage extends StatefulWidget {
 
 class _LogPageState extends State<LogPage> {
   var logsList;
+  static GlobalKey previewContainer = new GlobalKey();
   @override
   void initState() {
     super.initState();
@@ -27,7 +28,7 @@ class _LogPageState extends State<LogPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppTheme.screenbackGroundColor,
-        body: makeWidget(),
+        body: RepaintBoundary(key: previewContainer, child: makeWidget()),
         floatingActionButton: GestureDetector(
           onTap: () async {
             bool result = await Navigator.push(
@@ -180,9 +181,8 @@ class _LogPageState extends State<LogPage> {
                         ),
                         Expanded(
                           child: Text(
-                            items[index].temprature != null &&
-                                    items[index].temprature.isNotEmpty
-                                ? items[index].temprature
+                            items[index].addMedinceLog != null
+                                ? '${items[index].addMedinceLog.medicineName}, ${items[index].addMedinceLog.dosage}'
                                 : '',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,

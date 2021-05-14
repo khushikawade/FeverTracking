@@ -4,6 +4,7 @@ import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/graphdata/user_temp_grap.dart';
 
 import 'package:mobile_app/src/modules/home/menu_screen.dart';
+import 'package:mobile_app/src/modules/home/pdf_viewer_page.dart';
 import 'package:mobile_app/src/modules/logs/addLog.dart';
 import 'package:mobile_app/src/modules/logs/log.dart';
 import 'package:mobile_app/src/modules/medicines/medicine.dart';
@@ -148,18 +149,10 @@ class HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.only(right: 5),
                           child: IconButton(
                             onPressed: () async {
-                              // if (selectedIndex == 3) {
-                              //   updateProfileSuccess = await Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => EditProfileScreen()),
-                              //   );
-                              //   if (updateProfileSuccess != null && updateProfileSuccess) {
-                              //     print("Result : ${updateProfileSuccess}");
-                              //     setState(() {});
-                              //   }
-                              // }
-                              //Navigator.pop(context);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PdfViewerPage()));
                             },
                             icon: Icon(
                               const IconData(0xe809,
