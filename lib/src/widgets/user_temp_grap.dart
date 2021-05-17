@@ -245,12 +245,15 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                         ? isLoading
                             ? CustomLoader()
                             : graphWidget()
-                        : Center(
-                            child: Text(
-                              'This is the $label tab',
-                              style: const TextStyle(fontSize: 36),
-                            ),
-                          );
+                        : label == "week"
+                            ? isLoading
+                                ? CustomLoader()
+                                : graphWidget()
+                            : label == "day"
+                                ? isLoading
+                                    ? CustomLoader()
+                                    : graphWidget()
+                                : graphWidget();
                   }).toList(),
                 ),
               ),
@@ -259,6 +262,7 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
     );
   }
 
+  printLabel(String label) {}
   Widget graphWidget() {
     return Padding(
       padding: EdgeInsets.all(8.0),

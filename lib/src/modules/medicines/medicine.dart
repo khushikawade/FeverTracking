@@ -28,14 +28,19 @@ class _MedicinesPageState extends State<MedicinesPage> {
 
     bool isSuccess =
         await DbServices().deleteData(Strings.createMedicineName, index);
-    // if (isSuccess != null && isSuccess) {
-    //   Utility.showSnackBar(_scaffoldKey, 'Data Deleted Successfully', context);
-    // }
+    if (isSuccess != null && isSuccess) {
+      Utility.showSnackBar(_scaffoldKey, 'Data Deleted Successfully', context);
+
+      setState(() {
+        widget.deleteMedicine = false;
+      });
+    }
     return isSuccess;
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         appBar: widget.fromHomePage != null && widget.fromHomePage
             ? null
             : AppBar(
@@ -193,37 +198,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
                   fontSize: globals.deviceType == "phone" ? 15 : 23),
             ),
           ),
-          trailing: widget.deleteMedicine == false
-              ? Container(
-                  padding: EdgeInsets.only(right: 12),
-                  child: Icon(
-                    const IconData(0xe815, fontFamily: 'FeverTrackingIcons'),
-                    color: AppTheme.tralingIconColor,
-                    size: 9,
-                  ),
-                )
-              : InkWell(
-                  onTap: () async {
-                    bool sucess;
-                    widget.deleteMedicine == true
-                        ? sucess = await deleteMedicine(index)
-                        : print("");
-                    if (sucess) {
-                      setState(() {
-                        widget.deleteMedicine = false;
-                      });
-                    }
-                  },
-                  child: Container(
-                    padding: EdgeInsets.only(right: 0),
-                    child: Icon(
-                      Icons.delete,
-                      // color: AppTheme.iconsColor2,
-                      color: Colors.black54,
-                      size: 18,
-                    ),
-                  ),
-                ),
+          trailing: iconWidget(index),
           selected: true,
           onTap: () {
             Navigator.of(context).pop(items[index]);
@@ -237,5 +212,62 @@ class _MedicinesPageState extends State<MedicinesPage> {
             : Container()
       ]),
     );
+  }
+
+  Widget iconWidget(int index) {
+    {
+      return widget.deleteMedicine == false
+          ? Container(
+              padding: EdgeInsets.only(right: 12),
+              child: Icon(
+                const IconData(0xe815, fontFamily: 'FeverTrackingIcons'),
+                color: AppTheme.tralingIconColor,
+                size: 9,
+              ),
+            )
+          : Row(mainAxisSize: MainAxisSize.min, children: [
+              Container(
+                padding: EdgeInsets.only(right: 12),
+                child: Icon(
+                  const IconData(0xe815, fontFamily: 'FeverTrackingIcons'),
+                  color: AppTheme.tralingIconColor,
+                  size: 9,
+                ),
+              ),
+
+              IconButton(
+                icon: Icon(
+                  Icons.delete,
+                ),
+                iconSize: 18,
+                color: Colors.redAccent,
+                onPressed: () {
+                  deleteMedicine(index);
+                },
+              ),
+              // InkWell(
+              //   onTap: () async {
+              //     bool sucess;
+              //     widget.deleteMedicine == true
+              //         ? sucess = await deleteMedicine(index)
+              //         : print("");
+              //     if (sucess) {
+              //       setState(() {
+              //         widget.deleteMedicine = false;
+              //       });
+              //     }
+              //   },
+              //   child: Container(
+              //     padding: EdgeInsets.only(right: 0),
+              //     child: Icon(
+              //       Icons.delete,
+              //       // color: AppTheme.iconsColor2,
+              //       color: Colors.black54,
+              //       size: 18,
+              //     ),
+              //   ),
+              // ),
+            ]);
+    }
   }
 }
