@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/Symptoms/symptom.dart';
+import 'package:mobile_app/src/modules/profile/updateprofie.dart';
 
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
@@ -31,7 +32,8 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        body: ListView(children: [
+      Container(
         color: Theme.of(context).backgroundColor,
         child: Column(children: [
           SizedBox(
@@ -190,7 +192,8 @@ class _SettingPageState extends State<SettingPage> {
           ),
         ]),
       ),
-    ); // This trailing comma makes auto-formatting nicer for build methods.
+    ]));
+    // This trailing comma makes auto-formatting nicer for build methods.
   }
 
   Widget upperitemWidget() {
@@ -246,14 +249,23 @@ class _SettingPageState extends State<SettingPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        "Default Profile",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: AppTheme.headingTextColor,
-                            fontFamily: "SF UI Display Bold",
-                            fontSize: globals.deviceType == 'phone' ? 18 : 26),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UpdateProfielPage()));
+                        },
+                        child: Text(
+                          "Default Profile",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppTheme.headingTextColor,
+                              fontFamily: "SF UI Display Bold",
+                              fontSize:
+                                  globals.deviceType == 'phone' ? 18 : 26),
+                        ),
                       ),
                       Icon(
                         Icons.arrow_drop_down_sharp,

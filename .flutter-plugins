@@ -1,6 +1,9 @@
 # This is a generated file; do not edit or check into version control.
 device_info=/Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.0/
 ext_storage=/Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/ext_storage-1.0.3/
+libphonenumber=/Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber-2.0.0/
+libphonenumber_plugin=/Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber_plugin-0.2.3/
+libphonenumber_web=/Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber_web-0.2.0+1/
 path_provider=/Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.1/
 path_provider_linux=/Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.0.0/
 path_provider_macos=/Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.0/

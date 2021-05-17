@@ -39,6 +39,8 @@ dependencies:
   pdf: ^3.3.0
   progress_dialog: ^1.2.2
   share: ^2.0.1
+  intl_phone_number_input: ^0.7.0+2
+  regexpattern: ^1.0.0
 
 
 

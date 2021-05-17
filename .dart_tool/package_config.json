@@ -176,6 +176,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "equatable",
+      "rootUri": "file:///Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/equatable-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "ext_storage",
       "rootUri": "file:///Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/ext_storage-1.0.3",
       "packageUri": "lib/",
@@ -284,6 +290,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl_phone_number_input",
+      "rootUri": "file:///Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/intl_phone_number_input-0.7.0+2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "io",
       "rootUri": "file:///Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/io-1.0.0",
       "packageUri": "lib/",
@@ -298,6 +310,30 @@
     {
       "name": "json_annotation",
       "rootUri": "file:///Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "libphonenumber",
+      "rootUri": "file:///Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "libphonenumber_platform_interface",
+      "rootUri": "file:///Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber_platform_interface-0.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "libphonenumber_plugin",
+      "rootUri": "file:///Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber_plugin-0.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "libphonenumber_web",
+      "rootUri": "file:///Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber_web-0.2.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -450,6 +486,12 @@
       "rootUri": "file:///Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/qr-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "regexpattern",
+      "rootUri": "file:///Users/apple/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/regexpattern-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
     },
     {
       "name": "share",
@@ -626,7 +668,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-05-17T16:15:59.068185Z",
+  "generated": "2021-05-17T16:30:06.700678Z",
   "generator": "pub",
   "generatorVersion": "2.12.3"
 }
