@@ -153,7 +153,7 @@ class _TemperatureGraphState extends State<TemperatureGraph> {
 
   //   if (logsList != null && logsList.length > 0) {
   //     seriesList = _createSampleData(logsList);
-  //     print("Series List Lenght : ${seriesList.length}");
+
   //     setState(() {});
   //   }
   // }
@@ -163,26 +163,22 @@ class _TemperatureGraphState extends State<TemperatureGraph> {
     final labels = charts.BasicNumericTickFormatterSpec((num value) {
       var index = value.floor();
 
+      // return (index < globals.tempertureList.length)
+      //     ? '${globals.tempertureList[index]}'
+      //     : 'overflow ${globals.tempertureList.length} $index';
+
       return (index < globals.tempertureList.length)
           ? '${globals.tempertureList[index]}'
-          : 'overflow ${globals.tempertureList.length} $index';
+          : '${globals.tempertureList[index - 10]}';
     });
 
     final children = <Widget>[
       new SizedBox(
-          height: 225.0,
+          height: MediaQuery.of(context).size.height / 3,
           child: new charts.TimeSeriesChart(
             widget.seriesList != null && widget.seriesList.length > 0
                 ? widget.seriesList
                 : seriesList,
-
-            // UNCOMMENT   MAKE Y AXIS  POINT  DOUBLE (0.0)
-            // primaryMeasureAxis: new charts.NumericAxisSpec(
-            //   tickProviderSpec: new charts.StaticNumericTickProviderSpec(
-            //     _createTickSpec(),
-            //   ),
-            // ),
-
             primaryMeasureAxis: new charts.NumericAxisSpec(
               tickFormatterSpec: labels,
               tickProviderSpec: new charts.BasicNumericTickProviderSpec(
@@ -191,21 +187,6 @@ class _TemperatureGraphState extends State<TemperatureGraph> {
                 desiredTickCount: 12,
               ),
             ),
-
-            // primaryMeasureAxis: new charts.NumericAxisSpec(
-            //     // viewport: new charts.NumericExtents(2017, 2021),
-            //     tickProviderSpec: new charts.BasicNumericTickProviderSpec(
-            //       zeroBound: false,
-            //       dataIsInWholeNumbers: false,
-            //       desiredTickCount: 11,
-            //     ),
-            //     // tickFormatterSpec: charts.BasicNumericTickFormatterSpec(
-            //     //   _formaterYear,
-            //     // ),
-            //     renderSpec: charts.GridlineRendererSpec(
-            //       tickLengthPx: 0,
-            //       labelOffsetFromAxisPx: 12,
-            //     )),
             domainAxis: new charts.DateTimeAxisSpec(
               renderSpec: charts.GridlineRendererSpec(
                 labelStyle: new charts.TextStyleSpec(
@@ -223,15 +204,15 @@ class _TemperatureGraphState extends State<TemperatureGraph> {
           )),
     ];
 
-    if (_time != null) {
-      children.add(new Padding(
-          padding: new EdgeInsets.only(top: 5.0),
-          child: new Text(_time.toString())));
-    }
-    _measures?.forEach((String series, num value) {
-      print('${series}: ${value}');
-      children.add(new Text('${series}: ${value}'));
-    });
+    // if (_time != null) {
+    //   children.add(new Padding(
+    //       padding: new EdgeInsets.only(top: 5.0),
+    //       child: new Text(_time.toString())));
+    // }
+    // _measures?.forEach((String series, num value) {
+
+    //   children.add(new Text('${series}: ${value}'));
+    // });
 
     return new Column(children: children);
   }
@@ -408,7 +389,7 @@ class _TemperatureGraphState extends State<TemperatureGraph> {
 //           child: new Text(_time.toString())));
 //     }
 //     _measures?.forEach((String series, num value) {
-//       print('${series}: ${value}');
+
 //       children.add(new Text('${series}: ${value}'));
 //     });
 

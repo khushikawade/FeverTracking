@@ -61,7 +61,6 @@ class _AddLogPageState extends State<AddLogPage> {
   String temp = "";
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime selectedDate = DateTime.now();
-  String now = DateFormat('yyyy-MM-dd , kk:mm').format(DateTime.now());
 
   // DATABASE CODE
   void addLog(LogsModel log) async {
@@ -82,7 +81,7 @@ class _AddLogPageState extends State<AddLogPage> {
   getList() async {
     var logsList = await DbServices().getListData(Strings.hiveLogName);
     // List<LogsModel> list = hiveBox.get(Strings.hiveLogName);
-    print("Data : ${logsList[2].addNotehere}");
+
     setState(() {});
   }
 
@@ -105,11 +104,9 @@ class _AddLogPageState extends State<AddLogPage> {
       // backgroundColor: Colors.amberAccent,
       initialDateTime: DateTime.now(),
       onDateTimeChanged: (DateTime newdate) {
-        print(newdate);
         setState(() {
           //dateTime = DateFormat("yyyy-MM-dd , kk:mm").format(newdate);
           dateTime = newdate;
-          print("Date : ${dateTime}");
         });
       },
       use24hFormat: true,
@@ -215,7 +212,7 @@ class _AddLogPageState extends State<AddLogPage> {
                                   globals.deviceType == "phone" ? 17 : 25),
                         )
                       : Text(
-                          "$dateTime",
+                          DateFormat("dd-MM-yyyy HH:mm").format(dateTime),
                           style: TextStyle(
                               color: AppTheme.textColor2,
                               fontFamily: "SF UI Display Regular",
@@ -238,7 +235,6 @@ class _AddLogPageState extends State<AddLogPage> {
               selected: true,
               onTap: () {
                 bottomSheet(context, datetimePicker());
-                print(dateTime);
               },
             ),
           ),
@@ -500,7 +496,6 @@ class _AddLogPageState extends State<AddLogPage> {
                 MaterialPageRoute(builder: (context) => AddNote()),
               );
               setState(() {
-                print(result);
                 if (result != addNoteText && result != '') addNoteText = result;
               });
             },
@@ -715,7 +710,6 @@ class _AddLogPageState extends State<AddLogPage> {
                                     sypmtomsTempList.add(data.displayId);
                                     distinctIds =
                                         sypmtomsTempList.toSet().toList();
-                                    print(distinctIds);
                                   }
                                 });
                               },
@@ -754,7 +748,6 @@ class _AddLogPageState extends State<AddLogPage> {
       distinctIds = [];
       sypmtomsTempList = [];
     });
-    print('modal closed');
   }
 }
 

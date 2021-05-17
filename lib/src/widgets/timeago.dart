@@ -9,9 +9,6 @@ extension StringExtension on String {
     final DateTime videoDate = DateTime.parse(timestamp);
 
     final int diffInHours = DateTime.now().difference(videoDate).inHours;
-    print(videoDate);
-    print(DateTime.now());
-    print(diffInHours);
 
     String timeAgo = '';
     String timeUnit = '';
@@ -19,7 +16,7 @@ extension StringExtension on String {
 
     if (diffInHours < 1) {
       final diffInMinutes = DateTime.now().difference(videoDate).inMinutes;
-      print(diffInMinutes);
+
       if (diffInMinutes == 0) {
         timeUnit = 'Now';
         // timeValue = null;

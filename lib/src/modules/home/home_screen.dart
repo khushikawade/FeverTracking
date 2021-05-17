@@ -48,7 +48,7 @@ class HomeScreenState extends State<HomeScreen> {
   // get Logs List
   getLogs() async {
     logsList = await DbServices().getListData(Strings.hiveLogName);
-    print("Lenght : ${logsList.length}");
+
     setState(() {});
   }
 
@@ -371,7 +371,6 @@ class HomeScreenState extends State<HomeScreen> {
 
     File pdfFile = await generatePDF(columns, _generateTableData());
     if (pdfFile != null) {
-      print(pdfFile.path);
       _onShare(pdfFile, context);
     }
     await dialog.hide();

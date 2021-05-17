@@ -4,17 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/src/widgets/model/heart_data_model.dart';
 
 class HeartGraphClass extends StatelessWidget {
-  final List<charts.Series> seriesList;
-  final bool animate;
+  List<charts.Series<HeartDataClass, DateTime>> seriesList;
 
-  HeartGraphClass(this.seriesList, {this.animate});
+  HeartGraphClass({Key key, this.seriesList}) : super(key: key);
+  // final List<charts.Series> seriesList;
+  // final bool animate;
 
-  factory HeartGraphClass.withSampleData() {
-    return new HeartGraphClass(
-      _createSampleData(),
-      animate: false,
-    );
-  }
+  // HeartGraphClass(this.seriesList, {this.animate});
+
+  // factory HeartGraphClass.withSampleData() {
+  //   return new HeartGraphClass(
+  //     _createSampleData(),
+  //     animate: false,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,9 @@ class HeartGraphClass extends StatelessWidget {
 
       return (index < string.length)
           ? '${string[index]}'
-          : 'overflow ${string.length} $index';
+          : index == 50
+              ? 'Avg'
+              : "Max";
     });
 
     // List<charts.TickSpec<num>> _createTickSpec() {
@@ -42,9 +47,15 @@ class HeartGraphClass extends StatelessWidget {
     return new charts.TimeSeriesChart(seriesList,
         defaultRenderer:
             new charts.LineRendererConfig(includeArea: true, stacked: true),
-        animate: animate,
-        primaryMeasureAxis:
-            new charts.NumericAxisSpec(tickFormatterSpec: labels),
+        animate: false,
+        primaryMeasureAxis: new charts.NumericAxisSpec(
+          tickFormatterSpec: labels,
+          tickProviderSpec: new charts.BasicNumericTickProviderSpec(
+            zeroBound: false,
+            dataIsInWholeNumbers: false,
+            desiredTickCount: 3,
+          ),
+        ),
 
         // primaryMeasureAxis: new charts.NumericAxisSpec(
         //   tickProviderSpec: new charts.StaticNumericTickProviderSpec(
@@ -61,34 +72,34 @@ class HeartGraphClass extends StatelessWidget {
         ));
   }
 
-  static List<charts.Series<HeartDataClass, DateTime>> _createSampleData() {
-    final data = [
-      new HeartDataClass(new DateTime(2017, 9, 28), 0),
-      new HeartDataClass(new DateTime(2017, 9, 29), 1),
-      new HeartDataClass(new DateTime(2017, 9, 30), 1),
-      new HeartDataClass(new DateTime(2017, 10, 01), 1),
-      new HeartDataClass(new DateTime(2017, 10, 02), 1),
-      new HeartDataClass(new DateTime(2017, 10, 03), 1),
-      new HeartDataClass(new DateTime(2017, 10, 04), 1),
-      new HeartDataClass(new DateTime(2017, 10, 05), 1),
-      new HeartDataClass(new DateTime(2017, 10, 06), 1),
-      new HeartDataClass(new DateTime(2017, 10, 07), 1),
-      new HeartDataClass(new DateTime(2017, 10, 08), 1),
-      new HeartDataClass(new DateTime(2017, 10, 09), 1),
-      new HeartDataClass(new DateTime(2017, 10, 10), 1),
-      new HeartDataClass(new DateTime(2017, 10, 11), 0),
-      new HeartDataClass(new DateTime(2017, 10, 11), 2),
-    ];
+  // static List<charts.Series<HeartDataClass, DateTime>> _createSampleData() {
+  //   final data = [
+  //     new HeartDataClass(new DateTime(2017, 9, 28), 0),
+  //     new HeartDataClass(new DateTime(2017, 9, 29), 1),
+  //     new HeartDataClass(new DateTime(2017, 9, 30), 1),
+  //     new HeartDataClass(new DateTime(2017, 10, 01), 1),
+  //     new HeartDataClass(new DateTime(2017, 10, 02), 1),
+  //     new HeartDataClass(new DateTime(2017, 10, 03), 1),
+  //     new HeartDataClass(new DateTime(2017, 10, 04), 1),
+  //     new HeartDataClass(new DateTime(2017, 10, 05), 1),
+  //     new HeartDataClass(new DateTime(2017, 10, 06), 1),
+  //     new HeartDataClass(new DateTime(2017, 10, 07), 1),
+  //     new HeartDataClass(new DateTime(2017, 10, 08), 1),
+  //     new HeartDataClass(new DateTime(2017, 10, 09), 1),
+  //     new HeartDataClass(new DateTime(2017, 10, 10), 1),
+  //     new HeartDataClass(new DateTime(2017, 10, 11), 0),
+  //     new HeartDataClass(new DateTime(2017, 10, 11), 2),
+  //   ];
 
-    return [
-      new charts.Series<HeartDataClass, DateTime>(
-        id: ' Heart',
-        colorFn: (__, _) =>
-            charts.ColorUtil.fromDartColor(Color.fromRGBO(144, 238, 126, 1)),
-        domainFn: (HeartDataClass object, _) => object.timeStamp,
-        measureFn: (HeartDataClass object, _) => object.range,
-        data: data,
-      )
-    ];
-  }
+  //   return [
+  //     new charts.Series<HeartDataClass, DateTime>(
+  //       id: ' Heart',
+  //       colorFn: (__, _) =>
+  //           charts.ColorUtil.fromDartColor(Color.fromRGBO(144, 238, 126, 1)),
+  //       domainFn: (HeartDataClass object, _) => object.timeStamp,
+  //       measureFn: (HeartDataClass object, _) => object.range,
+  //       data: data,
+  //     )
+  //   ];
+  // }
 }

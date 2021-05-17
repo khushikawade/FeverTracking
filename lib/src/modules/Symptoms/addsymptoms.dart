@@ -84,7 +84,7 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
                 if ((symptomsController != null) &&
                     (symptomsController.text.isNotEmpty)) {
                   String item = symptomsController.text;
-                  print(item);
+
                   final log = SymptomsModel(item);
                   addLog(log);
                 } else {

@@ -42,7 +42,7 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
   // get Logs List
   getLogs() async {
     logsList = await DbServices().getListData(Strings.hiveLogName);
-    print("Lenght : ${logsList.length}");
+
     setState(() {});
   }
 
@@ -93,12 +93,7 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
                   "Dosage",
                   "Description"
                 ];
-                generatePDF(columns, _generateTableData()).then((value) {
-                  if (value != null)
-                    print("Success -----------");
-                  else
-                    print("Fail -----------");
-                });
+                generatePDF(columns, _generateTableData()).then((value) {});
               },
               icon: Icon(
                 const IconData(0xe809, fontFamily: "FeverTrackingIcons"),
