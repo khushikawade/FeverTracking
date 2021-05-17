@@ -102,7 +102,7 @@ class Utility {
     return _getPathToDownload();
   }
 
-  takeScreenShot(src, tmestamp, filename) async {
+  Future<bool> takeScreenShot(src) async {
     PermissionStatus status = await Permission.storage.request();
     if (status != PermissionStatus.granted) {
       return false;
@@ -113,13 +113,16 @@ class Utility {
     ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 
     Uint8List pngBytes = byteData.buffer.asUint8List();
-    File _pdfFile = await convertImageToPdf(pngBytes, "$filename");
 
-    var flag = await downloadPDfFile(_pdfFile, "$filename");
-    return flag;
+    // File imgFile = new File('screenshot.png');
+    // imgFile.writeAsBytes(pngBytes);
+    bool result = await downloadFile(pngBytes, 'screenshot.png');
+    // File imgFile = new File('$directory/screenshot.png');
+    // imgFile.writeAsBytes(pngBytes);
+    return result;
   }
 
-  downloadPDfFile(file, String docname) async {
+  downloadFile(Uint8List pngBytes, String docname) async {
     PermissionStatus status = await Permission.storage.request();
     if (status != PermissionStatus.granted) {
       return false;
@@ -129,51 +132,10 @@ class Utility {
         ? await _getDownloadDirectoryAndroid()
         : (await _getDownloadDirectoryIos()).path);
 
-    File('$downloadsDir/$_fileName.pdf')
-        .writeAsBytesSync(file.readAsBytesSync());
+    File imgFile = new File('$downloadsDir/$_fileName');
+    imgFile.writeAsBytes(pngBytes);
+    //File('$downloadsDir/$_fileName').writeAsBytes(file.readAsBytes());
 
     return true;
-  }
-
-  Future convertImageToPdf(bytes, String docname) async {
-    String _fileName = docname;
-    String dir = (await getApplicationDocumentsDirectory()).path;
-
-    bool _isFileExists = await File('$dir/$_fileName.pdf').exists();
-
-    if (_isFileExists == true) {
-      File _existingFile = File('$dir/$_fileName.pdf');
-      return _existingFile;
-    }
-
-    // try {
-    final data = generatePdf(PdfPageFormat.standard, bytes);
-    File('$dir/$_fileName.pdf').writeAsBytesSync(data);
-    File _file = File('$dir/$_fileName.pdf');
-
-    return _file;
-    // } catch (e) {
-
-    // }
-  }
-
-  Uint8List generatePdf(PdfPageFormat format, bytes) {
-    final pdf = pw.Document();
-
-    final PdfImage image = PdfImage.file(pdf.document, bytes: bytes);
-
-    pdf.addPage(
-      pw.Page(
-        pageFormat: format,
-        build: (pw.Context context) {
-          // return pw.Center(
-          //   child: pw.Image(image),
-          // );
-        },
-      ),
-    );
-    return null;
-
-    //return pdf.save();
   }
 }

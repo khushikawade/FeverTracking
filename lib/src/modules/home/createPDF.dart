@@ -155,7 +155,7 @@ Future<File> generatePDF(
     //         ])
   );
 
-  File result = await downloadPDfFile("sample", pdf);
+  File result = await downloadPDfFile("medicine_log", pdf);
   return result;
 }
 
