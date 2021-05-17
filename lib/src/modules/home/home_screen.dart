@@ -33,6 +33,9 @@ class HomeScreenState extends State<HomeScreen> {
   bool deletemedicine = false;
   DateTime currentDate = DateTime.now();
   final DateFormat formatter = DateFormat.yMMMMd('en_US');
+  DateTime selectedDate;
+  DateTime pervious7days;
+  DateTime pervious30days;
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -49,15 +52,10 @@ class HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-  DateTime selectedDate;
-  DateTime pervious7days;
-  DateTime pervious30days;
-
   // DateTime getCurrentdate = DateTime.now();
   getdate(int index) {
     final DateFormat formatter = DateFormat.yMMMMd('en_US');
-    print("index");
-    print(index);
+
     // currentDate = DateTime.now();
     if (index == 1) {
       pervious7days = new DateTime(
@@ -67,16 +65,18 @@ class HomeScreenState extends State<HomeScreen> {
       pervious30days = new DateTime(
           currentDate.year, currentDate.month - 1, currentDate.day + 1);
       pervious7days = null;
+    } else if (index == 0) {
+      currentDate = DateTime.now();
+      pervious7days = null;
+      pervious30days = null;
     }
-    print(pervious7days.month);
+
     // currentDate = formatter.format(now);
 
     // pervious7days = new DateTime(now.year, now.month, now.day - 6);
 
     // pervious30days = new DateTime(now.year, now.month - 1, now.day + 1);
 
-    print(" pervious 7 days  " + formatter.format(pervious7days));
-    print("pervious 30 days " + formatter.format(pervious30days));
     setState(() {});
     // something like 2013-04-20
   }

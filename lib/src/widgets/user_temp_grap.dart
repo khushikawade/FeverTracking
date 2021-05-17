@@ -1,7 +1,7 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 
 import 'package:mobile_app/src/db/db_services.dart';
-
+import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_app/src/styles/theme.dart';
@@ -155,90 +155,26 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
   List<charts.Series<TemperatureDataClass, DateTime>> _createSampleData(
       logsList) {
     List<TemperatureDataClass> tempraturedata1 = List<TemperatureDataClass>();
-    //List<TemperatureDataClass> tempraturedata2 = List<TemperatureDataClass>();
+    List<TemperatureDataClass> tempraturedata2 = List<TemperatureDataClass>();
+    List<TemperatureDataClass> tempraturedata3 = List<TemperatureDataClass>();
     if (logsList != null && logsList.length > 0) {
       for (int i = 0; i < logsList.length; i++) {
-        tempraturedata1
-            .add(new TemperatureDataClass(logsList[i].dateTime, i + 1));
-        // if (double.parse(logsList[i].temprature) >= 100.0) {
-        //   tempraturedata2
-        //       .add(new TemperatureDataClass(logsList[i].dateTime, i + 1));
-        // } else {
-        //   tempraturedata1
-        //       .add(new TemperatureDataClass(logsList[i].dateTime, i + 1));
-        // }
+        for (int j = 0; j < globals.tempertureList.length; j++) {
+          if (globals.tempertureList[j] == logsList[i].temprature) {
+            if (double.parse(logsList[i].temprature) <= 99.5) {
+              tempraturedata3
+                  .add(new TemperatureDataClass(logsList[i].dateTime, j));
+            } else if (double.parse(logsList[i].temprature) <= 102.5) {
+              tempraturedata2
+                  .add(new TemperatureDataClass(logsList[i].dateTime, j));
+            } else {
+              tempraturedata1
+                  .add(new TemperatureDataClass(logsList[i].dateTime, j));
+            }
+          }
+        }
       }
     }
-    // final tempraturedata1 = [
-    //   new TemperatureDataClass(new DateTime(2017, 10, 21), 0),
-    //   new TemperatureDataClass(new DateTime(2017, 10, 23), 1),
-    //   new TemperatureDataClass(new DateTime(2017, 10, 25), 2),
-    //   new TemperatureDataClass(new DateTime(2017, 10, 27), 1),
-    //   new TemperatureDataClass(new DateTime(2017, 10, 30), 2),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 2), 3),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 4), 4),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 5), 4),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 7), 4),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 9), 3),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 11), 3),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 12), 3),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 15), 3),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 17), 5),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 19), 5),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 21), 4),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 23), 4),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 25), 4),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 27), 5),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 31), 5),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 1), 5),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 2), 6),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 4), 7),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 5), 8),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 7), 9),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 9), 10),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 11), 11),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 14), 12),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 16), 13),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 19), 14),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 21), 15),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 24), 16),
-    // ];
-
-    // final tempraturedata2 = [
-    //   new TemperatureDataClass(new DateTime(2017, 10, 21), 5),
-    //   new TemperatureDataClass(new DateTime(2017, 10, 23), 5),
-    //   new TemperatureDataClass(new DateTime(2017, 10, 25), 2),
-    //   new TemperatureDataClass(new DateTime(2017, 10, 27), 2),
-    //   new TemperatureDataClass(new DateTime(2017, 10, 30), 3),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 2), 3),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 4), 3),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 5), 3),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 7), 5),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 9), 5),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 11), 5),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 12), 5),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 15), 5),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 17), 6),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 19), 7),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 21), 8),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 23), 9),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 25), 11),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 27), 10),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 29), 11),
-    //   new TemperatureDataClass(new DateTime(2017, 11, 31), 12),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 1), 13),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 3), 14),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 4), 15),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 5), 16),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 7), 17),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 9), 18),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 11), 19),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 14), 20),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 16), 21),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 19), 22),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 21), 23),
-    //   new TemperatureDataClass(new DateTime(2017, 12, 24), 23),
-    // ];
 
     return [
       new charts.Series<TemperatureDataClass, DateTime>(
@@ -253,7 +189,14 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
         colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff41AFF4)),
         domainFn: (TemperatureDataClass obj, _) => obj.time,
         measureFn: (TemperatureDataClass obj, _) => obj.temp,
-        data: tempraturedata1,
+        data: tempraturedata2,
+      ),
+      new charts.Series<TemperatureDataClass, DateTime>(
+        id: 'Temprature Minimum',
+        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xffDF3F3F)),
+        domainFn: (TemperatureDataClass obj, _) => obj.time,
+        measureFn: (TemperatureDataClass obj, _) => obj.temp,
+        data: tempraturedata3,
       )
     ];
   }
