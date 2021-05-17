@@ -26,6 +26,7 @@ bool alreaySetState = false;
 bool checkSubscription;
 bool checkVerification;
 bool isHaveData;
+bool isProfileset = false;
 List sEncIds = [];
 var location;
 bool isShowingInstruction = false;

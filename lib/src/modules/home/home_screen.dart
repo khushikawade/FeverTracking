@@ -218,11 +218,16 @@ class HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.only(right: 5),
                           child: IconButton(
                             onPressed: () {
-                              if (logsList != null && logsList.length > 0) {
-                                generatePDFFile();
+                              if (globals.isProfileset) {
+                                if (logsList != null && logsList.length > 0) {
+                                  generatePDFFile();
+                                } else {
+                                  Utility.showSnackBar(
+                                      _scaffoldKey, 'No Logs Found', context);
+                                }
                               } else {
-                                Utility.showSnackBar(
-                                    _scaffoldKey, 'No Logs Found', context);
+                                Utility.showSnackBar(_scaffoldKey,
+                                    'Please set Profile', context);
                               }
 
                               // Navigator.push(
