@@ -126,8 +126,11 @@ class _EditSymptomsPageState extends State<EditSymptomsPage> {
             child: IconButton(
               onPressed: () {
                 if ((symptomsController != null) &&
-                    (symptomsController.text.isNotEmpty) &&
-                    (symptomsController.text != widget.sysmptomsItem)) {
+                        (symptomsController.text.isNotEmpty)
+                    // &&
+                    // (symptomsController.text != widget.sysmptomsItem)
+
+                    ) {
                   String item = symptomsController.text;
                   print(item);
                   final updateItem = SymptomsModel(item);
