@@ -45,7 +45,6 @@ class _StartupPageState extends State<StartupPage> {
       final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
       // globals.deviceType = data.size.shortestSide < 600 ? 'tablet' :'tablet';
       globals.deviceType = data.size.shortestSide < 600 ? 'phone' : 'tablet';
-      print("Device Type : ${globals.deviceType}");
     } else {
       var deviceType = await getDeviceInfo();
       globals.deviceType = deviceType == "ipad" ? "tablet" : "phone";
@@ -55,7 +54,7 @@ class _StartupPageState extends State<StartupPage> {
   static Future<String> getDeviceInfo() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-    print('Running on ${iosInfo.model.toLowerCase()}');
+
     return iosInfo.model.toLowerCase();
   }
 

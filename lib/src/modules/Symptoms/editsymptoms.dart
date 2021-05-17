@@ -28,14 +28,12 @@ class _EditSymptomsPageState extends State<EditSymptomsPage> {
   void initState() {
     super.initState();
     symptomsController = new TextEditingController(text: widget.sysmptomsItem);
-    print(widget.sysmptomsItem);
   }
 
   var logsList;
   getList() async {
     logsList = await DbServices().getListData(Strings.createSymptoms);
 
-    print("${logsList[1].symptomName}");
     setState(() {});
   }
 
@@ -132,7 +130,7 @@ class _EditSymptomsPageState extends State<EditSymptomsPage> {
 
                     ) {
                   String item = symptomsController.text;
-                  print(item);
+
                   final updateItem = SymptomsModel(item);
                   updateSysmptomsList(widget.index, updateItem);
                   // addLog(log);

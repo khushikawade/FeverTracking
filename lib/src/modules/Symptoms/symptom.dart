@@ -34,8 +34,7 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
     logsList = await DbServices().getListData(Strings.createSymptoms);
     // logsList =
     //     await DbServices().updateListData(Strings.createSymptoms, 1, log);
-    print(logsList);
-    // print("${logsList[0]}");
+
     // setState(() {});
   }
 
@@ -187,7 +186,6 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
             ),
             InkWell(
               onTap: () async {
-                print(index);
                 {
                   var get = await Navigator.push(
                       context,
@@ -196,9 +194,7 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
                               index: index,
                               sysmptomsItem: items[index].symptomName)));
 
-                  setState(() {
-                    print("setstate");
-                  });
+                  setState(() {});
 
                   // Navigator.push(
                   //   context,

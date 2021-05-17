@@ -121,10 +121,6 @@ class _LogPageState extends State<LogPage> {
   }
 
   Widget itemWidget(int index, items) {
-    if (index == items.length - 1) {
-      print(DateFormat('HH:mm').format(items[index].dateTime));
-      print(DateFormat('HH:mm').format(DateTime.now()));
-    }
     return Container(
         margin: EdgeInsets.only(left: 16, right: 16, top: 5, bottom: 5),
         padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),

@@ -24,8 +24,6 @@ class _MedicinesPageState extends State<MedicinesPage> {
   // Color listTittleColor = Color(0XFF030303);
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Future<bool> deleteMedicine(index) async {
-    print(index);
-
     bool isSuccess =
         await DbServices().deleteData(Strings.createMedicineName, index);
     if (isSuccess != null && isSuccess) {
