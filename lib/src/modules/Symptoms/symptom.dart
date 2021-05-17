@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/Symptoms/addsymptoms.dart';
+import 'package:mobile_app/src/modules/Symptoms/editsymptoms.dart';
+import 'package:mobile_app/src/modules/Symptoms/model/symptomsmodel.dart';
 import 'package:mobile_app/src/modules/medicines/add_medicine.dart';
 
 import 'package:mobile_app/src/overrides.dart' as overrides;
@@ -28,10 +30,13 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
   ];
   var logsList;
   getList() async {
+    // final log = SymptomsModel("vomatining");
     logsList = await DbServices().getListData(Strings.createSymptoms);
-
-    print("${logsList[1].symptomName}");
-    setState(() {});
+    // logsList =
+    //     await DbServices().updateListData(Strings.createSymptoms, 1, log);
+    print(logsList);
+    // print("${logsList[0]}");
+    // setState(() {});
   }
 
   Widget build(BuildContext context) {
@@ -66,6 +71,7 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
         body: makeWidget(),
         floatingActionButton: GestureDetector(
           onTap: () async {
+            // getList();
             var name = await Navigator.push(context,
                 MaterialPageRoute(builder: (context) => AddSymptomsPage()));
             setState(() {});
@@ -180,13 +186,20 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
               ),
             ),
             InkWell(
-              onTap: () {
+              onTap: () async {
                 print(index);
                 {
-                  Navigator.push(
+                  var get = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AddSymptomsPage()));
+                          builder: (context) => EditSymptomsPage(
+                              index: index,
+                              sysmptomsItem: items[index].symptomName)));
+
+                  setState(() {
+                    print("setstate");
+                  });
+
                   // Navigator.push(
                   //   context,
                   //   MaterialPageRoute(
@@ -224,8 +237,6 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
   }
 }
 
-
-
 // ListView.separated(
 //           separatorBuilder: (BuildContext context, int index) {
 //             return Container(
@@ -239,8 +250,6 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
 //             return itemWidget1(index);
 //           },
 //         ),
-
-
 
 //  Text(
 //                 "${logsList[index].symptomName}",

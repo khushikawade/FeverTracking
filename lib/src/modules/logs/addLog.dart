@@ -169,6 +169,7 @@ class _AddLogPageState extends State<AddLogPage> {
 
   Widget datetimePicker() {
     return CupertinoDatePicker(
+      // backgroundColor: Colors.amberAccent,
       initialDateTime: DateTime.now(),
       onDateTimeChanged: (DateTime newdate) {
         print(newdate);
@@ -180,7 +181,9 @@ class _AddLogPageState extends State<AddLogPage> {
       },
       use24hFormat: true,
       minimumYear: 2010,
+      maximumDate: DateTime.now(),
       minuteInterval: 1,
+      // mode: CupertinoDatePickerMode.dateAndTime,
       mode: CupertinoDatePickerMode.dateAndTime,
     );
   }
@@ -228,7 +231,8 @@ class _AddLogPageState extends State<AddLogPage> {
                 if ((dateTime != null) &&
                     (postion.isNotEmpty) &&
                     (temp.isNotEmpty) &&
-                    (sypmtoms.isNotEmpty)) {
+                    (sypmtoms.isNotEmpty) &&
+                    (medicineList.isNotEmpty)) {
                   final log = LogsModel(
                       dateTime,
                       postion,

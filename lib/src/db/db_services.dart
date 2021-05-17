@@ -33,4 +33,35 @@ class DbServices {
       }
     }
   }
+
+  Future<bool> updateListData(tableName, index, value) async {
+    try {
+      final hiveBox = await Hive.openBox(tableName);
+
+      hiveBox.putAt(index, value);
+
+      return true;
+    } catch (e) {
+      if (e.toString().contains("Failed host lookup")) {
+        throw ("NO_CONNECTION");
+      } else {
+        throw (e);
+      }
+    }
+  }
+
+  Future<bool> deleteData(tableName, index) async {
+    try {
+      final hiveBox = await Hive.openBox(tableName);
+      hiveBox.deleteAt(index);
+
+      return true;
+    } catch (e) {
+      if (e.toString().contains("Failed host lookup")) {
+        throw ("NO_CONNECTION");
+      } else {
+        throw (e);
+      }
+    }
+  }
 }

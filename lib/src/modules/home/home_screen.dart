@@ -30,6 +30,10 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   var logsList;
+  bool deletemedicine = false;
+  DateTime currentDate = DateTime.now();
+  final DateFormat formatter = DateFormat.yMMMMd('en_US');
+
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -43,6 +47,38 @@ class HomeScreenState extends State<HomeScreen> {
     logsList = await DbServices().getListData(Strings.hiveLogName);
     print("Lenght : ${logsList.length}");
     setState(() {});
+  }
+
+  DateTime selectedDate;
+  DateTime pervious7days;
+  DateTime pervious30days;
+
+  // DateTime getCurrentdate = DateTime.now();
+  getdate(int index) {
+    final DateFormat formatter = DateFormat.yMMMMd('en_US');
+    print("index");
+    print(index);
+    // currentDate = DateTime.now();
+    if (index == 1) {
+      pervious7days = new DateTime(
+          currentDate.year, currentDate.month, currentDate.day - 6);
+      pervious30days = null;
+    } else if (index == 2) {
+      pervious30days = new DateTime(
+          currentDate.year, currentDate.month - 1, currentDate.day + 1);
+      pervious7days = null;
+    }
+    print(pervious7days.month);
+    // currentDate = formatter.format(now);
+
+    // pervious7days = new DateTime(now.year, now.month, now.day - 6);
+
+    // pervious30days = new DateTime(now.year, now.month - 1, now.day + 1);
+
+    print(" pervious 7 days  " + formatter.format(pervious7days));
+    print("pervious 30 days " + formatter.format(pervious30days));
+    setState(() {});
+    // something like 2013-04-20
   }
 
   @override
@@ -81,8 +117,13 @@ class HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Apr 23, 2021',
-                        textAlign: TextAlign.center,
+                        pervious7days != null
+                            ? '${formatter.format(pervious7days)} - ${formatter.format(currentDate)}'
+                            : pervious30days != null
+                                ? '${formatter.format(pervious30days)} - ${formatter.format(currentDate)}'
+                                : formatter.format(currentDate),
+                        // "$currentDate",
+                        textAlign: TextAlign.right,
                         style: TextStyle(
                             color: AppTheme.titleColor.withOpacity(0.6),
                             letterSpacing: 0.08,
@@ -201,18 +242,9 @@ class HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.only(right: 5),
                           child: IconButton(
                             onPressed: () async {
-                              // if (selectedIndex == 3) {
-                              //   updateProfileSuccess = await Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => EditProfileScreen()),
-                              //   );
-                              //   if (updateProfileSuccess != null && updateProfileSuccess) {
-                              //     print("Result : ${updateProfileSuccess}");
-                              //     setState(() {});
-                              //   }
-                              // }
-                              //Navigator.pop(context);
+                              setState(() {
+                                deletemedicine = !deletemedicine;
+                              });
                             },
                             icon: Icon(
                               const IconData(0xe802,
@@ -225,7 +257,21 @@ class HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: selectedIndex == 0
-          ? UserTemperaturePage()
+          ? UserTemperaturePage(
+              onUpdateWidget: (int index) {
+                if (index != null) {
+                  getdate(index);
+                  setState(() {
+                    // selectedDate = DateTime.now();
+                  });
+                } else {
+                  getdate(0);
+                  setState(() {
+                    // selectedDate = DateTime.now();
+                  });
+                }
+              },
+            )
           : selectedIndex == 1
               ? LogPage(
                   onUpdateWidget: (bool result) {
@@ -253,6 +299,7 @@ class HomeScreenState extends State<HomeScreen> {
               : selectedIndex == 2
                   ? MedicinesPage(
                       fromHomePage: true,
+                      deleteMedicine: deletemedicine,
                     )
                   : SettingPage(),
       floatingActionButton: selectedIndex == 0
