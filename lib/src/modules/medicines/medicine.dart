@@ -5,12 +5,15 @@ import 'package:mobile_app/src/modules/medicines/add_medicine.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
+import 'package:mobile_app/src/utils/utility.dart';
 import 'package:mobile_app/src/widgets/loaderWidget.dart';
 
 class MedicinesPage extends StatefulWidget {
   bool fromHomePage;
+  bool deleteMedicine;
 
-  MedicinesPage({Key key, this.fromHomePage}) : super(key: key);
+  MedicinesPage({Key key, this.fromHomePage, this.deleteMedicine = false})
+      : super(key: key);
   @override
   _MedicinesPageState createState() => _MedicinesPageState();
 }
@@ -19,6 +22,17 @@ class _MedicinesPageState extends State<MedicinesPage> {
   // Color flottingButtonColor = Color(0XFF463DC7);
   // Color dividerColor = Color(0XFF000000);
   // Color listTittleColor = Color(0XFF030303);
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  Future<bool> deleteMedicine(index) async {
+    print(index);
+
+    bool isSuccess =
+        await DbServices().deleteData(Strings.createMedicineName, index);
+    // if (isSuccess != null && isSuccess) {
+    //   Utility.showSnackBar(_scaffoldKey, 'Data Deleted Successfully', context);
+    // }
+    return isSuccess;
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,14 +193,37 @@ class _MedicinesPageState extends State<MedicinesPage> {
                   fontSize: globals.deviceType == "phone" ? 15 : 23),
             ),
           ),
-          trailing: Container(
-            padding: EdgeInsets.only(right: 12),
-            child: Icon(
-              const IconData(0xe815, fontFamily: 'FeverTrackingIcons'),
-              color: AppTheme.tralingIconColor,
-              size: 9,
-            ),
-          ),
+          trailing: widget.deleteMedicine == false
+              ? Container(
+                  padding: EdgeInsets.only(right: 12),
+                  child: Icon(
+                    const IconData(0xe815, fontFamily: 'FeverTrackingIcons'),
+                    color: AppTheme.tralingIconColor,
+                    size: 9,
+                  ),
+                )
+              : InkWell(
+                  onTap: () async {
+                    bool sucess;
+                    widget.deleteMedicine == true
+                        ? sucess = await deleteMedicine(index)
+                        : print("");
+                    if (sucess) {
+                      setState(() {
+                        widget.deleteMedicine = false;
+                      });
+                    }
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(right: 0),
+                    child: Icon(
+                      Icons.delete,
+                      // color: AppTheme.iconsColor2,
+                      color: Colors.black54,
+                      size: 18,
+                    ),
+                  ),
+                ),
           selected: true,
           onTap: () {
             Navigator.of(context).pop(items[index]);

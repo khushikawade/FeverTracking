@@ -3,7 +3,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:mobile_app/src/db/db_services.dart';
 
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/widgets/heart_graph.dart';
@@ -100,6 +100,8 @@ import 'package:mobile_app/src/widgets/selection_callback_state.dart';
 // ];
 
 class UserTemperaturePage extends StatefulWidget {
+  Function onUpdateWidget;
+  UserTemperaturePage({Key key, this.onUpdateWidget}) : super(key: key);
   @override
   _UserTemperaturePageState createState() => _UserTemperaturePageState();
 }
@@ -111,6 +113,7 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
     Tab(text: 'Month'),
     Tab(text: 'Custom'),
   ];
+  int selectedTabIndex = 0;
 
   var logsList;
   List<charts.Series> seriesList;
@@ -135,6 +138,18 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
         isLoading = false;
       });
     }
+  }
+
+  DateTime getCurrentdate = DateTime.now();
+  getdate() {
+    print(getCurrentdate);
+
+    final DateTime now = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String formatted = formatter.format(now);
+    var newDate = new DateTime(now.year, now.month, now.day - 7);
+    print(formatted);
+    print(formatter.format(newDate)); // something like 2013-04-20
   }
 
   List<charts.Series<TemperatureDataClass, DateTime>> _createSampleData(
@@ -254,6 +269,13 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                 height: 44,
                 color: Theme.of(context).primaryColor,
                 child: TabBar(
+                  onTap: (int index) {
+                    setState(() {
+                      selectedTabIndex = index;
+                    });
+
+                    widget.onUpdateWidget(index);
+                  },
                   tabs: tabcontent,
                   indicatorColor: Theme.of(context).accentColor,
                   indicatorWeight: 4,
@@ -420,13 +442,6 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                 width: double.infinity,
                 child: HeartGraphClass.withSampleData(),
               ),
-              ElevatedButton(
-                child: Text('GET DATA'),
-                onPressed: () {
-                  print('Pressed');
-                  getList();
-                },
-              )
             ],
           ),
         ),

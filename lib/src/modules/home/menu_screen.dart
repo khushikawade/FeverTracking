@@ -14,6 +14,7 @@ class _MenuScreenState extends State<MenuScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   int selectedIndex = 0;
+
   int index = 0;
 
   @override

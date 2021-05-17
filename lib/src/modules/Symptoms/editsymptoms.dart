@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
 import 'package:mobile_app/src/db/db_services.dart';
@@ -9,37 +10,80 @@ import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
 
-class AddSymptomsPage extends StatefulWidget {
-  final bool fromHomePage;
-  AddSymptomsPage({Key key, this.fromHomePage}) : super(key: key);
+class EditSymptomsPage extends StatefulWidget {
+  final int index;
+  final String sysmptomsItem;
+
+  EditSymptomsPage(
+      {Key key, @required this.index, @required this.sysmptomsItem})
+      : super(key: key);
   @override
-  _AddSymptomsPageState createState() => _AddSymptomsPageState();
+  _EditSymptomsPageState createState() => _EditSymptomsPageState();
 }
 
-class _AddSymptomsPageState extends State<AddSymptomsPage> {
+class _EditSymptomsPageState extends State<EditSymptomsPage> {
+  TextEditingController symptomsController = TextEditingController();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    super.initState();
+    symptomsController = new TextEditingController(text: widget.sysmptomsItem);
+    print(widget.sysmptomsItem);
+  }
+
+  var logsList;
+  getList() async {
+    logsList = await DbServices().getListData(Strings.createSymptoms);
+
+    print("${logsList[1].symptomName}");
+    setState(() {});
+  }
+
+  updateSysmptomsList(index, value) async {
+    bool isSuccess = await DbServices().updateListData(
+      Strings.createSymptoms,
+      index,
+      value,
+    );
+
+    if (isSuccess != null && isSuccess) {
+      Utility.showSnackBar(_scaffoldKey, 'Data Updated Successfully', context);
+      Future.delayed(const Duration(seconds: 1), () {
+        Navigator.of(context).pop(1);
+      });
+    }
+
+    //       //   }
+    // Hive.box('products').putAt(i,product);
+    // await _personBox.then((item) {
+    //   if (!item.isEmpty) {
+    //     print('empty');
+    //     item.putAt(0, SymptomsModel(this.symptomsController.text));
+    //   }
+    // }
+  }
+
   String selectedUnit = "";
   String selectedFrequency = "";
-  TextEditingController symptomsController = TextEditingController();
+
   bool fromHomePage;
   var distinctIds;
 
-  void addLog(SymptomsModel log) async {
-    bool isSuccess = await DbServices().addData(log, Strings.createSymptoms);
+  // void addLog(SymptomsModel log) async {
+  //   bool isSuccess = await DbServices().addData(log, Strings.createSymptoms);
 
-    if (isSuccess != null && isSuccess) {
-      Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
-      Future.delayed(const Duration(seconds: 1), () {
-        Navigator.of(context).pop();
-        //   if (widget.fromHomePage != null && widget.fromHomePage) {
-        //     Navigator.of(context).pop(1);
-        //   } else {
-        //     Navigator.of(context).pop(true);
-        //   }
-      });
-    }
-  }
-
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  //   if (isSuccess != null && isSuccess) {
+  //     Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
+  //     Future.delayed(const Duration(seconds: 1), () {
+  //       Navigator.of(context).pop();
+  //       //   if (widget.fromHomePage != null && widget.fromHomePage) {
+  //       //     Navigator.of(context).pop(1);
+  //       //   } else {
+  //       //     Navigator.of(context).pop(true);
+  //       //   }
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +99,7 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Add Symptoms',
+              'Edit Symptoms',
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: AppTheme.title,
@@ -82,14 +126,16 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
             child: IconButton(
               onPressed: () {
                 if ((symptomsController != null) &&
-                    (symptomsController.text.isNotEmpty)) {
+                    (symptomsController.text.isNotEmpty) &&
+                    (symptomsController.text != widget.sysmptomsItem)) {
                   String item = symptomsController.text;
                   print(item);
-                  final log = SymptomsModel(item);
-                  addLog(log);
+                  final updateItem = SymptomsModel(item);
+                  updateSysmptomsList(widget.index, updateItem);
+                  // addLog(log);
                 } else {
                   Utility.showSnackBar(
-                      _scaffoldKey, 'Please Enter Required Value ', context);
+                      _scaffoldKey, 'Please Update  Field ', context);
                 }
               },
               icon: Icon(
