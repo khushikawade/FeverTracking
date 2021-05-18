@@ -4,6 +4,14 @@ PODS:
   - ext_storage (0.0.1):
     - Flutter
   - Flutter (1.0.0)
+  - libphonenumber (0.0.1):
+    - Flutter
+    - libPhoneNumber-iOS
+  - libPhoneNumber-iOS (0.9.15)
+  - libphonenumber_plugin (0.0.1):
+    - Flutter
+    - libphonenumber
+    - libPhoneNumber-iOS
   - path_provider (0.0.1):
     - Flutter
   - "permission_handler (5.1.0+2)":
@@ -17,10 +25,16 @@ DEPENDENCIES:
   - device_info (from `.symlinks/plugins/device_info/ios`)
   - ext_storage (from `.symlinks/plugins/ext_storage/ios`)
   - Flutter (from `Flutter`)
+  - libphonenumber (from `.symlinks/plugins/libphonenumber/ios`)
+  - libphonenumber_plugin (from `.symlinks/plugins/libphonenumber_plugin/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+
+SPEC REPOS:
+  trunk:
+    - libPhoneNumber-iOS
 
 EXTERNAL SOURCES:
   device_info:
@@ -29,6 +43,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/ext_storage/ios"
   Flutter:
     :path: Flutter
+  libphonenumber:
+    :path: ".symlinks/plugins/libphonenumber/ios"
+  libphonenumber_plugin:
+    :path: ".symlinks/plugins/libphonenumber_plugin/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   permission_handler:
@@ -42,6 +60,9 @@ SPEC CHECKSUMS:
   device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
   ext_storage: 4eaf3a84d5594106e2ebcc2502248cfde53c8fa1
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  libphonenumber: bd14d5abfc5939ab0b0767234e2d8e2593af258e
+  libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
+  libphonenumber_plugin: 7cf755ad1656145935d6c208173a476bd3f12898
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
   share: 0b2c3e82132f5888bccca3351c504d0003b3b410

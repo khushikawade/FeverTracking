@@ -141,11 +141,11 @@ class _LogPageState extends State<LogPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            Icon(
-              const IconData(0xea10, fontFamily: 'FeverTrackingIcons'),
-              color: AppTheme.leadingiconsColor,
-            ),
-            SizedBox(width: 20),
+            // Icon(
+            //   const IconData(0xea10, fontFamily: 'FeverTrackingIcons'),
+            //   color: AppTheme.leadingiconsColor,
+            // ),
+
             Expanded(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,15 +234,15 @@ class _LogPageState extends State<LogPage> {
             Container(
               child: Text(
                 items[index].dateTime != null
-                    ? Utility.timeAgoSinceDate(items[index].dateTime)
-                    // DateFormat('HH:mm').format(items[index].dateTime) ==
-                    //         DateFormat('HH:mm').format(DateTime.now())
-                    //     ? 'Just Now'
-                    //     : DateFormat('yyyy-MM-dd')
-                    //                 .format(items[index].dateTime) ==
-                    //             DateFormat('yyyy-MM-dd').format(DateTime.now())
-                    //         ? DateFormat.MMMEd().format(items[index].dateTime)
-                    //         : DateFormat.jm().format(items[index].dateTime)
+                    //? Utility.timeAgoSinceDate(items[index].dateTime)
+                    ? DateFormat('HH:mm').format(items[index].dateTime) ==
+                            DateFormat('HH:mm').format(DateTime.now())
+                        ? 'Just Now'
+                        : DateFormat('yyyy-MM-dd')
+                                    .format(items[index].dateTime) ==
+                                DateFormat('yyyy-MM-dd').format(DateTime.now())
+                            ? DateFormat.MMMEd().format(items[index].dateTime)
+                            : DateFormat.jm().format(items[index].dateTime)
                     : '',
                 style: TextStyle(
                     color: AppTheme.textColor2,

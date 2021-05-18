@@ -508,7 +508,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 children: [
                   Expanded(
                     child: Text(
-                      addNoteText == '' ? "Add note here" : addNoteText,
+                      addNoteText == '' ? "Add Note Here" : addNoteText,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: TextStyle(

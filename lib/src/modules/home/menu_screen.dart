@@ -62,25 +62,25 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
               children: [
-                SizedBox(
-                  width: 30,
+                Expanded(
+                  child: Text(
+                    "Default Profile",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        color: AppTheme.titleColor,
+                        fontFamily: "SF UI Display Bold",
+                        fontSize: 22),
+                  ),
                 ),
-                Text(
-                  "Default Profile",
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      color: AppTheme.titleColor,
-                      fontFamily: "SF UI Display Bold",
-                      fontSize: 22),
-                ),
-                Icon(
-                  Icons.arrow_drop_down_sharp,
-                  color: AppTheme.dropIconColor,
-                  size: 30.0,
-                ),
+                // Icon(
+                //   Icons.arrow_drop_down_sharp,
+                //   color: AppTheme.dropIconColor,
+                //   size: 30.0,
+                // ),
               ],
             ),
             InkWell(

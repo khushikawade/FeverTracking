@@ -132,6 +132,8 @@ class Utility {
         ? await _getDownloadDirectoryAndroid()
         : (await _getDownloadDirectoryIos()).path);
 
+    // String time =
+    //     DateFormat('dd-MM-yyyy HH:mm').format(DateTime.now()).toString();
     File imgFile = new File('$downloadsDir/$_fileName');
     imgFile.writeAsBytes(pngBytes);
     //File('$downloadsDir/$_fileName').writeAsBytes(file.readAsBytes());

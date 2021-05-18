@@ -90,188 +90,188 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
-      key: previewContainer,
-      child: Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
-          elevation: 5,
-          backgroundColor: Theme.of(context).primaryColor,
-          centerTitle: true,
-          title: selectedIndex == 0
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Home',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: AppTheme.titleColor,
-                          letterSpacing: 0,
-                          fontSize: globals.deviceType == 'phone' ? 20 : 28,
-                          fontFamily: 'SF UI Display Semibold',
-                          fontWeight: FontWeight.w600),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          pervious7days != null
-                              ? '${formatter.format(pervious7days)} - ${formatter.format(currentDate)}'
-                              : pervious30days != null
-                                  ? '${formatter.format(pervious30days)} - ${formatter.format(currentDate)}'
-                                  : formatter.format(currentDate),
-                          // "$currentDate",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              color: AppTheme.titleColor.withOpacity(0.6),
-                              letterSpacing: 0.08,
-                              fontSize: globals.deviceType == 'phone' ? 13 : 21,
-                              fontFamily: 'SF UI Display Regular',
-                              fontWeight: FontWeight.normal),
-                        ),
-                        Icon(
-                          Icons.arrow_drop_down,
-                          color: AppTheme.dropdowniconColor,
-                          size: 18,
-                        )
-                      ],
-                    )
-                  ],
-                )
-              : selectedIndex == 1
-                  ? Text(
-                      'Logs',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: AppTheme.titleColor,
-                          letterSpacing: 0,
-                          fontSize: globals.deviceType == 'phone' ? 20 : 28,
-                          fontFamily: 'SF UI Display Semibold',
-                          fontWeight: FontWeight.w600),
-                    )
-                  : selectedIndex == 2
-                      ? Text(
-                          'Medicines',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: AppTheme.titleColor,
-                              letterSpacing: 0,
-                              fontSize: globals.deviceType == 'phone' ? 20 : 28,
-                              fontFamily: 'SF UI Display Semibold',
-                              fontWeight: FontWeight.w600),
-                        )
-                      : Text(
-                          'Settings',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: AppTheme.titleColor,
-                              letterSpacing: 0,
-                              fontSize: globals.deviceType == 'phone' ? 20 : 28,
-                              fontFamily: 'SF UI Display Semibold',
-                              fontWeight: FontWeight.w600),
-                        ),
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 5),
-            child: IconButton(
-              onPressed: () async {
-                int index = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MenuScreen(selectedIndex)),
-                );
-                if (index != null) {
-                  setState(() {
-                    selectedIndex = index;
-                  });
-                }
-              },
-              icon: Icon(
-                const IconData(0xe804, fontFamily: "FeverTrackingIcons"),
-                // color: AppTheme.iconColor,
-                size: 24,
-              ),
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        elevation: 5,
+        backgroundColor: Theme.of(context).primaryColor,
+        centerTitle: true,
+        title: selectedIndex == 0
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Home',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: AppTheme.titleColor,
+                        letterSpacing: 0,
+                        fontSize: globals.deviceType == 'phone' ? 20 : 28,
+                        fontFamily: 'SF UI Display Semibold',
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        pervious7days != null
+                            ? '${formatter.format(pervious7days)} - ${formatter.format(currentDate)}'
+                            : pervious30days != null
+                                ? '${formatter.format(pervious30days)} - ${formatter.format(currentDate)}'
+                                : formatter.format(currentDate),
+                        // "$currentDate",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                            color: AppTheme.titleColor.withOpacity(0.6),
+                            letterSpacing: 0.08,
+                            fontSize: globals.deviceType == 'phone' ? 13 : 21,
+                            fontFamily: 'SF UI Display Regular',
+                            fontWeight: FontWeight.normal),
+                      ),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: AppTheme.dropdowniconColor,
+                        size: 18,
+                      )
+                    ],
+                  )
+                ],
+              )
+            : selectedIndex == 1
+                ? Text(
+                    'Logs',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: AppTheme.titleColor,
+                        letterSpacing: 0,
+                        fontSize: globals.deviceType == 'phone' ? 20 : 28,
+                        fontFamily: 'SF UI Display Semibold',
+                        fontWeight: FontWeight.w600),
+                  )
+                : selectedIndex == 2
+                    ? Text(
+                        'Medicines',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: AppTheme.titleColor,
+                            letterSpacing: 0,
+                            fontSize: globals.deviceType == 'phone' ? 20 : 28,
+                            fontFamily: 'SF UI Display Semibold',
+                            fontWeight: FontWeight.w600),
+                      )
+                    : Text(
+                        'Settings',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: AppTheme.titleColor,
+                            letterSpacing: 0,
+                            fontSize: globals.deviceType == 'phone' ? 20 : 28,
+                            fontFamily: 'SF UI Display Semibold',
+                            fontWeight: FontWeight.w600),
+                      ),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 5),
+          child: IconButton(
+            onPressed: () async {
+              int index = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MenuScreen(selectedIndex)),
+              );
+              if (index != null) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              }
+            },
+            icon: Icon(
+              const IconData(0xe804, fontFamily: "FeverTrackingIcons"),
+              // color: AppTheme.iconColor,
+              size: 24,
             ),
           ),
-          actions: [
-            selectedIndex == 3
-                ? Container(
-                    height: 0,
-                    width: 0,
-                  )
-                : selectedIndex == 0
-                    ? Padding(
-                        padding: const EdgeInsets.only(right: 5),
-                        child: IconButton(
-                          onPressed: () async {
-                            bool result = await Utility()
-                                .takeScreenShot(previewContainer);
-                            if (result != null && result) {
-                              Utility.showSnackBar(
-                                  _scaffoldKey,
-                                  Platform.isAndroid
-                                      ? 'The Report has been downloaded to the Download folder.'
-                                      : 'The Report has been downloaded to the Files folder.',
-                                  context);
-                            }
-                          },
-                          icon: Icon(
-                            const IconData(0xe800,
-                                fontFamily: "FeverTrackingIcons"),
-                            // color:AppTheme.iconColor,
-                            size: 24,
-                          ),
-                        ),
-                      )
-                    : selectedIndex == 1
-                        ? Padding(
-                            padding: const EdgeInsets.only(right: 5),
-                            child: IconButton(
-                              onPressed: () {
-                                if (logsList != null && logsList.length > 0) {
-                                  generatePDFFile();
-                                } else {
-                                  Utility.showSnackBar(
-                                      _scaffoldKey, 'No Logs Found', context);
-                                }
-
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => PdfViewerPage()));
-                              },
-                              icon: Icon(
-                                const IconData(0xe809,
-                                    fontFamily: "FeverTrackingIcons"),
-                                // color:AppTheme.iconColor,
-                                size: 24,
-                              ),
-                            ),
-                          )
-                        : Padding(
-                            padding: const EdgeInsets.only(right: 5),
-                            child: IconButton(
-                              onPressed: () async {
-                                setState(() {
-                                  deletemedicine = !deletemedicine;
-                                });
-                              },
-                              icon: Icon(
-                                const IconData(0xe802,
-                                    fontFamily: "FeverTrackingIcons"),
-                                // color:AppTheme.iconColor,
-                                size: 24,
-                              ),
-                            ),
-                          )
-          ],
         ),
-        body: selectedIndex == 0
-            ? UserTemperaturePage(
+        actions: [
+          selectedIndex == 3
+              ? Container(
+                  height: 0,
+                  width: 0,
+                )
+              : selectedIndex == 0
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: IconButton(
+                        onPressed: () async {
+                          bool result =
+                              await Utility().takeScreenShot(previewContainer);
+                          if (result != null && result) {
+                            Utility.showSnackBar(
+                                _scaffoldKey,
+                                Platform.isAndroid
+                                    ? 'The Report has been downloaded to the Download folder.'
+                                    : 'The Report has been downloaded to the Files folder.',
+                                context);
+                          }
+                        },
+                        icon: Icon(
+                          const IconData(0xe800,
+                              fontFamily: "FeverTrackingIcons"),
+                          // color:AppTheme.iconColor,
+                          size: 24,
+                        ),
+                      ),
+                    )
+                  : selectedIndex == 1
+                      ? Padding(
+                          padding: const EdgeInsets.only(right: 5),
+                          child: IconButton(
+                            onPressed: () {
+                              if (logsList != null && logsList.length > 0) {
+                                generatePDFFile();
+                              } else {
+                                Utility.showSnackBar(
+                                    _scaffoldKey, 'No Logs Found', context);
+                              }
+
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => PdfViewerPage()));
+                            },
+                            icon: Icon(
+                              const IconData(0xe809,
+                                  fontFamily: "FeverTrackingIcons"),
+                              // color:AppTheme.iconColor,
+                              size: 24,
+                            ),
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.only(right: 5),
+                          child: IconButton(
+                            onPressed: () async {
+                              setState(() {
+                                deletemedicine = !deletemedicine;
+                              });
+                            },
+                            icon: Icon(
+                              const IconData(0xe802,
+                                  fontFamily: "FeverTrackingIcons"),
+                              // color:AppTheme.iconColor,
+                              size: 24,
+                            ),
+                          ),
+                        )
+        ],
+      ),
+      body: selectedIndex == 0
+          ? RepaintBoundary(
+              key: previewContainer,
+              child: UserTemperaturePage(
                 onUpdateWidget: (int index) {
                   if (index != null) {
                     getdate(index);
@@ -285,82 +285,82 @@ class HomeScreenState extends State<HomeScreen> {
                     });
                   }
                 },
-              )
-            : selectedIndex == 1
-                ? LogPage(
-                    onUpdateWidget: (bool result) {
-                      if (result != null && result) {
-                        getLogs();
-                      }
-                    },
-                  )
-                // ? FutureBuilder(
-                //     future: Hive.openBox(
-                //       'Logs',
-                //       compactionStrategy: (int total, int deleted) {
-                //         return deleted > 20;
-                //       },
-                //     ),
-                //     builder: (BuildContext context, AsyncSnapshot snapshot) {
-                //       if (snapshot.connectionState == ConnectionState.done) {
-                //         if (snapshot.hasError)
-                //           return Text(snapshot.error.toString());
-                //         else
-                //           return LogPage();
-                //       } else
-                //         return Scaffold();
-                //     })
-                : selectedIndex == 2
-                    ? MedicinesPage(
-                        fromHomePage: true,
-                        deleteMedicine: deletemedicine,
-                      )
-                    : SettingPage(),
-        floatingActionButton: selectedIndex == 0
-            ? GestureDetector(
-                onTap: () async {
-                  int index = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AddLogPage(
-                              fromHomePage: true,
-                            )),
-                  );
-
-                  if (index != null) {
-                    setState(() {
-                      selectedIndex = index;
-                    });
-                  }
-                },
-                child: Container(
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).accentColor,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(100),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color.fromARGB(250, 164, 95, 60),
-                        spreadRadius: 0,
-                        blurRadius: 10,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Icon(
-                    const IconData(0xe806, fontFamily: 'FeverTrackingIcons'),
-                    color: AppTheme.iconColor,
-                    size: 25,
-                  ),
-                ),
-              )
-            : Container(
-                height: 0,
-                width: 0,
               ),
-      ),
+            )
+          : selectedIndex == 1
+              ? LogPage(
+                  onUpdateWidget: (bool result) {
+                    if (result != null && result) {
+                      getLogs();
+                    }
+                  },
+                )
+              // ? FutureBuilder(
+              //     future: Hive.openBox(
+              //       'Logs',
+              //       compactionStrategy: (int total, int deleted) {
+              //         return deleted > 20;
+              //       },
+              //     ),
+              //     builder: (BuildContext context, AsyncSnapshot snapshot) {
+              //       if (snapshot.connectionState == ConnectionState.done) {
+              //         if (snapshot.hasError)
+              //           return Text(snapshot.error.toString());
+              //         else
+              //           return LogPage();
+              //       } else
+              //         return Scaffold();
+              //     })
+              : selectedIndex == 2
+                  ? MedicinesPage(
+                      fromHomePage: true,
+                      deleteMedicine: deletemedicine,
+                    )
+                  : SettingPage(),
+      floatingActionButton: selectedIndex == 0
+          ? GestureDetector(
+              onTap: () async {
+                int index = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddLogPage(
+                            fromHomePage: true,
+                          )),
+                );
+
+                if (index != null) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                }
+              },
+              child: Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).accentColor,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(100),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(250, 164, 95, 60),
+                      spreadRadius: 0,
+                      blurRadius: 10,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Icon(
+                  const IconData(0xe806, fontFamily: 'FeverTrackingIcons'),
+                  color: AppTheme.iconColor,
+                  size: 25,
+                ),
+              ),
+            )
+          : Container(
+              height: 0,
+              width: 0,
+            ),
     );
   }
 
@@ -374,7 +374,7 @@ class HomeScreenState extends State<HomeScreen> {
   // generate Pdf File
   generatePDFFile() async {
     var columns = [
-      "Temp(${Strings.feranahiteString})",
+      "Temp",
       "Symptoms",
       "Position",
       "Date",

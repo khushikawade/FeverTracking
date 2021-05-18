@@ -150,7 +150,7 @@ class _MonthTab extends State<MonthTab> {
             ? graphWidget()
             : Center(
                 child: Text(
-                  'No Data Found!!',
+                  'No Logs Found!! \n Create your first report using below button.',
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: AppTheme.textColor1,
