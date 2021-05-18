@@ -21,13 +21,15 @@ class ProfileModelAdapter extends TypeAdapter<ProfileModel> {
       fields[1] as int,
       fields[2] as int,
       fields[3] as String,
+      fields[4] as String,
+      fields[5] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ProfileModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -35,7 +37,11 @@ class ProfileModelAdapter extends TypeAdapter<ProfileModel> {
       ..writeByte(2)
       ..write(obj.age)
       ..writeByte(3)
-      ..write(obj.gender);
+      ..write(obj.gender)
+      ..writeByte(4)
+      ..write(obj.imageName)
+      ..writeByte(5)
+      ..write(obj.path);
   }
 
   @override

@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/Symptoms/symptom.dart';
 import 'package:mobile_app/src/modules/profile/updateprofie.dart';
 
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
+import 'package:mobile_app/src/utilities/strings.dart';
 
 class SettingPage extends StatefulWidget {
   @override
@@ -16,6 +20,8 @@ class _SettingPageState extends State<SettingPage> {
   bool _lights = false;
   int _selectedIndexValue;
   bool isSwitched = false;
+  var logsList;
+  String _image;
 
   void toggleSwitch(bool value) {
     if (isSwitched == false) {
@@ -27,6 +33,21 @@ class _SettingPageState extends State<SettingPage> {
         isSwitched = false;
       });
     }
+  }
+
+  getList() async {
+    // final log = SymptomsModel("vomatining");
+    logsList = await DbServices().getListData(Strings.updateProile);
+
+    logsList.indexOf(logsList);
+    print(logsList[0].path);
+    // logsList =
+    //     await DbServices().updateListData(Strings.createSymptoms, 1, log);
+
+    // setState(() {});
+    _image = logsList[0].path;
+    print("**********");
+    print(_image);
   }
 
   @override
@@ -190,6 +211,13 @@ class _SettingPageState extends State<SettingPage> {
               color: AppTheme.dividerColor,
             ),
           ),
+
+          ElevatedButton(
+            child: Text('get data'),
+            onPressed: () {
+              getList();
+            },
+          )
         ]),
       ),
     ]));
@@ -215,27 +243,32 @@ class _SettingPageState extends State<SettingPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(47.06),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromRGBO(0, 0, 0, 0.2),
-                          spreadRadius: 0,
-                          blurRadius: 1,
-                          offset: Offset(0, 4),
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(47.06),
                         ),
-                      ],
-                    ),
-                    child: CircleAvatar(
-                      radius: 47.06,
-                      backgroundImage:
-                          NetworkImage('https://picsum.photos/250?image=9'),
-                    ),
-                  ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.2),
+                            spreadRadius: 0,
+                            blurRadius: 1,
+                            offset: Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: CircleAvatar(
+                        radius: 47.06,
+                        // child:
+                        //  (_image != null )
+                        // ?
+                        backgroundImage: (_image != null)
+                            ? ExactAssetImage(_image)
+                            : ExactAssetImage('assets/images/profileimage.png'),
+                      )),
+                  // : Image.asset('assets/images/profileimage.png'),
+                  // )),
                 ]),
             SizedBox(
               width: 10,
