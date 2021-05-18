@@ -41,6 +41,7 @@ dependencies:
   share: ^2.0.1
   intl_phone_number_input: ^0.7.0+2
   regexpattern: ^1.0.0
+  image_picker: ^0.7.5
 
 
 

@@ -14,10 +14,15 @@ class ProfileModel {
   @HiveField(3)
   String gender;
   @HiveField(4)
+  String imageName;
+  @HiveField(5)
+  String path;
   ProfileModel(
     this.name,
     this.phonenumber,
     this.age,
     this.gender,
+    this.imageName,
+    this.path,
   );
 }

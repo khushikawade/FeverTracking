@@ -95,6 +95,8 @@ class AppTheme {
   static const Color titleColor = Color(0xFFFFFFFF);
   static const Color dividerColor = Color(0xffC4CADF);
 
+  static const Color buttomSheetTextColor = Color(0xFF6D6D72);
+
   static final ThemeData lightTheme = ThemeData(
       primaryColor: const Color(0xff463DC7),
       accentColor: const Color(0xffFAA45F),
