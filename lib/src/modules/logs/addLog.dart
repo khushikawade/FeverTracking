@@ -24,17 +24,8 @@ class _AddLogPageState extends State<AddLogPage> {
   String time;
   List<String> sypmtomsTempList = [];
   String sypmtoms = '';
-  String celsiusORfahrenheit = "celsius";
-  var medicineList = [];
 
-  List<String> postionList = [
-    " Ear ",
-    " ForeHead ",
-    " Underarm ",
-    " Mouth ",
-    " Neck ",
-    " Rectum "
-  ];
+  var medicineList = [];
 
   List<CheckBoxData> checkboxDataList = [
     new CheckBoxData(id: '1', displayId: 'Sweating', checked: false),
@@ -55,12 +46,11 @@ class _AddLogPageState extends State<AddLogPage> {
   ];
 
   var distinctIds;
-  DateTime dateTime;
+  DateTime dateTime = DateTime.now();
   String addNoteText = "";
   String postion = "";
   String temp = "";
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  DateTime selectedDate = DateTime.now();
 
   // DATABASE CODE
   void addLog(LogsModel log) async {
@@ -76,6 +66,13 @@ class _AddLogPageState extends State<AddLogPage> {
         }
       });
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    postion = globals.postionList[3];
+    temp = globals.tempertureList[0];
   }
 
   getList() async {
@@ -281,7 +278,8 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
               selected: true,
               onTap: () {
-                postionAndTemperatureBottomSheet(context, postionList, 0);
+                postionAndTemperatureBottomSheet(
+                    context, globals.postionList, 0);
               },
             ),
           ),
@@ -508,7 +506,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 children: [
                   Expanded(
                     child: Text(
-                      addNoteText == '' ? "Add note here" : addNoteText,
+                      addNoteText == '' ? "Add Note Here" : addNoteText,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: TextStyle(

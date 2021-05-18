@@ -149,7 +149,8 @@ class _DayTab extends State<DayTab> {
             ? graphWidget()
             : Center(
                 child: Text(
-                  'No Data Found!!',
+                  'No Logs Found!! \n Create your first report using below button.',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: AppTheme.textColor1,

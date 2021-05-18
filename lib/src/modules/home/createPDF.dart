@@ -1,5 +1,6 @@
 import 'package:ext_storage/ext_storage.dart';
 import 'package:flutter/material.dart' as material;
+import 'package:intl/intl.dart';
 
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
@@ -155,7 +156,9 @@ Future<File> generatePDF(
     //         ])
   );
 
-  File result = await downloadPDfFile("medicine_log", pdf);
+  File result = await downloadPDfFile(
+      'medicine_log_${DateFormat('dd-MM-yyyy HH:mm').format(DateTime.now())}',
+      pdf);
   return result;
 }
 

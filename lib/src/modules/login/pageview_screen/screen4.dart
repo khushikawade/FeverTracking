@@ -1,42 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
-import 'package:mobile_app/src/modules/home/home_screen.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 
-class Screen1 extends StatefulWidget {
+class Screen4 extends StatefulWidget {
   @override
-  Screen1State createState() => Screen1State();
+  Screen4State createState() => Screen4State();
 }
 
-class Screen1State extends State<Screen1> {
+class Screen4State extends State<Screen4> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   backgroundColor: Theme.of(context).backgroundColor,
-      //   actions: [
-      //     InkWell(
-      //       onTap: () {
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (context) => HomeScreen()));
-      //       },
-      //       child: Padding(
-      //         padding: const EdgeInsets.only(right: 25),
-      //         child: Text(
-      //           'Skip',
-      //           style: TextStyle(
-      //               color: AppTheme.textColor2,
-      //               letterSpacing: 0,
-      //               fontSize: globals.deviceType == 'phone' ? 17 : 25,
-      //               fontFamily: 'SF UI Display Semibold',
-      //               fontWeight: FontWeight.w600),
-      //         ),
-      //       ),
-      //     )
-      //   ],
-      // ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -56,13 +31,13 @@ class Screen1State extends State<Screen1> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/images/welcome_01.png',
+          'assets/images/data_security.jpeg',
         ),
         SizedBox(
           height: 25,
         ),
         Text(
-          'Easy way to track health parameters',
+          'User privacy policy',
           textAlign: TextAlign.center,
           style: TextStyle(
               color: AppTheme.contentColor1,
@@ -75,7 +50,7 @@ class Screen1State extends State<Screen1> {
           height: 16,
         ),
         Text(
-          'Running a fever during the onset of Monsoon could have been passed off as the seasonal flu or viral fever earlier.',
+          'This app does not use any server for storing users data, so data is secured at users end.',
           textAlign: TextAlign.center,
           style: TextStyle(
               color: AppTheme.contentColor2,

@@ -13,30 +13,30 @@ class Screen2State extends State<Screen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).backgroundColor,
-        actions: [
-          InkWell(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()));
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(right: 25),
-              child: Text(
-                'Skip',
-                style: TextStyle(
-                    color: AppTheme.textColor2,
-                    letterSpacing: 0,
-                    fontSize: globals.deviceType == 'phone' ? 17 : 25,
-                    fontFamily: 'SF UI Display Semibold',
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-          )
-        ],
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: Theme.of(context).backgroundColor,
+      //   actions: [
+      //     InkWell(
+      //       onTap: () {
+      //         Navigator.push(context,
+      //             MaterialPageRoute(builder: (context) => HomeScreen()));
+      //       },
+      //       child: Padding(
+      //         padding: const EdgeInsets.only(right: 25),
+      //         child: Text(
+      //           'Skip',
+      //           style: TextStyle(
+      //               color: AppTheme.textColor2,
+      //               letterSpacing: 0,
+      //               fontSize: globals.deviceType == 'phone' ? 17 : 25,
+      //               fontFamily: 'SF UI Display Semibold',
+      //               fontWeight: FontWeight.w600),
+      //         ),
+      //       ),
+      //     )
+      //   ],
+      // ),
       body: Container(
         width: double.infinity,
         height: double.infinity,

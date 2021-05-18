@@ -18,7 +18,7 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   bool _lights = false;
-  int _selectedIndexValue;
+  int _selectedIndexValue = 1;
   bool isSwitched = false;
   var logsList;
   String _image;
@@ -63,66 +63,59 @@ class _SettingPageState extends State<SettingPage> {
               color: AppTheme.dividerColor,
             ),
           ),
-          Container(
-            padding: EdgeInsets.only(top: 7, bottom: 7),
-            child: ListTile(
-              leading: Container(
-                padding: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                    color: AppTheme.iconBackgroundColor,
-                    shape: BoxShape.circle),
-                child: Icon(
-                  const IconData(0xe811, fontFamily: 'FeverTrackingIcons'),
-                  color: AppTheme.iconColor1,
-                  size: 26,
-                ),
-              ),
-              //minLeadingWidth: 30,
-              title: Text(
-                "Reminders",
-                style: TextStyle(
-                    color: AppTheme.textColor1,
-                    letterSpacing: 0,
-                    fontFamily: "SF UI Display Regular",
-                    fontSize: globals.deviceType == 'phone' ? 17 : 25),
-              ),
-              trailing: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Transform.scale(
-                      scale: 1.0,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 28.0, right: 0),
-                        child: CupertinoSwitch(
-                          value: _lights,
-                          onChanged: (bool value) {
-                            setState(() {
-                              _lights = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ]),
-              selected: true,
-              onTap: () {},
-            ),
-          ),
-          // Divider(
-          //   thickness: 1,
-          //   height: 1,
-          //   indent: 80,
-          //   endIndent: 10,
-          //   color: AppTheme.dividerColor,
+          // Container(
+          //   padding: EdgeInsets.only(top: 7, bottom: 7),
+          //   child: ListTile(
+          //     leading: Container(
+          //       padding: EdgeInsets.all(4),
+          //       decoration: BoxDecoration(
+          //           color: AppTheme.iconBackgroundColor,
+          //           shape: BoxShape.circle),
+          //       child: Icon(
+          //         const IconData(0xe811, fontFamily: 'FeverTrackingIcons'),
+          //         color: AppTheme.iconColor1,
+          //         size: 26,
+          //       ),
+          //     ),
+          //     //minLeadingWidth: 30,
+          //     title: Text(
+          //       "Reminders",
+          //       style: TextStyle(
+          //           color: AppTheme.textColor1,
+          //           letterSpacing: 0,
+          //           fontFamily: "SF UI Display Regular",
+          //           fontSize: globals.deviceType == 'phone' ? 17 : 25),
+          //     ),
+          //     trailing: Column(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         crossAxisAlignment: CrossAxisAlignment.end,
+          //         children: <Widget>[
+          //           Transform.scale(
+          //             scale: 1.0,
+          //             child: Padding(
+          //               padding: const EdgeInsets.only(left: 28.0, right: 0),
+          //               child: CupertinoSwitch(
+          //                 value: _lights,
+          //                 onChanged: (bool value) {
+          //                   setState(() {
+          //                     _lights = value;
+          //                   });
+          //                 },
+          //               ),
+          //             ),
+          //           ),
+          //         ]),
+          //     selected: true,
+          //     onTap: () {},
+          //   ),
           // ),
-          Container(
-            height: 0.7,
-            margin: EdgeInsets.only(left: 65),
-            decoration: BoxDecoration(
-              color: AppTheme.dividerColor,
-            ),
-          ),
+          // Container(
+          //   height: 0.7,
+          //   margin: EdgeInsets.only(left: 65),
+          //   decoration: BoxDecoration(
+          //     color: AppTheme.dividerColor,
+          //   ),
+          // ),
           Container(
             padding: EdgeInsets.only(top: 7, bottom: 7),
             child: ListTile(
@@ -166,43 +159,43 @@ class _SettingPageState extends State<SettingPage> {
               color: AppTheme.dividerColor,
             ),
           ),
-          Container(
-            padding: EdgeInsets.only(top: 7, bottom: 7),
-            child: ListTile(
-              leading: Container(
-                padding: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                    color: AppTheme.iconBackgroundColor,
-                    shape: BoxShape.circle),
-                child: Icon(
-                  const IconData(0xe812, fontFamily: 'FeverTrackingIcons'),
-                  color: AppTheme.iconColor1,
-                  size: 26,
-                ),
-              ),
-              title: Text(
-                "Health",
-                style: TextStyle(
-                    color: AppTheme.textColor1,
-                    fontFamily: "SF UI Display Regular",
-                    fontSize: globals.deviceType == 'phone' ? 17 : 25),
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: AppTheme.iconsColor3,
-                size: 15,
-              ),
-              selected: true,
-              onTap: () {},
-            ),
-          ),
-          Container(
-            height: 0.7,
-            margin: EdgeInsets.only(left: 65),
-            decoration: BoxDecoration(
-              color: AppTheme.dividerColor,
-            ),
-          ),
+          // Container(
+          //   padding: EdgeInsets.only(top: 7, bottom: 7),
+          //   child: ListTile(
+          //     leading: Container(
+          //       padding: EdgeInsets.all(4),
+          //       decoration: BoxDecoration(
+          //           color: AppTheme.iconBackgroundColor,
+          //           shape: BoxShape.circle),
+          //       child: Icon(
+          //         const IconData(0xe812, fontFamily: 'FeverTrackingIcons'),
+          //         color: AppTheme.iconColor1,
+          //         size: 26,
+          //       ),
+          //     ),
+          //     title: Text(
+          //       "Health",
+          //       style: TextStyle(
+          //           color: AppTheme.textColor1,
+          //           fontFamily: "SF UI Display Regular",
+          //           fontSize: globals.deviceType == 'phone' ? 17 : 25),
+          //     ),
+          //     trailing: Icon(
+          //       Icons.arrow_forward_ios,
+          //       color: AppTheme.iconsColor3,
+          //       size: 15,
+          //     ),
+          //     selected: true,
+          //     onTap: () {},
+          //   ),
+          // ),
+          // Container(
+          //   height: 0.7,
+          //   margin: EdgeInsets.only(left: 65),
+          //   decoration: BoxDecoration(
+          //     color: AppTheme.dividerColor,
+          //   ),
+          // ),
         ]),
       ),
     ]));
@@ -290,39 +283,39 @@ class _SettingPageState extends State<SettingPage> {
                                   globals.deviceType == 'phone' ? 18 : 26),
                         ),
                       ),
-                      Icon(
-                        Icons.arrow_drop_down_sharp,
-                        color: AppTheme.dropdowniconColor,
-                        size: 28,
-                      )
+                      // Icon(
+                      //   Icons.arrow_drop_down_sharp,
+                      //   color: AppTheme.dropdowniconColor,
+                      //   size: 28,
+                      // )
                     ],
                   ),
                   SizedBox(
                     height: 1.0,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Passcode :",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: AppTheme.headingTextColor,
-                            letterSpacing: 0,
-                            fontFamily: "SF UI Display Regulars",
-                            fontSize: globals.deviceType == 'phone' ? 14 : 22),
-                      ),
-                      Text(
-                        "Disable",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: AppTheme.textColor2,
-                            fontFamily: "SF UI Display Regular",
-                            fontSize: globals.deviceType == 'phone' ? 14 : 22),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.start,
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     Text(
+                  //       "Passcode :",
+                  //       textAlign: TextAlign.center,
+                  //       style: TextStyle(
+                  //           color: AppTheme.headingTextColor,
+                  //           letterSpacing: 0,
+                  //           fontFamily: "SF UI Display Regulars",
+                  //           fontSize: globals.deviceType == 'phone' ? 14 : 22),
+                  //     ),
+                  //     Text(
+                  //       "Disable",
+                  //       textAlign: TextAlign.center,
+                  //       style: TextStyle(
+                  //           color: AppTheme.textColor2,
+                  //           fontFamily: "SF UI Display Regular",
+                  //           fontSize: globals.deviceType == 'phone' ? 14 : 22),
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(
                     height: 10,
                   ),
@@ -333,6 +326,48 @@ class _SettingPageState extends State<SettingPage> {
                       padding: EdgeInsets.symmetric(horizontal: 0.0),
                       children: {
                         1: Container(
+                          alignment: Alignment.center,
+                          color: _selectedIndexValue == 0
+                              ? Colors.blue
+                              : Colors.white,
+                          padding: const EdgeInsets.only(
+                              top: 5, bottom: 5, right: 5, left: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  width: 4,
+                                  height: 4,
+                                  decoration: _selectedIndexValue == 0
+                                      ? BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Colors.white,
+                                            width: 1,
+                                          ))
+                                      : BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Colors.blue,
+                                            width: 1,
+                                          ))),
+                              Text(
+                                'C',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize:
+                                      globals.deviceType == 'phone' ? 16 : 24,
+                                  color: _selectedIndexValue == 0
+                                      ? Colors.white
+                                      : Colors.blue,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        2: Container(
                           alignment: Alignment.center,
                           color: _selectedIndexValue == 1
                               ? Colors.blue
@@ -361,54 +396,12 @@ class _SettingPageState extends State<SettingPage> {
                                             width: 1,
                                           ))),
                               Text(
-                                'C',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize:
-                                      globals.deviceType == 'phone' ? 16 : 24,
-                                  color: _selectedIndexValue == 1
-                                      ? Colors.white
-                                      : Colors.blue,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        2: Container(
-                          alignment: Alignment.center,
-                          color: _selectedIndexValue == 2
-                              ? Colors.blue
-                              : Colors.white,
-                          padding: const EdgeInsets.only(
-                              top: 5, bottom: 5, right: 5, left: 5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                  width: 4,
-                                  height: 4,
-                                  decoration: _selectedIndexValue == 2
-                                      ? BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: Colors.white,
-                                            width: 1,
-                                          ))
-                                      : BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: Colors.blue,
-                                            width: 1,
-                                          ))),
-                              Text(
                                 'F',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize:
                                       globals.deviceType == 'phone' ? 16 : 24,
-                                  color: _selectedIndexValue == 2
+                                  color: _selectedIndexValue == 1
                                       ? Colors.white
                                       : Colors.blue,
                                 ),
