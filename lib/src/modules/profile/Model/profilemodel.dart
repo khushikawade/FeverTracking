@@ -17,8 +17,11 @@ class ProfileModel {
   String imageName;
   @HiveField(5)
   String path;
+  @HiveField(6)
+  String address;
   ProfileModel(
     this.name,
+    this.address,
     this.phonenumber,
     this.age,
     this.gender,

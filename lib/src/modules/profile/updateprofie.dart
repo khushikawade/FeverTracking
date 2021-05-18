@@ -21,6 +21,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
   GlobalKey<ScaffoldState> _scaffold = GlobalKey<ScaffoldState>();
   String fileName;
   String _username;
+  String address;
   int _phone;
   int age;
   var _image;
@@ -34,6 +35,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
   }
 
   final TextEditingController _Namecontroller = new TextEditingController();
+  final TextEditingController _Adresscontroller = new TextEditingController();
   final TextEditingController _Phonecontroller = new TextEditingController();
   final TextEditingController _agecontroller = new TextEditingController();
   final TextEditingController _gendercontroller = new TextEditingController();
@@ -51,13 +53,35 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
 
   void addLog(ProfileModel log) async {
     print(log);
-    bool isSuccess = await DbServices().addData(log, Strings.updateProile);
+    bool isSuccess;
+    print("inside add*******");
+    isSuccess = await DbServices().addData(log, Strings.updateProile);
 
     if (isSuccess != null && isSuccess) {
       globals.isProfileset = true;
       Utility.showSnackBar(_scaffold, 'Data Added Successfully', context);
       Future.delayed(const Duration(seconds: 1), () {
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(log.path);
+      });
+    }
+  }
+
+  void updateLog(ProfileModel log) async {
+    print(log);
+    bool isSuccess;
+    if (globals.isProfileset) {
+      print("inside **********update");
+      isSuccess = await DbServices().updateListData(
+        Strings.updateProile,
+        0,
+        log,
+      );
+    }
+    if (isSuccess != null && isSuccess) {
+      globals.isProfileset = true;
+      Utility.showSnackBar(_scaffold, 'Profile Update Successfully', context);
+      Future.delayed(const Duration(seconds: 1), () {
+        Navigator.of(context).pop(log.path);
       });
     }
   }
@@ -67,8 +91,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
 
     if (form.validate()) {
       form.save();
+
       _getitem();
-      // addLog(log);
     }
   }
 
@@ -94,48 +118,25 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
   }
 
   void _getitem() {
-    String imagepath;
-    print(_username);
-    print(_phone);
-    print(age);
-    print(_genderRadioBtnVal);
-    // final item = ProfileModel(
-    //   _username,
-    //   _phone,
-    //   age,
-    //   _genderRadioBtnVal,
-    //   fileName,
-    //   imagepath,
-    // );
+    final item = ProfileModel(
+      _username,
+      address,
+      _phone,
+      age,
+      _genderRadioBtnVal,
+      _image != null
+          ? _image.path.split('/').last
+          : globals.userObj[0].imageName,
+      _image != null ? _image.path : globals.userObj[0].path,
+    );
+    _isprofileUpdate(item);
+  }
 
-    if (_image == null) {
-      imagepath = '';
-      fileName = '';
-      final item = ProfileModel(
-        _username,
-        _phone,
-        age,
-        _genderRadioBtnVal,
-        fileName,
-        imagepath,
-      );
-      print(imagepath);
-      addLog(item);
-    } else if (_image.path != null) {
-      imagepath = _image.path;
-      fileName = _image.path.split('/').last;
-
-      final item1 = ProfileModel(
-        _username,
-        _phone,
-        age,
-        _genderRadioBtnVal,
-        fileName,
-        imagepath,
-      );
-      addLog(item1);
-      print("************inside get item function");
-      print(_image.path);
+  void _isprofileUpdate(ProfileModel log) {
+    if (globals.isProfileset) {
+      updateLog(log);
+    } else {
+      addLog(log);
     }
   }
 
@@ -168,7 +169,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
           ),
           leading: InkWell(
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pop(context, "pop");
             },
             child: Icon(
               Icons.close,
@@ -235,9 +236,9 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                   ),
                                   child: CircleAvatar(
                                     // backgroundColor: Colors.redAccent,
-                                    radius: 39.0,
+                                    radius: 47.06,
                                     child: CircleAvatar(
-                                      radius: 38.0,
+                                      radius: 47.06,
                                       backgroundImage:
                                           new FileImage(File(_image.path)),
                                     ),
@@ -324,12 +325,49 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               padding: const EdgeInsets.only(
                                   left: 20, right: 20, top: 10, bottom: 10),
                               child: TextFormField(
+                                controller: _Adresscontroller,
+                                validator: (val) {
+                                  if (val.isEmpty) {
+                                    return 'This field is required   ';
+                                  } else if (val.length > 0 &&
+                                      val.length < 10) {
+                                    return 'Please Enter a Valid Address ';
+                                  }
+
+                                  return null;
+                                },
+                                onSaved: (val) => address = val,
+                                style: TextStyle(
+                                  color: AppTheme.textColor1,
+                                  fontFamily: 'SF UI Display Bold',
+                                  fontSize: 14.0,
+                                ),
+                                decoration: InputDecoration(
+                                  labelText: 'ADDRESS',
+                                  labelStyle: TextStyle(
+                                    fontSize: 14.0,
+                                    // fontWeight: FontWeight.bold,
+                                    fontFamily: 'SF UI Display Bold',
+                                    color: AppTheme.textColor1,
+                                  ),
+                                ),
+                              ),
+                            )),
+                        new Theme(
+                            data: new ThemeData(
+                              primaryColor: Theme.of(context).primaryColor,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20, right: 20, top: 10, bottom: 10),
+                              child: TextFormField(
                                 keyboardType: TextInputType.phone,
                                 validator: (val) {
                                   if (val.isEmpty) {
                                     return 'This field is required ';
                                   } else if (val.length > 0 &&
-                                      val.length < 10) {
+                                      val.length < 10 &&
+                                      val.length > 10) {
                                     return 'Enter a 10 Digit vaild Number';
                                   }
 
@@ -450,7 +488,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 20, right: 20, top: 50),
+                                        left: 20, right: 20, top: 20),
                                     child: new Container(
                                       height: 60,
                                       alignment: Alignment.center,
@@ -486,7 +524,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
       builder: (BuildContext context) {
         return SingleChildScrollView(
             child: Container(
-          height: 200,
+          height: MediaQuery.of(context).size.width * 0.35,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -559,33 +597,33 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                         _imgFromGallery();
                       }),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    print("upper");
-                    Navigator.pop(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 30, top: 0),
-                    child: new Container(
-                      height: 60,
-                      alignment: Alignment.center,
-                      color: Theme.of(context).primaryColor,
-                      child: new Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            new Text(
-                              "Cancel",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "SF UI Display",
-                                color: Colors.white,
-                                fontSize: 17,
-                              ),
-                            )
-                          ]),
-                    ),
-                  ),
-                )
+                // GestureDetector(
+                //   onTap: () {
+                //     print("upper");
+                //     Navigator.pop(context);
+                //   },
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(left: 20, right: 30, top: 0),
+                //     child: new Container(
+                //       height: 60,
+                //       alignment: Alignment.center,
+                //       color: Theme.of(context).primaryColor,
+                //       child: new Column(
+                //           mainAxisAlignment: MainAxisAlignment.center,
+                //           children: [
+                //             new Text(
+                //               "Cancel",
+                //               style: TextStyle(
+                //                 fontWeight: FontWeight.bold,
+                //                 fontFamily: "SF UI Display",
+                //                 color: Colors.white,
+                //                 fontSize: 17,
+                //               ),
+                //             )
+                //           ]),
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ),

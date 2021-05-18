@@ -2,15 +2,18 @@ import 'dart:io';
 
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app/src/db/db_services.dart';
 
 import 'package:mobile_app/src/modules/login/intro_page.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/utilities/strings.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StartupPage extends StatefulWidget {
   bool firstLogin;
+
   StartupPage({Key key, this.firstLogin}) : super(key: key);
   @override
   _StartupPageState createState() => new _StartupPageState();
@@ -38,6 +41,13 @@ class _StartupPageState extends State<StartupPage> {
         showlogin = true;
       }
     });
+  }
+
+  getUserDetail() async {
+    // final log = SymptomsModel("vomatining");
+    var userData = await DbServices().getListData(Strings.updateProile);
+
+    globals.userObj = userData;
   }
 
   getDeviceType() async {

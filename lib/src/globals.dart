@@ -22,6 +22,7 @@ var client; // To sotre client info
 var provider; // for chat lobby
 var userData;
 var link;
+
 bool alreaySetState = false;
 bool checkSubscription;
 bool checkVerification;

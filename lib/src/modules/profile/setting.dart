@@ -35,19 +35,11 @@ class _SettingPageState extends State<SettingPage> {
     }
   }
 
-  getList() async {
-    // final log = SymptomsModel("vomatining");
-    logsList = await DbServices().getListData(Strings.updateProile);
+  @override
+  void initState() {
+    super.initState();
 
-    logsList.indexOf(logsList);
-    print(logsList[0].path);
-    // logsList =
-    //     await DbServices().updateListData(Strings.createSymptoms, 1, log);
-
-    // setState(() {});
-    _image = logsList[0].path;
-    print("**********");
-    print(_image);
+    _image = globals.userObj != null ? globals.userObj[0].path : null;
   }
 
   @override
@@ -211,13 +203,6 @@ class _SettingPageState extends State<SettingPage> {
               color: AppTheme.dividerColor,
             ),
           ),
-
-          ElevatedButton(
-            child: Text('get data'),
-            onPressed: () {
-              getList();
-            },
-          )
         ]),
       ),
     ]));
@@ -263,8 +248,8 @@ class _SettingPageState extends State<SettingPage> {
                         // child:
                         //  (_image != null )
                         // ?
-                        backgroundImage: (_image != null)
-                            ? ExactAssetImage(_image)
+                        backgroundImage: _image != null
+                            ? new FileImage(File(_image))
                             : ExactAssetImage('assets/images/profileimage.png'),
                       )),
                   // : Image.asset('assets/images/profileimage.png'),
@@ -283,11 +268,16 @@ class _SettingPageState extends State<SettingPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       InkWell(
-                        onTap: () {
-                          Navigator.push(
+                        onTap: () async {
+                          String path =  await Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => UpdateProfielPage()));
+
+                          if (path != null && path.isNotEmpty) {
+                             _image=
+                          }
+                          setState(() {});
                         },
                         child: Text(
                           "Default Profile",
