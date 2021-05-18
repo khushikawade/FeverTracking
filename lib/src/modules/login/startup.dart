@@ -27,7 +27,7 @@ class _StartupPageState extends State<StartupPage> {
   void initState() {
     super.initState();
     getDeviceType();
-
+    getUserDetail();
     checklogin();
   }
 

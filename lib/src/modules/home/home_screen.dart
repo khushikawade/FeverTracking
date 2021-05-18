@@ -297,22 +297,6 @@ class HomeScreenState extends State<HomeScreen> {
                     }
                   },
                 )
-              // ? FutureBuilder(
-              //     future: Hive.openBox(
-              //       'Logs',
-              //       compactionStrategy: (int total, int deleted) {
-              //         return deleted > 20;
-              //       },
-              //     ),
-              //     builder: (BuildContext context, AsyncSnapshot snapshot) {
-              //       if (snapshot.connectionState == ConnectionState.done) {
-              //         if (snapshot.hasError)
-              //           return Text(snapshot.error.toString());
-              //         else
-              //           return LogPage();
-              //       } else
-              //         return Scaffold();
-              //     })
               : selectedIndex == 2
                   ? MedicinesPage(
                       fromHomePage: true,

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
@@ -17,6 +19,16 @@ class _MenuScreenState extends State<MenuScreen> {
   int selectedIndex = 0;
 
   int index = 0;
+  String selectedImage;
+
+  @override
+  void initState() {
+    super.initState();
+
+    selectedImage = globals.userObj != null && globals.userObj.length > 0
+        ? globals.userObj[0].path
+        : null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +67,9 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
             CircleAvatar(
               radius: 56.47,
-              backgroundImage:
-                  ExactAssetImage('assets/images/profileimage.png'),
+              backgroundImage: selectedImage != null
+                  ? new FileImage(File(selectedImage))
+                  : ExactAssetImage('assets/images/profileimage.png'),
             ),
             SizedBox(
               height: 20,
