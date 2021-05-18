@@ -268,7 +268,9 @@ class _SettingPageState extends State<SettingPage> {
                                   builder: (context) => UpdateProfielPage()));
 
                           if (path != null && path.isNotEmpty) {
-                            //  _image=
+                            globals.userObj[0].path = path;
+
+                            _image = globals.userObj[0].path;
                           }
                           setState(() {});
                         },

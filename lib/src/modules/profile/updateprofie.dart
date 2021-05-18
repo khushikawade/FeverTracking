@@ -10,6 +10,7 @@ import 'package:regexpattern/regexpattern.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UpdateProfielPage extends StatefulWidget {
   @override
@@ -58,7 +59,9 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
     isSuccess = await DbServices().addData(log, Strings.updateProile);
 
     if (isSuccess != null && isSuccess) {
-      globals.isProfileset = true;
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      pref.setBool("ISPROFILE_UPDATED", true);
+
       Utility.showSnackBar(_scaffold, 'Data Added Successfully', context);
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.of(context).pop(log.path);
@@ -67,18 +70,15 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
   }
 
   void updateLog(ProfileModel log) async {
-    print(log);
-    bool isSuccess;
-    if (globals.isProfileset) {
-      print("inside **********update");
-      isSuccess = await DbServices().updateListData(
-        Strings.updateProile,
-        0,
-        log,
-      );
-    }
+    bool isSuccess = await DbServices().updateListData(
+      Strings.updateProile,
+      0,
+      log,
+    );
+
     if (isSuccess != null && isSuccess) {
-      globals.isProfileset = true;
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      pref.setBool("ISPROFILE_UPDATED", true);
       Utility.showSnackBar(_scaffold, 'Profile Update Successfully', context);
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.of(context).pop(log.path);
@@ -119,21 +119,28 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
 
   void _getitem() {
     final item = ProfileModel(
-      _username,
-      address,
-      _phone,
-      age,
-      _genderRadioBtnVal,
-      _image != null
-          ? _image.path.split('/').last
-          : globals.userObj[0].imageName,
-      _image != null ? _image.path : globals.userObj[0].path,
-    );
+        _username,
+        address,
+        _phone,
+        age,
+        _genderRadioBtnVal,
+        _image != null
+            ? _image.path.split('/').last
+            : globals.userObj != null
+                ? globals.userObj[0].imageName
+                : null,
+        _image != null
+            ? _image.path
+            : globals.userObj != null
+                ? globals.userObj[0].path
+                : null);
     _isprofileUpdate(item);
   }
 
-  void _isprofileUpdate(ProfileModel log) {
-    if (globals.isProfileset) {
+  void _isprofileUpdate(ProfileModel log) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    bool result = await pref.setBool("ISPROFILE_UPDATED", true);
+    if (result != null && result) {
       updateLog(log);
     } else {
       addLog(log);

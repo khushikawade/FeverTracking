@@ -1,7 +1,7 @@
 import 'package:ext_storage/ext_storage.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:intl/intl.dart';
-
+import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -269,16 +269,16 @@ Widget pdfHeader() {
               Text("Patient Name : ",
                   style: TextStyle(fontSize: 14, color: _darkColor)),
               Text(
-                "DevByBit",
+                "${globals.userObj[0].name}",
                 style: TextStyle(
                     fontSize: 16,
                     color: _darkColor,
                     fontWeight: FontWeight.bold),
               )
             ]),
-            Text("Contact No. : +254 700 123456",
+            Text("Contact No. : ${globals.userObj[0].phonenumber}",
                 style: TextStyle(fontSize: 14, color: _darkColor)),
-            Text("Address : Nairobi, Kenya",
+            Text("Address : ${globals.userObj[0].address}",
                 style: TextStyle(fontSize: 14, color: _darkColor)),
             Divider(color: accentColor),
           ]));
