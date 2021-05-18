@@ -256,9 +256,6 @@ class _SettingPageState extends State<SettingPage> {
                   // : Image.asset('assets/images/profileimage.png'),
                   // )),
                 ]),
-            SizedBox(
-              width: 10,
-            ),
             Container(
               padding: EdgeInsets.all(20),
               child: Column(
@@ -286,16 +283,19 @@ class _SettingPageState extends State<SettingPage> {
                                   globals.deviceType == 'phone' ? 18 : 26),
                         ),
                       ),
-                      // Icon(
-                      //   Icons.arrow_drop_down_sharp,
-                      //   color: AppTheme.dropdowniconColor,
-                      //   size: 28,
-                      // )
+                      IconButton(
+                        onPressed: () {
+                          print("Tapped ---------------");
+                        },
+                        icon: Icon(
+                          Icons.edit,
+                          color: AppTheme.dropdowniconColor,
+                          size: 20,
+                        ),
+                      )
                     ],
                   ),
-                  SizedBox(
-                    height: 1.0,
-                  ),
+
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.start,
                   //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -319,9 +319,7 @@ class _SettingPageState extends State<SettingPage> {
                   //     ),
                   //   ],
                   // ),
-                  SizedBox(
-                    height: 10,
-                  ),
+
                   Container(
                     margin: const EdgeInsets.all(0),
                     width: 110,
