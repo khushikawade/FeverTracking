@@ -87,7 +87,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         fontWeight: FontWeight.w800,
                         color: AppTheme.titleColor,
                         fontFamily: "SF UI Display Bold",
-                        fontSize: 22),
+                        fontSize: globals.deviceType == 'phone' ? 22 : 30),
                   ),
                 ),
                 // Icon(
@@ -112,7 +112,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ? AppTheme.titleColor
                           : AppTheme.titleColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
-                      fontSize: 20),
+                      fontSize: globals.deviceType == 'phone' ? 20 : 28),
                 ),
               ),
             ),
@@ -152,7 +152,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ? AppTheme.titleColor
                           : AppTheme.titleColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
-                      fontSize: 20),
+                      fontSize: globals.deviceType == 'phone' ? 20 : 28),
                 ),
               ),
             ),
@@ -192,7 +192,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ? AppTheme.titleColor
                           : AppTheme.titleColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
-                      fontSize: 20),
+                      fontSize: globals.deviceType == 'phone' ? 20 : 28),
                 ),
               ),
             ),
@@ -232,7 +232,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ? AppTheme.titleColor
                           : AppTheme.titleColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
-                      fontSize: 20),
+                      fontSize: globals.deviceType == 'phone' ? 20 : 28),
                 ),
               ),
             ),

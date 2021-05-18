@@ -327,12 +327,15 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 style: TextStyle(
                                   color: AppTheme.textColor1,
                                   fontFamily: 'SF UI Display Bold',
-                                  fontSize: 14.0,
+                                  fontSize:
+                                      globals.deviceType == "phone" ? 14.0 : 22,
                                 ),
                                 decoration: InputDecoration(
                                   labelText: 'NAME',
                                   labelStyle: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: globals.deviceType == "phone"
+                                        ? 14.0
+                                        : 22,
                                     // fontWeight: FontWeight.bold,
                                     fontFamily: 'SF UI Display Bold',
                                     color: AppTheme.textColor1,
@@ -363,12 +366,15 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 style: TextStyle(
                                   color: AppTheme.textColor1,
                                   fontFamily: 'SF UI Display Bold',
-                                  fontSize: 14.0,
+                                  fontSize:
+                                      globals.deviceType == "phone" ? 14.0 : 22,
                                 ),
                                 decoration: InputDecoration(
                                   labelText: 'ADDRESS',
                                   labelStyle: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: globals.deviceType == "phone"
+                                        ? 14.0
+                                        : 22,
                                     // fontWeight: FontWeight.bold,
                                     fontFamily: 'SF UI Display Bold',
                                     color: AppTheme.textColor1,
@@ -401,12 +407,15 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 style: TextStyle(
                                   color: AppTheme.textColor1,
                                   fontFamily: 'SF UI Display Bold',
-                                  fontSize: 14.0,
+                                  fontSize:
+                                      globals.deviceType == "phone" ? 14.0 : 22,
                                 ),
                                 decoration: InputDecoration(
                                   labelText: 'PHONE NUMBER ',
                                   labelStyle: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: globals.deviceType == 'phone'
+                                        ? 14.0
+                                        : 22,
                                     fontFamily: 'SF UI Display Bold',
                                     color: AppTheme.textColor1,
                                   ),
@@ -425,7 +434,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               style: TextStyle(
                                 color: AppTheme.textColor1,
                                 fontFamily: 'SF UI Display Bold',
-                                fontSize: 14.0,
+                                fontSize:
+                                    globals.deviceType == 'phone' ? 14.0 : 22,
                               ),
                               keyboardType: TextInputType.number,
                               onSaved: (val) => age = num.tryParse(val),
@@ -441,7 +451,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               decoration: InputDecoration(
                                 labelText: 'Age ',
                                 labelStyle: TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize:
+                                      globals.deviceType == "phone" ? 14.0 : 22,
                                   fontFamily: 'SF UI Display Bold',
                                   color: AppTheme.textColor1,
                                 ),
@@ -459,7 +470,10 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                             children: <Widget>[
                               Text(
                                 'Gender',
-                                style: new TextStyle(fontSize: 16.0),
+                                style: new TextStyle(
+                                    fontSize: globals.deviceType == "phone"
+                                        ? 16.0
+                                        : 24),
                               ),
                               new Radio<String>(
                                 value: "Male",
@@ -468,7 +482,10 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               ),
                               new Text(
                                 'Male',
-                                style: new TextStyle(fontSize: 16.0),
+                                style: new TextStyle(
+                                    fontSize: globals.deviceType == "phone"
+                                        ? 16.0
+                                        : 24),
                               ),
                               new Radio<String>(
                                 value: "Female",
@@ -478,7 +495,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               new Text(
                                 'Female',
                                 style: new TextStyle(
-                                  fontSize: 16.0,
+                                  fontSize:
+                                      globals.deviceType == "phone" ? 16 : 24,
                                 ),
                               ),
                               new Radio<String>(
@@ -488,7 +506,10 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               ),
                               new Text(
                                 'Other',
-                                style: new TextStyle(fontSize: 16.0),
+                                style: new TextStyle(
+                                    fontSize: globals.deviceType == "phone"
+                                        ? 16.0
+                                        : 24),
                               ),
                             ],
                           ),
@@ -508,13 +529,13 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 child: GestureDetector(
                                   onTap: () {
                                     _submit();
-                                    print("upper");
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, right: 20, top: 20),
+                                    padding: const EdgeInsets.all(20),
                                     child: new Container(
-                                      height: 60,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              .09,
                                       alignment: Alignment.center,
                                       color: Theme.of(context).primaryColor,
                                       child: new Column(
@@ -527,7 +548,10 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                                 fontWeight: FontWeight.bold,
                                                 fontFamily: "SF UI Display",
                                                 color: Colors.white,
-                                                fontSize: 17,
+                                                fontSize: globals.deviceType ==
+                                                        "phone"
+                                                    ? 17
+                                                    : 25,
                                               ),
                                             )
                                           ]),
@@ -582,7 +606,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               fontFamily: 'SF UI Display Bold',
                               fontWeight: FontWeight.w900,
                               color: AppTheme.buttomSheetTextColor,
-                              fontSize: 17),
+                              fontSize:
+                                  globals.deviceType == "phone" ? 17 : 25),
                         ),
                         selected: true,
                         onTap: () {
@@ -616,7 +641,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               fontFamily: 'SF UI Display Bold',
                               fontWeight: FontWeight.w900,
                               color: AppTheme.buttomSheetTextColor,
-                              fontSize: 17),
+                              fontSize:
+                                  globals.deviceType == "phone" ? 17 : 25),
                         ),
                         selected: true,
                         onTap: () {

@@ -161,7 +161,7 @@ class _CustomTab extends State<CustomTab> {
                   'Temperature \u00B0F',
                   style: TextStyle(
                       fontFamily: "SF UI Display Regular",
-                      fontSize: 10.0,
+                      fontSize: globals.deviceType == 'phone' ? 10 : 18,
                       color: AppTheme.graphTextColor,
                       fontWeight: FontWeight.bold),
                 ),
@@ -185,7 +185,7 @@ class _CustomTab extends State<CustomTab> {
                       'Max',
                       style: TextStyle(
                           fontFamily: "SF UI Display Regular",
-                          fontSize: 10.0,
+                          fontSize: globals.deviceType == 'phone' ? 10 : 18,
                           color: AppTheme.graphTextColor,
                           fontWeight: FontWeight.bold),
                     ),
@@ -208,7 +208,7 @@ class _CustomTab extends State<CustomTab> {
                       'Normal',
                       style: TextStyle(
                           fontFamily: "SF UI Display Regular",
-                          fontSize: 10.0,
+                          fontSize: globals.deviceType == 'phone' ? 10 : 18,
                           color: AppTheme.graphTextColor,
                           fontWeight: FontWeight.bold),
                     ),
@@ -231,7 +231,7 @@ class _CustomTab extends State<CustomTab> {
                       'Min',
                       style: TextStyle(
                           fontFamily: "SF UI Display Regular",
-                          fontSize: 10.0,
+                          fontSize: globals.deviceType == 'phone' ? 10 : 18,
                           color: AppTheme.graphTextColor,
                           fontWeight: FontWeight.bold),
                     ),
@@ -255,7 +255,7 @@ class _CustomTab extends State<CustomTab> {
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       fontFamily: "SF UI Display Regular",
-                      fontSize: 13.0,
+                      fontSize: globals.deviceType == 'phone' ? 13 : 21,
                       color: AppTheme.graphTextColor2,
                     ),
                   ),
@@ -263,7 +263,7 @@ class _CustomTab extends State<CustomTab> {
                     '1 Reading',
                     style: TextStyle(
                       fontFamily: "SF UI Display Regular",
-                      fontSize: 12.0,
+                      fontSize: globals.deviceType == 'phone' ? 12 : 20,
                       color: AppTheme.graphTextColor,
                     ),
                   ),

@@ -362,11 +362,11 @@ class _AddLogPageState extends State<AddLogPage> {
                       style: TextStyle(
                           color: AppTheme.textColor1,
                           fontFamily: "SF UI Display Regular",
-                          fontSize: 17),
+                          fontSize: globals.deviceType == 'phone' ? 17 : 25),
                     ),
                   ),
                   Container(
-                      width: 150,
+                      width: MediaQuery.of(context).size.width * 0.40,
                       child: Text(
                         "$sypmtoms",
                         overflow: TextOverflow.ellipsis,
@@ -655,7 +655,8 @@ class _AddLogPageState extends State<AddLogPage> {
                           '$i',
                           style: TextStyle(
                             color: AppTheme.textColor1,
-                            fontSize: 17.0,
+                            fontSize:
+                                globals.deviceType == 'phone' ? 17.0 : 25.0,
                             fontFamily: 'SF UI Display Regular',
                             fontWeight: FontWeight.w600,
                           ),
