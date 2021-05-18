@@ -172,7 +172,7 @@ class _WeekTab extends State<WeekTab> {
                   'Temperature \u00B0F',
                   style: TextStyle(
                       fontFamily: "SF UI Display Regular",
-                      fontSize: 10.0,
+                      fontSize: globals.deviceType == 'phone' ? 10 : 18,
                       color: AppTheme.graphTextColor,
                       fontWeight: FontWeight.bold),
                 ),
@@ -196,7 +196,7 @@ class _WeekTab extends State<WeekTab> {
                       'Max',
                       style: TextStyle(
                           fontFamily: "SF UI Display Regular",
-                          fontSize: 10.0,
+                          fontSize: globals.deviceType == 'phone' ? 10 : 18,
                           color: AppTheme.graphTextColor,
                           fontWeight: FontWeight.bold),
                     ),
@@ -219,7 +219,7 @@ class _WeekTab extends State<WeekTab> {
                       'Normal',
                       style: TextStyle(
                           fontFamily: "SF UI Display Regular",
-                          fontSize: 10.0,
+                          fontSize: globals.deviceType == 'phone' ? 10 : 18,
                           color: AppTheme.graphTextColor,
                           fontWeight: FontWeight.bold),
                     ),
@@ -242,7 +242,7 @@ class _WeekTab extends State<WeekTab> {
                       'Min',
                       style: TextStyle(
                           fontFamily: "SF UI Display Regular",
-                          fontSize: 10.0,
+                          fontSize: globals.deviceType == 'phone' ? 10 : 18,
                           color: AppTheme.graphTextColor,
                           fontWeight: FontWeight.bold),
                     ),

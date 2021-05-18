@@ -456,7 +456,8 @@ class _AddMedicineState extends State<AddMedicine> {
                             '$i',
                             style: TextStyle(
                               color: Color(0xff463DC7),
-                              fontSize: 17.0,
+                              fontSize:
+                                  globals.deviceType == 'phone' ? 17.0 : 25.0,
                               fontFamily: 'SF UI Display Regular',
                               fontWeight: FontWeight.normal,
                             ),

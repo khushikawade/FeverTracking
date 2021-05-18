@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
+import 'package:mobile_app/src/globals.dart' as globals;
 
 class MenuScreen extends StatefulWidget {
   int selectedIndex;
@@ -55,7 +56,7 @@ class _MenuScreenState extends State<MenuScreen> {
             CircleAvatar(
               radius: 56.47,
               backgroundImage:
-                  NetworkImage('https://picsum.photos/250?image=9'),
+                  ExactAssetImage('assets/images/profileimage.png'),
             ),
             SizedBox(
               height: 20,
@@ -73,7 +74,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         fontWeight: FontWeight.w800,
                         color: AppTheme.titleColor,
                         fontFamily: "SF UI Display Bold",
-                        fontSize: 22),
+                        fontSize: globals.deviceType == 'phone' ? 22 : 30),
                   ),
                 ),
                 // Icon(
@@ -98,7 +99,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ? AppTheme.titleColor
                           : AppTheme.titleColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
-                      fontSize: 20),
+                      fontSize: globals.deviceType == 'phone' ? 20 : 28),
                 ),
               ),
             ),
@@ -138,7 +139,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ? AppTheme.titleColor
                           : AppTheme.titleColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
-                      fontSize: 20),
+                      fontSize: globals.deviceType == 'phone' ? 20 : 28),
                 ),
               ),
             ),
@@ -178,7 +179,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ? AppTheme.titleColor
                           : AppTheme.titleColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
-                      fontSize: 20),
+                      fontSize: globals.deviceType == 'phone' ? 20 : 28),
                 ),
               ),
             ),
@@ -218,7 +219,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ? AppTheme.titleColor
                           : AppTheme.titleColor.withOpacity(0.61),
                       fontFamily: "SF UI Display",
-                      fontSize: 20),
+                      fontSize: globals.deviceType == 'phone' ? 20 : 28),
                 ),
               ),
             ),

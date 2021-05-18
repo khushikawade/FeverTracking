@@ -173,7 +173,7 @@ class _MonthTab extends State<MonthTab> {
                   'Temperature \u00B0F',
                   style: TextStyle(
                       fontFamily: "SF UI Display Regular",
-                      fontSize: 10.0,
+                      fontSize: globals.deviceType == 'phone' ? 10 : 18,
                       color: AppTheme.graphTextColor,
                       fontWeight: FontWeight.bold),
                 ),
@@ -197,7 +197,7 @@ class _MonthTab extends State<MonthTab> {
                       'Max',
                       style: TextStyle(
                           fontFamily: "SF UI Display Regular",
-                          fontSize: 10.0,
+                          fontSize: globals.deviceType == 'phone' ? 10 : 18,
                           color: AppTheme.graphTextColor,
                           fontWeight: FontWeight.bold),
                     ),
@@ -220,7 +220,7 @@ class _MonthTab extends State<MonthTab> {
                       'Normal',
                       style: TextStyle(
                           fontFamily: "SF UI Display Regular",
-                          fontSize: 10.0,
+                          fontSize: globals.deviceType == 'phone' ? 10 : 18,
                           color: AppTheme.graphTextColor,
                           fontWeight: FontWeight.bold),
                     ),
@@ -243,7 +243,7 @@ class _MonthTab extends State<MonthTab> {
                       'Min',
                       style: TextStyle(
                           fontFamily: "SF UI Display Regular",
-                          fontSize: 10.0,
+                          fontSize: globals.deviceType == 'phone' ? 10 : 18,
                           color: AppTheme.graphTextColor,
                           fontWeight: FontWeight.bold),
                     ),
@@ -267,7 +267,7 @@ class _MonthTab extends State<MonthTab> {
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       fontFamily: "SF UI Display Regular",
-                      fontSize: 13.0,
+                      fontSize: globals.deviceType == 'phone' ? 13 : 21,
                       color: AppTheme.graphTextColor2,
                     ),
                   ),
@@ -275,7 +275,7 @@ class _MonthTab extends State<MonthTab> {
                     '1 Reading',
                     style: TextStyle(
                       fontFamily: "SF UI Display Regular",
-                      fontSize: 12.0,
+                      fontSize: globals.deviceType == 'phone' ? 12 : 20,
                       color: AppTheme.graphTextColor,
                     ),
                   ),

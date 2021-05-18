@@ -492,7 +492,8 @@ class HomeScreenState extends State<HomeScreen> {
                               fontFamily: 'SF UI Display Bold',
                               fontWeight: FontWeight.w700,
                               color: AppTheme.buttomSheetTextColor,
-                              fontSize: 17),
+                              fontSize:
+                                  globals.deviceType == 'phone' ? 17 : 25),
                         ),
                         selected: true,
                         onTap: () {
@@ -528,7 +529,8 @@ class HomeScreenState extends State<HomeScreen> {
                               fontFamily: 'SF UI Display Bold',
                               fontWeight: FontWeight.w700,
                               color: AppTheme.buttomSheetTextColor,
-                              fontSize: 17),
+                              fontSize:
+                                  globals.deviceType == 'phone' ? 17 : 25),
                         ),
                         selected: true,
                         onTap: () {

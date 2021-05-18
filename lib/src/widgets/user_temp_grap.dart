@@ -4,7 +4,7 @@ import 'package:mobile_app/src/db/db_services.dart';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/home_tabs/custom_tab.dart';
-
+import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/home_tabs/day_tab.dart';
 import 'package:mobile_app/src/home_tabs/month_tab.dart';
 import 'package:mobile_app/src/home_tabs/week_tab.dart';
@@ -50,12 +50,12 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
 
                   // labelColor: Colors.white,
                   labelStyle: TextStyle(
-                      fontSize: 14.0,
+                      fontSize: globals.deviceType == 'phone' ? 14 : 22,
                       color: AppTheme.titleColor,
                       fontWeight: FontWeight.w600,
                       fontFamily: 'SF UI Display Semibold'),
                   unselectedLabelStyle: TextStyle(
-                      fontSize: 14.0,
+                      fontSize: globals.deviceType == 'phone' ? 14 : 22,
                       fontWeight: FontWeight.w600,
                       color: AppTheme.titleColor.withOpacity(0.50),
                       fontFamily:

@@ -2,6 +2,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/widgets/model/heart_data_model.dart';
+import 'package:mobile_app/src/globals.dart' as globals;
 
 class HeartGraphClass extends StatelessWidget {
   List<charts.Series<HeartDataClass, DateTime>> seriesList;
@@ -65,7 +66,7 @@ class HeartGraphClass extends StatelessWidget {
         domainAxis: new charts.DateTimeAxisSpec(
           renderSpec: charts.GridlineRendererSpec(
             labelStyle: new charts.TextStyleSpec(
-              fontSize: 10,
+              fontSize: globals.deviceType == 'phone' ? 10 : 18,
               color: charts.MaterialPalette.white,
             ),
           ),
