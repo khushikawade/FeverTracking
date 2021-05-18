@@ -26,6 +26,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
   int _phone;
   int age;
   var _image;
+  String selectedImage;
 
   String _genderRadioBtnVal = 'Male';
 
@@ -96,18 +97,6 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
     }
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
   Future openCamera() async {
     var image = await ImagePicker.platform
         .pickImage(source: ImageSource.camera, imageQuality: 50);
@@ -139,7 +128,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
 
   void _isprofileUpdate(ProfileModel log) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    bool result = await pref.setBool("ISPROFILE_UPDATED", true);
+    bool result = pref.getBool("ISPROFILE_UPDATED");
     if (result != null && result) {
       updateLog(log);
     } else {
@@ -154,6 +143,33 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
     setState(() {
       _image = image;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    selectedImage = globals.userObj != null && globals.userObj.length > 0
+        ? globals.userObj[0].path
+        : null;
+    _Namecontroller.text = globals.userObj != null && globals.userObj.length > 0
+        ? globals.userObj[0].name
+        : '';
+    _Adresscontroller.text =
+        globals.userObj != null && globals.userObj.length > 0
+            ? globals.userObj[0].address
+            : '';
+    _Phonecontroller.text =
+        globals.userObj != null && globals.userObj.length > 0
+            ? globals.userObj[0].phonenumber.toString()
+            : '';
+    _agecontroller.text = globals.userObj != null && globals.userObj.length > 0
+        ? globals.userObj[0].age.toString()
+        : '';
+
+    _genderRadioBtnVal = globals.userObj != null && globals.userObj.length > 0
+        ? globals.userObj[0].gender.toString()
+        : '';
   }
 
   @override
@@ -203,7 +219,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        _image == null
+                        _image == null && selectedImage == null
                             ? Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.all(
@@ -222,8 +238,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                   radius: 47.06,
                                   // backgroundColor: Colors.red.withOpacity(0),
 
-                                  backgroundImage: NetworkImage(
-                                      'https://picsum.photos/250?image=9'),
+                                  backgroundImage: ExactAssetImage(
+                                      'assets/images/profileimage.png'),
                                 ),
                               )
                             : InkWell(
@@ -242,19 +258,19 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                     ],
                                   ),
                                   child: CircleAvatar(
-                                    // backgroundColor: Colors.redAccent,
                                     radius: 47.06,
                                     child: CircleAvatar(
                                       radius: 47.06,
-                                      backgroundImage:
-                                          new FileImage(File(_image.path)),
+                                      backgroundImage: new FileImage(File(
+                                          _image != null
+                                              ? _image.path
+                                              : selectedImage)),
                                     ),
                                   ),
                                 ),
                               ),
                         GestureDetector(
                             onTap: () {
-                              print('Pressed');
                               bottomsheet();
                             },
                             child: Container(
@@ -368,6 +384,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               padding: const EdgeInsets.only(
                                   left: 20, right: 20, top: 10, bottom: 10),
                               child: TextFormField(
+                                controller: _Phonecontroller,
                                 keyboardType: TextInputType.phone,
                                 validator: (val) {
                                   if (val.isEmpty) {
@@ -529,112 +546,116 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return SingleChildScrollView(
-            child: Container(
-          height: MediaQuery.of(context).size.width * 0.35,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(
-                      left: 5, right: 10, bottom: 5, top: 5),
-                  child: ListTile(
-                      leading: Container(
-                        padding: const EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          border: Border.all(width: 0.0, color: Colors.white54),
-                          borderRadius: BorderRadius.all(Radius.circular(
-                                  14.0) //                 <--- border radius here
-                              ),
+        return SafeArea(
+          bottom: true,
+          child: SingleChildScrollView(
+              child: Container(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                        left: 5, right: 10, bottom: 5, top: 5),
+                    child: ListTile(
+                        leading: Container(
+                          padding: const EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            border:
+                                Border.all(width: 0.0, color: Colors.white54),
+                            borderRadius: BorderRadius.all(Radius.circular(
+                                    14.0) //                 <--- border radius here
+                                ),
+                          ),
+                          child: Icon(
+                            const IconData(0xe800,
+                                fontFamily: "FeverTrackingIcons"),
+                            // color:AppTheme.iconColor,
+                            size: 22,
+                            color: AppTheme.iconColor,
+                          ),
                         ),
-                        child: Icon(
-                          const IconData(0xe800,
-                              fontFamily: "FeverTrackingIcons"),
-                          // color:AppTheme.iconColor,
-                          size: 22,
-                          color: AppTheme.iconColor,
+                        title: Text(
+                          "Camera",
+                          style: TextStyle(
+                              fontFamily: 'SF UI Display Bold',
+                              fontWeight: FontWeight.w900,
+                              color: AppTheme.buttomSheetTextColor,
+                              fontSize: 17),
                         ),
-                      ),
-                      title: Text(
-                        "Camera",
-                        style: TextStyle(
-                            fontFamily: 'SF UI Display Bold',
-                            fontWeight: FontWeight.w900,
-                            color: AppTheme.buttomSheetTextColor,
-                            fontSize: 17),
-                      ),
-                      selected: true,
-                      onTap: () {
-                        debugPrint("Starred***** Listile 2   2   Me!");
-                        openCamera();
-                      }),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(
-                      left: 5, right: 10, bottom: 0, top: 0),
-                  child: ListTile(
-                      leading: Container(
-                        padding: const EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          border: Border.all(width: 0.0, color: Colors.white54),
-                          borderRadius: BorderRadius.all(Radius.circular(
-                                  14.0) //                 <--- border radius here
-                              ),
+                        selected: true,
+                        onTap: () {
+                          Navigator.pop(context);
+                          openCamera();
+                        }),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(
+                        left: 5, right: 10, bottom: 0, top: 0),
+                    child: ListTile(
+                        leading: Container(
+                          padding: const EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            border:
+                                Border.all(width: 0.0, color: Colors.white54),
+                            borderRadius: BorderRadius.all(Radius.circular(
+                                    14.0) //                 <--- border radius here
+                                ),
+                          ),
+                          child: Icon(
+                            Icons.photo,
+                            color: Colors.white,
+                            size: 22,
+                          ),
                         ),
-                        child: Icon(
-                          Icons.photo,
-                          color: Colors.white,
-                          size: 22,
+                        title: Text(
+                          "Gallery ",
+                          style: TextStyle(
+                              fontFamily: 'SF UI Display Bold',
+                              fontWeight: FontWeight.w900,
+                              color: AppTheme.buttomSheetTextColor,
+                              fontSize: 17),
                         ),
-                      ),
-                      title: Text(
-                        "Gallery ",
-                        style: TextStyle(
-                            fontFamily: 'SF UI Display Bold',
-                            fontWeight: FontWeight.w900,
-                            color: AppTheme.buttomSheetTextColor,
-                            fontSize: 17),
-                      ),
-                      selected: true,
-                      onTap: () {
-                        debugPrint("Starred***** Listile 2   2   Me!");
-                        _imgFromGallery();
-                      }),
-                ),
-                // GestureDetector(
-                //   onTap: () {
-                //     print("upper");
-                //     Navigator.pop(context);
-                //   },
-                //   child: Padding(
-                //     padding: const EdgeInsets.only(left: 20, right: 30, top: 0),
-                //     child: new Container(
-                //       height: 60,
-                //       alignment: Alignment.center,
-                //       color: Theme.of(context).primaryColor,
-                //       child: new Column(
-                //           mainAxisAlignment: MainAxisAlignment.center,
-                //           children: [
-                //             new Text(
-                //               "Cancel",
-                //               style: TextStyle(
-                //                 fontWeight: FontWeight.bold,
-                //                 fontFamily: "SF UI Display",
-                //                 color: Colors.white,
-                //                 fontSize: 17,
-                //               ),
-                //             )
-                //           ]),
-                //     ),
-                //   ),
-                // )
-              ],
+                        selected: true,
+                        onTap: () {
+                          Navigator.pop(context);
+                          _imgFromGallery();
+                        }),
+                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     print("upper");
+                  //     Navigator.pop(context);
+                  //   },
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.only(left: 20, right: 30, top: 0),
+                  //     child: new Container(
+                  //       height: 60,
+                  //       alignment: Alignment.center,
+                  //       color: Theme.of(context).primaryColor,
+                  //       child: new Column(
+                  //           mainAxisAlignment: MainAxisAlignment.center,
+                  //           children: [
+                  //             new Text(
+                  //               "Cancel",
+                  //               style: TextStyle(
+                  //                 fontWeight: FontWeight.bold,
+                  //                 fontFamily: "SF UI Display",
+                  //                 color: Colors.white,
+                  //                 fontSize: 17,
+                  //               ),
+                  //             )
+                  //           ]),
+                  //     ),
+                  //   ),
+                  // )
+                ],
+              ),
             ),
-          ),
-        ));
+          )),
+        );
       },
     );
   }

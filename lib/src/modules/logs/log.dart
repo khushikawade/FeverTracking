@@ -215,7 +215,7 @@ class _LogPageState extends State<LogPage> {
                                     items[index].symptoms.isNotEmpty
                                 ? items[index].symptoms
                                 : '',
-                            maxLines: 2,
+                            maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: AppTheme.subtitleTextColor,

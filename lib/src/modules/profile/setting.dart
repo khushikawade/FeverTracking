@@ -35,11 +35,26 @@ class _SettingPageState extends State<SettingPage> {
     }
   }
 
+  getUserDetail() async {
+    // final log = SymptomsModel("vomatining");
+    var userData = await DbServices().getListData(Strings.updateProile);
+
+    globals.userObj = userData;
+
+    _image = globals.userObj != null && globals.userObj.length > 0
+        ? globals.userObj[0].path
+        : null;
+
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
 
-    _image = globals.userObj != null ? globals.userObj[0].path : null;
+    _image = globals.userObj != null && globals.userObj.length > 0
+        ? globals.userObj[0].path
+        : null;
   }
 
   @override
@@ -257,34 +272,28 @@ class _SettingPageState extends State<SettingPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      InkWell(
-                        onTap: () async {
+                      Text(
+                        "Default Profile",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.headingTextColor,
+                            fontFamily: "SF UI Display Bold",
+                            fontSize: globals.deviceType == 'phone' ? 18 : 26),
+                      ),
+                      IconButton(
+                        onPressed: () async {
                           String path = await Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => UpdateProfielPage()));
 
                           if (path != null && path.isNotEmpty) {
-                            globals.userObj[0].path = path;
+                            getUserDetail();
+                            // globals.userObj[0].path = path;
 
-                            _image = globals.userObj[0].path;
+                            // _image = globals.userObj[0].path;
                           }
-                          setState(() {});
-                        },
-                        child: Text(
-                          "Default Profile",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: AppTheme.headingTextColor,
-                              fontFamily: "SF UI Display Bold",
-                              fontSize:
-                                  globals.deviceType == 'phone' ? 18 : 26),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          print("Tapped ---------------");
                         },
                         icon: Icon(
                           Icons.edit,
