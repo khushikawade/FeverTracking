@@ -21,6 +21,7 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'dart:io';
 
 import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -236,12 +237,7 @@ class HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.only(right: 5),
                           child: IconButton(
                             onPressed: () {
-                              if (logsList != null && logsList.length > 0) {
-                                generatePDFFile();
-                              } else {
-                                Utility.showSnackBar(
-                                    _scaffoldKey, 'No Logs Found', context);
-                              }
+                              checkProfile();
 
                               // Navigator.push(
                               //     context,
@@ -441,6 +437,21 @@ class HomeScreenState extends State<HomeScreen> {
     return data;
   }
 
+  checkProfile() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    bool isResult = pref.getBool('ISPROFILE_UPDATED');
+
+    if (isResult != null && isResult) {
+      if (logsList != null && logsList.length > 0) {
+        generatePDFFile();
+      } else {
+        Utility.showSnackBar(_scaffoldKey, 'No Logs Found', context);
+      }
+    } else {
+      Utility.showSnackBar(_scaffoldKey, 'Please Update Your Profile', context);
+    }
+  }
+
   bottomsheet() {
     showModalBottomSheet(
       context: context,
@@ -522,12 +533,7 @@ class HomeScreenState extends State<HomeScreen> {
                         selected: true,
                         onTap: () {
                           Navigator.pop(context);
-                          if (logsList != null && logsList.length > 0) {
-                            generatePDFFile();
-                          } else {
-                            Utility.showSnackBar(
-                                _scaffoldKey, 'No Logs Found', context);
-                          }
+                          checkProfile();
                         }),
                   ),
                 ],
