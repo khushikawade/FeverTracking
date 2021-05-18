@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app/src/modules/home/home_screen.dart';
 
 import 'package:mobile_app/src/modules/login/intro_page.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
@@ -23,21 +24,21 @@ class _StartupPageState extends State<StartupPage> {
   void initState() {
     super.initState();
     getDeviceType();
-    startTimer();
+
+    checklogin();
   }
 
   checklogin() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    var username = pref.getString('username');
-    setState(() {
-      if (username != null) {
-        flag = false;
-        showlogin = false;
-      } else {
-        flag = false;
-        showlogin = true;
-      }
-    });
+    bool isResult = pref.getBool('INTRODUCTION_WATCHED');
+    if (isResult != null && isResult) {
+      Future.delayed(const Duration(seconds: 5), () {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      });
+    } else {
+      startTimer();
+    }
   }
 
   getDeviceType() async {

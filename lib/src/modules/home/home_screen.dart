@@ -206,23 +206,29 @@ class HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.only(right: 5),
                       child: IconButton(
                         onPressed: () async {
-                          bool result =
-                              await Utility().takeScreenShot(previewContainer);
-                          if (result != null && result) {
-                            Utility.showSnackBar(
-                                _scaffoldKey,
-                                Platform.isAndroid
-                                    ? 'The Report has been downloaded to the Download folder.'
-                                    : 'The Report has been downloaded to the Files folder.',
-                                context);
-                          }
+                          bottomsheet();
+                          // bool result =
+                          //     await Utility().takeScreenShot(previewContainer);
+                          // if (result != null && result) {
+                          //   Utility.showSnackBar(
+                          //       _scaffoldKey,
+                          //       Platform.isAndroid
+                          //           ? 'The Report has been downloaded to the Download folder.'
+                          //           : 'The Report has been downloaded to the Files folder.',
+                          //       context);
+                          // }
                         },
                         icon: Icon(
-                          const IconData(0xe800,
-                              fontFamily: "FeverTrackingIcons"),
-                          // color:AppTheme.iconColor,
+                          Icons.more_vert,
                           size: 24,
+                          color: AppTheme.iconColor,
                         ),
+                        // icon: Icon(
+                        //   const IconData(0xe800,
+                        //       fontFamily: "FeverTrackingIcons"),
+                        //   // color:AppTheme.iconColor,
+                        //   size: 24,
+                        // ),
                       ),
                     )
                   : selectedIndex == 1
@@ -433,5 +439,116 @@ class HomeScreenState extends State<HomeScreen> {
             : '',
       ]);
     return data;
+  }
+
+  bottomsheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SafeArea(
+          bottom: true,
+          child: SingleChildScrollView(
+              child: Container(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                        left: 5, right: 10, bottom: 5, top: 5),
+                    child: ListTile(
+                        leading: Container(
+                          padding: const EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            border:
+                                Border.all(width: 0.0, color: Colors.white54),
+                            borderRadius: BorderRadius.all(Radius.circular(
+                                    14.0) //                 <--- border radius here
+                                ),
+                          ),
+                          child: Icon(
+                            const IconData(0xe800,
+                                fontFamily: "FeverTrackingIcons"),
+                            // color:AppTheme.iconColor,
+                            size: 22,
+                            color: AppTheme.iconColor,
+                          ),
+                        ),
+                        title: Text(
+                          "Take Screenshot",
+                          style: TextStyle(
+                              fontFamily: 'SF UI Display Bold',
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.buttomSheetTextColor,
+                              fontSize: 17),
+                        ),
+                        selected: true,
+                        onTap: () {
+                          Navigator.pop(context);
+                          takeScreenshot();
+                        }),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(
+                        left: 5, right: 10, bottom: 0, top: 0),
+                    child: ListTile(
+                        leading: Container(
+                          padding: const EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            border:
+                                Border.all(width: 0.0, color: Colors.white54),
+                            borderRadius: BorderRadius.all(Radius.circular(
+                                    14.0) //                 <--- border radius here
+                                ),
+                          ),
+                          child: Icon(
+                            const IconData(0xe809,
+                                fontFamily: "FeverTrackingIcons"),
+                            // color:AppTheme.iconColor,
+                            size: 22,
+                            color: AppTheme.iconColor,
+                          ),
+                        ),
+                        title: Text(
+                          "Share Report to Doctor",
+                          style: TextStyle(
+                              fontFamily: 'SF UI Display Bold',
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.buttomSheetTextColor,
+                              fontSize: 17),
+                        ),
+                        selected: true,
+                        onTap: () {
+                          Navigator.pop(context);
+                          if (logsList != null && logsList.length > 0) {
+                            generatePDFFile();
+                          } else {
+                            Utility.showSnackBar(
+                                _scaffoldKey, 'No Logs Found', context);
+                          }
+                        }),
+                  ),
+                ],
+              ),
+            ),
+          )),
+        );
+      },
+    );
+  }
+
+  // take screenshot
+  takeScreenshot() async {
+    bool result = await Utility().takeScreenShot(previewContainer);
+    if (result != null && result) {
+      Utility.showSnackBar(
+          _scaffoldKey,
+          Platform.isAndroid
+              ? 'The Report has been downloaded to the Download folder.'
+              : 'The Report has been downloaded to the Files folder.',
+          context);
+    }
   }
 }

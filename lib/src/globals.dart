@@ -262,3 +262,12 @@ final List<String> tempertureList = [
   "105.8",
   "105.9",
 ];
+
+List<String> postionList = [
+  " Ear ",
+  " ForeHead ",
+  " Underarm ",
+  " Mouth ",
+  " Neck ",
+  " Rectum "
+];

@@ -4,8 +4,10 @@ import 'package:mobile_app/src/modules/login/pageview_screen/screen1.dart';
 import 'package:mobile_app/src/modules/login/pageview_screen/screen2.dart';
 import 'package:mobile_app/src/modules/login/pageview_screen/screen3.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/modules/login/pageview_screen/screen4.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroPage extends StatefulWidget {
   @override
@@ -19,6 +21,7 @@ class IntroPageState extends State<IntroPage> {
     Screen1(),
     Screen2(),
     Screen3(),
+    Screen4()
   ];
 
   @override
@@ -54,7 +57,7 @@ class IntroPageState extends State<IntroPage> {
         Stack(
           alignment: AlignmentDirectional.topStart,
           children: <Widget>[
-            currentPageValue == 2
+            currentPageValue == 3
                 ? Container(
                     margin: EdgeInsets.only(bottom: 50),
                     child: getStartedButton())
@@ -82,8 +85,7 @@ class IntroPageState extends State<IntroPage> {
   Widget getStartedButton() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        navigateToScreen();
       },
       child: Container(
         width: double.infinity,
@@ -159,5 +161,14 @@ class IntroPageState extends State<IntroPage> {
   void getChangedPageAndMoveBar(int page) {
     currentPageValue = page;
     setState(() {});
+  }
+
+  // navigate to screen
+  navigateToScreen() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setBool("INTRODUCTION_WATCHED", true);
+
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 }
