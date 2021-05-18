@@ -269,13 +269,13 @@ class _SettingPageState extends State<SettingPage> {
                     children: [
                       InkWell(
                         onTap: () async {
-                          String path =  await Navigator.push(
+                          String path = await Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => UpdateProfielPage()));
 
                           if (path != null && path.isNotEmpty) {
-                             _image=
+                            //  _image=
                           }
                           setState(() {});
                         },
