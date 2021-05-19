@@ -22,7 +22,7 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
     Tab(text: 'Day'),
     Tab(text: 'Week'),
     Tab(text: 'Month'),
-    Tab(text: 'Custom'),
+    Tab(text: 'All'),
   ];
   int selectedTabIndex = 0;
 

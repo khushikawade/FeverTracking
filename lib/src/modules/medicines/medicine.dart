@@ -148,7 +148,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
     //       )
     //     : Center(
     //         child: Text(
-    //           'No Logs Found!!',
+    //           '',
     //           style: TextStyle(
     //               fontWeight: FontWeight.w600,
     //               color: AppTheme.textColor1,

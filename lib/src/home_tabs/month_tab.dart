@@ -35,9 +35,11 @@ class _MonthTab extends State<MonthTab> {
   getList() async {
     newLogsList.clear();
     logsList.clear();
-    setState(() {
-      isLoading = true;
-    });
+    if (mounted) {
+      setState(() {
+        isLoading = true;
+      });
+    }
     var now = new DateTime.now();
 
     var now_1m = new DateTime(now.year, now.month - 1, now.day);
@@ -57,13 +59,17 @@ class _MonthTab extends State<MonthTab> {
       seriesList = _createSampleData(newLogsList);
       seriesListSecond = _createSampleDataSecond(newLogsList);
 
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     } else {
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -150,7 +156,8 @@ class _MonthTab extends State<MonthTab> {
             ? graphWidget()
             : Center(
                 child: Text(
-                  'No Logs Found!! \n Create your first report using below button.',
+                  'Create your first report using below button.',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: AppTheme.textColor1,

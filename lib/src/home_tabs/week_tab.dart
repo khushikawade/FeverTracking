@@ -35,9 +35,11 @@ class _WeekTab extends State<WeekTab> {
   getList() async {
     newLogsList.clear();
     logsList.clear();
-    setState(() {
-      isLoading = true;
-    });
+    if (mounted) {
+      setState(() {
+        isLoading = true;
+      });
+    }
     var now = new DateTime.now();
     var now_1w = now.subtract(Duration(days: 6));
 
@@ -56,13 +58,17 @@ class _WeekTab extends State<WeekTab> {
       seriesList = _createSampleData(newLogsList);
       seriesListSecond = _createSampleDataSecond(newLogsList);
 
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     } else {
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -149,7 +155,8 @@ class _WeekTab extends State<WeekTab> {
             ? graphWidget()
             : Center(
                 child: Text(
-                  'No Logs Found!! \n Create your first report using below button.',
+                  'Create your first report using below button.',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: AppTheme.textColor1,
