@@ -115,12 +115,12 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
         _genderRadioBtnVal,
         _image != null
             ? _image.path.split('/').last
-            : globals.userObj != null
+            : globals.userObj != null && globals.userObj.length > 0
                 ? globals.userObj[0].imageName
                 : null,
         _image != null
             ? _image.path
-            : globals.userObj != null
+            : globals.userObj != null && globals.userObj.length > 0
                 ? globals.userObj[0].path
                 : null);
     _isprofileUpdate(item);
@@ -169,7 +169,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
 
     _genderRadioBtnVal = globals.userObj != null && globals.userObj.length > 0
         ? globals.userObj[0].gender.toString()
-        : '';
+        : 'Male';
   }
 
   @override
