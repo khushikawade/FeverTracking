@@ -36,7 +36,6 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   getUserDetail() async {
-    // final log = SymptomsModel("vomatining");
     var userData = await DbServices().getListData(Strings.updateProile);
 
     globals.userObj = userData;
@@ -260,8 +259,6 @@ class _SettingPageState extends State<SettingPage> {
                             ? new FileImage(File(_image))
                             : ExactAssetImage('assets/images/profileimage.png'),
                       )),
-                  // : Image.asset('assets/images/profileimage.png'),
-                  // )),
                 ]),
             Container(
               padding: EdgeInsets.all(20),
@@ -334,7 +331,7 @@ class _SettingPageState extends State<SettingPage> {
                     child: CupertinoSegmentedControl(
                       padding: EdgeInsets.symmetric(horizontal: 0.0),
                       children: {
-                        1: Container(
+                        0: Container(
                           alignment: Alignment.center,
                           color: _selectedIndexValue == 0
                               ? Colors.blue
@@ -376,7 +373,7 @@ class _SettingPageState extends State<SettingPage> {
                             ],
                           ),
                         ),
-                        2: Container(
+                        1: Container(
                           alignment: Alignment.center,
                           color: _selectedIndexValue == 1
                               ? Colors.blue

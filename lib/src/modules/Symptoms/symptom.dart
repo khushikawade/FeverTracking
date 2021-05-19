@@ -135,24 +135,6 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
           } else
             return Scaffold();
         });
-    // return logsList != null && logsList.length > 0
-    //     ? ListView.builder(
-    //         padding: EdgeInsets.only(top: 10),
-    //         itemCount: logsList.length,
-    //         itemBuilder: (BuildContext context, int index) {
-    //           return itemWidget(index, logsList);
-    //         },
-    //       )
-    //     : Center(
-    //         child: Text(
-    //           'No Logs Found!!',
-    //           style: TextStyle(
-    //               fontWeight: FontWeight.w600,
-    //               color: AppTheme.textColor1,
-    //               fontFamily: "SF UI Display Regular",
-    //               fontSize: globals.deviceType == 'phone' ? 17 : 25),
-    //         ),
-    //       );
   }
 
   Widget itemWidget1(int index, items) {
@@ -163,13 +145,6 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
           padding: EdgeInsets.all(20),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            // leading: Container(
-            //   child: Icon(
-            //     const IconData(0xe814, fontFamily: 'FeverTrackingIcons'),
-            //     color: AppTheme.iconsColor,
-            //     size: 45,
-            //   ),
-            // ),
             Container(
               child: Text(
                 items[index].symptomName != null &&
@@ -195,12 +170,6 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
                               sysmptomsItem: items[index].symptomName)));
 
                   setState(() {});
-
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => DetailScreen(todo: todos[index]),
-                  //   ),
                 }
               },
               child: Container(
@@ -211,23 +180,16 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
                   color: Colors.black54,
                   size: 24,
                 ),
-
-                // Icon(
-                //   Icons.edit_rounded,
-                //   // color: AppTheme.tralingIconColor,
-                //   color: Colors.black,
-                //   size: 19,
-                // ),
               ),
             ),
           ]),
         ),
-        // index == (symptoms.length - 1)
-        //     ? Container(
-        //         height: 1,
-        //         color: Color.fromRGBO(0, 0, 0, 0.25),
-        //       )
-        //     : Container()
+        index == (symptoms.length - 1)
+            ? Container(
+                height: 1,
+                color: Color.fromRGBO(0, 0, 0, 0.25),
+              )
+            : Container()
       ]),
     );
   }

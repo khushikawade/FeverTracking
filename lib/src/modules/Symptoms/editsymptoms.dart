@@ -50,15 +50,6 @@ class _EditSymptomsPageState extends State<EditSymptomsPage> {
         Navigator.of(context).pop(1);
       });
     }
-
-    //       //   }
-    // Hive.box('products').putAt(i,product);
-    // await _personBox.then((item) {
-    //   if (!item.isEmpty) {
-    //     print('empty');
-    //     item.putAt(0, SymptomsModel(this.symptomsController.text));
-    //   }
-    // }
   }
 
   String selectedUnit = "";
@@ -66,22 +57,6 @@ class _EditSymptomsPageState extends State<EditSymptomsPage> {
 
   bool fromHomePage;
   var distinctIds;
-
-  // void addLog(SymptomsModel log) async {
-  //   bool isSuccess = await DbServices().addData(log, Strings.createSymptoms);
-
-  //   if (isSuccess != null && isSuccess) {
-  //     Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
-  //     Future.delayed(const Duration(seconds: 1), () {
-  //       Navigator.of(context).pop();
-  //       //   if (widget.fromHomePage != null && widget.fromHomePage) {
-  //       //     Navigator.of(context).pop(1);
-  //       //   } else {
-  //       //     Navigator.of(context).pop(true);
-  //       //   }
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -133,10 +108,6 @@ class _EditSymptomsPageState extends State<EditSymptomsPage> {
 
                   final updateItem = SymptomsModel(item);
                   updateSysmptomsList(widget.index, updateItem);
-                  // addLog(log);
-                } else {
-                  Utility.showSnackBar(
-                      _scaffoldKey, 'Please Update  Field ', context);
                 }
               },
               icon: Icon(
