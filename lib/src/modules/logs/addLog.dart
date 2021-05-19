@@ -544,7 +544,7 @@ class _AddLogPageState extends State<AddLogPage> {
   // make selected medicine item view
   Widget selectedMedicineWidget(medicineItems, index) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+      padding: const EdgeInsets.all(16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,

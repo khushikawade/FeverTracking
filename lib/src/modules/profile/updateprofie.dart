@@ -395,9 +395,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 validator: (val) {
                                   if (val.isEmpty) {
                                     return 'This field is required ';
-                                  } else if (val.length > 0 &&
-                                      val.length < 10 &&
-                                      val.length > 10) {
+                                  } else if (val.length != 10) {
                                     return 'Enter a 10 Digit vaild Number';
                                   }
 
@@ -460,60 +458,77 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 10, left: 20, right: 20, bottom: 0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            // mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Text(
-                                'Gender',
-                                style: new TextStyle(
-                                    fontSize: globals.deviceType == "phone"
-                                        ? 16.0
-                                        : 24),
-                              ),
-                              new Radio<String>(
-                                value: "Male",
-                                groupValue: _genderRadioBtnVal,
-                                onChanged: _handleGenderChange,
-                              ),
-                              new Text(
-                                'Male',
-                                style: new TextStyle(
-                                    fontSize: globals.deviceType == "phone"
-                                        ? 16.0
-                                        : 24),
-                              ),
-                              new Radio<String>(
-                                value: "Female",
-                                groupValue: _genderRadioBtnVal,
-                                onChanged: _handleGenderChange,
-                              ),
-                              new Text(
-                                'Female',
-                                style: new TextStyle(
-                                  fontSize:
-                                      globals.deviceType == "phone" ? 16 : 24,
-                                ),
-                              ),
-                              new Radio<String>(
-                                value: "Other",
-                                groupValue: _genderRadioBtnVal,
-                                onChanged: _handleGenderChange,
-                              ),
-                              new Text(
-                                'Other',
-                                style: new TextStyle(
-                                    fontSize: globals.deviceType == "phone"
-                                        ? 16.0
-                                        : 24),
-                              ),
-                            ],
-                          ),
-                        ),
+
+                        // FormBuilderRadio(
+                        //   decoration:
+                        //       InputDecoration(labelText: 'My chosen language'),
+                        //   attribute: "best_language",
+                        //   leadingInput: true,
+                        //   onChanged: _onChanged,
+                        //   validators: [FormBuilderValidators.required()],
+                        //   options:
+                        //       ["Dart", "Kotlin", "Java", "Swift", "Objective-C"]
+                        //           .map((lang) => FormBuilderFieldOption(
+                        //                 value: lang,
+                        //                 child: Text('$lang'),
+                        //               ))
+                        //           .toList(growable: false),
+                        // ),
+
+                        // Padding(
+                        //   padding: const EdgeInsets.only(
+                        //       top: 10, left: 20, right: 20, bottom: 0),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.start,
+                        //     crossAxisAlignment: CrossAxisAlignment.center,
+                        //     // mainAxisSize: MainAxisSize.max,
+                        //     children: <Widget>[
+                        //       Text(
+                        //         'Gender',
+                        //         style: new TextStyle(
+                        //             fontSize: globals.deviceType == "phone"
+                        //                 ? 16.0
+                        //                 : 24),
+                        //       ),
+                        //       new Radio<String>(
+                        //         value: "Male",
+                        //         groupValue: _genderRadioBtnVal,
+                        //         onChanged: _handleGenderChange,
+                        //       ),
+                        //       new Text(
+                        //         'Male',
+                        //         style: new TextStyle(
+                        //             fontSize: globals.deviceType == "phone"
+                        //                 ? 16.0
+                        //                 : 24),
+                        //       ),
+                        //       new Radio<String>(
+                        //         value: "Female",
+                        //         groupValue: _genderRadioBtnVal,
+                        //         onChanged: _handleGenderChange,
+                        //       ),
+                        //       new Text(
+                        //         'Female',
+                        //         style: new TextStyle(
+                        //           fontSize:
+                        //               globals.deviceType == "phone" ? 16 : 24,
+                        //         ),
+                        //       ),
+                        //       new Radio<String>(
+                        //         value: "Other",
+                        //         groupValue: _genderRadioBtnVal,
+                        //         onChanged: _handleGenderChange,
+                        //       ),
+                        //       new Text(
+                        //         'Other',
+                        //         style: new TextStyle(
+                        //             fontSize: globals.deviceType == "phone"
+                        //                 ? 16.0
+                        //                 : 24),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                         Container(
                           height: 0.7,
                           margin: EdgeInsets.only(left: 20, right: 20),
