@@ -11,6 +11,7 @@ import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
 
 class UpdateProfielPage extends StatefulWidget {
   @override
@@ -246,7 +247,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(47.06),
+                                      Radius.circular(48.06),
                                     ),
                                     boxShadow: [
                                       BoxShadow(
@@ -275,9 +276,10 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                             },
                             child: Container(
                                 padding: const EdgeInsets.only(
-                                    top: 10, left: 0, right: 0, bottom: 20),
+                                    top: 10, left: 10, right: 0, bottom: 20),
                                 child: Text(
                                   'Change Profile',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: AppTheme.titleColor,
                                       letterSpacing: 0,
@@ -308,6 +310,15 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                   left: 20, right: 20, top: 10, bottom: 10),
                               child: TextFormField(
                                 controller: _Namecontroller,
+                                inputFormatters: [
+                                  //Only letters are allowed
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp("[a-zA-Z]+|\s")),
+                                ],
+                                // inputFormatters: <TextInputFormatter>[
+                                // FilteringTextInputFormatter(
+                                //       RegExp(r"[a-zA-Z]+\s")),
+                                // ],
                                 validator: (val) {
                                   if (val.isEmpty) {
                                     return 'This field is required   ';
@@ -346,6 +357,11 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                   left: 20, right: 20, top: 10, bottom: 10),
                               child: TextFormField(
                                 controller: _Adresscontroller,
+                                inputFormatters: [
+                                  //Only letters are allowed
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp("[a-zA-Z0-9]+|\s")),
+                                ],
                                 validator: (val) {
                                   if (val.isEmpty) {
                                     return 'This field is required   ';
@@ -386,6 +402,9 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               child: TextFormField(
                                 controller: _Phonecontroller,
                                 keyboardType: TextInputType.phone,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
                                 validator: (val) {
                                   if (val.isEmpty) {
                                     return 'This field is required ';
@@ -430,6 +449,11 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                     globals.deviceType == 'phone' ? 14.0 : 22,
                               ),
                               keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                //Only letters are allowed
+                                FilteringTextInputFormatter.allow(
+                                    (RegExp("[0-9]"))),
+                              ],
                               onSaved: (val) => age = num.tryParse(val),
                               validator: (val) {
                                 if (val.isEmpty) {
