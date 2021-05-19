@@ -313,7 +313,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 inputFormatters: [
                                   //Only letters are allowed
                                   FilteringTextInputFormatter.allow(
-                                      RegExp("[a-zA-Z]+|\s")),
+                                      RegExp("[a-zA-Z_\\s-]")),
                                 ],
                                 // inputFormatters: <TextInputFormatter>[
                                 // FilteringTextInputFormatter(
@@ -360,7 +360,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 inputFormatters: [
                                   //Only letters are allowed
                                   FilteringTextInputFormatter.allow(
-                                      RegExp("[a-zA-Z0-9]+|\s")),
+                                      RegExp("[a-zA-Z0-9_\\s-]")),
                                 ],
                                 validator: (val) {
                                   if (val.isEmpty) {

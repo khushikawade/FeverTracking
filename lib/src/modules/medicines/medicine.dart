@@ -14,6 +14,10 @@ class MedicinesPage extends StatefulWidget {
 
   MedicinesPage({Key key, this.fromHomePage, this.deleteMedicine = false})
       : super(key: key);
+  // MedicinesPage({
+  //   Key key,
+  //   this.fromHomePage,
+  // }) : super(key: key);
   @override
   _MedicinesPageState createState() => _MedicinesPageState();
 }
@@ -199,7 +203,9 @@ class _MedicinesPageState extends State<MedicinesPage> {
           trailing: iconWidget(index),
           selected: true,
           onTap: () {
-            Navigator.of(context).pop(items[index]);
+            widget.fromHomePage
+                ? print("fromhomepage")
+                : Navigator.of(context).pop(items[index]);
           },
         ),
         index == items.length - 1
