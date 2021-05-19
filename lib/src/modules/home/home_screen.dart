@@ -255,7 +255,7 @@ class HomeScreenState extends State<HomeScreen> {
                       : Padding(
                           padding: const EdgeInsets.only(right: 5),
                           child: IconButton(
-                            onPressed: () async {
+                            onPressed: () {
                               setState(() {
                                 deletemedicine = !deletemedicine;
                               });
