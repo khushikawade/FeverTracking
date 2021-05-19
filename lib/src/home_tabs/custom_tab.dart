@@ -34,9 +34,11 @@ class _CustomTab extends State<CustomTab> {
 
   getList() async {
     logsList.clear();
-    setState(() {
-      isLoading = true;
-    });
+    if (mounted) {
+      setState(() {
+        isLoading = true;
+      });
+    }
 
     logsList = await DbServices().getListData(Strings.hiveLogName);
 
@@ -45,13 +47,17 @@ class _CustomTab extends State<CustomTab> {
       seriesList = _createSampleData(logsList);
       seriesListSecond = _createSampleDataSecond(logsList);
 
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     } else {
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -138,7 +144,8 @@ class _CustomTab extends State<CustomTab> {
             ? graphWidget()
             : Center(
                 child: Text(
-                  'No Logs Found!! \n Create your first report using below button.',
+                  'Create your first report using below button.',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: AppTheme.textColor1,

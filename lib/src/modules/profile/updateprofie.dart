@@ -274,25 +274,19 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               bottomsheet();
                             },
                             child: Container(
-                              padding: const EdgeInsets.only(
-                                  top: 5, left: 10, right: 10, bottom: 20),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 0.0,
-                                ),
-                                color: AppTheme.textColor2,
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                        00.0) //                 <--- border radius here
-                                    ),
-                              ),
-                              child: Icon(
-                                const IconData(0xe800,
-                                    fontFamily: "FeverTrackingIcons"),
-                                // color:AppTheme.iconColor,
-                                size: 24,
-                                color: AppTheme.iconColor,
-                              ),
-                            )),
+                                padding: const EdgeInsets.only(
+                                    top: 10, left: 0, right: 0, bottom: 20),
+                                child: Text(
+                                  'Change Profile',
+                                  style: TextStyle(
+                                      color: AppTheme.titleColor,
+                                      letterSpacing: 0,
+                                      fontSize: globals.deviceType == 'phone'
+                                          ? 18
+                                          : 26,
+                                      fontFamily: 'SF UI Display Semibold',
+                                      fontWeight: FontWeight.w600),
+                                ))),
                       ],
                     ),
                   ),
@@ -303,7 +297,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         new Theme(
                             data: new ThemeData(
@@ -458,77 +452,60 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                             ),
                           ),
                         ),
-
-                        // FormBuilderRadio(
-                        //   decoration:
-                        //       InputDecoration(labelText: 'My chosen language'),
-                        //   attribute: "best_language",
-                        //   leadingInput: true,
-                        //   onChanged: _onChanged,
-                        //   validators: [FormBuilderValidators.required()],
-                        //   options:
-                        //       ["Dart", "Kotlin", "Java", "Swift", "Objective-C"]
-                        //           .map((lang) => FormBuilderFieldOption(
-                        //                 value: lang,
-                        //                 child: Text('$lang'),
-                        //               ))
-                        //           .toList(growable: false),
-                        // ),
-
-                        // Padding(
-                        //   padding: const EdgeInsets.only(
-                        //       top: 10, left: 20, right: 20, bottom: 0),
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.start,
-                        //     crossAxisAlignment: CrossAxisAlignment.center,
-                        //     // mainAxisSize: MainAxisSize.max,
-                        //     children: <Widget>[
-                        //       Text(
-                        //         'Gender',
-                        //         style: new TextStyle(
-                        //             fontSize: globals.deviceType == "phone"
-                        //                 ? 16.0
-                        //                 : 24),
-                        //       ),
-                        //       new Radio<String>(
-                        //         value: "Male",
-                        //         groupValue: _genderRadioBtnVal,
-                        //         onChanged: _handleGenderChange,
-                        //       ),
-                        //       new Text(
-                        //         'Male',
-                        //         style: new TextStyle(
-                        //             fontSize: globals.deviceType == "phone"
-                        //                 ? 16.0
-                        //                 : 24),
-                        //       ),
-                        //       new Radio<String>(
-                        //         value: "Female",
-                        //         groupValue: _genderRadioBtnVal,
-                        //         onChanged: _handleGenderChange,
-                        //       ),
-                        //       new Text(
-                        //         'Female',
-                        //         style: new TextStyle(
-                        //           fontSize:
-                        //               globals.deviceType == "phone" ? 16 : 24,
-                        //         ),
-                        //       ),
-                        //       new Radio<String>(
-                        //         value: "Other",
-                        //         groupValue: _genderRadioBtnVal,
-                        //         onChanged: _handleGenderChange,
-                        //       ),
-                        //       new Text(
-                        //         'Other',
-                        //         style: new TextStyle(
-                        //             fontSize: globals.deviceType == "phone"
-                        //                 ? 16.0
-                        //                 : 24),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10, left: 20, right: 20, bottom: 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            // mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              Text(
+                                'Gender',
+                                style: new TextStyle(
+                                    fontSize: globals.deviceType == "phone"
+                                        ? 16.0
+                                        : 24),
+                              ),
+                              new Radio<String>(
+                                value: "Male",
+                                groupValue: _genderRadioBtnVal,
+                                onChanged: _handleGenderChange,
+                              ),
+                              new Text(
+                                'Male',
+                                style: new TextStyle(
+                                    fontSize: globals.deviceType == "phone"
+                                        ? 16.0
+                                        : 24),
+                              ),
+                              new Radio<String>(
+                                value: "Female",
+                                groupValue: _genderRadioBtnVal,
+                                onChanged: _handleGenderChange,
+                              ),
+                              new Text(
+                                'Female',
+                                style: new TextStyle(
+                                  fontSize:
+                                      globals.deviceType == "phone" ? 16 : 24,
+                                ),
+                              ),
+                              new Radio<String>(
+                                value: "Other",
+                                groupValue: _genderRadioBtnVal,
+                                onChanged: _handleGenderChange,
+                              ),
+                              new Text(
+                                'Other',
+                                style: new TextStyle(
+                                    fontSize: globals.deviceType == "phone"
+                                        ? 16.0
+                                        : 24),
+                              ),
+                            ],
+                          ),
+                        ),
                         Container(
                           height: 0.7,
                           margin: EdgeInsets.only(left: 20, right: 20),
@@ -548,9 +525,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(20),
                                     child: new Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              .09,
+                                      padding: const EdgeInsets.all(16),
                                       alignment: Alignment.center,
                                       color: Theme.of(context).primaryColor,
                                       child: new Column(

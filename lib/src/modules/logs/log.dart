@@ -87,7 +87,8 @@ class _LogPageState extends State<LogPage> {
                   )
                 : Center(
                     child: Text(
-                      'No Logs Found!!',
+                      'Create your first report using below button.',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
                           color: AppTheme.textColor1,
@@ -110,7 +111,7 @@ class _LogPageState extends State<LogPage> {
     //       )
     //     : Center(
     //         child: Text(
-    //           'No Logs Found!!',
+    //           '',
     //           style: TextStyle(
     //               fontWeight: FontWeight.w600,
     //               color: AppTheme.textColor1,

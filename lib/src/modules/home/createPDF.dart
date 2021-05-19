@@ -280,6 +280,10 @@ Widget pdfHeader() {
                 style: TextStyle(fontSize: 14, color: _darkColor)),
             Text("Address : ${globals.userObj[0].address}",
                 style: TextStyle(fontSize: 14, color: _darkColor)),
+            Text("Gender : ${globals.userObj[0].gender}",
+                style: TextStyle(fontSize: 14, color: _darkColor)),
+            Text("Age : ${globals.userObj[0].age}",
+                style: TextStyle(fontSize: 14, color: _darkColor)),
             Divider(color: accentColor),
           ]));
 }

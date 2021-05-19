@@ -35,9 +35,11 @@ class _DayTab extends State<DayTab> {
   getList() async {
     newLogsList.clear();
     logsList.clear();
-    setState(() {
-      isLoading = true;
-    });
+    if (mounted) {
+      setState(() {
+        isLoading = true;
+      });
+    }
     var now = new DateTime.now();
 
     logsList = await DbServices().getListData(Strings.hiveLogName);
@@ -56,13 +58,17 @@ class _DayTab extends State<DayTab> {
       seriesList = _createSampleData(newLogsList);
       seriesListSecond = _createSampleDataSecond(newLogsList);
 
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     } else {
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -149,7 +155,7 @@ class _DayTab extends State<DayTab> {
             ? graphWidget()
             : Center(
                 child: Text(
-                  'No Logs Found!! \n Create your first report using below button.',
+                  'Create your first report using below button.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
