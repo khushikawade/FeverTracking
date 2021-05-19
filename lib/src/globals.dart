@@ -275,19 +275,20 @@ List<String> postionList = [
   " Rectum "
 ];
 
-List<CheckBoxModel> checkBoxModelList = [
-  new CheckBoxModel(id: '1', displayId: 'Sweating', checked: false),
-  new CheckBoxModel(id: '2', displayId: 'Chills and Shivering', checked: false),
-  new CheckBoxModel(id: '3', displayId: 'Headache', checked: false),
-  new CheckBoxModel(id: '4', displayId: 'Muscle Aches', checked: false),
-  new CheckBoxModel(id: '5', displayId: 'Loss of Appetite', checked: false),
-  new CheckBoxModel(id: '6', displayId: 'Irritability', checked: false),
-  new CheckBoxModel(id: '7', displayId: 'Dehydration', checked: false),
-  new CheckBoxModel(id: '8', displayId: 'General Weakness', checked: false),
-  new CheckBoxModel(
-      id: '9', displayId: 'Loss of Taste or Smell', checked: false),
-  new CheckBoxModel(id: '10', displayId: 'Cough ', checked: false),
-  new CheckBoxModel(id: '11', displayId: 'Short of Breath ', checked: false),
-  new CheckBoxModel(id: '12', displayId: 'Runny Noise ', checked: false),
-  new CheckBoxModel(id: '13', displayId: 'Sore Throat ', checked: false),
-];
+// List<CheckBoxModel> checkBoxModelList = [
+//   new CheckBoxModel(id: '1', displayId: 'Sweating', checked: false),
+//   new CheckBoxModel(id: '2', displayId: 'Chills and Shivering', checked: false),
+//   new CheckBoxModel(id: '3', displayId: 'Headache', checked: false),
+//   new CheckBoxModel(id: '4', displayId: 'Muscle Aches', checked: false),
+//   new CheckBoxModel(id: '5', displayId: 'Loss of Appetite', checked: false),
+//   new CheckBoxModel(id: '6', displayId: 'Irritability', checked: false),
+//   new CheckBoxModel(id: '7', displayId: 'Dehydration', checked: false),
+//   new CheckBoxModel(id: '8', displayId: 'General Weakness', checked: false),
+//   new CheckBoxModel(
+//       id: '9', displayId: 'Loss of Taste or Smell', checked: false),
+//   new CheckBoxModel(id: '10', displayId: 'Cough ', checked: false),
+//   new CheckBoxModel(id: '11', displayId: 'Short of Breath ', checked: false),
+//   new CheckBoxModel(id: '12', displayId: 'Runny Noise ', checked: false),
+//   new CheckBoxModel(id: '13', displayId: 'Sore Throat ', checked: false),
+// ];
+

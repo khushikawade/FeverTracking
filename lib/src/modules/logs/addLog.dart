@@ -13,6 +13,22 @@ import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
 
+List<CheckBoxModel> checkBoxModelList = [
+  new CheckBoxModel(displayId: 'Sweating', checked: false),
+  new CheckBoxModel(displayId: 'Chills and Shivering', checked: false),
+  new CheckBoxModel(displayId: 'Headache', checked: false),
+  new CheckBoxModel(displayId: 'Muscle Aches', checked: false),
+  new CheckBoxModel(displayId: 'Loss of Appetite', checked: false),
+  new CheckBoxModel(displayId: 'Irritability', checked: false),
+  new CheckBoxModel(displayId: 'Dehydration', checked: false),
+  new CheckBoxModel(displayId: 'General Weakness', checked: false),
+  new CheckBoxModel(displayId: 'Loss of Taste or Smell', checked: false),
+  new CheckBoxModel(displayId: 'Cough ', checked: false),
+  new CheckBoxModel(displayId: 'Short of Breath ', checked: false),
+  new CheckBoxModel(displayId: 'Runny Noise ', checked: false),
+  new CheckBoxModel(displayId: 'Sore Throat ', checked: false),
+];
+
 class AddLogPage extends StatefulWidget {
   bool fromHomePage;
 
@@ -71,25 +87,32 @@ class _AddLogPageState extends State<AddLogPage> {
 
   getsymptomsDetail() async {
     var symptomsData = await DbServices().getListData(Strings.createSymptoms);
+    bool isunique = true;
 
-    globals.symptomsListobj = symptomsData;
+    print("Sysmtoms data");
+    if (symptomsData != null) {
+      for (int i = 0; i < symptomsData.length; i++) {
+        for (int j = 0; j < checkBoxModelList.length; j++) {
+          if (checkBoxModelList[j].displayId == symptomsData[i].symptomName) {
+            isunique = false;
 
-    // _image = globals.symptomsListobj != null && globals.symptomsListobj.length > 0
-    //     ? globals.symptomsListobj[0].symptomName
-    //     : null;
+            break;
+          }
+        }
+        if (isunique) {
+          print("isunique");
 
-    // setState(() {});
-    mapListData();
-  }
-
-  mapListData() {
-    if (globals.symptomsListobj != null && globals.symptomsListobj > 0) {
-      for (int i = 0; i < globals.checkBoxModelList.length; i++) {
-        // if( globals.checkBoxModelList[i].displayId  )
-        // {
-
-        // }
+          var item = CheckBoxModel(
+              displayId: '${symptomsData[i].symptomName}', checked: false);
+          checkBoxModelList.add(item);
+          // globals.checkBoxModelList.add(CheckBoxModel(
+          //     displayId:
+          //         '${globals.symptomsListobj[globals.symptomsListobj.length + i]}',
+          //     checked: false));
+        }
+        print(checkBoxModelList.length);
       }
+      print(symptomsData.length);
     }
   }
 
@@ -717,7 +740,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: globals.checkBoxModelList.map<Widget>(
+                  children: checkBoxModelList.map<Widget>(
                     (data) {
                       return Container(
                         child: Column(
@@ -762,9 +785,9 @@ class _AddLogPageState extends State<AddLogPage> {
   }
 
   void _closeModal(void value) {
-    for (int i = 0; i < globals.checkBoxModelList.length; i++) {
-      if (globals.checkBoxModelList[i].checked) {
-        globals.checkBoxModelList[i].checked = false;
+    for (int i = 0; i < checkBoxModelList.length; i++) {
+      if (checkBoxModelList[i].checked) {
+        checkBoxModelList[i].checked = false;
       }
     }
     setState(() {

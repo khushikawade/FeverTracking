@@ -38,7 +38,7 @@ class _SettingPageState extends State<SettingPage> {
   getUserDetail() async {
     var userData = await DbServices().getListData(Strings.updateProile);
 
-    globals.symptomsList = userData;
+    globals.userObj = userData;
 
     _image = globals.userObj != null && globals.userObj.length > 0
         ? globals.userObj[0].path
