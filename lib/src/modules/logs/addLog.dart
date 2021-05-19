@@ -1,5 +1,6 @@
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/modules/logs/addnote.dart';
+import 'package:mobile_app/src/modules/logs/model/checkboxmodel.dart';
 import 'package:mobile_app/src/modules/logs/model/logsmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,23 +28,23 @@ class _AddLogPageState extends State<AddLogPage> {
 
   var medicineList = [];
 
-  List<CheckBoxData> checkboxDataList = [
-    new CheckBoxData(id: '1', displayId: 'Sweating', checked: false),
-    new CheckBoxData(
-        id: '2', displayId: 'Chills and Shivering', checked: false),
-    new CheckBoxData(id: '3', displayId: 'Headache', checked: false),
-    new CheckBoxData(id: '4', displayId: 'Muscle Aches', checked: false),
-    new CheckBoxData(id: '5', displayId: 'Loss of Appetite', checked: false),
-    new CheckBoxData(id: '6', displayId: 'Irritability', checked: false),
-    new CheckBoxData(id: '7', displayId: 'Dehydration', checked: false),
-    new CheckBoxData(id: '8', displayId: 'General Weakness', checked: false),
-    new CheckBoxData(
-        id: '9', displayId: 'Loss of Taste or Smell', checked: false),
-    new CheckBoxData(id: '10', displayId: 'Cough ', checked: false),
-    new CheckBoxData(id: '11', displayId: 'Short of Breath ', checked: false),
-    new CheckBoxData(id: '12', displayId: 'Runny Noise ', checked: false),
-    new CheckBoxData(id: '13', displayId: 'Sore Throat ', checked: false),
-  ];
+  // List<CheckBoxModel> checkBoxModelList = [
+  //   new CheckBoxModel(id: '1', displayId: 'Sweating', checked: false),
+  //   new CheckBoxModel(
+  //       id: '2', displayId: 'Chills and Shivering', checked: false),
+  //   new CheckBoxModel(id: '3', displayId: 'Headache', checked: false),
+  //   new CheckBoxModel(id: '4', displayId: 'Muscle Aches', checked: false),
+  //   new CheckBoxModel(id: '5', displayId: 'Loss of Appetite', checked: false),
+  //   new CheckBoxModel(id: '6', displayId: 'Irritability', checked: false),
+  //   new CheckBoxModel(id: '7', displayId: 'Dehydration', checked: false),
+  //   new CheckBoxModel(id: '8', displayId: 'General Weakness', checked: false),
+  //   new CheckBoxModel(
+  //       id: '9', displayId: 'Loss of Taste or Smell', checked: false),
+  //   new CheckBoxModel(id: '10', displayId: 'Cough ', checked: false),
+  //   new CheckBoxModel(id: '11', displayId: 'Short of Breath ', checked: false),
+  //   new CheckBoxModel(id: '12', displayId: 'Runny Noise ', checked: false),
+  //   new CheckBoxModel(id: '13', displayId: 'Sore Throat ', checked: false),
+  // ];
 
   var distinctIds;
   DateTime dateTime = DateTime.now();
@@ -68,11 +69,36 @@ class _AddLogPageState extends State<AddLogPage> {
     }
   }
 
+  getsymptomsDetail() async {
+    var symptomsData = await DbServices().getListData(Strings.createSymptoms);
+
+    globals.symptomsListobj = symptomsData;
+
+    // _image = globals.symptomsListobj != null && globals.symptomsListobj.length > 0
+    //     ? globals.symptomsListobj[0].symptomName
+    //     : null;
+
+    // setState(() {});
+    mapListData();
+  }
+
+  mapListData() {
+    if (globals.symptomsListobj != null && globals.symptomsListobj > 0) {
+      for (int i = 0; i < globals.checkBoxModelList.length; i++) {
+        // if( globals.checkBoxModelList[i].displayId  )
+        // {
+
+        // }
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     postion = globals.postionList[3];
     temp = globals.tempertureList[0];
+    getsymptomsDetail();
   }
 
   getList() async {
@@ -691,7 +717,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: checkboxDataList.map<Widget>(
+                  children: globals.checkBoxModelList.map<Widget>(
                     (data) {
                       return Container(
                         child: Column(
@@ -736,9 +762,9 @@ class _AddLogPageState extends State<AddLogPage> {
   }
 
   void _closeModal(void value) {
-    for (int i = 0; i < checkboxDataList.length; i++) {
-      if (checkboxDataList[i].checked) {
-        checkboxDataList[i].checked = false;
+    for (int i = 0; i < globals.checkBoxModelList.length; i++) {
+      if (globals.checkBoxModelList[i].checked) {
+        globals.checkBoxModelList[i].checked = false;
       }
     }
     setState(() {
@@ -748,28 +774,4 @@ class _AddLogPageState extends State<AddLogPage> {
       sypmtomsTempList = [];
     });
   }
-}
-
-class CheckBoxData {
-  String id;
-  String displayId;
-  bool checked;
-
-  CheckBoxData({
-    this.id,
-    this.displayId,
-    this.checked,
-  });
-
-  factory CheckBoxData.fromJson(Map<String, dynamic> json) => CheckBoxData(
-        id: json["id"] == null ? null : json["id"],
-        displayId: json["displayId"] == null ? null : json["displayId"],
-        checked: json["checked"] == null ? null : json["checked"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "displayId": displayId == null ? null : displayId,
-        "checked": checked == null ? null : checked,
-      };
 }
