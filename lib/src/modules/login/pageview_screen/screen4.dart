@@ -31,7 +31,7 @@ class Screen4State extends State<Screen4> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/images/data_security.jpeg',
+          'assets/images/undraw_Safe_re_kiil.png',
         ),
         SizedBox(
           height: 25,
@@ -50,7 +50,7 @@ class Screen4State extends State<Screen4> {
           height: 16,
         ),
         Text(
-          'This app does not use any server for storing users data, so data is secured at users end.',
+          "FeverTracking app doesn't communicate with any server, so your details are fully secured in your phone.",
           textAlign: TextAlign.center,
           style: TextStyle(
               color: AppTheme.contentColor2,
