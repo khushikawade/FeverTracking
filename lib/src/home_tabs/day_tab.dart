@@ -35,11 +35,11 @@ class _DayTab extends State<DayTab> {
   getList() async {
     newLogsList.clear();
     logsList.clear();
-    if (mounted) {
-      setState(() {
-        isLoading = true;
-      });
-    }
+
+    setState(() {
+      isLoading = true;
+    });
+
     var now = new DateTime.now();
 
     logsList = await DbServices().getListData(Strings.hiveLogName);
@@ -58,17 +58,13 @@ class _DayTab extends State<DayTab> {
       seriesList = _createSampleData(newLogsList);
       seriesListSecond = _createSampleDataSecond(newLogsList);
 
-      if (mounted) {
-        setState(() {
-          isLoading = false;
-        });
-      }
+      setState(() {
+        isLoading = false;
+      });
     } else {
-      if (mounted) {
-        setState(() {
-          isLoading = false;
-        });
-      }
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
