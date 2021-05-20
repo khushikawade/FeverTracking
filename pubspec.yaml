@@ -42,6 +42,7 @@ dependencies:
   intl_phone_number_input: ^0.7.0+2
   regexpattern: ^1.0.0
   image_picker: ^0.7.5
+  
 
 
 
