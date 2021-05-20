@@ -56,9 +56,6 @@ class HomeScreenState extends State<HomeScreen> {
 
   // DateTime getCurrentdate = DateTime.now();
   getdate(int index) {
-    final DateFormat formatter = DateFormat.yMMMMd('en_US');
-
-    // currentDate = DateTime.now();
     if (index == 1) {
       pervious7days = new DateTime(
           currentDate.year, currentDate.month, currentDate.day - 6);
