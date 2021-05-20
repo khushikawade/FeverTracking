@@ -250,7 +250,12 @@ class _CustomTab extends State<CustomTab> {
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height / 3,
                   width: double.infinity,
-                  child: TemperatureGraph(seriesList: seriesList),
+                  child: seriesList != null && seriesList.length > 0
+                      ? TemperatureGraph(seriesList: seriesList)
+                      : Container(
+                          width: 0,
+                          height: 0,
+                        ),
                 ),
               ),
               Row(
@@ -279,7 +284,12 @@ class _CustomTab extends State<CustomTab> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 3,
                 width: double.infinity,
-                child: HeartGraphClass(seriesList: seriesListSecond),
+                child: seriesListSecond != null && seriesListSecond.length > 0
+                    ? HeartGraphClass(seriesList: seriesListSecond)
+                    : Container(
+                        height: 0,
+                        width: 0,
+                      ),
               ),
             ],
           ),

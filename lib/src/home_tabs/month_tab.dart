@@ -28,7 +28,7 @@ class _MonthTab extends State<MonthTab> {
   @override
   void initState() {
     super.initState();
-    print('Init Callled -------------------------');
+    // print('Init Callled -------------------------');
     getList();
   }
 
@@ -262,7 +262,12 @@ class _MonthTab extends State<MonthTab> {
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height / 3,
                   width: double.infinity,
-                  child: TemperatureGraph(seriesList: seriesList),
+                  child: seriesList != null && seriesList.length > 0
+                      ? TemperatureGraph(seriesList: seriesList)
+                      : Container(
+                          width: 0,
+                          height: 0,
+                        ),
                 ),
               ),
               Row(
@@ -291,7 +296,12 @@ class _MonthTab extends State<MonthTab> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 3,
                 width: double.infinity,
-                child: HeartGraphClass(seriesList: seriesListSecond),
+                child: seriesListSecond != null && seriesListSecond.length > 0
+                    ? HeartGraphClass(seriesList: seriesListSecond)
+                    : Container(
+                        width: 0,
+                        height: 0,
+                      ),
               ),
             ],
           ),
