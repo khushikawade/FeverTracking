@@ -68,6 +68,7 @@ class _AddLogPageState extends State<AddLogPage> {
   String postion = "";
   String temp = "";
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  List<CheckBoxModel> completeSymptomsList = new List();
 
   // DATABASE CODE
   void addLog(LogsModel log) async {
@@ -86,34 +87,61 @@ class _AddLogPageState extends State<AddLogPage> {
   }
 
   getsymptomsDetail() async {
+    List<CheckBoxModel> itemList = new List();
     var symptomsData = await DbServices().getListData(Strings.createSymptoms);
-    bool isunique = true;
 
-    print("Sysmtoms data");
-    if (symptomsData != null) {
+    if (symptomsData != null && symptomsData.length > 0) {
       for (int i = 0; i < symptomsData.length; i++) {
-        for (int j = 0; j < checkBoxModelList.length; j++) {
-          if (checkBoxModelList[j].displayId == symptomsData[i].symptomName) {
-            isunique = false;
+        var item = CheckBoxModel(
+            displayId: '${symptomsData[i].symptomName}', checked: false);
 
-            break;
-          }
-        }
-        if (isunique) {
-          print("isunique");
-
-          var item = CheckBoxModel(
-              displayId: '${symptomsData[i].symptomName}', checked: false);
-          checkBoxModelList.add(item);
-          // globals.checkBoxModelList.add(CheckBoxModel(
-          //     displayId:
-          //         '${globals.symptomsListobj[globals.symptomsListobj.length + i]}',
-          //     checked: false));
-        }
-        print(checkBoxModelList.length);
+        itemList.add(item);
+        // if (itemList != null && itemList.length > 0) {
+        //   for (int j = 0; j < itemList.length; j++) {
+        //     if (itemList[j].displayId != symptomsData[i].symptomName) {
+        //       print('---------------------------------------');
+        //       itemList.add(item);
+        //     }
+        //   }
+        // } else {
+        //   itemList.add(item);
+        // }
       }
-      print(symptomsData.length);
+
+      completeSymptomsList = checkBoxModelList + itemList;
     }
+    // bool isunique = true;
+
+    // print("Sysmtoms data");
+    // if (symptomsData != null) {
+    //   for (int i = 0; i < symptomsData.length; i++) {
+    //     for (int j = 0; j < checkBoxModelList.length; j++) {
+    //       if (checkBoxModelList[j].displayId == symptomsData[i].symptomName) {
+    //         print("Systoms Name : ${checkBoxModelList[j].displayId}");
+    //         print("Systoms Name -------- : ${symptomsData[i].symptomName}");
+    //         isunique = false;
+
+    //         break;
+    //       } else {
+    //         print("------------------------------------");
+    //         isunique = false;
+    //       }
+    //     }
+    //     if (isunique) {
+    //       print("isunique");
+
+    //       var item = CheckBoxModel(
+    //           displayId: '${symptomsData[i].symptomName}', checked: false);
+    //       checkBoxModelList.add(item);
+    //       // globals.checkBoxModelList.add(CheckBoxModel(
+    //       //     displayId:
+    //       //         '${globals.symptomsListobj[globals.symptomsListobj.length + i]}',
+    //       //     checked: false));
+    //     }
+    //     print(checkBoxModelList.length);
+    //   }
+    //   print(symptomsData.length);
+    // }
   }
 
   @override
@@ -740,7 +768,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: checkBoxModelList.map<Widget>(
+                  children: completeSymptomsList.map<Widget>(
                     (data) {
                       return Container(
                         child: Column(
@@ -785,9 +813,9 @@ class _AddLogPageState extends State<AddLogPage> {
   }
 
   void _closeModal(void value) {
-    for (int i = 0; i < checkBoxModelList.length; i++) {
-      if (checkBoxModelList[i].checked) {
-        checkBoxModelList[i].checked = false;
+    for (int i = 0; i < completeSymptomsList.length; i++) {
+      if (completeSymptomsList[i].checked) {
+        completeSymptomsList[i].checked = false;
       }
     }
     setState(() {
