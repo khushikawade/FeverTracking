@@ -3,6 +3,8 @@ import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/modules/profile/updateprofie.dart';
+import 'package:mobile_app/src/widgets/registration_success_dialog.dart';
 import 'package:mobile_app/src/widgets/user_temp_grap.dart';
 import 'package:mobile_app/src/modules/home/createPDF.dart';
 
@@ -354,6 +356,32 @@ class HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  getUserDetail() async {
+    var userData = await DbServices().getListData(Strings.updateProile);
+
+    globals.userObj = userData;
+
+    setState(() {});
+  }
+
+  // show success dialog
+  void showSuccessDialog(BuildContext context) async {
+    bool result = await showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return RegistrationSuccessDialog();
+        });
+    if (result != null && result) {
+      bool isValue = await Navigator.push(context,
+          MaterialPageRoute(builder: (context) => UpdateProfielPage()));
+
+      if (isValue != null && isValue) {
+        getUserDetail();
+      }
+    }
+  }
+
   // generate Pdf File
   generatePDFFile() async {
     var columns = [
@@ -429,7 +457,8 @@ class HomeScreenState extends State<HomeScreen> {
         Utility.showSnackBar(_scaffoldKey, 'No Logs Found', context);
       }
     } else {
-      Utility.showSnackBar(_scaffoldKey, 'Please Update Your Profile', context);
+      showSuccessDialog(context);
+      //Utility.showSnackBar(_scaffoldKey, 'Please Update Your Profile', context);
     }
   }
 

@@ -280,16 +280,13 @@ class _SettingPageState extends State<SettingPage> {
                       ),
                       IconButton(
                         onPressed: () async {
-                          String path = await Navigator.push(
+                          bool result = await Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => UpdateProfielPage()));
 
-                          if (path != null && path.isNotEmpty) {
+                          if (result != null && result) {
                             getUserDetail();
-                            // globals.userObj[0].path = path;
-
-                            // _image = globals.userObj[0].path;
                           }
                         },
                         icon: Icon(

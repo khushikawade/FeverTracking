@@ -66,7 +66,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
 
       Utility.showSnackBar(_scaffold, 'Data Added Successfully', context);
       Future.delayed(const Duration(seconds: 1), () {
-        Navigator.of(context).pop(log.path);
+        Navigator.of(context).pop(true);
       });
     }
   }
@@ -193,7 +193,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
           ),
           leading: InkWell(
             onTap: () {
-              Navigator.pop(context, "pop");
+              Navigator.of(context).pop(false);
             },
             child: Icon(
               Icons.close,
