@@ -34,11 +34,10 @@ class _CustomTab extends State<CustomTab> {
 
   getList() async {
     logsList.clear();
-    if (mounted) {
-      setState(() {
-        isLoading = true;
-      });
-    }
+
+    setState(() {
+      isLoading = true;
+    });
 
     logsList = await DbServices().getListData(Strings.hiveLogName);
 
@@ -47,17 +46,13 @@ class _CustomTab extends State<CustomTab> {
       seriesList = _createSampleData(logsList);
       seriesListSecond = _createSampleDataSecond(logsList);
 
-      if (mounted) {
-        setState(() {
-          isLoading = false;
-        });
-      }
+      setState(() {
+        isLoading = false;
+      });
     } else {
-      if (mounted) {
-        setState(() {
-          isLoading = false;
-        });
-      }
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 

@@ -109,6 +109,8 @@ class _AddLogPageState extends State<AddLogPage> {
       }
 
       completeSymptomsList = checkBoxModelList + itemList;
+    } else {
+      completeSymptomsList = checkBoxModelList;
     }
     // bool isunique = true;
 
