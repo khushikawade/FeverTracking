@@ -35,11 +35,11 @@ class _WeekTab extends State<WeekTab> {
   getList() async {
     newLogsList.clear();
     logsList.clear();
-
-    setState(() {
-      isLoading = true;
-    });
-
+    if (mounted) {
+      setState(() {
+        isLoading = true;
+      });
+    }
     var now = new DateTime.now();
     var now_1w = now.subtract(Duration(days: 6));
 
@@ -60,14 +60,17 @@ class _WeekTab extends State<WeekTab> {
 
       print("Length : ${seriesList.length}");
       print("Length : ${seriesListSecond.length}");
-
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     } else {
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 

@@ -39,6 +39,8 @@ class HomeScreenState extends State<HomeScreen> {
   DateTime selectedDate;
   DateTime pervious7days;
   DateTime pervious30days;
+  bool dayIndex = false;
+  bool monthIndex = false;
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   static GlobalKey previewContainer = new GlobalKey();
@@ -62,14 +64,21 @@ class HomeScreenState extends State<HomeScreen> {
       pervious7days = new DateTime(
           currentDate.year, currentDate.month, currentDate.day - 6);
       pervious30days = null;
+      monthIndex = false;
     } else if (index == 2) {
       pervious30days = new DateTime(
           currentDate.year, currentDate.month - 1, currentDate.day + 1);
       pervious7days = null;
+      monthIndex = false;
     } else if (index == 0) {
       currentDate = DateTime.now();
       pervious7days = null;
       pervious30days = null;
+      monthIndex = false;
+    } else if (index == 3) {
+      monthIndex = true;
+      pervious30days = null;
+      pervious7days = null;
     }
 
     // currentDate = formatter.format(now);
@@ -122,7 +131,9 @@ class HomeScreenState extends State<HomeScreen> {
                             ? '${formatter.format(pervious7days)} - ${formatter.format(currentDate)}'
                             : pervious30days != null
                                 ? '${formatter.format(pervious30days)} - ${formatter.format(currentDate)}'
-                                : formatter.format(currentDate),
+                                : monthIndex
+                                    ? " ALL"
+                                    : formatter.format(currentDate),
                         // "$currentDate",
                         textAlign: TextAlign.right,
                         style: TextStyle(
@@ -276,6 +287,7 @@ class HomeScreenState extends State<HomeScreen> {
                 onUpdateWidget: (int index) {
                   if (index != null) {
                     getdate(index);
+                    print(index);
                     setState(() {
                       // selectedDate = DateTime.now();
                     });
@@ -377,6 +389,7 @@ class HomeScreenState extends State<HomeScreen> {
           MaterialPageRoute(builder: (context) => UpdateProfielPage()));
 
       if (isValue != null && isValue) {
+        getLogs();
         getUserDetail();
       }
     }

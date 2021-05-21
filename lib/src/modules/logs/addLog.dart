@@ -111,6 +111,8 @@ class _AddLogPageState extends State<AddLogPage> {
       completeSymptomsList = checkBoxModelList + itemList;
 
       // print(result.toString().substring(result.toString().indexOf('1') + 1));
+    } else {
+      completeSymptomsList = checkBoxModelList;
     }
     // bool isunique = true;
 

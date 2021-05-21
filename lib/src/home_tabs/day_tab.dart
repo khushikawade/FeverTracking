@@ -35,11 +35,11 @@ class _DayTab extends State<DayTab> {
   getList() async {
     newLogsList.clear();
     logsList.clear();
-
-    setState(() {
-      isLoading = true;
-    });
-
+    if (mounted) {
+      setState(() {
+        isLoading = true;
+      });
+    }
     var now = new DateTime.now();
 
     logsList = await DbServices().getListData(Strings.hiveLogName);
@@ -58,13 +58,17 @@ class _DayTab extends State<DayTab> {
       seriesList = _createSampleData(newLogsList);
       seriesListSecond = _createSampleDataSecond(newLogsList);
 
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     } else {
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -77,13 +81,16 @@ class _DayTab extends State<DayTab> {
       for (int i = 0; i < logsList.length; i++) {
         for (int j = 0; j < globals.tempertureList.length; j++) {
           if (globals.tempertureList[j] == logsList[i].temprature) {
-            if (double.parse(logsList[i].temprature) <= 99.5) {
+            if (double.parse(logsList[i].temprature) <= 97.9) {
+              //LOW
               tempraturedata3
                   .add(new TemperatureDataClass(logsList[i].dateTime, j));
-            } else if (double.parse(logsList[i].temprature) <= 102.5) {
+            } else if (double.parse(logsList[i].temprature) <= 99) {
+              //NORMAL
               tempraturedata2
                   .add(new TemperatureDataClass(logsList[i].dateTime, j));
             } else {
+              //HIGH
               tempraturedata1
                   .add(new TemperatureDataClass(logsList[i].dateTime, j));
             }

@@ -82,8 +82,9 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
       SharedPreferences pref = await SharedPreferences.getInstance();
       pref.setBool("ISPROFILE_UPDATED", true);
       Utility.showSnackBar(_scaffold, 'Profile Update Successfully', context);
-      Future.delayed(const Duration(seconds: 1), () {
-        Navigator.of(context).pop(log.path);
+      Future.delayed(const Duration(seconds: 3), () {
+        // Navigator.of(context).pop(log.path);
+        Navigator.of(context).pop(true);
       });
     }
   }
@@ -125,6 +126,14 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                 ? globals.userObj[0].path
                 : null);
     _isprofileUpdate(item);
+
+    // print(item.address);
+    // print(item.imageName);
+    // print(item.name);
+    // print(item.path);
+    // print(item.phonenumber);
+    // print(item.gender);
+    // print(item.age);
   }
 
   void _isprofileUpdate(ProfileModel log) async {
@@ -193,7 +202,12 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
           ),
           leading: InkWell(
             onTap: () {
-              Navigator.of(context).pop(false);
+              Future.delayed(
+                Duration.zero,
+                () {
+                  Navigator.of(context).pop(false);
+                },
+              );
             },
             child: Icon(
               Icons.close,
