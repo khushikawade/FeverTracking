@@ -18,16 +18,16 @@ class SymptomsListPage extends StatefulWidget {
 }
 
 class _SymptomsListPageState extends State<SymptomsListPage> {
-  List<String> symptoms = [
-    "Sweating",
-    "Chills and Shivering",
-    "Sore Throat",
-    // "Loss of Taste or Smell",
-    // "Sweating",
-    // "Chills and Shivering",
-    // "Sore Throat",
-    // "Loss of Taste or Smell",
-  ];
+  // List<String> symptoms = [
+  //   "Sweating",
+  //   "Chills and Shivering",
+  //   "Sore Throat",
+  //   // "Loss of Taste or Smell",
+  //   // "Sweating",
+  //   // "Chills and Shivering",
+  //   // "Sore Throat",
+  //   // "Loss of Taste or Smell",
+  // ];
   var logsList;
   getList() async {
     // final log = SymptomsModel("vomatining");
@@ -162,6 +162,7 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
             InkWell(
               onTap: () async {
                 {
+                  print(items.length);
                   var get = await Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -184,7 +185,7 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
             ),
           ]),
         ),
-        index == (symptoms.length - 1)
+        index == (items.length - 1)
             ? Container(
                 height: 1,
                 color: Color.fromRGBO(0, 0, 0, 0.25),

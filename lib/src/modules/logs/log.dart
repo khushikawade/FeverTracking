@@ -5,6 +5,7 @@ import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/logs/addLog.dart';
 import 'package:mobile_app/src/modules/logs/model/logsmodel.dart';
+import 'package:mobile_app/src/modules/logs/sliders/monthslider.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
@@ -25,26 +26,38 @@ class _LogPageState extends State<LogPage> {
   @override
   void initState() {
     super.initState();
+    // getLogs();
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppTheme.screenbackGroundColor,
-        body: RepaintBoundary(key: previewContainer, child: makeWidget()),
+        body: Container(
+          color: Theme.of(context).backgroundColor,
+          child: ListView(children: [
+            makeSliders(),
+            makeWidget(),
+          ]
+              //  makeWidget()
+              ),
+        ),
         floatingActionButton: GestureDetector(
           onTap: () async {
-            bool result = await Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => AddLogPage(
-                          fromHomePage: false,
-                        )));
+            setState(() {});
+            // getLogs();
 
-            if (result != null && result) {
-              widget.onUpdateWidget(true);
-              setState(() {});
-              //getList();
-            }
+            // bool result = await Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) => AddLogPage(
+            //               fromHomePage: false,
+            //             )));
+
+            // if (result != null && result) {
+            //   widget.onUpdateWidget(true);
+            //   setState(() {});
+            //   //getList();
+            // }
           },
           child: Container(
             padding: EdgeInsets.all(15),
@@ -71,20 +84,88 @@ class _LogPageState extends State<LogPage> {
         ));
   }
 
+  Widget makeSliders() {
+    return SizedBox(
+      // width: 200.0,
+      height: 148.0,
+      child: MonthSlider(),
+    );
+  }
+
+  List<LogsModel> listofSelectedDate;
+  // getLogs() async {
+  //   print("getlogs");
+  //   listofSelectedDate = new List();
+  //   var logsList = await DbServices().getListData(Strings.hiveLogName);
+  //   // globals.getdatefromslider !=null ?    globals.getdatefromslider=
+
+  //   if (logsList != null && logsList.length > 0) {
+  //     for (int i = 0; i < logsList.length; i++) {
+  //       // print(logsList[i].dateTime);
+
+  //       String logTemp1 = "${logsList[i].dateTime}".split(' ')[0];
+  //       String logTemp2 = "${globals.getdatefromslider}".split(' ')[0];
+
+  //       if (logTemp1 == logTemp2) {
+  //         // DateTime dateTime = logsList[i].dateTime;
+  //         // String position;
+  //         // String temprature;
+  //         // String symptoms;
+  //         // var addMedinceLog;
+  //         // String addNotehere;
+  //         var item = LogsModel(
+  //             logsList[i].dateTime,
+  //             logsList[i].position,
+  //             logsList[i].temprature,
+  //             logsList[i].symptoms,
+  //             logsList[i].addMedinceLog,
+  //             logsList[i].addNotehere);
+  //         print("inside loop  $logTemp1  $logTemp2");
+  //         listofSelectedDate.add(item);
+
+  //         for (int i = 0; i < listofSelectedDate.length; i++) {
+  //           print("loglistitem");
+  //           print(listofSelectedDate[i].dateTime);
+  //           // var filteredUsers = logsList.values
+  //           //     .where((LogsModel) => LogsModel.dateTime == "")
+  //           //     .toList();
+  //           // print(filteredUsers.length);
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
   // make logs scrren list
   Widget makeWidget() {
     return FutureBuilder(
-        future: DbServices().getListData(Strings.hiveLogName),
+        future: DbServices().getSelectedDateData(Strings.hiveLogName),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return snapshot.data != null && snapshot.data.length > 0
-                ? ListView.builder(
+                ?
+
+                //  listofSelectedDate != null && listofSelectedDate.length > 0
+                //     ?
+
+                ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
                     padding: EdgeInsets.only(top: 10, bottom: 100),
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
                       return itemWidget(index, snapshot.data);
                     },
                   )
+                // : ListView.builder(
+                //     scrollDirection: Axis.vertical,
+                //     shrinkWrap: true,
+                //     padding: EdgeInsets.only(top: 10, bottom: 100),
+                //     itemCount: snapshot.data.length,
+                //     itemBuilder: (BuildContext context, int index) {
+                //       return itemWidget(index, snapshot.data);
+                //     },
+                //   )
                 : Center(
                     child: Text(
                       'Create your first report using below button.',

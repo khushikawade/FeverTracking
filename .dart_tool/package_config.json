@@ -164,6 +164,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "date_picker_timeline",
+      "rootUri": "file:///E:/download/flutter/.pub-cache/hosted/pub.dartlang.org/date_picker_timeline-1.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "date_util",
+      "rootUri": "file:///E:/download/flutter/.pub-cache/hosted/pub.dartlang.org/date_util-0.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "1.20"
+    },
+    {
+      "name": "day_night_time_picker",
+      "rootUri": "file:///E:/download/flutter/.pub-cache/hosted/pub.dartlang.org/day_night_time_picker-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "device_info",
       "rootUri": "file:///E:/download/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.0",
       "packageUri": "lib/",
@@ -240,6 +258,12 @@
       "rootUri": "file:///E:/download/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_xlider",
+      "rootUri": "file:///E:/download/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_xlider-3.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
     },
     {
       "name": "frontend_server_client",
@@ -698,7 +722,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-05-21T05:14:33.584912Z",
+  "generated": "2021-05-26T17:01:15.485912Z",
   "generator": "pub",
   "generatorVersion": "2.12.2"
 }

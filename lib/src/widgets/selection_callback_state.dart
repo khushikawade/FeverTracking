@@ -144,6 +144,7 @@ class _TemperatureGraphState extends State<TemperatureGraph> {
   @override
   void initState() {
     super.initState();
+    print("************************Graph State Calll *************");
     //_createSampleData();
     //getList();
   }
@@ -191,9 +192,10 @@ class _TemperatureGraphState extends State<TemperatureGraph> {
               renderSpec: charts.GridlineRendererSpec(
                 labelStyle: new charts.TextStyleSpec(
                   fontSize: 10,
-                  color: charts.MaterialPalette.white,
+                  color: charts.MaterialPalette.black,
                 ),
               ),
+              tickProviderSpec: charts.DayTickProviderSpec(increments: [1]),
             ),
             animate: false,
             selectionModels: [

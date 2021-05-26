@@ -82,10 +82,10 @@ class _MonthTab extends State<MonthTab> {
       for (int i = 0; i < logsList.length; i++) {
         for (int j = 0; j < globals.tempertureList.length; j++) {
           if (globals.tempertureList[j] == logsList[i].temprature) {
-            if (double.parse(logsList[i].temprature) <= 99.5) {
+            if (double.parse(logsList[i].temprature) <= 97.9) {
               tempraturedata3
                   .add(new TemperatureDataClass(logsList[i].dateTime, j));
-            } else if (double.parse(logsList[i].temprature) <= 102.5) {
+            } else if (double.parse(logsList[i].temprature) <= 99) {
               tempraturedata2
                   .add(new TemperatureDataClass(logsList[i].dateTime, j));
             } else {

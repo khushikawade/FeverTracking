@@ -6,12 +6,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
+import 'package:mobile_app/src/modules/logs/sliders/monthslider.dart';
 import 'package:mobile_app/src/modules/medicines/medicine.dart';
+import 'package:day_night_time_picker/day_night_time_picker.dart';
+import 'package:day_night_time_picker/lib/constants.dart';
 
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
+import 'package:day_night_time_picker/day_night_time_picker.dart';
 
 List<CheckBoxModel> checkBoxModelList = [
   new CheckBoxModel(displayId: 'Sweating', checked: false),
@@ -42,6 +46,8 @@ class _AddLogPageState extends State<AddLogPage> {
   List<String> sypmtomsTempList = [];
   String sypmtoms = '';
 
+  final DateFormat timeformatter = DateFormat('Hms');
+
   var medicineList = [];
 
   // List<CheckBoxModel> checkBoxModelList = [
@@ -62,13 +68,24 @@ class _AddLogPageState extends State<AddLogPage> {
   //   new CheckBoxModel(id: '13', displayId: 'Sore Throat ', checked: false),
   // ];
 
+  DateTime finaldate;
   var distinctIds;
   DateTime dateTime = DateTime.now();
+  String timeString;
   String addNoteText = "";
   String postion = "";
   String temp = "";
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<CheckBoxModel> completeSymptomsList = new List();
+
+  TimeOfDay _time = TimeOfDay.now().replacing(minute: 30);
+  bool iosStyle = true;
+
+  void onTimeChanged(TimeOfDay newTime) {
+    setState(() {
+      _time = newTime;
+    });
+  }
 
   // DATABASE CODE
   void addLog(LogsModel log) async {
@@ -189,11 +206,33 @@ class _AddLogPageState extends State<AddLogPage> {
       },
       use24hFormat: true,
       minimumYear: 2010,
-      maximumDate: DateTime.now(),
+      // maximumDate: DateTime.now(),
+      // maximumDate: 2021,
+      maximumYear: 2021,
       minuteInterval: 1,
       // mode: CupertinoDatePickerMode.dateAndTime,
       mode: CupertinoDatePickerMode.dateAndTime,
     );
+  }
+
+  getcurrentdate() {
+    String dateString;
+    if (globals.getdatefromslider != null) {
+      // dateString = "${globals.getdatefromslider}";
+
+      // String date = dateString.substring(0, dateString.indexOf(' '));
+
+      String date = "${globals.getdatefromslider}".split(' ')[0];
+      var dateAndTimeString = "$date $timeString";
+      print(dateAndTimeString);
+
+      finaldate =
+          new DateFormat("yyyy-MM-dd hh:mm:ss").parse("$dateAndTimeString");
+
+      print("FINALDATE $finaldate");
+    } else {
+      Utility.showSnackBar(_scaffoldKey, 'Please Select Month & Date', context);
+    }
   }
 
   @override
@@ -236,18 +275,20 @@ class _AddLogPageState extends State<AddLogPage> {
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(
               onPressed: () {
-                if ((dateTime != null) &&
+                getcurrentdate();
+                if ((finaldate != null) &&
                     (postion.isNotEmpty) &&
                     (temp.isNotEmpty) &&
                     (sypmtoms.isNotEmpty) &&
                     (medicineList.isNotEmpty)) {
                   final log = LogsModel(
-                      dateTime,
+                      finaldate,
                       postion,
                       temp,
                       sypmtoms,
                       medicineList != null ? medicineList[0] : null,
                       addNoteText);
+
                   addLog(log);
                 } else {
                   Utility.showSnackBar(
@@ -266,6 +307,18 @@ class _AddLogPageState extends State<AddLogPage> {
       body: Container(
         color: Theme.of(context).backgroundColor,
         child: ListView(children: [
+          SizedBox(
+            width: 200.0,
+            height: 205.0,
+            child: MonthSlider(),
+          ),
+          Container(
+            height: 1,
+            // margin: EdgeInsets.only(left: 20),
+            decoration: BoxDecoration(
+              color: AppTheme.dividerColor.withOpacity(0.25),
+            ),
+          ),
           Container(
             padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
             child: ListTile(
@@ -290,7 +343,7 @@ class _AddLogPageState extends State<AddLogPage> {
                                   globals.deviceType == "phone" ? 17 : 25),
                         )
                       : Text(
-                          DateFormat("dd-MM-yyyy HH:mm").format(dateTime),
+                          DateFormat("HH:mm").format(dateTime),
                           style: TextStyle(
                               color: AppTheme.textColor2,
                               fontFamily: "SF UI Display Regular",
@@ -311,9 +364,39 @@ class _AddLogPageState extends State<AddLogPage> {
                 ],
               ),
               selected: true,
+
               onTap: () {
-                bottomSheet(context, datetimePicker());
+                Navigator.of(context).push(
+                  showPicker(
+                    unselectedColor: AppTheme.subHeadingTextColor,
+                    context: context,
+                    value: _time,
+                    onChange: onTimeChanged,
+                    minuteInterval: MinuteInterval.FIVE,
+                    accentColor: Theme.of(context).primaryColor,
+                    disableHour: false,
+                    disableMinute: false,
+                    minMinute: 0,
+                    maxMinute: 59,
+                    // Optional onChange to receive value as DateTime
+                    onChangeDateTime: (DateTime timeNow) {
+                      setState(() {
+                        timeString = timeformatter.format(timeNow);
+                        dateTime = timeNow;
+
+                        // getcurrentdate(dateTimeNow);
+                      });
+
+                      // DateTime time =
+                      //     new DateFormat("hh:mm:ss").parse("$dateTimeNow");
+                      print(timeString);
+                    },
+                  ),
+                );
               },
+              // onTap: () {
+              //   bottomSheet(context, datetimePicker());
+              // },
             ),
           ),
           Container(

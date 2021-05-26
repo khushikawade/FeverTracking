@@ -24,7 +24,14 @@ var provider; // for chat lobby
 var userData;
 var symptomsListobj;
 var link;
+// DateTime todayDateTime = DateTime.now();
+String getdatefromslider;
+// = DateFormat('yyyy-MMMM-dd').format(todayDateTime);
+// String getdatefromslider =
+//     "${todayDateTime.year}-${todayDateTime.month}-${todayDateTime.day}"
+//         .padLeft(2, '0');
 
+//  new DateTime(todayDateTime.year,todayDateTime.month,todayDateTime.day);
 bool alreaySetState = false;
 bool checkSubscription;
 bool checkVerification;
@@ -46,6 +53,8 @@ String deviceType;
 var PharmacyHistory;
 
 String currentRoute = "chatlobby";
+
+int selectedMonthIndex = 0;
 
 void printWrapped(String text) {
   final pattern = new RegExp('.{1,800}'); // 800 is the size of each chunk

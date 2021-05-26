@@ -21,6 +21,8 @@ class DayTab extends StatefulWidget {
 class _DayTab extends State<DayTab> {
   var logsList = [];
   var newLogsList = [];
+
+  var dayHoursList = [];
   List<charts.Series> seriesList;
   List<charts.Series> seriesListSecond;
   bool isLoading = false;
@@ -28,7 +30,7 @@ class _DayTab extends State<DayTab> {
   @override
   void initState() {
     super.initState();
-    // print('Init Callled -------------------------');
+    print('Init Callled --------------day graph-----------');
     getList();
   }
 
@@ -41,7 +43,7 @@ class _DayTab extends State<DayTab> {
       });
     }
     var now = new DateTime.now();
-
+    int counter = 0;
     logsList = await DbServices().getListData(Strings.hiveLogName);
 
     if (logsList != null && logsList.length > 0) {
@@ -50,9 +52,16 @@ class _DayTab extends State<DayTab> {
           if (DateFormat("dd-MM-yyyy").format(logsList[i].dateTime) ==
               DateFormat("dd-MM-yyyy").format(now)) {
             newLogsList.add(logsList[i]);
+
+            // dayHoursList.add(logsList[i]);
+            // dayHoursList[counter] = DateFormat.j().format(newLogsList[counter]);
+            // print(dayHoursList[counter]);
+            // ++counter;
+            print("Length : ${newLogsList[counter].dateTime}");
           }
+          // print("Length : ${newLogsList.length}");
+
         }
-        // print("Length : ${newLogsList.length}");
       }
 
       seriesList = _createSampleData(newLogsList);

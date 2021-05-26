@@ -3,6 +3,8 @@ import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/modules/logs/sliders/monthslider.dart';
+
 import 'package:mobile_app/src/modules/profile/updateprofie.dart';
 import 'package:mobile_app/src/widgets/registration_success_dialog.dart';
 import 'package:mobile_app/src/widgets/user_temp_grap.dart';
@@ -317,6 +319,14 @@ class HomeScreenState extends State<HomeScreen> {
       floatingActionButton: selectedIndex == 0
           ? GestureDetector(
               onTap: () async {
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) =>
+                //             // DatePickerTimeLine(title: "this dateTimePicker")
+
+                //             MonthSlider()));
+
                 int index = await Navigator.push(
                   context,
                   MaterialPageRoute(
