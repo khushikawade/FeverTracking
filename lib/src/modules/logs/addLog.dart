@@ -308,9 +308,15 @@ class _AddLogPageState extends State<AddLogPage> {
         color: Theme.of(context).backgroundColor,
         child: ListView(children: [
           SizedBox(
-            width: 200.0,
-            height: 205.0,
-            child: MonthSlider(),
+            // width: 200.0,
+            height: MediaQuery.of(context).size.height * .22,
+            child: MonthSlider(
+              onUpdateWidget: (bool result) {
+                print(" called ...... ");
+                // setState(() {});
+              },
+              isdefaultcall: true,
+            ),
           ),
           Container(
             height: 1,

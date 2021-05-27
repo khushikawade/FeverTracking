@@ -2,13 +2,18 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile_app/src/modules/logs/log.dart';
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:date_util/date_util.dart';
 
 class DateSlider extends StatefulWidget {
+  Function onUpdateWidget;
+  bool isdefaultcall;
   // final int selectedTabIndex;
-  // DateSlider({Key key, @required this.selectedTabIndex}) : super(key: key);
+  DateSlider(
+      {Key key, @required this.onUpdateWidget, @required this.isdefaultcall})
+      : super(key: key);
   @override
   _DateSliderState createState() => _DateSliderState();
 }
@@ -94,6 +99,7 @@ class _DateSliderState extends State<DateSlider> {
   var currentdate;
   String monthindex;
   int currentmonth;
+  // bool isdefaultcall = true;
 
   DateTime now = new DateTime.now(); // for 5  ->05 format
   void _dateCounter() {
@@ -142,21 +148,22 @@ class _DateSliderState extends State<DateSlider> {
 
   @override
   Widget build(BuildContext context) {
-    // if (globals.selectedMonthIndex == currentmonth ) {
-    //   WidgetsBinding.instance.addPostFrameCallback((_) {
-    //     //write or call your logic
+    if (globals.selectedMonthIndex == currentmonth) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        //write or call your logic
 
-    //     //code will run when widget rendering complete
+        //code will run when widget rendering complete
 
-    //     if (scrollController.hasClients) {
-    //       Timer(
-    //         Duration(seconds: 1),
-    //         () => scrollController
-    //             .jumpTo(scrollController.position.maxScrollExtent),
-    //       );
-    //     }
-    //   });
-    // }
+        if (scrollController.hasClients && widget.isdefaultcall) {
+          Timer(
+            Duration(seconds: 1),
+            () => scrollController
+                .jumpTo(scrollController.position.maxScrollExtent),
+          );
+          widget.isdefaultcall = false;
+        }
+      });
+    }
     return SafeArea(
         child: Scaffold(
             body: Column(children: [
@@ -197,6 +204,8 @@ class _DateSliderState extends State<DateSlider> {
                 });
                 print(
                     "  globals.getdatefromslider          ${globals.getdatefromslider}  ");
+
+                widget.onUpdateWidget(true);
               },
               child: Container(
                 height: 50,
@@ -229,7 +238,7 @@ class _DateSliderState extends State<DateSlider> {
                       ((index + 1)).toString(),
 
                       style: TextStyle(
-                          fontSize: 17,
+                          fontSize: globals.deviceType == 'phone' ? 17 : 25,
                           fontWeight: FontWeight.w500,
                           fontFamily: "SF UI Display Medium",
                           color: currentDateSelectedIndex == index
@@ -245,7 +254,7 @@ class _DateSliderState extends State<DateSlider> {
                           .toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 14,
+                          fontSize: globals.deviceType == 'phone' ? 14 : 22,
                           fontWeight: currentDateSelectedIndex == index
                               ? FontWeight.w500
                               : FontWeight.w400,

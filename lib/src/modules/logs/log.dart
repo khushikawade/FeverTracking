@@ -36,28 +36,29 @@ class _LogPageState extends State<LogPage> {
           color: Theme.of(context).backgroundColor,
           child: ListView(children: [
             makeSliders(),
-            makeWidget(),
-          ]
-              //  makeWidget()
+            Container(
+              height: 1,
+              decoration: BoxDecoration(
+                color: AppTheme.dividerColor.withOpacity(0.25),
               ),
+            ),
+            makeWidget(),
+          ]),
         ),
         floatingActionButton: GestureDetector(
           onTap: () async {
-            setState(() {});
-            // getLogs();
+            bool result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddLogPage(
+                          fromHomePage: false,
+                        )));
 
-            // bool result = await Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => AddLogPage(
-            //               fromHomePage: false,
-            //             )));
-
-            // if (result != null && result) {
-            //   widget.onUpdateWidget(true);
-            //   setState(() {});
-            //   //getList();
-            // }
+            if (result != null && result) {
+              widget.onUpdateWidget(true);
+              setState(() {});
+              //getList();
+            }
           },
           child: Container(
             padding: EdgeInsets.all(15),
@@ -87,8 +88,14 @@ class _LogPageState extends State<LogPage> {
   Widget makeSliders() {
     return SizedBox(
       // width: 200.0,
-      height: 148.0,
-      child: MonthSlider(),
+      height: MediaQuery.of(context).size.height * .22,
+      child: MonthSlider(
+        onUpdateWidget: (bool result) {
+          print(" called ...... ");
+          setState(() {});
+        },
+        isdefaultcall: true,
+      ),
     );
   }
 
@@ -143,12 +150,7 @@ class _LogPageState extends State<LogPage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return snapshot.data != null && snapshot.data.length > 0
-                ?
-
-                //  listofSelectedDate != null && listofSelectedDate.length > 0
-                //     ?
-
-                ListView.builder(
+                ? ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     padding: EdgeInsets.only(top: 10, bottom: 100),
@@ -167,14 +169,17 @@ class _LogPageState extends State<LogPage> {
                 //     },
                 //   )
                 : Center(
-                    child: Text(
-                      'Create your first report using below button.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: AppTheme.textColor1,
-                          fontFamily: "SF UI Display Regular",
-                          fontSize: globals.deviceType == 'phone' ? 17 : 25),
+                    child: Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: Text(
+                        'No Data Found.',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: AppTheme.textColor1,
+                            fontFamily: "SF UI Display Regular",
+                            fontSize: globals.deviceType == 'phone' ? 17 : 25),
+                      ),
                     ),
                   );
           } else if (snapshot.connectionState == ConnectionState.waiting) {
@@ -204,7 +209,7 @@ class _LogPageState extends State<LogPage> {
 
   Widget itemWidget(int index, items) {
     return Container(
-        margin: EdgeInsets.only(left: 16, right: 16, top: 5, bottom: 5),
+        margin: EdgeInsets.only(left: 16, right: 16, top: 6, bottom: 6),
         padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
         decoration: BoxDecoration(
           color: AppTheme.listbackGroundColor,

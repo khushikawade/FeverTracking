@@ -6,6 +6,13 @@ import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/utils/utility.dart';
 
 class MonthSlider extends StatefulWidget {
+  Function onUpdateWidget;
+  bool isdefaultcall;
+  // final int selectedTabIndex;
+  MonthSlider(
+      {Key key, @required this.onUpdateWidget, @required this.isdefaultcall})
+      : super(key: key);
+
   @override
   _MonthSliderState createState() => _MonthSliderState();
 }
@@ -27,6 +34,16 @@ class _MonthSliderState extends State<MonthSlider>
     // print(globals.selectedMonthIndex);
   }
 
+  List<bool> _isDisabled = [false, true];
+  onTap() {
+    if (_isDisabled[tabController.index]) {
+      int index = tabController.previousIndex;
+      setState(() {
+        tabController.index = index;
+      });
+    }
+  }
+
   ScrollController scrollController =
       ScrollController(); //To Track Scroll of ListView
 
@@ -45,26 +62,27 @@ class _MonthSliderState extends State<MonthSlider>
     Tab(text: "December"),
   ];
 
-  List<String> listOfMonths = [
-    "January",
-    "February",
-    "March",
-    "April ",
-    "May ",
-    "June",
-    "July",
-    "August ",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
+  // List<String> listOfMonths = [
+  //   "January",
+  //   "February",
+  //   "March",
+  //   "April ",
+  //   "May ",
+  //   "June",
+  //   "July",
+  //   "August ",
+  //   "September",
+  //   "October",
+  //   "November",
+  //   "December"
+  // ];
   List<String> listOfDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   bool isfutureMonthIndex = false;
   @override
   void initState() {
     super.initState();
     currentIndex();
+    print("month init call");
     tabController = TabController(
       length: listOfMonthsTabs.length,
       vsync: this,
@@ -81,6 +99,7 @@ class _MonthSliderState extends State<MonthSlider>
   }
 
   _handleTabSelection() async {
+    int index = tabController.previousIndex;
     setState(() {
       if ((tabController.index) < isfutureIndex) {
         // currentMonthSelectedIndex = tabController.index;
@@ -90,6 +109,9 @@ class _MonthSliderState extends State<MonthSlider>
         // print("INSIDE THETABBAR LiSNtner  $currentMonthSelectedIndex");
       } else {
         isfutureMonthIndex = true;
+        setState(() {
+          tabController.index = index;
+        });
       }
     });
   }
@@ -156,7 +178,11 @@ class _MonthSliderState extends State<MonthSlider>
                       // final index = DefaultTabController.of(context).index;
                       return selectedMonthlabel != null &&
                               isfutureMonthIndex == false
-                          ? DateSlider()
+                          ? DateSlider(
+                              onUpdateWidget: (bool result) {
+                                widget.onUpdateWidget(result);
+                              },
+                              isdefaultcall: widget.isdefaultcall)
                           : Container(
                               child: Center(
                                 child: Text(""),

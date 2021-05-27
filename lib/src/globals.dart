@@ -40,6 +40,7 @@ bool isProfileset = false;
 List sEncIds = [];
 var location;
 bool isShowingInstruction = false;
+bool isdefaultcall = true;
 
 ///TEMP
 var encounterProvider;
