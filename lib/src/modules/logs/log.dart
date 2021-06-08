@@ -88,7 +88,8 @@ class _LogPageState extends State<LogPage> {
   Widget makeSliders() {
     return SizedBox(
       // width: 200.0,
-      height: MediaQuery.of(context).size.height * .22,
+      //height: MediaQuery.of(context).size.height * .22,
+      height: 160,
       child: MonthSlider(
         onUpdateWidget: (bool result) {
           print(" called ...... ");

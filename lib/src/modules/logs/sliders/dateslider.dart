@@ -148,13 +148,8 @@ class _DateSliderState extends State<DateSlider> {
   Widget dateSliderWidget() {
     return Container(
         height: 63,
-        // width: 60,
-
-        child: Container(
-            child: ListView.separated(
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(width: 13);
-          },
+        child: ListView.builder(
+          padding: EdgeInsets.only(left: 16, right: 16),
           itemCount: globals.selectedMonthIndex == currentmonth
               ? int.parse("${selectedDate2.day}")
               : noOfDaysInCurrentMonth,
@@ -174,14 +169,13 @@ class _DateSliderState extends State<DateSlider> {
                   globals.getdatefromslider = asuumeCurrentDate;
                   // print(asuumeCurrentDate);
                 });
-                print(
-                    "  globals.getdatefromslider          ${globals.getdatefromslider}  ");
 
                 widget.onUpdateWidget(true);
               },
               child: Container(
                 height: 50,
                 width: 53,
+                margin: EdgeInsets.only(left: index == 0 ? 0 : 13),
                 padding: EdgeInsets.only(left: 10, right: 10),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -234,6 +228,6 @@ class _DateSliderState extends State<DateSlider> {
               ),
             );
           },
-        )));
+        ));
   }
 }
