@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_app/src/modules/logs/log.dart';
@@ -10,7 +9,7 @@ import 'package:date_util/date_util.dart';
 class DateSlider extends StatefulWidget {
   Function onUpdateWidget;
   bool isdefaultcall;
-  // final int selectedTabIndex;
+
   DateSlider(
       {Key key, @required this.onUpdateWidget, @required this.isdefaultcall})
       : super(key: key);
@@ -27,11 +26,10 @@ class _DateSliderState extends State<DateSlider> {
   String asuumeCurrentDate;
 
   int monthIndex;
-
+  final DateFormat yearMonthDateFormatter = DateFormat('yyyy-MM-dd');
   int currentDateSelectedIndex = 0; //For Horizontal Date
   //To Track Scroll of ListView
 
-  // int currentMonthSelectedIndex = 0;
   final List<Tab> listOfMonthsTabs = <Tab>[
     Tab(text: "January"),
     Tab(text: "February"),
@@ -47,20 +45,6 @@ class _DateSliderState extends State<DateSlider> {
     Tab(text: "December"),
   ];
 
-  List<String> listOfMonths = [
-    "January",
-    "February",
-    "March",
-    "April ",
-    "May ",
-    "June",
-    "July",
-    "August ",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
   DateTime currentDate2 = new DateTime.now();
   DateTime selectedDate2;
 
@@ -72,17 +56,13 @@ class _DateSliderState extends State<DateSlider> {
   void initState() {
     super.initState();
 
-    // monthIndex = 0;
-
     selectedDate2 =
         new DateTime(currentDate2.year, currentDate2.month, currentDate2.day);
-    // initialScrollofSetIndex = double.parse("${currentDate2.day}");
 
     _dateCounter();
   }
 
   ScrollController scrollController = ScrollController(
-    // initialScrollOffset: // or whatever offset you wish
     keepScrollOffset: true,
   );
 
@@ -92,28 +72,24 @@ class _DateSliderState extends State<DateSlider> {
   }
 
   var dateUtility = DateUtil();
-  DateTime getDateTime;
+  DateTime startingdate;
   int currentDate1;
   var date = new DateTime.now().toString();
   var dateParse;
   var currentdate;
   String monthindex;
   int currentmonth;
-  // bool isdefaultcall = true;
 
   DateTime now = new DateTime.now(); // for 5  ->05 format
   void _dateCounter() {
     dateParse = DateTime.parse(date); //current date from date time now
 
-    var startingdate;
+    var startingdateString;
 
     //get the no  days    1....31  in the month
     noOfDaysInCurrentMonth = dateUtility.daysInMonth(
         (globals.selectedMonthIndex + 1), dateParse.year);
     currentYear = "${dateParse.year}";
-
-    // currentMonth = listOfMonths[
-    //     globals.selectedMonthIndex]; //set the month which getted from TabBar
 
     setState(() {
       monthIndex = globals.selectedMonthIndex +
@@ -132,14 +108,14 @@ class _DateSliderState extends State<DateSlider> {
       }
 
       // Get the days index and helps to show on  UI   (mon ,tue,wed)
-      startingdate = "$currentYear-$monthindex-01 ";
-      getDateTime = new DateFormat("yyyy-MM-dd").parse("$startingdate");
+      startingdateString = "$currentYear-$monthindex-01 ";
+      startingdate = new DateFormat("yyyy-MM-dd").parse("$startingdateString");
 
-      //if getdatefromslider is null then  initilalize them
-      final DateFormat formatter = DateFormat('yyyy-MM-dd');
-      final String formatted = formatter.format(now);
+      //if getdatefromslider is null then  initilalize them with current date
+      final String yearMonthDayForamttedDate =
+          yearMonthDateFormatter.format(now);
       globals.getdatefromslider == null
-          ? globals.getdatefromslider = "$formatted"
+          ? globals.getdatefromslider = "$yearMonthDayForamttedDate"
           : globals.getdatefromslider = globals.getdatefromslider;
 
       print("globals.selectedMonthIndex ${globals.getdatefromslider}");
@@ -148,12 +124,8 @@ class _DateSliderState extends State<DateSlider> {
 
   @override
   Widget build(BuildContext context) {
-    if (globals.selectedMonthIndex == currentmonth) {
+    if (globals.selectedMonthIndex == currentmonth && widget.isdefaultcall) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        //write or call your logic
-
-        //code will run when widget rendering complete
-
         if (scrollController.hasClients && widget.isdefaultcall) {
           Timer(
             Duration(seconds: 1),
@@ -170,7 +142,6 @@ class _DateSliderState extends State<DateSlider> {
       SizedBox(height: 15),
       dateSliderWidget(),
       SizedBox(height: 15),
-      // To show Calendar Widget
     ])));
   }
 
@@ -195,10 +166,11 @@ class _DateSliderState extends State<DateSlider> {
                 setState(() {
                   currentDateSelectedIndex = index;
 
-                  String currentdate = (index + 1).toString().padLeft(2, '0');
+                  String currentdateString =
+                      (index + 1).toString().padLeft(2, '0');
 
                   asuumeCurrentDate =
-                      "$currentYear-$monthindex-$currentdate"; //SET  THE SELECTED DATE
+                      "$currentYear-$monthindex-$currentdateString"; //SET  THE SELECTED DATE
                   globals.getdatefromslider = asuumeCurrentDate;
                   // print(asuumeCurrentDate);
                 });
@@ -217,12 +189,6 @@ class _DateSliderState extends State<DateSlider> {
                         ? Border.all(color: Color(0xffFAA45F), width: 1.5)
                         : Border.all(color: Color(0xffBFBFBF), width: 1.0),
                     borderRadius: BorderRadius.circular(10),
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //       color: Colors.grey[400],
-                    //       offset: Offset(3, 3),
-                    //       blurRadius: 5)
-                    // ],
                     color: currentDateSelectedIndex == index
                         ? Colors.white
                         : Colors.white),
@@ -233,10 +199,7 @@ class _DateSliderState extends State<DateSlider> {
                       height: 3.5,
                     ),
                     Text(
-                      // DATE
-
                       ((index + 1)).toString(),
-
                       style: TextStyle(
                           fontSize: globals.deviceType == 'phone' ? 17 : 25,
                           fontWeight: FontWeight.w500,
@@ -250,7 +213,7 @@ class _DateSliderState extends State<DateSlider> {
                     ),
                     Text(
                       // DAYS
-                      listOfDays[(getDateTime.weekday + index - 1) % 7]
+                      listOfDays[(startingdate.weekday + index - 1) % 7]
                           .toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(

@@ -50,24 +50,6 @@ class _AddLogPageState extends State<AddLogPage> {
 
   var medicineList = [];
 
-  // List<CheckBoxModel> checkBoxModelList = [
-  //   new CheckBoxModel(id: '1', displayId: 'Sweating', checked: false),
-  //   new CheckBoxModel(
-  //       id: '2', displayId: 'Chills and Shivering', checked: false),
-  //   new CheckBoxModel(id: '3', displayId: 'Headache', checked: false),
-  //   new CheckBoxModel(id: '4', displayId: 'Muscle Aches', checked: false),
-  //   new CheckBoxModel(id: '5', displayId: 'Loss of Appetite', checked: false),
-  //   new CheckBoxModel(id: '6', displayId: 'Irritability', checked: false),
-  //   new CheckBoxModel(id: '7', displayId: 'Dehydration', checked: false),
-  //   new CheckBoxModel(id: '8', displayId: 'General Weakness', checked: false),
-  //   new CheckBoxModel(
-  //       id: '9', displayId: 'Loss of Taste or Smell', checked: false),
-  //   new CheckBoxModel(id: '10', displayId: 'Cough ', checked: false),
-  //   new CheckBoxModel(id: '11', displayId: 'Short of Breath ', checked: false),
-  //   new CheckBoxModel(id: '12', displayId: 'Runny Noise ', checked: false),
-  //   new CheckBoxModel(id: '13', displayId: 'Sore Throat ', checked: false),
-  // ];
-
   DateTime finaldate;
   var distinctIds;
   DateTime dateTime = DateTime.now();
@@ -113,61 +95,18 @@ class _AddLogPageState extends State<AddLogPage> {
             displayId: '${symptomsData[i].symptomName}', checked: false);
 
         itemList.add(item);
-        // if (itemList != null && itemList.length > 0) {
-        //   for (int j = 0; j < itemList.length; j++) {
-        //     if (itemList[j].displayId != symptomsData[i].symptomName) {
-        //       print('---------------------------------------');
-        //       itemList.add(item);
-        //     }
-        //   }
-        // } else {
-        //   itemList.add(item);
-        // }
       }
 
       completeSymptomsList = checkBoxModelList + itemList;
-
-      // print(result.toString().substring(result.toString().indexOf('1') + 1));
     } else {
       completeSymptomsList = checkBoxModelList;
     }
-    // bool isunique = true;
-
-    // print("Sysmtoms data");
-    // if (symptomsData != null) {
-    //   for (int i = 0; i < symptomsData.length; i++) {
-    //     for (int j = 0; j < checkBoxModelList.length; j++) {
-    //       if (checkBoxModelList[j].displayId == symptomsData[i].symptomName) {
-    //         print("Systoms Name : ${checkBoxModelList[j].displayId}");
-    //         print("Systoms Name -------- : ${symptomsData[i].symptomName}");
-    //         isunique = false;
-
-    //         break;
-    //       } else {
-    //         print("------------------------------------");
-    //         isunique = false;
-    //       }
-    //     }
-    //     if (isunique) {
-    //       print("isunique");
-
-    //       var item = CheckBoxModel(
-    //           displayId: '${symptomsData[i].symptomName}', checked: false);
-    //       checkBoxModelList.add(item);
-    //       // globals.checkBoxModelList.add(CheckBoxModel(
-    //       //     displayId:
-    //       //         '${globals.symptomsListobj[globals.symptomsListobj.length + i]}',
-    //       //     checked: false));
-    //     }
-    //     print(checkBoxModelList.length);
-    //   }
-    //   print(symptomsData.length);
-    // }
   }
 
   @override
   void initState() {
     super.initState();
+    timeString = timeformatter.format(DateTime.now());
     postion = globals.postionList[3];
     temp = globals.tempertureList[0];
     getsymptomsDetail();
@@ -175,7 +114,6 @@ class _AddLogPageState extends State<AddLogPage> {
 
   getList() async {
     var logsList = await DbServices().getListData(Strings.hiveLogName);
-    // List<LogsModel> list = hiveBox.get(Strings.hiveLogName);
 
     setState(() {});
   }
@@ -218,10 +156,6 @@ class _AddLogPageState extends State<AddLogPage> {
   getcurrentdate() {
     String dateString;
     if (globals.getdatefromslider != null) {
-      // dateString = "${globals.getdatefromslider}";
-
-      // String date = dateString.substring(0, dateString.indexOf(' '));
-
       String date = "${globals.getdatefromslider}".split(' ')[0];
       var dateAndTimeString = "$date $timeString";
       print(dateAndTimeString);
@@ -241,7 +175,6 @@ class _AddLogPageState extends State<AddLogPage> {
       key: _scaffoldKey,
       appBar: AppBar(
         elevation: 5,
-        // backgroundColor: Color(0xff463DC7),
         centerTitle: true,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -370,7 +303,6 @@ class _AddLogPageState extends State<AddLogPage> {
                 ],
               ),
               selected: true,
-
               onTap: () {
                 Navigator.of(context).push(
                   showPicker(
@@ -384,25 +316,17 @@ class _AddLogPageState extends State<AddLogPage> {
                     disableMinute: false,
                     minMinute: 0,
                     maxMinute: 59,
-                    // Optional onChange to receive value as DateTime
                     onChangeDateTime: (DateTime timeNow) {
                       setState(() {
                         timeString = timeformatter.format(timeNow);
                         dateTime = timeNow;
-
-                        // getcurrentdate(dateTimeNow);
                       });
 
-                      // DateTime time =
-                      //     new DateFormat("hh:mm:ss").parse("$dateTimeNow");
                       print(timeString);
                     },
                   ),
                 );
               },
-              // onTap: () {
-              //   bottomSheet(context, datetimePicker());
-              // },
             ),
           ),
           Container(
@@ -603,34 +527,6 @@ class _AddLogPageState extends State<AddLogPage> {
                     return addMedicineWidget();
                   }
                 }),
-            // child: ListTile(
-            //   leading: Text(
-            //     "Add Medicine Log",
-            //     style: TextStyle(
-            //         color: AppTheme.textColor1,
-            //         fontFamily: "SF UI Display Regular",
-            //         fontSize: globals.deviceType == "phone" ? 17 : 25),
-            //   ),
-            //   trailing: Icon(
-            //     Icons.arrow_forward_ios,
-            //     color: AppTheme.arrowIconsColor.withOpacity(0.25),
-            //     size: globals.deviceType == 'phone' ? 15 : 23,
-            //   ),
-            //   selected: true,
-            //   onTap: () async {
-            //     var medicineModel = await Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => MedicinesPage(
-            //                   fromHomePage: false,
-            //                 )));
-
-            //                 if(medicineModel != null) {
-            //                   medicineList.add(medicineModel);
-            //                   ffsd
-            //                 }
-            //   },
-            // ),
           ),
           Container(
             padding: EdgeInsets.only(top: 10, bottom: 10),
@@ -820,7 +716,6 @@ class _AddLogPageState extends State<AddLogPage> {
                 children: obj
                     .map<Widget>(
                       (i) => new ListTile(
-                        // leading: new Icon(Icons.music_note),UNCOMMENT
                         title: new Text(
                           '$i',
                           style: TextStyle(
@@ -883,13 +778,6 @@ class _AddLogPageState extends State<AddLogPage> {
                                 });
                               },
                             ),
-                            // Container(
-                            //   height: 1,
-                            //   margin: EdgeInsets.only(left: 40),
-                            //   decoration: BoxDecoration(
-                            //     color: AppTheme.dividerColor.withOpacity(0.25),
-                            //   ),
-                            // ),
                           ],
                         ),
                       );

@@ -278,8 +278,32 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "google_sign_in",
+      "rootUri": "file:///E:/download/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-5.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "google_sign_in_platform_interface",
+      "rootUri": "file:///E:/download/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_platform_interface-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "google_sign_in_web",
+      "rootUri": "file:///E:/download/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.10.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "graphs",
       "rootUri": "file:///E:/download/flutter/.pub-cache/hosted/pub.dartlang.org/graphs-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "health",
+      "rootUri": "file:///E:/download/flutter/.pub-cache/hosted/pub.dartlang.org/health-3.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -542,6 +566,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "quiver",
+      "rootUri": "file:///E:/download/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "regexpattern",
       "rootUri": "file:///E:/download/flutter/.pub-cache/hosted/pub.dartlang.org/regexpattern-1.0.0",
       "packageUri": "lib/",
@@ -722,7 +752,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-05-27T09:28:04.803314Z",
+  "generated": "2021-06-08T06:53:21.411888Z",
   "generator": "pub",
   "generatorVersion": "2.12.2"
 }

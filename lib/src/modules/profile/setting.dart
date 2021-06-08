@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/Symptoms/symptom.dart';
+import 'package:mobile_app/src/modules/profile/googlefit.dart';
 import 'package:mobile_app/src/modules/profile/updateprofie.dart';
 
 import 'package:mobile_app/src/overrides.dart' as overrides;
@@ -188,7 +189,7 @@ class _SettingPageState extends State<SettingPage> {
           //       ),
           //     ),
           //     title: Text(
-          //       "Health",
+          //       "Sync with Google Fit",
           //       style: TextStyle(
           //           color: AppTheme.textColor1,
           //           fontFamily: "SF UI Display Regular",
@@ -200,7 +201,12 @@ class _SettingPageState extends State<SettingPage> {
           //       size: 15,
           //     ),
           //     selected: true,
-          //     onTap: () {},
+          //     onTap: () {
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(builder: (context) => GoogleFit()),
+          //       );
+          //     },
           //   ),
           // ),
           // Container(

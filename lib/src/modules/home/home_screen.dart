@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/logs/sliders/monthslider.dart';
+import 'package:mobile_app/src/modules/profile/googlefit.dart';
 
 import 'package:mobile_app/src/modules/profile/updateprofie.dart';
 import 'package:mobile_app/src/widgets/registration_success_dialog.dart';
@@ -319,27 +320,27 @@ class HomeScreenState extends State<HomeScreen> {
       floatingActionButton: selectedIndex == 0
           ? GestureDetector(
               onTap: () async {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) =>
-                //             // DatePickerTimeLine(title: "this dateTimePicker")
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            // DatePickerTimeLine(title: "this dateTimePicker")
 
-                //             MonthSlider()));
+                            GoogleFit()));
 
-                int index = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AddLogPage(
-                            fromHomePage: true,
-                          )),
-                );
+                // int index = await Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => AddLogPage(
+                //             fromHomePage: true,
+                //           )),
+                // );
 
-                if (index != null) {
-                  setState(() {
-                    selectedIndex = index;
-                  });
-                }
+                // if (index != null) {
+                //   setState(() {
+                //     selectedIndex = index;
+                //   });
+                // }
               },
               child: Container(
                 padding: EdgeInsets.all(15),
