@@ -277,6 +277,15 @@ List<String> postionList = [
   " Rectum "
 ];
 
+List<Icon> postionListIcon = [
+  Icon(Icons.add),
+  Icon(Icons.place),
+  Icon(Icons.add),
+  Icon(Icons.place),
+  Icon(Icons.add),
+  Icon(Icons.place),
+];
+
 // List<CheckBoxModel> checkBoxModelList = [
 //   new CheckBoxModel(id: '1', displayId: 'Sweating', checked: false),
 //   new CheckBoxModel(id: '2', displayId: 'Chills and Shivering', checked: false),

@@ -43,9 +43,35 @@ class Screen1State extends State<Screen1> {
         alignment: Alignment.center,
         color: Theme.of(context).backgroundColor,
         padding: EdgeInsets.only(left: 30, right: 30),
-        child: makeWidget(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            SizedBox(
+              height: 100,
+            ),
+            skipWidget(),
+            SizedBox(
+              height: 50,
+            ),
+            makeWidget(),
+          ],
+        ),
       ),
     );
+  }
+
+  Widget skipWidget() {
+    return Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.grey.shade400,
+            style: BorderStyle.solid,
+            width: 1.0,
+          ),
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        child: Text("Skip", textAlign: TextAlign.center));
   }
 
   // make Widget
@@ -55,6 +81,19 @@ class Screen1State extends State<Screen1> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        // Text(
+        //   'Skip',
+        //   textAlign: TextAlign.end,
+        //   style: TextStyle(
+        //       color: AppTheme.contentColor1,
+        //       letterSpacing: 0,
+        //       fontSize: globals.deviceType == 'phone' ? 24 : 32,
+        //       fontFamily: 'SF UI Display Bold',
+        //       fontWeight: FontWeight.bold),
+        // ),
+        // SizedBox(
+        //   height: 100,
+        // ),
         Image.asset(
           'assets/images/welcome_01.png',
         ),

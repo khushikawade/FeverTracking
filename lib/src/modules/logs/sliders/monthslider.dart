@@ -148,23 +148,29 @@ class _MonthSliderState extends State<MonthSlider>
                   child: TabBar(
                     onTap: (int index) {},
                     controller: tabController,
-
                     tabs: listOfMonthsTabs,
-                    indicatorColor: Theme.of(context).accentColor,
+                    // indicatorColor: Theme.of(context).accentColor,
                     indicatorWeight: 4,
                     isScrollable: true,
 
                     labelPadding: EdgeInsets.symmetric(horizontal: 22.0),
 
-                    // labelColor: Colors.white,
+                    // labelColor: Colors.red,
                     labelStyle: TextStyle(
                         fontSize: globals.deviceType == 'phone' ? 14 : 22,
-                        color: AppTheme.titleColor,
+                        // color: AppTheme.titleColor,
+                        // color: Color(0xffFAA45F),
                         fontWeight: FontWeight.w600,
                         fontFamily: 'SF UI Display Semibold'),
+
+                    labelColor: Theme.of(context).accentColor,
+                    unselectedLabelColor: AppTheme.titleColor,
+                    // automaticIndicatorColorAdjustment: true,
+
                     unselectedLabelStyle: TextStyle(
                         fontSize: globals.deviceType == 'phone' ? 14 : 22,
                         fontWeight: FontWeight.w600,
+                        // color: AppTheme.titleColor1,
                         color: AppTheme.titleColor.withOpacity(0.50),
                         fontFamily:
                             'SF UI Display Semibold'), //For Un-selected Tabs

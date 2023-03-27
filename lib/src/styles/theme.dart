@@ -93,6 +93,7 @@ class AppTheme {
 
   //
   static const Color titleColor = Color(0xFFFFFFFF);
+  static const Color titleColor1 = Colors.red;
   static const Color dividerColor = Color(0xffC4CADF);
 
   static const Color ToolTipTextColor = Color(0xff463DC7);

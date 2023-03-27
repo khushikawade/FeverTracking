@@ -233,7 +233,8 @@ class HomeScreenState extends State<HomeScreen> {
                           // }
                         },
                         icon: Icon(
-                          Icons.more_vert,
+                          Icons.share,
+                          // Icons.more_vert,
                           size: 24,
                           color: AppTheme.iconColor,
                         ),

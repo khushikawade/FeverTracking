@@ -10,6 +10,7 @@ import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Utility {
   static Size displaySize(BuildContext context) {
@@ -53,12 +54,24 @@ class Utility {
     return n.toStringAsFixed(n.truncateToDouble() == n ? 0 : 1);
   }
 
-  static void showSnackBar(_scaffoldKey, msg, context) {
-    _scaffoldKey.currentState.removeCurrentSnackBar();
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
+  static void showSnackBar(_scaffoldKey, msg, BuildContext context) {
+    final snackBar = SnackBar(
       content: Text("$msg"),
       duration: Duration(seconds: 3),
-    ));
+      // action: SnackBarAction(
+      //   label: 'Undo',
+      //   onPressed: () {
+      //     // Some code to undo the change.
+      //   },
+      // ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+    // _scaffoldKey.currentState.removeCurrentSnackBar();
+    // _scaffoldKey.currentState.showSnackBar(SnackBar(
+    //   content: Text("$msg"),
+    //   duration: Duration(seconds: 3),
+    // ));
   }
 
   static String timeAgoSinceDate(DateTime date, {bool numericDates = true}) {
@@ -139,5 +152,25 @@ class Utility {
     //File('$downloadsDir/$_fileName').writeAsBytes(file.readAsBytes());
 
     return true;
+  }
+
+  static const String IMG_KEY = "IMAGE_KEY";
+  static Future<bool> saveImageToPreferences(String value) async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.setString(IMG_KEY, value);
+  }
+
+  static String getImageFromPreferences() {
+    final String imgPath =  getPrefrenceValue();
+
+    return imgPath;
+  }
+
+  static getPrefrenceValue() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    print("get Image path");
+    print("path actual" + preferences.getString(IMG_KEY));
+
+    return preferences.getString(IMG_KEY);
   }
 }

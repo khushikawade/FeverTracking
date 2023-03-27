@@ -22,7 +22,6 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
@@ -34,7 +33,7 @@ if (keystorePropertiesFile.exists()) {
 
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 33
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -49,7 +48,7 @@ android {
         applicationId "com.feverTracking.app"
         multiDexEnabled true
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -75,7 +74,9 @@ flutter {
 }
 
 dependencies {
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+   
     implementation 'com.android.support:multidex:1.0.3'
     
 }

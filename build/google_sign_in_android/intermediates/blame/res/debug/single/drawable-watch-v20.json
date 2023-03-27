@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\feverTracking_mobile_app\\build\\google_sign_in_android\\intermediates\\res\\merged\\debug\\drawable-watch-v20\\common_google_signin_btn_text_dark_normal.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\a1bd6752a29f29385329c0805f85acfe\\play-services-auth-20.4.1\\res\\drawable-watch-v20\\common_google_signin_btn_text_dark_normal.xml"
+    },
+    {
+        "merged": "C:\\feverTracking_mobile_app\\build\\google_sign_in_android\\intermediates\\res\\merged\\debug\\drawable-watch-v20\\common_google_signin_btn_text_disabled.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\a1bd6752a29f29385329c0805f85acfe\\play-services-auth-20.4.1\\res\\drawable-watch-v20\\common_google_signin_btn_text_disabled.xml"
+    },
+    {
+        "merged": "C:\\feverTracking_mobile_app\\build\\google_sign_in_android\\intermediates\\res\\merged\\debug\\drawable-watch-v20\\common_google_signin_btn_text_light_normal.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\a1bd6752a29f29385329c0805f85acfe\\play-services-auth-20.4.1\\res\\drawable-watch-v20\\common_google_signin_btn_text_light_normal.xml"
+    }
+]

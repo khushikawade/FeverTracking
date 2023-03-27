@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/profile/Model/profilemodel.dart';
+import 'package:mobile_app/src/modules/profile/setting.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
 import 'package:regexpattern/regexpattern.dart';
@@ -20,7 +21,9 @@ class UpdateProfielPage extends StatefulWidget {
 
 class _UpdateProfielPageState extends State<UpdateProfielPage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  GlobalKey<ScaffoldState> _scaffold = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  // final GlobalKey<ScaffoldState> _scaffoldstate =
+  //     new GlobalKey<ScaffoldState>();
   String fileName;
   String _username;
   String address;
@@ -63,8 +66,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
     if (isSuccess != null && isSuccess) {
       SharedPreferences pref = await SharedPreferences.getInstance();
       pref.setBool("ISPROFILE_UPDATED", true);
+      Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
 
-      Utility.showSnackBar(_scaffold, 'Data Added Successfully', context);
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.of(context).pop(true);
       });
@@ -72,6 +75,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
   }
 
   void updateLog(ProfileModel log) async {
+    print(log.path);
     bool isSuccess = await DbServices().updateListData(
       Strings.updateProile,
       0,
@@ -80,11 +84,29 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
 
     if (isSuccess != null && isSuccess) {
       SharedPreferences pref = await SharedPreferences.getInstance();
-      pref.setBool("ISPROFILE_UPDATED", true);
-      Utility.showSnackBar(_scaffold, 'Profile Update Successfully', context);
+      pref.setBool("ISPROFLE_UPDATED", true);
+      Utility.saveImageToPreferences(log.path);
+      Utility.showSnackBar(
+          _scaffoldKey, 'Profile Update Successfully', context);
+
       Future.delayed(const Duration(seconds: 3), () {
         // Navigator.of(context).pop(log.path);
-        Navigator.of(context).pop(true);
+
+        // String image = Utility.getImageFromPreferences().toString();
+        // print(image.);
+        // Utility.getImageFromPreferences().then((value) {
+        //   print(" Path++++         " + value);
+        // });
+
+        // Navigator.of(context).pop(true);
+        // Navigator.pop(context, log.path);
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => SettingPage(
+                imagePath: log.path,
+              ),
+            ));
       });
     }
   }
@@ -185,7 +207,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _scaffold,
+        key: _scaffoldKey,
         appBar: AppBar(
           elevation: 5,
           backgroundColor: Theme.of(context).primaryColor,
@@ -223,45 +245,26 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                ClipPath(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 100,
-                    color: Theme.of(context).primaryColor,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        _image == null && selectedImage == null
-                            ? Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(47.06),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromRGBO(0, 0, 0, 0.2),
-                                      spreadRadius: 0,
-                                      blurRadius: 1,
-                                      offset: Offset(0, 4),
-                                    ),
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  radius: 47.06,
-                                  // backgroundColor: Colors.red.withOpacity(0),
-
-                                  backgroundImage: ExactAssetImage(
-                                      'assets/images/profileimage.png'),
-                                ),
-                              )
-                            : InkWell(
-                                child: Container(
+                InkWell(
+                  onTap: () {
+                    bottomsheet();
+                  },
+                  child: ClipPath(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 100,
+                      color: Theme.of(context).primaryColor,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 10,
+                          ),
+                          _image == null && selectedImage == null
+                              ? Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(48.06),
+                                      Radius.circular(47.06),
                                     ),
                                     boxShadow: [
                                       BoxShadow(
@@ -274,39 +277,63 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                   ),
                                   child: CircleAvatar(
                                     radius: 47.06,
+                                    // backgroundColor: Colors.red.withOpacity(0),
+
+                                    backgroundImage: ExactAssetImage(
+                                        'assets/images/profileimage.png'),
+                                  ),
+                                )
+                              : InkWell(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(48.06),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color.fromRGBO(0, 0, 0, 0.2),
+                                          spreadRadius: 0,
+                                          blurRadius: 1,
+                                          offset: Offset(0, 4),
+                                        ),
+                                      ],
+                                    ),
                                     child: CircleAvatar(
                                       radius: 47.06,
-                                      backgroundImage: new FileImage(File(
-                                          _image != null
-                                              ? _image.path
-                                              : selectedImage)),
+                                      child: CircleAvatar(
+                                        radius: 47.06,
+                                        backgroundImage: new FileImage(File(
+                                            _image != null
+                                                ? _image.path
+                                                : selectedImage)),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                        GestureDetector(
-                            onTap: () {
-                              bottomsheet();
-                            },
-                            child: Container(
-                                padding: const EdgeInsets.only(
-                                    top: 10, left: 10, right: 0, bottom: 20),
-                                child: Text(
-                                  'Change Profile',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: AppTheme.titleColor,
-                                      letterSpacing: 0,
-                                      fontSize: globals.deviceType == 'phone'
-                                          ? 18
-                                          : 26,
-                                      fontFamily: 'SF UI Display Semibold',
-                                      fontWeight: FontWeight.w600),
-                                ))),
-                      ],
+                          GestureDetector(
+                              onTap: () {
+                                // bottomsheet();
+                              },
+                              child: Container(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, left: 10, right: 0, bottom: 20),
+                                  child: Text(
+                                    'Change Profile',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: AppTheme.titleColor,
+                                        letterSpacing: 0,
+                                        fontSize: globals.deviceType == 'phone'
+                                            ? 18
+                                            : 26,
+                                        fontFamily: 'SF UI Display Semibold',
+                                        fontWeight: FontWeight.w600),
+                                  ))),
+                        ],
+                      ),
                     ),
+                    clipper: BottomWaveClipper(),
                   ),
-                  clipper: BottomWaveClipper(),
                 ),
                 Form(
                     key: _formKey,
@@ -324,6 +351,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                   left: 20, right: 20, top: 10, bottom: 10),
                               child: TextFormField(
                                 controller: _Namecontroller,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 inputFormatters: [
                                   //Only letters are allowed
                                   FilteringTextInputFormatter.allow(
@@ -336,9 +365,10 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 validator: (val) {
                                   if (val.isEmpty) {
                                     return 'This field is required   ';
-                                  } else if (val.length > 0 && val.length < 4) {
-                                    return 'Please Enter a Valid Name ';
                                   }
+                                  // else if (val.length > 0 && val.length < 4) {
+                                  //   return 'Please Enter a Valid Name ';
+                                  // }
 
                                   return null;
                                 },
@@ -362,91 +392,92 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 ),
                               ),
                             )),
-                        new Theme(
-                            data: new ThemeData(
-                              primaryColor: Theme.of(context).primaryColor,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20, right: 20, top: 10, bottom: 10),
-                              child: TextFormField(
-                                controller: _Adresscontroller,
-                                inputFormatters: [
-                                  //Only letters are allowed
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp("[a-zA-Z0-9_\\s-]")),
-                                ],
-                                validator: (val) {
-                                  if (val.isEmpty) {
-                                    return 'This field is required   ';
-                                  } else if (val.length > 0 &&
-                                      val.length < 10) {
-                                    return 'Please Enter a Valid Address ';
-                                  }
+                        // ********These Field not required********************//
+                        // new Theme(
+                        //     data: new ThemeData(
+                        //       primaryColor: Theme.of(context).primaryColor,
+                        //     ),
+                        //     child: Padding(
+                        //       padding: const EdgeInsets.only(
+                        //           left: 20, right: 20, top: 10, bottom: 10),
+                        //       child: TextFormField(
+                        //         controller: _Adresscontroller,
+                        //         inputFormatters: [
+                        //           //Only letters are allowed
+                        //           FilteringTextInputFormatter.allow(
+                        //               RegExp("[a-zA-Z0-9_\\s-]")),
+                        //         ],
+                        //         validator: (val) {
+                        //           if (val.isEmpty) {
+                        //             return 'This field is required   ';
+                        //           } else if (val.length > 0 &&
+                        //               val.length < 10) {
+                        //             return 'Please Enter a Valid Address ';
+                        //           }
 
-                                  return null;
-                                },
-                                onSaved: (val) => address = val,
-                                style: TextStyle(
-                                  color: AppTheme.textColor1,
-                                  fontFamily: 'SF UI Display Bold',
-                                  fontSize:
-                                      globals.deviceType == "phone" ? 14.0 : 22,
-                                ),
-                                decoration: InputDecoration(
-                                  labelText: 'ADDRESS',
-                                  labelStyle: TextStyle(
-                                    fontSize: globals.deviceType == "phone"
-                                        ? 14.0
-                                        : 22,
-                                    // fontWeight: FontWeight.bold,
-                                    fontFamily: 'SF UI Display Bold',
-                                    color: AppTheme.textColor1,
-                                  ),
-                                ),
-                              ),
-                            )),
-                        new Theme(
-                            data: new ThemeData(
-                              primaryColor: Theme.of(context).primaryColor,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20, right: 20, top: 10, bottom: 10),
-                              child: TextFormField(
-                                controller: _Phonecontroller,
-                                keyboardType: TextInputType.phone,
-                                inputFormatters: <TextInputFormatter>[
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                validator: (val) {
-                                  if (val.isEmpty) {
-                                    return 'This field is required ';
-                                  } else if (val.length != 10) {
-                                    return 'Enter a 10 Digit vaild Number';
-                                  }
+                        //           return null;
+                        //         },
+                        //         onSaved: (val) => address = val,
+                        //         style: TextStyle(
+                        //           color: AppTheme.textColor1,
+                        //           fontFamily: 'SF UI Display Bold',
+                        //           fontSize:
+                        //               globals.deviceType == "phone" ? 14.0 : 22,
+                        //         ),
+                        //         decoration: InputDecoration(
+                        //           labelText: 'ADDRESS',
+                        //           labelStyle: TextStyle(
+                        //             fontSize: globals.deviceType == "phone"
+                        //                 ? 14.0
+                        //                 : 22,
+                        //             // fontWeight: FontWeight.bold,
+                        //             fontFamily: 'SF UI Display Bold',
+                        //             color: AppTheme.textColor1,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     )),
+                        // new Theme(
+                        //     data: new ThemeData(
+                        //       primaryColor: Theme.of(context).primaryColor,
+                        //     ),
+                        //     child: Padding(
+                        //       padding: const EdgeInsets.only(
+                        //           left: 20, right: 20, top: 10, bottom: 10),
+                        //       child: TextFormField(
+                        //         controller: _Phonecontroller,
+                        //         keyboardType: TextInputType.phone,
+                        //         inputFormatters: <TextInputFormatter>[
+                        //           FilteringTextInputFormatter.digitsOnly
+                        //         ],
+                        //         validator: (val) {
+                        //           if (val.isEmpty) {
+                        //             return 'This field is required ';
+                        //           } else if (val.length != 10) {
+                        //             return 'Enter a 10 Digit vaild Number';
+                        //           }
 
-                                  return null;
-                                },
-                                onSaved: (val) => _phone = num.tryParse(val),
-                                style: TextStyle(
-                                  color: AppTheme.textColor1,
-                                  fontFamily: 'SF UI Display Bold',
-                                  fontSize:
-                                      globals.deviceType == "phone" ? 14.0 : 22,
-                                ),
-                                decoration: InputDecoration(
-                                  labelText: 'PHONE NUMBER ',
-                                  labelStyle: TextStyle(
-                                    fontSize: globals.deviceType == 'phone'
-                                        ? 14.0
-                                        : 22,
-                                    fontFamily: 'SF UI Display Bold',
-                                    color: AppTheme.textColor1,
-                                  ),
-                                ),
-                              ),
-                            )),
+                        //           return null;
+                        //         },
+                        //         onSaved: (val) => _phone = num.tryParse(val),
+                        //         style: TextStyle(
+                        //           color: AppTheme.textColor1,
+                        //           fontFamily: 'SF UI Display Bold',
+                        //           fontSize:
+                        //               globals.deviceType == "phone" ? 14.0 : 22,
+                        //         ),
+                        //         decoration: InputDecoration(
+                        //           labelText: 'PHONE NUMBER ',
+                        //           labelStyle: TextStyle(
+                        //             fontSize: globals.deviceType == 'phone'
+                        //                 ? 14.0
+                        //                 : 22,
+                        //             fontFamily: 'SF UI Display Bold',
+                        //             color: AppTheme.textColor1,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     )),
                         new Theme(
                           data: new ThemeData(
                             primaryColor: Theme.of(context).primaryColor,
@@ -456,6 +487,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 left: 20, right: 20, top: 10, bottom: 10),
                             child: TextFormField(
                               controller: _agecontroller,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               style: TextStyle(
                                 color: AppTheme.textColor1,
                                 fontFamily: 'SF UI Display Bold',
@@ -472,10 +505,14 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               validator: (val) {
                                 if (val.isEmpty) {
                                   return 'This field is required ';
-                                } else if (int.parse(val) < 0 ||
-                                    int.parse(val) > 100) {
-                                  return 'Please Enter a Valid Age';
+                                } else if (int.parse(val) <= 0 ||
+                                    int.parse(val) >= 100) {
+                                  return 'Please Enter a Valid Age ';
                                 }
+                                // else if (int.parse(val) < 0 ||
+                                //     int.parse(val) > 100) {
+                                //   return 'Please Enter a Valid Age';
+                                // }
                                 return null;
                               },
                               decoration: InputDecoration(

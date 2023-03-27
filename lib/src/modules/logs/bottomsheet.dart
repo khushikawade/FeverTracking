@@ -820,10 +820,10 @@ class _ButtomSheetPageState extends State<ButtomSheetPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(
-              child: Text('Show'),
-              onPressed: () => _showModalSheet(),
-            ),
+            // RaisedButton(
+            //   child: Text('Show'),
+            //   onPressed: () => _showModalSheet(),
+            // ),
             Text(
               _selectedItem,
               style: TextStyle(fontSize: 30),

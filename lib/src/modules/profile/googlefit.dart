@@ -80,7 +80,7 @@ class _GoogleFitState extends State<GoogleFit> {
       /// Print the results
       _healthDataList.forEach((x) {
         print("Data point: $x");
-        steps += x.value.round();
+        // steps += x.value.round;
       });
 
       print("Steps: $steps");

@@ -310,7 +310,7 @@ class _AddLogPageState extends State<AddLogPage> {
                     context: context,
                     value: _time,
                     onChange: onTimeChanged,
-                    minuteInterval: MinuteInterval.FIVE,
+                    // minuteInterval: MinuteInterval.FIVE,
                     accentColor: Theme.of(context).primaryColor,
                     disableHour: false,
                     disableMinute: false,
@@ -373,7 +373,7 @@ class _AddLogPageState extends State<AddLogPage> {
               selected: true,
               onTap: () {
                 postionAndTemperatureBottomSheet(
-                    context, globals.postionList, 0);
+                    context, globals.postionList, 0, globals.postionListIcon);
               },
             ),
           ),
@@ -426,8 +426,8 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
               selected: true,
               onTap: () {
-                postionAndTemperatureBottomSheet(
-                    context, globals.tempertureList, 1);
+                // postionAndTemperatureBottomSheet(
+                //     context, globals.tempertureList, 1, goblas.);
               },
             ),
           ),
@@ -704,33 +704,62 @@ class _AddLogPageState extends State<AddLogPage> {
     );
   }
 
-  postionAndTemperatureBottomSheet(context, obj, int value) {
+  // postionAndTemperatureBottomSheet(context, obj, int value) {
+  //   showModalBottomSheet(
+  //       context: context,
+  //       isDismissible: true,
+  //       enableDrag: true,
+  //       backgroundColor: Theme.of(context).backgroundColor,
+  //       builder: (BuildContext bc) {
+  //         return SingleChildScrollView(
+  //           child: new Wrap(
+  //               children: obj
+  //                   .map<Widget>(
+  //                     (i) => new ListTile(
+  //                       leading: Icon(Icons.add),
+  //                       title: new Text(
+  //                         '$i',
+  //                         style: TextStyle(
+  //                           color: AppTheme.textColor1,
+  //                           fontSize:
+  //                               globals.deviceType == 'phone' ? 17.0 : 25.0,
+  //                           fontFamily: 'SF UI Display Regular',
+  //                           fontWeight: FontWeight.w600,
+  //                         ),
+  //                       ),
+  //                       onTap: () => _selectTemp(i, value),
+  //                     ),
+  //                   )
+  //                   .toList()),
+  //         );
+  //       });
+  // }
+
+  postionAndTemperatureBottomSheet(context, obj, int value, icon) {
     showModalBottomSheet(
         context: context,
         isDismissible: true,
         enableDrag: true,
         backgroundColor: Theme.of(context).backgroundColor,
         builder: (BuildContext bc) {
-          return SingleChildScrollView(
-            child: new Wrap(
-                children: obj
-                    .map<Widget>(
-                      (i) => new ListTile(
-                        title: new Text(
-                          '$i',
-                          style: TextStyle(
-                            color: AppTheme.textColor1,
-                            fontSize:
-                                globals.deviceType == 'phone' ? 17.0 : 25.0,
-                            fontFamily: 'SF UI Display Regular',
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        onTap: () => _selectTemp(i, value),
-                      ),
-                    )
-                    .toList()),
-          );
+          return ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: icon[index],
+                  title: new Text(
+                    // items[index],
+                    obj[index],
+                    style: TextStyle(
+                      color: AppTheme.textColor1,
+                      fontSize: globals.deviceType == 'phone' ? 17.0 : 25.0,
+                      fontFamily: 'SF UI Display Regular',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  onTap: () => _selectTemp(obj, value),
+                );
+              });
         });
   }
 

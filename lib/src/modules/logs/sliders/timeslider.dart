@@ -46,7 +46,7 @@ class _TimeSliderState extends State<TimeSlider> {
                       context: context,
                       value: _time,
                       onChange: onTimeChanged,
-                      minuteInterval: MinuteInterval.FIVE,
+                      // minuteInterval: MinuteInterval.FIVE,
                       disableHour: false,
                       disableMinute: false,
                       minMinute: 7,
@@ -71,15 +71,15 @@ class _TimeSliderState extends State<TimeSlider> {
                 style: Theme.of(context).textTheme.headline6,
               ),
               // Render inline widget
-              createInlinePicker(
-                elevation: 1,
-                value: _time,
-                onChange: onTimeChanged,
-                minuteInterval: MinuteInterval.FIVE,
-                iosStylePicker: iosStyle,
-                minMinute: 7,
-                maxMinute: 56,
-              ),
+              // createInlinePicker(
+              //   elevation: 1,
+              //   value: _time,
+              //   onChange: onTimeChanged,
+              //   minuteInterval: MinuteInterval.FIVE,
+              //   iosStylePicker: iosStyle,
+              //   minMinute: 7,
+              //   maxMinute: 56,
+              // ),
               Text(
                 "IOS Style",
                 style: Theme.of(context).textTheme.bodyText1,

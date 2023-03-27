@@ -11,8 +11,12 @@ import 'package:mobile_app/src/modules/profile/updateprofie.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
+import 'package:mobile_app/src/utils/utility.dart';
 
+// ignore: must_be_immutable
 class SettingPage extends StatefulWidget {
+  String imagePath;
+  SettingPage({this.imagePath});
   @override
   _SettingPageState createState() => _SettingPageState();
 }
@@ -49,12 +53,18 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
+  initState() {
+    print("path");
+    print(widget.imagePath);
+    if (widget.imagePath != null) {
+      _image = widget.imagePath;
+    } else {
+      _image = globals.userObj != null && globals.userObj.length > 0
+          ? globals.userObj[0].path
+          : null;
+    }
 
-    _image = globals.userObj != null && globals.userObj.length > 0
-        ? globals.userObj[0].path
-        : null;
+    super.initState();
   }
 
   @override
@@ -231,6 +241,7 @@ class _SettingPageState extends State<SettingPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children:
+          
               // <Widget>
               [
             SizedBox(
@@ -240,31 +251,39 @@ class _SettingPageState extends State<SettingPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(47.06),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.2),
-                            spreadRadius: 0,
-                            blurRadius: 1,
-                            offset: Offset(0, 4),
+                  InkWell(
+                      onTap: () async {
+                        bool result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => UpdateProfielPage()));
+                      },
+                      child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            // color: Colors.red,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(47.06),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.2),
+                                spreadRadius: 0,
+                                blurRadius: 1,
+                                offset: Offset(0, 4),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      child: CircleAvatar(
-                        radius: 47.06,
-                        // child:
-                        //  (_image != null )
-                        // ?
-                        backgroundImage: _image != null
-                            ? new FileImage(File(_image))
-                            : ExactAssetImage('assets/images/profileimage.png'),
-                      )),
+                          child: CircleAvatar(
+                              radius: 47.06,
+                              // child:
+                              //  (_image != null )Utility.getImageFromPreferences().toString()
+                              // ? Utility.getImageFromPreferences().then((value)
+                              backgroundImage: _image != null
+                                  ? FileImage(File(_image))
+                                  : ExactAssetImage(
+                                      'assets/images/profileimage.png'))))
                 ]),
             Container(
               padding: EdgeInsets.all(20),

@@ -1,0 +1,289 @@
+-- Merging decision tree log ---
+application
+INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:16:5-57:19
+MERGED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-20:19
+MERGED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-20:19
+MERGED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-17:19
+MERGED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-17:19
+MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:24:5-31:19
+MERGED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-fitness:16.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\2dec87f8fdb5ab3d31d592a5f681a91e\jetified-play-services-fitness-16.0.1\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-fitness:16.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\2dec87f8fdb5ab3d31d592a5f681a91e\jetified-play-services-fitness-16.0.1\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3afc1fc63130a1b44985898296821bd2\jetified-play-services-location-16.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3afc1fc63130a1b44985898296821bd2\jetified-play-services-location-16.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-fido:19.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4165d8f2ffae78a25bd723b75d269816\jetified-play-services-fido-19.0.1\AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-fido:19.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4165d8f2ffae78a25bd723b75d269816\jetified-play-services-fido-19.0.1\AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1acbf95ece99097e456d2cd1a2414d60\play-services-base-18.0.1\AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1acbf95ece99097e456d2cd1a2414d60\play-services-base-18.0.1\AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\50f2c4391ccd22b4075310d117894411\play-services-tasks-18.0.1\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\50f2c4391ccd22b4075310d117894411\play-services-tasks-18.0.1\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\189ce3a1a0f98363039b0053b22bbc9b\play-services-places-placereport-16.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\189ce3a1a0f98363039b0053b22bbc9b\play-services-places-placereport-16.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\9d1bd875d1611802df2ac66eea1c097e\jetified-play-services-basement-18.1.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\9d1bd875d1611802df2ac66eea1c097e\jetified-play-services-basement-18.1.0\AndroidManifest.xml:20:5-24:19
+MERGED from [androidx.core:core:1.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\5ca5512e1364ea0fc701e812862764bc\core-1.6.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\5ca5512e1364ea0fc701e812862764bc\core-1.6.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\97037453ecd780f522cf817ab79f29d6\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\97037453ecd780f522cf817ab79f29d6\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\5ca5512e1364ea0fc701e812862764bc\core-1.6.0\AndroidManifest.xml:24:18-86
+	android:name
+		INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml
+manifest
+ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:1-58:12
+MERGED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:1-58:12
+MERGED from [:shared_preferences_android] C:\feverTracking_mobile_app\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-22:12
+MERGED from [:flutter_plugin_android_lifecycle] C:\feverTracking_mobile_app\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:health] C:\feverTracking_mobile_app\build\health\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:device_info] C:\feverTracking_mobile_app\build\device_info\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:ext_storage] C:\feverTracking_mobile_app\build\ext_storage\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:libphonenumber_plugin] C:\feverTracking_mobile_app\build\libphonenumber_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:path_provider_android] C:\feverTracking_mobile_app\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-19:12
+MERGED from [:permission_handler] C:\feverTracking_mobile_app\build\permission_handler\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:google_sign_in_android] C:\feverTracking_mobile_app\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\446846cfea4d873445262c2acf7a8037\window-java-1.0.0-beta04\AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b654ad39108ef572ff83cd660b3d9f72\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\93125046c97250e08a60e5630792280b\exifinterface-1.3.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:17:1-40:12
+MERGED from [com.google.android.gms:play-services-fitness:16.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\2dec87f8fdb5ab3d31d592a5f681a91e\jetified-play-services-fitness-16.0.1\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3afc1fc63130a1b44985898296821bd2\jetified-play-services-location-16.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\7ce0370dfa21b461c9d7cdbd6b669d2b\play-services-auth-api-phone-18.0.1\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1dc04e9344d991d989ccfa93095bf703\play-services-auth-base-18.0.4\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-fido:19.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4165d8f2ffae78a25bd723b75d269816\jetified-play-services-fido-19.0.1\AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1acbf95ece99097e456d2cd1a2414d60\play-services-base-18.0.1\AndroidManifest.xml:16:1-24:12
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\50f2c4391ccd22b4075310d117894411\play-services-tasks-18.0.1\AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\189ce3a1a0f98363039b0053b22bbc9b\play-services-places-placereport-16.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\9d1bd875d1611802df2ac66eea1c097e\jetified-play-services-basement-18.1.0\AndroidManifest.xml:16:1-26:12
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\fa38444c6be6c215567e1820429c0193\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\7ffc62821c933d6a176312b0cf90c34c\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b407711f032273438adcbbb0d9d4f29a\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c2871c222cc25e71b3da760b0cdbdc02\activity-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\028ba2ff0bf7d0c15378760e56317795\customview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\5ca5512e1364ea0fc701e812862764bc\core-1.6.0\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b801122a3fcf6007fc1b77f7fbd7ff2b\lifecycle-runtime-2.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f2734dfbf0a4cb246b6bfe1b40d51ca9\savedstate-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\48aa9c562507d6d4e5eb4b09a252c6f5\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6d47287f88174c3ede0fcb993f1ae21b\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ae454f3f5f13bce2dbea1f72e565d5ef\tracing-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\97037453ecd780f522cf817ab79f29d6\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\85fbc1e589c24605078d184b337b0a4b\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\9b9ae7798f5b891c1fc016eefc32358e\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\344e3b7bb2225a80e98ea17c69cf6c20\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
+INJECTED from C:\feverTracking_mobile_app\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\feverTracking_mobile_app\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\feverTracking_mobile_app\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+	package
+		ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:2:5-36
+		INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\feverTracking_mobile_app\android\app\src\debug\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml
+		ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:1-58:12
+		INJECTED from C:\feverTracking_mobile_app\android\app\src\debug\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:2:37-83
+		ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:2:37-83
+	android:versionCode
+		INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml
+		ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:1-58:12
+		INJECTED from C:\feverTracking_mobile_app\android\app\src\debug\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:8:5-67
+MERGED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:8:5-67
+MERGED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:8:5-67
+MERGED from [:google_sign_in_android] C:\feverTracking_mobile_app\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-67
+MERGED from [:google_sign_in_android] C:\feverTracking_mobile_app\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-67
+	android:name
+		ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:8:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:10:5-80
+MERGED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
+MERGED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:10:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:11:5-80
+MERGED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
+MERGED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
+	android:name
+		ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:11:22-77
+uses-permission#android.permission.CAMERA
+ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:12:5-13:26
+	tools:node
+		ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:13:5-24
+	android:name
+		ADDED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:12:22-62
+uses-sdk
+INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml
+INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml
+MERGED from [:shared_preferences_android] C:\feverTracking_mobile_app\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences_android] C:\feverTracking_mobile_app\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] C:\feverTracking_mobile_app\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] C:\feverTracking_mobile_app\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:health] C:\feverTracking_mobile_app\build\health\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:health] C:\feverTracking_mobile_app\build\health\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:device_info] C:\feverTracking_mobile_app\build\device_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:device_info] C:\feverTracking_mobile_app\build\device_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:ext_storage] C:\feverTracking_mobile_app\build\ext_storage\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:ext_storage] C:\feverTracking_mobile_app\build\ext_storage\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:libphonenumber_plugin] C:\feverTracking_mobile_app\build\libphonenumber_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:libphonenumber_plugin] C:\feverTracking_mobile_app\build\libphonenumber_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] C:\feverTracking_mobile_app\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] C:\feverTracking_mobile_app\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:permission_handler] C:\feverTracking_mobile_app\build\permission_handler\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:permission_handler] C:\feverTracking_mobile_app\build\permission_handler\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:google_sign_in_android] C:\feverTracking_mobile_app\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:google_sign_in_android] C:\feverTracking_mobile_app\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\446846cfea4d873445262c2acf7a8037\window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\446846cfea4d873445262c2acf7a8037\window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b654ad39108ef572ff83cd660b3d9f72\multidex-2.0.0\AndroidManifest.xml:20:5-43
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b654ad39108ef572ff83cd660b3d9f72\multidex-2.0.0\AndroidManifest.xml:20:5-43
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\93125046c97250e08a60e5630792280b\exifinterface-1.3.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\93125046c97250e08a60e5630792280b\exifinterface-1.3.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-fitness:16.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\2dec87f8fdb5ab3d31d592a5f681a91e\jetified-play-services-fitness-16.0.1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-fitness:16.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\2dec87f8fdb5ab3d31d592a5f681a91e\jetified-play-services-fitness-16.0.1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3afc1fc63130a1b44985898296821bd2\jetified-play-services-location-16.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3afc1fc63130a1b44985898296821bd2\jetified-play-services-location-16.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\7ce0370dfa21b461c9d7cdbd6b669d2b\play-services-auth-api-phone-18.0.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\7ce0370dfa21b461c9d7cdbd6b669d2b\play-services-auth-api-phone-18.0.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1dc04e9344d991d989ccfa93095bf703\play-services-auth-base-18.0.4\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1dc04e9344d991d989ccfa93095bf703\play-services-auth-base-18.0.4\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-fido:19.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4165d8f2ffae78a25bd723b75d269816\jetified-play-services-fido-19.0.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-fido:19.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4165d8f2ffae78a25bd723b75d269816\jetified-play-services-fido-19.0.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1acbf95ece99097e456d2cd1a2414d60\play-services-base-18.0.1\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1acbf95ece99097e456d2cd1a2414d60\play-services-base-18.0.1\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\50f2c4391ccd22b4075310d117894411\play-services-tasks-18.0.1\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\50f2c4391ccd22b4075310d117894411\play-services-tasks-18.0.1\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\189ce3a1a0f98363039b0053b22bbc9b\play-services-places-placereport-16.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\189ce3a1a0f98363039b0053b22bbc9b\play-services-places-placereport-16.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\9d1bd875d1611802df2ac66eea1c097e\jetified-play-services-basement-18.1.0\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\9d1bd875d1611802df2ac66eea1c097e\jetified-play-services-basement-18.1.0\AndroidManifest.xml:18:5-43
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\fa38444c6be6c215567e1820429c0193\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\fa38444c6be6c215567e1820429c0193\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\7ffc62821c933d6a176312b0cf90c34c\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\7ffc62821c933d6a176312b0cf90c34c\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b407711f032273438adcbbb0d9d4f29a\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b407711f032273438adcbbb0d9d4f29a\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c2871c222cc25e71b3da760b0cdbdc02\activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c2871c222cc25e71b3da760b0cdbdc02\activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\028ba2ff0bf7d0c15378760e56317795\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\028ba2ff0bf7d0c15378760e56317795\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\5ca5512e1364ea0fc701e812862764bc\core-1.6.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\5ca5512e1364ea0fc701e812862764bc\core-1.6.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b801122a3fcf6007fc1b77f7fbd7ff2b\lifecycle-runtime-2.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b801122a3fcf6007fc1b77f7fbd7ff2b\lifecycle-runtime-2.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f2734dfbf0a4cb246b6bfe1b40d51ca9\savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f2734dfbf0a4cb246b6bfe1b40d51ca9\savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\48aa9c562507d6d4e5eb4b09a252c6f5\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\48aa9c562507d6d4e5eb4b09a252c6f5\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6d47287f88174c3ede0fcb993f1ae21b\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6d47287f88174c3ede0fcb993f1ae21b\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ae454f3f5f13bce2dbea1f72e565d5ef\tracing-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ae454f3f5f13bce2dbea1f72e565d5ef\tracing-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\97037453ecd780f522cf817ab79f29d6\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\97037453ecd780f522cf817ab79f29d6\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\85fbc1e589c24605078d184b337b0a4b\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\85fbc1e589c24605078d184b337b0a4b\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\9b9ae7798f5b891c1fc016eefc32358e\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\9b9ae7798f5b891c1fc016eefc32358e\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\344e3b7bb2225a80e98ea17c69cf6c20\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\344e3b7bb2225a80e98ea17c69cf6c20\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
+INJECTED from C:\feverTracking_mobile_app\android\app\src\debug\AndroidManifest.xml
+INJECTED from C:\feverTracking_mobile_app\android\app\src\debug\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\feverTracking_mobile_app\android\app\src\debug\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\feverTracking_mobile_app\android\app\src\debug\AndroidManifest.xml
+provider#io.flutter.plugins.imagepicker.ImagePickerFileProvider
+ADDED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-19:20
+	android:grantUriPermissions
+		ADDED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-47
+	android:authorities
+		ADDED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-74
+	android:exported
+		ADDED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-37
+	android:name
+		ADDED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-82
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-18:75
+	android:resource
+		ADDED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-72
+	android:name
+		ADDED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:17:17-67
+provider#io.flutter.plugins.share.ShareFileProvider
+ADDED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-16:20
+	android:grantUriPermissions
+		ADDED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-47
+	android:authorities
+		ADDED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-74
+	android:exported
+		ADDED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-37
+	android:name
+		ADDED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-70
+uses-library#androidx.window.extensions
+ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+uses-library#androidx.window.sidecar
+ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+ADDED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:23:9-27:75
+	android:excludeFromRecents
+		ADDED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:25:13-46
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:26:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:27:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:24:13-93
+service#com.google.android.gms.auth.api.signin.RevocationBoundService
+ADDED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:33:9-37:51
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:35:13-36
+	android:visibleToInstantApps
+		ADDED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:37:13-48
+	android:permission
+		ADDED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:36:13-107
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:20.4.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\a1bd6752a29f29385329c0805f85acfe\play-services-auth-20.4.1\AndroidManifest.xml:34:13-89
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1acbf95ece99097e456d2cd1a2414d60\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1acbf95ece99097e456d2cd1a2414d60\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1acbf95ece99097e456d2cd1a2414d60\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1acbf95ece99097e456d2cd1a2414d60\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\9d1bd875d1611802df2ac66eea1c097e\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\9d1bd875d1611802df2ac66eea1c097e\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\9d1bd875d1611802df2ac66eea1c097e\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
