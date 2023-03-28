@@ -3,6 +3,7 @@ import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/home/home_screen.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
+import 'package:mobile_app/src/widgets/skip_button.dart';
 
 class Screen2 extends StatefulWidget {
   @override
@@ -43,7 +44,19 @@ class Screen2State extends State<Screen2> {
         alignment: Alignment.center,
         color: Theme.of(context).backgroundColor,
         padding: EdgeInsets.only(left: 30, right: 30),
-        child: makeWidget(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            SizedBox(
+              height: 60,
+            ),
+            SkipButton(),
+            SizedBox(
+              height: 100,
+            ),
+            makeWidget(),
+          ],
+        ),
       ),
     );
   }

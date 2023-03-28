@@ -23,15 +23,13 @@ class MedicinesPage extends StatefulWidget {
 }
 
 class _MedicinesPageState extends State<MedicinesPage> {
-  // Color flottingButtonColor = Color(0XFF463DC7);
-  // Color dividerColor = Color(0XFF000000);
-  // Color listTittleColor = Color(0XFF030303);
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Future<bool> deleteMedicine(index) async {
     bool isSuccess =
         await DbServices().deleteData(Strings.createMedicineName, index);
     if (isSuccess != null && isSuccess) {
-      Utility.showSnackBar(_scaffoldKey, 'Data Deleted Successfully', context);
+      Utility.showSnackBar(
+          _scaffoldKey, 'Medicine Deleted Successfully', context);
 
       setState(() {
         widget.deleteMedicine = false;
@@ -58,16 +56,6 @@ class _MedicinesPageState extends State<MedicinesPage> {
                       fontSize: globals.deviceType == 'phone' ? 20 : 28,
                       fontFamily: 'SF UI Display Semibold',
                       fontWeight: FontWeight.w600),
-                ),
-                leading: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.close,
-                    size: 30.0,
-                    color: AppTheme.iconColor,
-                  ),
                 ),
               ),
         backgroundColor: AppTheme.screenbackGroundColor,
@@ -205,7 +193,14 @@ class _MedicinesPageState extends State<MedicinesPage> {
           onTap: () {
             widget.fromHomePage
                 ? print("fromhomepage")
-                : Navigator.of(context).pop(items[index]);
+                : Future.delayed(const Duration(seconds: 0), () {
+                    Utility.showSnackBar(_scaffoldKey,
+                        'Medicine Successfully Added To Log', context);
+                    Future.delayed(const Duration(seconds: 2), () {
+                      Navigator.of(context).pop(items[index]);
+                    });
+                  });
+            //
           },
         ),
         index == items.length - 1
@@ -220,58 +215,71 @@ class _MedicinesPageState extends State<MedicinesPage> {
 
   Widget iconWidget(int index) {
     {
-      return widget.deleteMedicine == false
-          ? Container(
-              padding: EdgeInsets.only(right: 12),
-              child: Icon(
-                const IconData(0xe815, fontFamily: 'FeverTrackingIcons'),
-                color: AppTheme.tralingIconColor,
-                size: 9,
-              ),
-            )
-          : Row(mainAxisSize: MainAxisSize.min, children: [
-              Container(
-                padding: EdgeInsets.only(right: 12),
-                child: Icon(
-                  const IconData(0xe815, fontFamily: 'FeverTrackingIcons'),
-                  color: AppTheme.tralingIconColor,
-                  size: 9,
-                ),
-              ),
+      return
+          // widget.deleteMedicine == false
+          //     ?
+          IconButton(
+        icon: Icon(
+          Icons.delete,
+        ),
+        iconSize: 18,
+        color: Colors.redAccent,
+        onPressed: () {
+          deleteMedicine(index);
+        },
+      );
+      // Container(
+      //     padding: EdgeInsets.only(right: 12),
+      //     child: Icon(
+      //       const IconData(0xe815, fontFamily: 'FeverTrackingIcons'),
+      //       color: AppTheme.tralingIconColor,
+      //       size: 9,
+      //     ),
+      //   )
+      // : Row(mainAxisSize: MainAxisSize.min, children: [
+      //     Container(
+      //       padding: EdgeInsets.only(right: 12),
+      //       child: Icon(
+      //         const IconData(0xe815, fontFamily: 'FeverTrackingIcons'),
+      //         color: AppTheme.tralingIconColor,
+      //         size: 9,
+      //       ),
+      //     ),
 
-              IconButton(
-                icon: Icon(
-                  Icons.delete,
-                ),
-                iconSize: 18,
-                color: Colors.redAccent,
-                onPressed: () {
-                  deleteMedicine(index);
-                },
-              ),
-              // InkWell(
-              //   onTap: () async {
-              //     bool sucess;
-              //     widget.deleteMedicine == true
-              //         ? sucess = await deleteMedicine(index)
-              //         : print("");
-              //     if (sucess) {
-              //       setState(() {
-              //         widget.deleteMedicine = false;
-              //       });
-              //     }
-              //   },
-              //   child: Container(
-              //     padding: EdgeInsets.only(right: 0),
-              //     child: Icon(
-              //       Icons.delete,
-              //       // color: AppTheme.iconsColor2,
-              //       color: Colors.black54,
-              //       size: 18,
-              //     ),
-              //   ),
-              // ),
-            ]);
+      //     IconButton(
+      //       icon: Icon(
+      //         Icons.delete,
+      //       ),
+      //       iconSize: 18,
+      //       color: Colors.redAccent,
+      //       onPressed: () {
+      //         deleteMedicine(index);
+      //       },
+      //     ),
+
+      // InkWell(
+      //   onTap: () async {
+      //     bool sucess;
+      //     widget.deleteMedicine == true
+      //         ? sucess = await deleteMedicine(index)
+      //         : print("");
+      //     if (sucess) {
+      //       setState(() {
+      //         widget.deleteMedicine = false;
+      //       });
+      //     }
+      //   },
+      //   child: Container(
+      //     padding: EdgeInsets.only(right: 0),
+      //     child: Icon(
+      //       Icons.delete,
+      //       // color: AppTheme.iconsColor2,
+      //       color: Colors.black54,
+      //       size: 18,
+      //     ),
+      //   ),
+      // ),
+      // ]);
     }
   }
 }

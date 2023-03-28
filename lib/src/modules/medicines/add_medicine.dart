@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/modules/logs/addnote.dart';
@@ -14,6 +15,7 @@ List<String> frequencyList = [
   "Twice per day",
   "3 times per day",
   "4 times per day",
+  "5 times per day",
   "6 times per day",
   "As needed"
 ];
@@ -33,6 +35,7 @@ class _AddMedicineState extends State<AddMedicine> {
   TextEditingController dosageController = TextEditingController();
   FocusNode dosageFocus = new FocusNode();
   FocusNode medicineFocus = new FocusNode();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   var distinctIds;
 
@@ -51,7 +54,8 @@ class _AddMedicineState extends State<AddMedicine> {
         await DbServices().addData(log, Strings.createMedicineName);
 
     if (isSuccess != null && isSuccess) {
-      Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
+      Utility.showSnackBar(
+          _scaffoldKey, 'Medicine Added Successfully', context);
       Future.delayed(const Duration(seconds: 3), () {
         Navigator.of(context).pop(true);
       });
@@ -76,9 +80,10 @@ class _AddMedicineState extends State<AddMedicine> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: AppTheme.subHeadingbackgroundcolor,
       appBar: AppBar(
         elevation: 5,
-        // backgroundColor: Color(0xff463DC7),
+        backgroundColor: Color(0xff463DC7),
         centerTitle: true,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -107,338 +112,395 @@ class _AddMedicineState extends State<AddMedicine> {
             color: AppTheme.iconColor,
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: IconButton(
-              onPressed: () {
-                String medicineName = medicineController.text;
-                String dosage = dosageController.text;
-                if (medicineName != null &&
-                    medicineName.isNotEmpty &&
-                    dosage != null &&
-                    dosage.isNotEmpty) {
-                  final medicineModel = MedicineModel(
-                      medicineName,
-                      '${dosage} $selectedUnit',
-                      selectedUnit,
-                      selectedFrequency,
-                      addNoteText);
-                  addMedicine(medicineModel);
-                } else {
-                  Utility.showSnackBar(
-                      _scaffoldKey, 'Please Fill All Required Field ', context);
-                }
-              },
-              icon: Icon(
-                const IconData(59809, fontFamily: "MaterialIcons"),
-                color: AppTheme.iconColor,
-                size: 24,
-              ),
-            ),
-          ),
-        ],
       ),
       body: ListView(children: [
         Container(
           color: Theme.of(context).backgroundColor,
-          child: Column(children: [
-            Container(
-              padding: EdgeInsets.only(top: 2, bottom: 2),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: AppTheme.subHeadingbackgroundcolor,
-                boxShadow: [
-                  const BoxShadow(
-                    color: AppTheme.subHeadingbackgroundcolor2,
-                    spreadRadius: 0,
-                    blurRadius: 0,
-                    offset: Offset(0, -0.5),
+          child: Form(
+            key: _formKey,
+            child: Column(children: [
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: AppTheme.subHeadingbackgroundcolor,
+                    boxShadow: [
+                      const BoxShadow(
+                        color: AppTheme.subHeadingbackgroundcolor2,
+                        spreadRadius: 0,
+                        blurRadius: 0,
+                        offset: Offset(0, -0.5),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: TextField(
-                  focusNode: medicineFocus,
-                  controller: medicineController,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Medicine Name',
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.only(left: 0, bottom: 8, top: 8, right: 0),
-                    hintStyle: TextStyle(
-                        color: AppTheme.subHeadingTextColor,
-                        fontFamily: "SF UI Display Regular",
-                        fontSize: globals.deviceType == "phone" ? 16 : 24),
-                  ),
-                  style: TextStyle(
-                      color: AppTheme.contentColor1,
-                      fontFamily: "SF UI Display Regular",
-                      fontSize: globals.deviceType == "phone" ? 16 : 24),
-                ),
-              ),
-            ),
-            Container(
-              padding:
-                  EdgeInsets.only(top: 2.5, bottom: 2.5, left: 16, right: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 0,
-                    child: Text(
-                      "Dosage",
-                      textAlign: TextAlign.start,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20, right: 20, bottom: 30, top: 20),
+                    child: TextFormField(
+                      focusNode: medicineFocus,
+                      controller: medicineController,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      inputFormatters: [
+                        //Only letters are allowed
+                        FilteringTextInputFormatter.allow(
+                            RegExp("[a-zA-Z_\\s-]")),
+                      ],
+                      validator: (val) {
+                        if (val.isEmpty) {
+                          return 'Medicine Name is required   ';
+                        } else {
+                          return null;
+                        }
+                      },
+                      // onSaved: (val) => _username = val,
                       style: TextStyle(
-                          color: AppTheme.textColor1,
-                          fontFamily: "SF UI Display Regular Bold",
-                          fontSize: globals.deviceType == "phone" ? 17 : 25),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: TextField(
-                      textAlign: TextAlign.end,
-                      controller: dosageController,
-                      focusNode: dosageFocus,
-                      keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
+                        color: AppTheme.textColor1,
+                        fontFamily: 'SF UI Display Bold',
+                        fontSize: globals.deviceType == "phone" ? 16.0 : 24,
+                      ),
                       decoration: InputDecoration(
-                        hintText: '0',
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.only(
-                            left: 0, bottom: 8, top: 8, right: 0),
-                        hintStyle: TextStyle(
-                            color: AppTheme.subHeadingTextColor,
-                            fontFamily: "SF UI Display Regular",
-                            fontSize: globals.deviceType == "phone" ? 16 : 24),
-                      ),
-                      style: TextStyle(
-                          color: AppTheme.textColor2,
-                          fontFamily: "SF UI Display Regular",
-                          fontSize: globals.deviceType == "phone" ? 16 : 24),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    flex: 0,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 02),
-                      child: Text(
-                        "${selectedUnit}",
-                        style: TextStyle(
-                          color: AppTheme.textColor2,
-                          fontFamily: "SF UI Display Regular",
-                          fontSize: globals.deviceType == "phone" ? 15 : 23,
+                        // border: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.circular(25.0),
+                        // ),
+                        labelText: 'Enter Medicine Name',
+                        labelStyle: TextStyle(
+                          fontSize: globals.deviceType == "phone" ? 16.0 : 24,
+                          fontFamily: 'SF UI Display Bold',
+                          color: AppTheme.textColor1,
                         ),
+                        // focusedBorder: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.circular(25.0),
+                        //   borderSide: BorderSide(
+                        //     color: Color(0xff463DC7),
+                        //   ),
+                        // ),
+                        // enabledBorder: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.circular(25.0),
+                        //   borderSide: BorderSide(
+                        //     color: Colors.grey,
+                        //     width: 2.0,
+                        //   ),
+                        // ),
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              height: 1,
-              margin: EdgeInsets.only(left: 20),
-              decoration: BoxDecoration(
-                color: AppTheme.dividerColor.withOpacity(0.25),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-              child: ListTile(
-                leading: Text(
-                  "Unit",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: AppTheme.textColor1,
-                      fontFamily: "SF UI Display Regular Bold",
-                      fontSize: globals.deviceType == "phone" ? 17 : 25),
-                ),
-                trailing: Wrap(
-                  alignment: WrapAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "$selectedUnit",
-                      style: TextStyle(
-                          color: AppTheme.textColor2,
-                          fontFamily: "SF UI Display Regular",
-                          fontSize: globals.deviceType == "phone" ? 17 : 25),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 02),
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        color: AppTheme.arrowIconsColor.withOpacity(0.2),
-                        size: globals.deviceType == 'phone' ? 15 : 23,
-                      ),
-                    ),
-                  ],
-                ),
-                selected: true,
-                onTap: () {
-                  dosageFocus.unfocus();
-                  medicineFocus.unfocus();
-                  _settingModalBottomSheet(context, unitList, 0);
-                },
-              ),
-            ),
-            Container(
-              height: 1,
-              margin: EdgeInsets.only(left: 20),
-              decoration: BoxDecoration(
-                color: AppTheme.dividerColor.withOpacity(0.25),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-              child: ListTile(
-                leading: Text(
-                  "Frequency",
-                  style: TextStyle(
-                      color: AppTheme.textColor1,
-                      fontFamily: "SF UI Display Regular",
-                      fontSize: globals.deviceType == "phone" ? 17 : 25),
-                ),
-                trailing: Wrap(
-                  alignment: WrapAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "$selectedFrequency",
-                      style: TextStyle(
-                          color: AppTheme.textColor2,
-                          fontFamily: "SF UI Display Regular",
-                          fontSize: globals.deviceType == "phone" ? 17 : 25),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 02,
-                      ),
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        color: AppTheme.arrowIconsColor.withOpacity(0.25),
-                        size: 15,
-                      ),
-                    ),
-                  ],
-                ),
-                selected: true,
-                onTap: () {
-                  dosageFocus.unfocus();
-                  medicineFocus.unfocus();
-                  _settingModalBottomSheet(context, frequencyList, 1);
-                },
-              ),
-            ),
-            Container(
-              height: 1,
-              margin: EdgeInsets.only(left: 20),
-              decoration: BoxDecoration(
-                color: AppTheme.dividerColor.withOpacity(0.25),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 10, bottom: 10),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: AppTheme.subHeadingbackgroundcolor,
-                boxShadow: [
-                  const BoxShadow(
-                    color: AppTheme.subHeadingbackgroundcolor2,
-                    spreadRadius: 0,
-                    blurRadius: 0,
-                    offset: Offset(0, -0.5),
-                  ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Text(
-                  "Note",
-                  style: TextStyle(
-                      color: AppTheme.subHeadingTextColor,
-                      fontFamily: "SF UI Display Regular",
-                      fontSize: globals.deviceType == "phone" ? 13 : 21),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () async {
-                dosageFocus.unfocus();
-                medicineFocus.unfocus();
-                var result = await Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddNote()),
-                );
-                setState(() {
-                  addNoteText = result;
-                });
-              },
-              child: Container(
-                padding: EdgeInsets.all(20),
+                  )),
+              Container(
+                padding:
+                    EdgeInsets.only(top: 2.5, bottom: 2.5, left: 16, right: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
+                      flex: 0,
                       child: Text(
-                        addNoteText == '' ? "Add Note Here" : addNoteText,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
+                        "Dosage",
+                        textAlign: TextAlign.start,
                         style: TextStyle(
                             color: AppTheme.textColor1,
-                            fontFamily: "SF UI Display Regular",
+                            fontFamily: "SF UI Display Regular Bold",
                             fontSize: globals.deviceType == "phone" ? 17 : 25),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 02,
-                      ),
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        color: AppTheme.arrowIconsColor.withOpacity(0.25),
-                        size: 15,
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: TextField(
+                        textAlign: TextAlign.end,
+                        controller: dosageController,
+                        focusNode: dosageFocus,
+                        keyboardType:
+                            TextInputType.numberWithOptions(decimal: true),
+                        decoration: InputDecoration(
+                          hintText: '1',
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          contentPadding: EdgeInsets.only(
+                              left: 0, bottom: 8, top: 8, right: 0),
+                          hintStyle: TextStyle(
+                              color: AppTheme.subHeadingTextColor,
+                              fontFamily: "SF UI Display Regular",
+                              fontSize:
+                                  globals.deviceType == "phone" ? 16 : 24),
+                        ),
+                        style: TextStyle(
+                            color: AppTheme.textColor2,
+                            fontFamily: "SF UI Display Regular",
+                            fontSize: globals.deviceType == "phone" ? 16 : 24),
                       ),
                     ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      flex: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 02),
+                        child: Text(
+                          "${selectedUnit}",
+                          style: TextStyle(
+                            color: AppTheme.textColor2,
+                            fontFamily: "SF UI Display Regular",
+                            fontSize: globals.deviceType == "phone" ? 15 : 23,
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
-            ),
-            Container(
-              height: 1,
-              margin: EdgeInsets.only(left: 20),
-              decoration: BoxDecoration(
-                color: AppTheme.dividerColor.withOpacity(0.25),
+              Container(
+                height: 1,
+                margin: EdgeInsets.only(left: 20),
+                decoration: BoxDecoration(
+                  color: AppTheme.dividerColor.withOpacity(0.25),
+                ),
               ),
-            ),
-          ]),
+              Container(
+                padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
+                child: ListTile(
+                  leading: Text(
+                    "Unit",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: AppTheme.textColor1,
+                        fontFamily: "SF UI Display Regular Bold",
+                        fontSize: globals.deviceType == "phone" ? 17 : 25),
+                  ),
+                  trailing: Wrap(
+                    alignment: WrapAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "$selectedUnit",
+                        style: TextStyle(
+                            color: AppTheme.textColor2,
+                            fontFamily: "SF UI Display Regular",
+                            fontSize: globals.deviceType == "phone" ? 17 : 25),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 02),
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppTheme.arrowIconsColor.withOpacity(0.2),
+                          size: globals.deviceType == 'phone' ? 15 : 23,
+                        ),
+                      ),
+                    ],
+                  ),
+                  selected: true,
+                  onTap: () {
+                    dosageFocus.unfocus();
+                    medicineFocus.unfocus();
+                    _settingModalBottomSheet(context, unitList, 0);
+                  },
+                ),
+              ),
+              Container(
+                height: 1,
+                margin: EdgeInsets.only(left: 20),
+                decoration: BoxDecoration(
+                  color: AppTheme.dividerColor.withOpacity(0.25),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
+                child: ListTile(
+                  leading: Text(
+                    "Frequency",
+                    style: TextStyle(
+                        color: AppTheme.textColor1,
+                        fontFamily: "SF UI Display Regular",
+                        fontSize: globals.deviceType == "phone" ? 17 : 25),
+                  ),
+                  trailing: Wrap(
+                    alignment: WrapAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "$selectedFrequency",
+                        style: TextStyle(
+                            color: AppTheme.textColor2,
+                            fontFamily: "SF UI Display Regular",
+                            fontSize: globals.deviceType == "phone" ? 17 : 25),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 02,
+                        ),
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppTheme.arrowIconsColor.withOpacity(0.25),
+                          size: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                  selected: true,
+                  onTap: () {
+                    dosageFocus.unfocus();
+                    medicineFocus.unfocus();
+                    _settingModalBottomSheet(context, frequencyList, 1);
+                  },
+                ),
+              ),
+              // Container(
+              //   height: 1,
+              //   margin: EdgeInsets.only(left: 20),
+              //   decoration: BoxDecoration(
+              //     color: AppTheme.dividerColor.withOpacity(0.25),
+              //   ),
+              // ),
+              Container(
+                padding: EdgeInsets.only(top: 10, bottom: 10),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: AppTheme.subHeadingbackgroundcolor,
+                  boxShadow: [
+                    const BoxShadow(
+                      color: AppTheme.subHeadingbackgroundcolor2,
+                      spreadRadius: 0,
+                      blurRadius: 0,
+                      offset: Offset(0, -0.5),
+                    ),
+                  ],
+                ),
+                // child: Padding(
+                //   padding: const EdgeInsets.only(left: 20.0),
+                //   child: Text(
+                //     "Note",
+                //     style: TextStyle(
+                //         color: AppTheme.subHeadingTextColor,
+                //         fontFamily: "SF UI Display Regular",
+                //         fontSize: globals.deviceType == "phone" ? 14 : 21),
+                //   ),
+                // ),
+              ),
+              InkWell(
+                onTap: () async {
+                  dosageFocus.unfocus();
+                  medicineFocus.unfocus();
+                  var result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddNote()),
+                  );
+                  setState(() {
+                    addNoteText = result;
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          addNoteText == ''
+                              ? "Add Personal Notes Here"
+                              : addNoteText,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(
+                              color: AppTheme.textColor1,
+                              fontFamily: "SF UI Display Regular",
+                              fontSize:
+                                  globals.deviceType == "phone" ? 17 : 25),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 02,
+                        ),
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppTheme.arrowIconsColor.withOpacity(0.25),
+                          size: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: AppTheme.subHeadingbackgroundcolor,
+                  boxShadow: [
+                    const BoxShadow(
+                      color: AppTheme.subHeadingbackgroundcolor2,
+                      spreadRadius: 0,
+                      blurRadius: 0,
+                      offset: Offset(0, -0.5),
+                    ),
+                  ],
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    _submit();
+                  },
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20, right: 20, top: 100),
+                    child: new Container(
+                      padding: const EdgeInsets.all(16),
+                      alignment: Alignment.center,
+                      color: Theme.of(context).primaryColor,
+                      child: new Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            new Text(
+                              "Add Medicine",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "SF UI Display",
+                                color: Colors.white,
+                                fontSize:
+                                    globals.deviceType == "phone" ? 17 : 25,
+                              ),
+                            )
+                          ]),
+                    ),
+                  ),
+                ),
+              ),
+            ]),
+          ),
         ),
       ]),
     );
+  }
+
+  void _submit() {
+    final form = _formKey.currentState;
+
+    if (form.validate()) {
+      String medicineName = medicineController.text;
+      String dosage = dosageController.text;
+      if (medicineName != null && medicineName.isNotEmpty) {
+        final medicineModel = MedicineModel(
+            medicineName,
+            '${dosage} $selectedUnit',
+            selectedUnit,
+            selectedFrequency,
+            addNoteText);
+        addMedicine(medicineModel);
+      } else {
+        Utility.showSnackBar(
+            _scaffoldKey, 'Please Fill All Required Field ', context);
+      }
+      form.save();
+    }
   }
 
   _settingModalBottomSheet(context, obj, int value) {

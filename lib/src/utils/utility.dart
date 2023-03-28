@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
+import 'package:mobile_app/src/modules/home/home_screen.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:ext_storage/ext_storage.dart';
@@ -161,7 +162,7 @@ class Utility {
   }
 
   static String getImageFromPreferences() {
-    final String imgPath =  getPrefrenceValue();
+    final String imgPath = getPrefrenceValue();
 
     return imgPath;
   }
@@ -172,5 +173,14 @@ class Utility {
     print("path actual" + preferences.getString(IMG_KEY));
 
     return preferences.getString(IMG_KEY);
+  }
+
+  // navigate to screen
+  static navigateToScreen(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setBool("INTRODUCTION_WATCHED", true);
+
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 }

@@ -7,6 +7,7 @@ import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/login/pageview_screen/screen4.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
+import 'package:mobile_app/src/utils/utility.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroPage extends StatefulWidget {
@@ -85,7 +86,7 @@ class IntroPageState extends State<IntroPage> {
   Widget getStartedButton() {
     return InkWell(
       onTap: () {
-        navigateToScreen();
+        Utility.navigateToScreen(context);
       },
       child: Container(
         width: double.infinity,
@@ -163,12 +164,12 @@ class IntroPageState extends State<IntroPage> {
     setState(() {});
   }
 
-  // navigate to screen
-  navigateToScreen() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setBool("INTRODUCTION_WATCHED", true);
+  // // navigate to screen
+  // navigateToScreen() async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   pref.setBool("INTRODUCTION_WATCHED", true);
 
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomeScreen()));
-  }
+  //   Navigator.pushReplacement(
+  //       context, MaterialPageRoute(builder: (context) => HomeScreen()));
+  // }
 }

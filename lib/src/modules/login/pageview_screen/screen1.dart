@@ -3,6 +3,8 @@ import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/home/home_screen.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
+import 'package:mobile_app/src/utils/utility.dart';
+import 'package:mobile_app/src/widgets/skip_button.dart';
 
 class Screen1 extends StatefulWidget {
   @override
@@ -47,31 +49,17 @@ class Screen1State extends State<Screen1> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             SizedBox(
-              height: 100,
+              height: 60,
             ),
-            skipWidget(),
+            SkipButton(),
             SizedBox(
-              height: 50,
+              height: 100,
             ),
             makeWidget(),
           ],
         ),
       ),
     );
-  }
-
-  Widget skipWidget() {
-    return Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.grey.shade400,
-            style: BorderStyle.solid,
-            width: 1.0,
-          ),
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        child: Text("Skip", textAlign: TextAlign.center));
   }
 
   // make Widget

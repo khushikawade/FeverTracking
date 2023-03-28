@@ -49,6 +49,8 @@ dependencies:
   hive: ^2.2.3
   path_provider: ^2.0.14
   pdf: ^3.8.4
+  bubble_showcase: ^1.1.0
+  speech_bubble: ^0.0.9
   # permission_handler: ^10.2.0
   # day_night_time_picker: ^1.2.0+2
   # image_picker: ^0.8.7
@@ -90,6 +92,9 @@ flutter:
     - family: FeverTrackingIcons
       fonts:
         - asset: assets/fonts/FeverTrackingIcons.ttf
+    - family:  BodyIcon
+      fonts:
+        - asset: assets/fonts/BodyIcon.ttf
     - family: SF-UI-DISPLAY
       fonts:
         - asset: assets/fonts/SF-UI-Display-Black.ttf

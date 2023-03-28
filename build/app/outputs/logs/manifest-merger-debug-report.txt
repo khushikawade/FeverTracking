@@ -37,17 +37,18 @@ INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.x
 INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:1-58:12
 INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:1-58:12
 MERGED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml:1:1-58:12
-MERGED from [:shared_preferences_android] C:\feverTracking_mobile_app\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-22:12
 MERGED from [:flutter_plugin_android_lifecycle] C:\feverTracking_mobile_app\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:path_provider_android] C:\feverTracking_mobile_app\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:health] C:\feverTracking_mobile_app\build\health\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:speech_bubble] C:\feverTracking_mobile_app\build\speech_bubble\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:google_sign_in_android] C:\feverTracking_mobile_app\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:shared_preferences_android] C:\feverTracking_mobile_app\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:device_info] C:\feverTracking_mobile_app\build\device_info\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:ext_storage] C:\feverTracking_mobile_app\build\ext_storage\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:libphonenumber_plugin] C:\feverTracking_mobile_app\build\libphonenumber_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:path_provider_android] C:\feverTracking_mobile_app\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-19:12
 MERGED from [:permission_handler] C:\feverTracking_mobile_app\build\permission_handler\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:google_sign_in_android] C:\feverTracking_mobile_app\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\446846cfea4d873445262c2acf7a8037\window-java-1.0.0-beta04\AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b654ad39108ef572ff83cd660b3d9f72\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
@@ -127,28 +128,30 @@ uses-sdk
 INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml
 INJECTED from C:\feverTracking_mobile_app\android\app\src\main\AndroidManifest.xml
-MERGED from [:shared_preferences_android] C:\feverTracking_mobile_app\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:shared_preferences_android] C:\feverTracking_mobile_app\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:image_picker] C:\feverTracking_mobile_app\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:flutter_plugin_android_lifecycle] C:\feverTracking_mobile_app\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:flutter_plugin_android_lifecycle] C:\feverTracking_mobile_app\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] C:\feverTracking_mobile_app\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] C:\feverTracking_mobile_app\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:health] C:\feverTracking_mobile_app\build\health\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:health] C:\feverTracking_mobile_app\build\health\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:speech_bubble] C:\feverTracking_mobile_app\build\speech_bubble\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:speech_bubble] C:\feverTracking_mobile_app\build\speech_bubble\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:google_sign_in_android] C:\feverTracking_mobile_app\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:google_sign_in_android] C:\feverTracking_mobile_app\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences_android] C:\feverTracking_mobile_app\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences_android] C:\feverTracking_mobile_app\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:device_info] C:\feverTracking_mobile_app\build\device_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:device_info] C:\feverTracking_mobile_app\build\device_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:ext_storage] C:\feverTracking_mobile_app\build\ext_storage\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:ext_storage] C:\feverTracking_mobile_app\build\ext_storage\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:libphonenumber_plugin] C:\feverTracking_mobile_app\build\libphonenumber_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:libphonenumber_plugin] C:\feverTracking_mobile_app\build\libphonenumber_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:path_provider_android] C:\feverTracking_mobile_app\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:path_provider_android] C:\feverTracking_mobile_app\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:share] C:\feverTracking_mobile_app\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:permission_handler] C:\feverTracking_mobile_app\build\permission_handler\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:permission_handler] C:\feverTracking_mobile_app\build\permission_handler\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:google_sign_in_android] C:\feverTracking_mobile_app\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:google_sign_in_android] C:\feverTracking_mobile_app\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\446846cfea4d873445262c2acf7a8037\window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\446846cfea4d873445262c2acf7a8037\window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\4d7dc63838efc341654fcea06ed6fbb1\jetified-window-1.0.0-beta04\AndroidManifest.xml:20:5-22:41

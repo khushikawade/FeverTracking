@@ -45,7 +45,7 @@ class _MenuScreenState extends State<MenuScreen> {
           ),
         ),
         automaticallyImplyLeading: false,
-        // backgroundColor: backGroundColor,
+        backgroundColor: AppTheme.textColor2,
         elevation: 0,
         titleSpacing: 0.0,
       ),

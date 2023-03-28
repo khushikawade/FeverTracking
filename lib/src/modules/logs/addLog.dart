@@ -57,6 +57,7 @@ class _AddLogPageState extends State<AddLogPage> {
   String addNoteText = "";
   String postion = "";
   String temp = "";
+  bool ClickAddLog = false;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<CheckBoxModel> completeSymptomsList = new List();
 
@@ -74,8 +75,9 @@ class _AddLogPageState extends State<AddLogPage> {
     bool isSuccess = await DbServices().addData(log, Strings.hiveLogName);
 
     if (isSuccess != null && isSuccess) {
-      Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
-      Future.delayed(const Duration(seconds: 1), () {
+      Utility.showSnackBar(
+          _scaffoldKey, 'Log data Added Successfully', context);
+      Future.delayed(const Duration(seconds: 2), () {
         if (widget.fromHomePage != null && widget.fromHomePage) {
           Navigator.of(context).pop(1);
         } else {
@@ -173,7 +175,9 @@ class _AddLogPageState extends State<AddLogPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: AppTheme.subHeadingbackgroundcolor,
       appBar: AppBar(
+        backgroundColor: AppTheme.textColor2,
         elevation: 5,
         centerTitle: true,
         title: Column(
@@ -203,39 +207,39 @@ class _AddLogPageState extends State<AddLogPage> {
             color: AppTheme.iconColor,
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: IconButton(
-              onPressed: () {
-                getcurrentdate();
-                if ((finaldate != null) &&
-                    (postion.isNotEmpty) &&
-                    (temp.isNotEmpty) &&
-                    (sypmtoms.isNotEmpty) &&
-                    (medicineList.isNotEmpty)) {
-                  final log = LogsModel(
-                      finaldate,
-                      postion,
-                      temp,
-                      sypmtoms,
-                      medicineList != null ? medicineList[0] : null,
-                      addNoteText);
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.only(right: 10),
+        //     child: IconButton(
+        //       onPressed: () {
+        //         getcurrentdate();
+        //         if ((finaldate != null) &&
+        //             (postion.isNotEmpty) &&
+        //             (temp.isNotEmpty) &&
+        //             (sypmtoms.isNotEmpty) &&
+        //             (medicineList.isNotEmpty)) {
+        //           final log = LogsModel(
+        //               finaldate,
+        //               postion,
+        //               temp,
+        //               sypmtoms,
+        //               medicineList != null ? medicineList[0] : null,
+        //               addNoteText);
 
-                  addLog(log);
-                } else {
-                  Utility.showSnackBar(
-                      _scaffoldKey, 'Please Fill All Required Field ', context);
-                }
-              },
-              icon: Icon(
-                const IconData(59809, fontFamily: "MaterialIcons"),
-                color: AppTheme.iconColor,
-                size: 24,
-              ),
-            ),
-          ),
-        ],
+        //           addLog(log);
+        //         } else {
+        //           Utility.showSnackBar(
+        //               _scaffoldKey, 'Please Fill All Required Field ', context);
+        //         }
+        //       },
+        //       icon: Icon(
+        //         const IconData(59809, fontFamily: "MaterialIcons"),
+        //         color: AppTheme.iconColor,
+        //         size: 24,
+        //       ),
+        //     ),
+        //   ),
+        // ],
       ),
       body: Container(
         color: Theme.of(context).backgroundColor,
@@ -308,9 +312,10 @@ class _AddLogPageState extends State<AddLogPage> {
                   showPicker(
                     unselectedColor: AppTheme.subHeadingTextColor,
                     context: context,
-                    value: _time,
+                    value: Time.fromTimeOfDay(_time, 0),
                     onChange: onTimeChanged,
                     // minuteInterval: MinuteInterval.FIVE,
+
                     accentColor: Theme.of(context).primaryColor,
                     disableHour: false,
                     disableMinute: false,
@@ -340,7 +345,7 @@ class _AddLogPageState extends State<AddLogPage> {
             padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
             child: ListTile(
               leading: Text(
-                "Postion",
+                "Position",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: AppTheme.textColor1,
@@ -426,8 +431,8 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
               selected: true,
               onTap: () {
-                // postionAndTemperatureBottomSheet(
-                //     context, globals.tempertureList, 1, goblas.);
+                postionAndTemperatureBottomSheet(context,
+                    globals.tempertureList, 1, globals.postionListIcon);
               },
             ),
           ),
@@ -440,7 +445,10 @@ class _AddLogPageState extends State<AddLogPage> {
           ),
           InkWell(
             onTap: () {
-              _showSymtomModalSheet();
+              setState(() {
+                _showSymtomModalSheet();
+                print(sypmtomsTempList.length);
+              });
             },
             child: Container(
               padding: EdgeInsets.all(20),
@@ -460,7 +468,9 @@ class _AddLogPageState extends State<AddLogPage> {
                     ),
                   ),
                   Container(
-                      width: MediaQuery.of(context).size.width * 0.40,
+                      width: sypmtomsTempList.length == 1
+                          ? MediaQuery.of(context).size.width * 0.20
+                          : MediaQuery.of(context).size.width * 0.40,
                       child: Text(
                         "$sypmtoms",
                         overflow: TextOverflow.ellipsis,
@@ -487,6 +497,26 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(left: 18.0, bottom: 5),
+            child: sypmtomsTempList.isEmpty &&
+                    ClickAddLog &&
+                    sypmtomsTempList.length == 0
+                ? Text(
+                    "Please select the symptoms",
+                    style: TextStyle(
+                        color: AppTheme.titleColor1,
+                        fontFamily: "SF UI Display Regular",
+                        fontSize: globals.deviceType == "phone" ? 13 : 21),
+                  )
+                : Text(""),
+          ),
+          // sypmtomsTempList.length == 0 || sypmtomsTempList.isEmpty
+          //     ? Text(
+          //         "Please Select the symptoms",
+          //         style: TextStyle(color: Colors.red),
+          //       )
+          //     : Text(""),
           Container(
             padding: EdgeInsets.only(top: 10, bottom: 10),
             width: MediaQuery.of(context).size.width,
@@ -595,13 +625,61 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
             ),
           ),
-          Container(
-            height: 1,
-            margin: EdgeInsets.only(left: 20),
-            decoration: BoxDecoration(
-              color: AppTheme.dividerColor.withOpacity(0.25),
+          InkWell(
+            onTap: () {
+              setState(() {
+                ClickAddLog = true;
+                getcurrentdate();
+                if ((finaldate != null) &&
+                    (postion.isNotEmpty) &&
+                    (temp.isNotEmpty) &&
+                    (sypmtoms.isNotEmpty) &&
+                    (medicineList.isNotEmpty)) {
+                  ClickAddLog = false;
+                  final log = LogsModel(
+                      finaldate,
+                      postion,
+                      temp,
+                      sypmtoms,
+                      medicineList != null ? medicineList[0] : null,
+                      addNoteText);
+                  addLog(log);
+                } else {
+                  // Utility.showSnackBar(
+                  //     _scaffoldKey, 'Please Fill All Required Field ', context);
+                }
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  left: 20, right: 20, top: 10, bottom: 20),
+              child: new Container(
+                padding: const EdgeInsets.all(16),
+                alignment: Alignment.center,
+                color: Theme.of(context).primaryColor,
+                child: new Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      new Text(
+                        "Add Log",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "SF UI Display",
+                          color: Colors.white,
+                          fontSize: globals.deviceType == "phone" ? 17 : 25,
+                        ),
+                      )
+                    ]),
+              ),
             ),
           ),
+          // Container(
+          //   height: 1,
+          //   margin: EdgeInsets.only(left: 20),
+          //   decoration: BoxDecoration(
+          //     color: AppTheme.dividerColor.withOpacity(0.25),
+          //   ),
+          // ),
         ]),
       ),
     );
@@ -625,13 +703,13 @@ class _AddLogPageState extends State<AddLogPage> {
               padding: EdgeInsets.all(2),
               alignment: Alignment.center,
               child: Icon(
-                Icons.remove,
+                Icons.delete,
                 size: 16,
-                color: Colors.grey,
+                color: Colors.red,
               ),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.red, width: 1)),
+                  border: Border.all(color: Colors.grey, width: 1)),
             ),
           ),
           SizedBox(
@@ -674,33 +752,64 @@ class _AddLogPageState extends State<AddLogPage> {
 
   // add Medicine Widget
   Widget addMedicineWidget() {
-    return ListTile(
-      leading: Text(
-        "Add Medicine Log",
-        style: TextStyle(
-            color: AppTheme.textColor1,
-            fontFamily: "SF UI Display Regular",
-            fontSize: globals.deviceType == "phone" ? 17 : 25),
-      ),
-      trailing: Icon(
-        Icons.arrow_forward_ios,
-        color: AppTheme.arrowIconsColor.withOpacity(0.25),
-        size: globals.deviceType == 'phone' ? 15 : 23,
-      ),
-      selected: true,
-      onTap: () async {
-        var medicineModel = await Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MedicinesPage(
-                      fromHomePage: false,
-                    )));
+    return Column(
+      children: [
+        ListTile(
+          leading: Text(
+            "Add Medicine Log",
+            style: TextStyle(
+                color: AppTheme.textColor1,
+                fontFamily: "SF UI Display Regular",
+                fontSize: globals.deviceType == "phone" ? 17 : 25),
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: AppTheme.arrowIconsColor.withOpacity(0.25),
+            size: globals.deviceType == 'phone' ? 15 : 23,
+          ),
+          selected: true,
+          onTap: () async {
+            var medicineModel = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MedicinesPage(
+                          fromHomePage: false,
+                        )));
 
-        if (medicineModel != null) {
-          medicineList.add(medicineModel);
-          setState(() {});
-        }
-      },
+            if (medicineModel != null) {
+              medicineList.add(medicineModel);
+              setState(() {});
+            }
+          },
+        ),
+        Container(
+          padding: EdgeInsets.only(top: 2, bottom: 2),
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              // color: AppTheme.subHeadingbackgroundcolor,
+              ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 18.0, bottom: 5),
+            child:
+                medicineList.isEmpty && ClickAddLog && medicineList.length == 0
+                    ? Text(
+                        "Please add the medicines",
+                        style: TextStyle(
+                            color: AppTheme.titleColor1,
+                            fontFamily: "SF UI Display Regular",
+                            fontSize: globals.deviceType == "phone" ? 13 : 21),
+                      )
+                    : Text(""),
+          ),
+        ),
+        // Container(
+        //   height: 2,
+        //   margin: EdgeInsets.only(left: 20),
+        //   decoration: BoxDecoration(
+        //     color: AppTheme.dividerColor.withOpacity(0.25),
+        //   ),
+        // ),
+      ],
     );
   }
 
@@ -743,21 +852,25 @@ class _AddLogPageState extends State<AddLogPage> {
         backgroundColor: Theme.of(context).backgroundColor,
         builder: (BuildContext bc) {
           return ListView.builder(
-              itemCount: 5,
+              itemCount: 6,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading: icon[index],
-                  title: new Text(
-                    // items[index],
-                    obj[index],
-                    style: TextStyle(
-                      color: AppTheme.textColor1,
-                      fontSize: globals.deviceType == 'phone' ? 17.0 : 25.0,
-                      fontFamily: 'SF UI Display Regular',
-                      fontWeight: FontWeight.w600,
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Card(
+                    child: ListTile(
+                      trailing: value == 1 ? null : icon[index],
+                      title: new Text(
+                        obj[index],
+                        style: TextStyle(
+                          color: AppTheme.textColor1,
+                          fontSize: globals.deviceType == 'phone' ? 17.0 : 25.0,
+                          fontFamily: 'SF UI Display Regular',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      onTap: () => _selectTemp(obj[index], value),
                     ),
                   ),
-                  onTap: () => _selectTemp(obj, value),
                 );
               });
         });
@@ -796,15 +909,17 @@ class _AddLogPageState extends State<AddLogPage> {
                               title: Text(data.displayId),
                               controlAffinity: ListTileControlAffinity.leading,
                               onChanged: (bool val) {
-                                state2(() {
+                                setState(() {
                                   data.checked = !data.checked;
 
                                   if (sypmtomsTempList.length < 3) {
                                     sypmtomsTempList.add(data.displayId);
                                     distinctIds =
                                         sypmtomsTempList.toSet().toList();
+                                    sypmtomsTempList.length;
                                   }
                                 });
+                                state2(() {});
                               },
                             ),
                           ],
@@ -832,7 +947,7 @@ class _AddLogPageState extends State<AddLogPage> {
       sypmtoms = '';
       sypmtoms = distinctIds != null ? distinctIds.join(', ') : '';
       distinctIds = [];
-      sypmtomsTempList = [];
+      // sypmtomsTempList = [];
     });
   }
 }

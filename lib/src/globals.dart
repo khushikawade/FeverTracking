@@ -271,19 +271,56 @@ final List<String> tempertureList = [
 List<String> postionList = [
   " Ear ",
   " ForeHead ",
-  " Underarm ",
   " Mouth ",
-  " Neck ",
-  " Rectum "
+  " Nose ",
+  " Heart ",
+  " Teeth ",
 ];
 
-List<Icon> postionListIcon = [
-  Icon(Icons.add),
-  Icon(Icons.place),
-  Icon(Icons.add),
-  Icon(Icons.place),
-  Icon(Icons.add),
-  Icon(Icons.place),
+List<Image> postionListIcon = [
+  Image.asset(
+    'assets/images/ear1.png',
+    height: 30,
+    width: 30,
+  ),
+  Image.asset(
+    'assets/images/forehead1.jpg',
+    height: 30,
+    width: 30,
+  ),
+  Image.asset(
+    'assets/images/mouth1.png',
+    height: 30,
+    width: 30,
+  ),
+  Image.asset(
+    'assets/images/nose1.png',
+    height: 30,
+    width: 30,
+  ),
+  Image.asset(
+    'assets/images/heart.jpg',
+    height: 30,
+    width: 30,
+  ),
+  Image.asset(
+    'assets/images/teeth.jpg',
+    height: 30,
+    width: 30,
+  ),
+
+  // Icon(const IconData(0xe802, fontFamily: "BodyIcon"), color: Colors.amber),
+  // Icon(const IconData(0xe800, fontFamily: "BodyIcon"), color: Colors.pink),
+  // Icon(const IconData(0xe804, fontFamily: "BodyIcon"), color: Colors.red),
+  // Icon(const IconData(0xe801, fontFamily: "BodyIcon"), color: Colors.green),
+  // Icon(const IconData(0xe805, fontFamily: "BodyIcon"), color: Colors.blue),
+  // Icon(const IconData(0xe806, fontFamily: "BodyIcon"), color: Colors.brown),
+  // Icon(const IconData(0xe807, fontFamily: "BodyIcon"), color: Colors.red),
+  // Icon(const IconData(0xe808, fontFamily: "BodyIcon"), color: Colors.green),
+  // Icon(Icons.add),
+  // Icon(Icons.place),
+  // Icon(Icons.add),
+  // Icon(Icons.place),
 ];
 
 // List<CheckBoxModel> checkBoxModelList = [
