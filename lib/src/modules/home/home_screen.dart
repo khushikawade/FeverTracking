@@ -1,3 +1,4 @@
+import 'package:bubble_showcase/bubble_showcase.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +8,7 @@ import 'package:mobile_app/src/modules/logs/sliders/monthslider.dart';
 import 'package:mobile_app/src/modules/profile/googlefit.dart';
 
 import 'package:mobile_app/src/modules/profile/updateprofie.dart';
+import 'package:mobile_app/src/widgets/bubbleWidget.dart';
 import 'package:mobile_app/src/widgets/registration_success_dialog.dart';
 import 'package:mobile_app/src/widgets/user_temp_grap.dart';
 import 'package:mobile_app/src/modules/home/createPDF.dart';
@@ -47,7 +49,7 @@ class HomeScreenState extends State<HomeScreen> {
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   static GlobalKey previewContainer = new GlobalKey();
-
+  GlobalKey _secondButtonKey = GlobalKey();
   @override
   void initState() {
     getLogs();
@@ -319,7 +321,14 @@ class HomeScreenState extends State<HomeScreen> {
                     )
                   : SettingPage(),
       floatingActionButton: selectedIndex == 0
-          ? GestureDetector(
+          ?
+          //  Container(
+          //     child: bubble(
+          //       context,
+          //       _secondButtonKey,
+          //     ),
+          //   )
+          GestureDetector(
               onTap: () async {
                 // Navigator.push(
                 //     context,

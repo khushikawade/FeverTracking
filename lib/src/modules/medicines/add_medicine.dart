@@ -28,6 +28,7 @@ class AddMedicine extends StatefulWidget {
 }
 
 class _AddMedicineState extends State<AddMedicine> {
+  String dropdownValue = unitList.first;
   String selectedUnit = "";
   String selectedFrequency = "";
   String addNoteText = '';
@@ -158,28 +159,12 @@ class _AddMedicineState extends State<AddMedicine> {
                         fontSize: globals.deviceType == "phone" ? 16.0 : 24,
                       ),
                       decoration: InputDecoration(
-                        // border: OutlineInputBorder(
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
                         labelText: 'Enter Medicine Name',
                         labelStyle: TextStyle(
                           fontSize: globals.deviceType == "phone" ? 16.0 : 24,
                           fontFamily: 'SF UI Display Bold',
                           color: AppTheme.textColor1,
                         ),
-                        // focusedBorder: OutlineInputBorder(
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        //   borderSide: BorderSide(
-                        //     color: Color(0xff463DC7),
-                        //   ),
-                        // ),
-                        // enabledBorder: OutlineInputBorder(
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        //   borderSide: BorderSide(
-                        //     color: Colors.grey,
-                        //     width: 2.0,
-                        //   ),
-                        // ),
                       ),
                     ),
                   )),
@@ -203,10 +188,10 @@ class _AddMedicineState extends State<AddMedicine> {
                       ),
                     ),
                     SizedBox(
-                      width: 20,
+                      width: 209,
                     ),
                     Expanded(
-                      flex: 4,
+                      flex: 3,
                       child: TextField(
                         textAlign: TextAlign.end,
                         controller: dosageController,
@@ -215,13 +200,22 @@ class _AddMedicineState extends State<AddMedicine> {
                             TextInputType.numberWithOptions(decimal: true),
                         decoration: InputDecoration(
                           hintText: '1',
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
+                          // border: UnderlineInputBorder(
+                          //   borderSide: BorderSide(
+                          //       color: AppTheme.textColor2, width: 0.2),
+                          // ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppTheme.textColor2, width: 1),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppTheme.subtitleTextColor, width: 1),
+                          ),
+                          // errorBorder: InputBorder.none,
+                          // disabledBorder: InputBorder.none,
                           contentPadding: EdgeInsets.only(
-                              left: 0, bottom: 8, top: 8, right: 0),
+                              left: 0, bottom: 0, top: 0, right: 0),
                           hintStyle: TextStyle(
                               color: AppTheme.subHeadingTextColor,
                               fontFamily: "SF UI Display Regular",
@@ -234,26 +228,65 @@ class _AddMedicineState extends State<AddMedicine> {
                             fontSize: globals.deviceType == "phone" ? 16 : 24),
                       ),
                     ),
+
                     SizedBox(
                       width: 10,
                     ),
+                    // Expanded(
+                    //   flex: 0,
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(top: 02),
+                    //     child: Text(
+                    //       "${selectedUnit}",
+                    //       style: TextStyle(
+                    //         color: AppTheme.textColor2,
+                    //         fontFamily: "SF UI Display Regular",
+                    //         fontSize: globals.deviceType == "phone" ? 15 : 23,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     Expanded(
-                      flex: 0,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 02),
-                        child: Text(
-                          "${selectedUnit}",
-                          style: TextStyle(
-                            color: AppTheme.textColor2,
-                            fontFamily: "SF UI Display Regular",
-                            fontSize: globals.deviceType == "phone" ? 15 : 23,
-                          ),
-                        ),
+                      flex: 5,
+                      child: DropdownButton<String>(
+                        value: dropdownValue,
+                        icon: const Icon(Icons.arrow_drop_down),
+                        // elevation: 0,
+                        style: const TextStyle(color: AppTheme.textColor2),
+                        onChanged: (String value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValue = value;
+                            print(dropdownValue);
+                          });
+                        },
+                        items: unitList
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
                       ),
                     )
                   ],
                 ),
               ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 70),
+              //   child: Align(
+              //     alignment: Alignment.topRight,
+              //     child: Container(
+              //       height: 2,
+              //       width: 30,
+              //       color: AppTheme.textColor2,
+              //     ),
+              //   ),
+              // ),
+              SizedBox(
+                height: 10,
+              ),
+
               Container(
                 height: 1,
                 margin: EdgeInsets.only(left: 20),
@@ -261,48 +294,48 @@ class _AddMedicineState extends State<AddMedicine> {
                   color: AppTheme.dividerColor.withOpacity(0.25),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-                child: ListTile(
-                  leading: Text(
-                    "Unit",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: AppTheme.textColor1,
-                        fontFamily: "SF UI Display Regular Bold",
-                        fontSize: globals.deviceType == "phone" ? 17 : 25),
-                  ),
-                  trailing: Wrap(
-                    alignment: WrapAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "$selectedUnit",
-                        style: TextStyle(
-                            color: AppTheme.textColor2,
-                            fontFamily: "SF UI Display Regular",
-                            fontSize: globals.deviceType == "phone" ? 17 : 25),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 02),
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          color: AppTheme.arrowIconsColor.withOpacity(0.2),
-                          size: globals.deviceType == 'phone' ? 15 : 23,
-                        ),
-                      ),
-                    ],
-                  ),
-                  selected: true,
-                  onTap: () {
-                    dosageFocus.unfocus();
-                    medicineFocus.unfocus();
-                    _settingModalBottomSheet(context, unitList, 0);
-                  },
-                ),
-              ),
+              // Container(
+              //   padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
+              //   child: ListTile(
+              //     leading: Text(
+              //       "Unit",
+              //       textAlign: TextAlign.center,
+              //       style: TextStyle(
+              //           color: AppTheme.textColor1,
+              //           fontFamily: "SF UI Display Regular Bold",
+              //           fontSize: globals.deviceType == "phone" ? 17 : 25),
+              //     ),
+              //     trailing: Wrap(
+              //       alignment: WrapAlignment.center,
+              //       children: <Widget>[
+              //         Text(
+              //           "$selectedUnit",
+              //           style: TextStyle(
+              //               color: AppTheme.textColor2,
+              //               fontFamily: "SF UI Display Regular",
+              //               fontSize: globals.deviceType == "phone" ? 17 : 25),
+              //         ),
+              //         SizedBox(
+              //           width: 10,
+              //         ),
+              //         Padding(
+              //           padding: const EdgeInsets.only(top: 02),
+              //           child: Icon(
+              //             Icons.arrow_forward_ios,
+              //             color: AppTheme.arrowIconsColor.withOpacity(0.2),
+              //             size: globals.deviceType == 'phone' ? 15 : 23,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     selected: true,
+              //     onTap: () {
+              //       dosageFocus.unfocus();
+              //       medicineFocus.unfocus();
+              //       _settingModalBottomSheet(context, unitList, 0);
+              //     },
+              //   ),
+              // ),
               Container(
                 height: 1,
                 margin: EdgeInsets.only(left: 20),
