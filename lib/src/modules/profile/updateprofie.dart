@@ -350,6 +350,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               padding: const EdgeInsets.only(
                                   left: 20, right: 20, top: 10, bottom: 10),
                               child: TextFormField(
+                                cursorColor: AppTheme.textColor2,
                                 controller: _Namecontroller,
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
@@ -388,6 +389,15 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                     // fontWeight: FontWeight.bold,
                                     fontFamily: 'SF UI Display Bold',
                                     color: AppTheme.textColor1,
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: AppTheme.textColor2, width: 1.5),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: AppTheme.subHeadingTextColor,
+                                        width: 1.5),
                                   ),
                                 ),
                               ),
@@ -486,6 +496,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                             padding: const EdgeInsets.only(
                                 left: 20, right: 20, top: 10, bottom: 10),
                             child: TextFormField(
+                              cursorColor: AppTheme.textColor2,
                               controller: _agecontroller,
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
@@ -522,6 +533,15 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                       globals.deviceType == "phone" ? 14.0 : 22,
                                   fontFamily: 'SF UI Display Bold',
                                   color: AppTheme.textColor1,
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: AppTheme.textColor2, width: 1.5),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: AppTheme.subHeadingTextColor,
+                                      width: 1.5),
                                 ),
                               ),
                             ),

@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/medicines/add_medicine.dart';
+import 'package:mobile_app/src/modules/medicines/editMedicine.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
+import 'package:mobile_app/src/widgets/add_to_log.dart';
 import 'package:mobile_app/src/widgets/loaderWidget.dart';
+import 'package:mobile_app/src/widgets/skip_button.dart';
 
 class MedicinesPage extends StatefulWidget {
   bool fromHomePage;
@@ -29,7 +32,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
         await DbServices().deleteData(Strings.createMedicineName, index);
     if (isSuccess != null && isSuccess) {
       Utility.showSnackBar(
-          _scaffoldKey, 'Medicine Deleted Successfully', context);
+          _scaffoldKey, 'Medicine deleted successfully', context);
 
       setState(() {
         widget.deleteMedicine = false;
@@ -188,20 +191,55 @@ class _MedicinesPageState extends State<MedicinesPage> {
                   fontSize: globals.deviceType == "phone" ? 15 : 23),
             ),
           ),
-          trailing: iconWidget(index),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              addToLogButton(
+                  widget.fromHomePage, _scaffoldKey, index, items, context),
+              SizedBox(
+                width: 10,
+              ),
+              // InkWell(
+              //   onTap: () async {
+              //     // {
+              //     //   print(items.length);
+              //     //   var get = await Navigator.push(
+              //     //       context,
+              //     //       MaterialPageRoute(
+              //     //           builder: (context) => EditMedicinePage(
+              //     //                 medicineItem: items[index].medicineName,
+              //     //                 index: index,
+              //     //               )));
+
+              //     //   setState(() {});
+              //     // }
+              //   },
+              //   child: Icon(
+              //     const IconData(0xe802, fontFamily: "FeverTrackingIcons"),
+              //     // color:AppTheme.iconColor,
+              //     color: Colors.black54,
+              //     size: 24,
+              //   ),
+              // ),
+              SizedBox(
+                width: 10,
+              ),
+              iconWidget(index),
+            ],
+          ),
           selected: true,
-          onTap: () {
-            widget.fromHomePage
-                ? print("fromhomepage")
-                : Future.delayed(const Duration(seconds: 0), () {
-                    Utility.showSnackBar(_scaffoldKey,
-                        'Medicine Successfully Added To Log', context);
-                    Future.delayed(const Duration(seconds: 2), () {
-                      Navigator.of(context).pop(items[index]);
-                    });
-                  });
-            //
-          },
+          // onTap: () {
+          //   widget.fromHomePage
+          //       ? print("fromhomepage")
+          //       : Future.delayed(const Duration(seconds: 0), () {
+          //           Utility.showSnackBar(_scaffoldKey,
+          //               'Medicine successfully added to log', context);
+          //           Future.delayed(const Duration(seconds: 2), () {
+          //             Navigator.of(context).pop(items[index]);
+          //           });
+          //         });
+          //   //
+          // },
         ),
         index == items.length - 1
             ? Container(
@@ -218,16 +256,31 @@ class _MedicinesPageState extends State<MedicinesPage> {
       return
           // widget.deleteMedicine == false
           //     ?
-          IconButton(
-        icon: Icon(
-          Icons.delete,
-        ),
-        iconSize: 18,
-        color: Colors.redAccent,
-        onPressed: () {
+          InkWell(
+        onTap: () {
           deleteMedicine(index);
         },
+        child: Container(
+          padding: EdgeInsets.all(2),
+          alignment: Alignment.center,
+          child: Icon(
+            Icons.delete_outline,
+            size: 20,
+            color: Colors.red,
+          ),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.grey, width: 1)),
+        ),
       );
+      //     IconButton(
+      //   icon: Icon(Icons.delete_outline),
+      //   iconSize: 25,
+      //   color: Colors.grey,
+      //   onPressed: () {
+      //     deleteMedicine(index);
+      //   },
+      // );
       // Container(
       //     padding: EdgeInsets.only(right: 12),
       //     child: Icon(

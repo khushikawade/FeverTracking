@@ -23,6 +23,9 @@ List<String> frequencyList = [
 List<String> unitList = ["cc", "g", "mcg", "mg", "ml", "oz"];
 
 class AddMedicine extends StatefulWidget {
+  AddMedicine({
+    Key key,
+  }) : super(key: key);
   @override
   _AddMedicineState createState() => _AddMedicineState();
 }
@@ -56,7 +59,7 @@ class _AddMedicineState extends State<AddMedicine> {
 
     if (isSuccess != null && isSuccess) {
       Utility.showSnackBar(
-          _scaffoldKey, 'Medicine Added Successfully', context);
+          _scaffoldKey, 'Medicine added successfully', context);
       Future.delayed(const Duration(seconds: 3), () {
         Navigator.of(context).pop(true);
       });
@@ -137,6 +140,7 @@ class _AddMedicineState extends State<AddMedicine> {
                     padding: const EdgeInsets.only(
                         left: 20, right: 20, bottom: 30, top: 20),
                     child: TextFormField(
+                      cursorColor: AppTheme.textColor2,
                       focusNode: medicineFocus,
                       controller: medicineController,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -147,12 +151,13 @@ class _AddMedicineState extends State<AddMedicine> {
                       ],
                       validator: (val) {
                         if (val.isEmpty) {
-                          return 'Medicine Name is required   ';
+                          return 'Medicine name is required   ';
                         } else {
                           return null;
                         }
                       },
                       // onSaved: (val) => _username = val,
+
                       style: TextStyle(
                         color: AppTheme.textColor1,
                         fontFamily: 'SF UI Display Bold',
@@ -164,6 +169,15 @@ class _AddMedicineState extends State<AddMedicine> {
                           fontSize: globals.deviceType == "phone" ? 16.0 : 24,
                           fontFamily: 'SF UI Display Bold',
                           color: AppTheme.textColor1,
+                        ),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: AppTheme.textColor2, width: 1.5),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: AppTheme.subHeadingTextColor, width: 1.5),
                         ),
                       ),
                     ),
@@ -200,10 +214,7 @@ class _AddMedicineState extends State<AddMedicine> {
                             TextInputType.numberWithOptions(decimal: true),
                         decoration: InputDecoration(
                           hintText: '1',
-                          // border: UnderlineInputBorder(
-                          //   borderSide: BorderSide(
-                          //       color: AppTheme.textColor2, width: 0.2),
-                          // ),
+
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: AppTheme.textColor2, width: 1),
@@ -407,16 +418,17 @@ class _AddMedicineState extends State<AddMedicine> {
                     ),
                   ],
                 ),
-                // child: Padding(
-                //   padding: const EdgeInsets.only(left: 20.0),
-                //   child: Text(
-                //     "Note",
-                //     style: TextStyle(
-                //         color: AppTheme.subHeadingTextColor,
-                //         fontFamily: "SF UI Display Regular",
-                //         fontSize: globals.deviceType == "phone" ? 14 : 21),
-                //   ),
-                // ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20.0, top: 10, bottom: 10),
+                  child: Text(
+                    "Note",
+                    style: TextStyle(
+                        color: AppTheme.subHeadingTextColor,
+                        fontFamily: "SF UI Display Regular",
+                        fontSize: globals.deviceType == "phone" ? 14 : 21),
+                  ),
+                ),
               ),
               InkWell(
                 onTap: () async {

@@ -20,6 +20,7 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
   String selectedUnit = "";
   String selectedFrequency = "";
   TextEditingController symptomsController = TextEditingController();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool fromHomePage;
   var distinctIds;
 
@@ -27,7 +28,8 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
     bool isSuccess = await DbServices().addData(log, Strings.createSymptoms);
 
     if (isSuccess != null && isSuccess) {
-      Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
+      Utility.showSnackBar(
+          _scaffoldKey, 'Symptoms added successfully', context);
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.of(context).pop();
         //   if (widget.fromHomePage != null && widget.fromHomePage) {
@@ -47,7 +49,7 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
       key: _scaffoldKey,
       appBar: AppBar(
         elevation: 5,
-        // backgroundColor: Color(0xff463DC7),
+        backgroundColor: AppTheme.textColor2,
         centerTitle: true,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -76,75 +78,170 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
             color: AppTheme.iconColor,
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: IconButton(
-              onPressed: () {
-                if ((symptomsController != null) &&
-                    (symptomsController.text.isNotEmpty)) {
-                  String item = symptomsController.text;
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.only(right: 10),
+        //     child: IconButton(
+        //       onPressed: () {
+        //         if ((symptomsController != null) &&
+        //             (symptomsController.text.isNotEmpty)) {
+        //           String item = symptomsController.text;
 
-                  final log = SymptomsModel(item);
-                  addLog(log);
-                } else {
-                  Utility.showSnackBar(
-                      _scaffoldKey, 'Please Enter Required Value ', context);
-                }
-              },
-              icon: Icon(
-                const IconData(59809, fontFamily: "MaterialIcons"),
-                color: AppTheme.iconColor,
-                size: 24,
-              ),
-            ),
-          ),
-        ],
+        //           final log = SymptomsModel(item);
+        //           addLog(log);
+        //         } else {
+        //           Utility.showSnackBar(
+        //               _scaffoldKey, 'Please Enter Required Value ', context);
+        //         }
+        //       },
+        //       icon: Icon(
+        //         const IconData(59809, fontFamily: "MaterialIcons"),
+        //         color: AppTheme.iconColor,
+        //         size: 24,
+        //       ),
+        //     ),
+        //   ),
+        // ],
       ),
       body: Container(
-        color: Theme.of(context).backgroundColor,
+        color: AppTheme.subHeadingbackgroundcolor,
         child: Column(children: [
           Container(
-            padding: EdgeInsets.only(top: 2, bottom: 2),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: AppTheme.subHeadingbackgroundcolor,
-              boxShadow: [
-                const BoxShadow(
-                  color: AppTheme.subHeadingbackgroundcolor2,
-                  spreadRadius: 0,
-                  blurRadius: 0,
-                  offset: Offset(0, -0.5),
+              padding: EdgeInsets.only(top: 2, bottom: 2),
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: AppTheme.subHeadingbackgroundcolor,
+                boxShadow: [
+                  const BoxShadow(
+                    color: AppTheme.subHeadingbackgroundcolor2,
+                    spreadRadius: 0,
+                    blurRadius: 0,
+                    offset: Offset(0, -0.5),
+                  ),
+                ],
+              ),
+              // child: Padding(
+              //   padding: const EdgeInsets.only(left: 20.0),
+              //   child:
+              //   TextField(
+              //     controller: symptomsController,
+              //     decoration: InputDecoration(
+              //       hintText: 'Enter Symptoms Name',
+              //       border: InputBorder.none,
+              //       focusedBorder: InputBorder.none,
+              //       enabledBorder: InputBorder.none,
+              //       errorBorder: InputBorder.none,
+              //       disabledBorder: InputBorder.none,
+              //       contentPadding:
+              //           EdgeInsets.only(left: 0, bottom: 8, top: 8, right: 0),
+              //       hintStyle: TextStyle(
+              //           color: AppTheme.subHeadingTextColor,
+              //           fontFamily: "SF UI Display Regular",
+              //           fontSize: globals.deviceType == "phone" ? 16 : 24),
+              //     ),
+              //     style: TextStyle(
+              //         color: AppTheme.contentColor1,
+              //         fontFamily: "SF UI Display Regular",
+              //         fontSize: globals.deviceType == "phone" ? 16 : 24),
+              //   ),
+              // ),
+
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 20, right: 20, bottom: 30, top: 20),
+                child: Form(
+                  key: _formKey,
+                  child: TextFormField(
+                    cursorColor: AppTheme.textColor2,
+
+                    controller: symptomsController,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    inputFormatters: [
+                      //Only letters are allowed
+                      // FilteringTextInputFormatter.allow(
+                      //     RegExp("[a-zA-Z_\\s-]")),
+                    ],
+                    validator: (val) {
+                      if (val.isEmpty) {
+                        return 'Please enter symptoms   ';
+                      } else {
+                        return null;
+                      }
+                    },
+                    // onSaved: (val) => _username = val,
+
+                    style: TextStyle(
+                      color: AppTheme.textColor1,
+                      fontFamily: 'SF UI Display Bold',
+                      fontSize: globals.deviceType == "phone" ? 16.0 : 24,
+                    ),
+                    decoration: InputDecoration(
+                      labelText: 'Enter Symptoms Name',
+                      labelStyle: TextStyle(
+                        fontSize: globals.deviceType == "phone" ? 16.0 : 24,
+                        fontFamily: 'SF UI Display Bold',
+                        color: AppTheme.textColor1,
+                      ),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: AppTheme.textColor2, width: 1.5),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: AppTheme.subHeadingTextColor, width: 1.5),
+                      ),
+                    ),
+                  ),
                 ),
-              ],
-            ),
+              )),
+          InkWell(
+            onTap: () {
+              _submit();
+            },
             child: Padding(
-              padding: const EdgeInsets.only(left: 20.0),
-              child: TextField(
-                controller: symptomsController,
-                decoration: InputDecoration(
-                  hintText: 'Enter Symptoms Name',
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  errorBorder: InputBorder.none,
-                  disabledBorder: InputBorder.none,
-                  contentPadding:
-                      EdgeInsets.only(left: 0, bottom: 8, top: 8, right: 0),
-                  hintStyle: TextStyle(
-                      color: AppTheme.subHeadingTextColor,
-                      fontFamily: "SF UI Display Regular",
-                      fontSize: globals.deviceType == "phone" ? 16 : 24),
-                ),
-                style: TextStyle(
-                    color: AppTheme.contentColor1,
-                    fontFamily: "SF UI Display Regular",
-                    fontSize: globals.deviceType == "phone" ? 16 : 24),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 100),
+              child: new Container(
+                padding: const EdgeInsets.all(16),
+                alignment: Alignment.center,
+                color: Theme.of(context).primaryColor,
+                child: new Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      new Text(
+                        "Add Symptoms",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "SF UI Display",
+                          color: Colors.white,
+                          fontSize: globals.deviceType == "phone" ? 17 : 25,
+                        ),
+                      )
+                    ]),
               ),
             ),
           ),
         ]),
       ),
     );
+  }
+
+  void _submit() {
+    final form = _formKey.currentState;
+
+    if (form.validate()) {
+      if ((symptomsController != null) &&
+          (symptomsController.text.isNotEmpty)) {
+        String item = symptomsController.text;
+
+        final log = SymptomsModel(item);
+        addLog(log);
+      } else {
+        Utility.showSnackBar(
+            _scaffoldKey, 'Please Enter Required Value ', context);
+      }
+
+      form.save();
+    }
   }
 }

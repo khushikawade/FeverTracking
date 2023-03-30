@@ -90,13 +90,14 @@ class _AddNoteState extends State<AddNote> {
                           //   ),
                           // ),
                           TextFormField(
+                        cursorColor: AppTheme.textColor2,
                         focusNode: _descriptionFocus,
                         controller: textController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         keyboardType: TextInputType.multiline,
                         validator: (val) {
                           if (val.isEmpty) {
-                            return 'Please Enter Note   ';
+                            return 'Please enter note   ';
                           } else {
                             return null;
                           }
@@ -117,19 +118,18 @@ class _AddNoteState extends State<AddNote> {
                             color: AppTheme.textColor1,
                           ),
 
-                          // focusedBorder: OutlineInputBorder(
-                          //   borderRadius: BorderRadius.circular(25.0),
-                          //   borderSide: BorderSide(
-                          //     color: Color(0xff463DC7),
-                          //   ),
-                          // ),
-                          // enabledBorder: OutlineInputBorder(
-                          //   borderRadius: BorderRadius.circular(25.0),
-                          //   borderSide: BorderSide(
-                          //     color: Colors.grey,
-                          //     width: 2.0,
-                          //   ),
-                          // ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppTheme.textColor2,
+                              width: 1.5,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppTheme.subHeadingTextColor,
+                              width: 1.5,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -144,7 +144,7 @@ class _AddNoteState extends State<AddNote> {
                             form.save();
 
                             Utility.showSnackBar(_scaffoldKey,
-                                'Note Added Successfully', context);
+                                'Note added successfully', context);
                             Future.delayed(const Duration(seconds: 2), () {
                               Navigator.pop(context, textController.text);
                             });

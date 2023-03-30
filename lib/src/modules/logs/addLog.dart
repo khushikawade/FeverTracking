@@ -36,7 +36,10 @@ List<CheckBoxModel> checkBoxModelList = [
 class AddLogPage extends StatefulWidget {
   bool fromHomePage;
 
-  AddLogPage({Key key, this.fromHomePage}) : super(key: key);
+  AddLogPage({
+    Key key,
+    this.fromHomePage,
+  }) : super(key: key);
   @override
   _AddLogPageState createState() => _AddLogPageState();
 }
@@ -44,7 +47,8 @@ class AddLogPage extends StatefulWidget {
 class _AddLogPageState extends State<AddLogPage> {
   String time;
   List<String> sypmtomsTempList = [];
-  String sypmtoms = '';
+
+  String sypmtoms = "xyz";
 
   final DateFormat timeformatter = DateFormat('Hms');
 
@@ -70,13 +74,16 @@ class _AddLogPageState extends State<AddLogPage> {
     });
   }
 
+//  List<String> namesList =sypmtomsTempList.map((e) => e["Name"].toString()).toList();
+// print(namesList);
+
   // DATABASE CODE
   void addLog(LogsModel log) async {
     bool isSuccess = await DbServices().addData(log, Strings.hiveLogName);
 
     if (isSuccess != null && isSuccess) {
       Utility.showSnackBar(
-          _scaffoldKey, 'Log data Added Successfully', context);
+          _scaffoldKey, 'Log data added successfully', context);
       Future.delayed(const Duration(seconds: 2), () {
         if (widget.fromHomePage != null && widget.fromHomePage) {
           Navigator.of(context).pop(1);
@@ -472,6 +479,7 @@ class _AddLogPageState extends State<AddLogPage> {
                           ? MediaQuery.of(context).size.width * 0.20
                           : MediaQuery.of(context).size.width * 0.40,
                       child: Text(
+                        // (sypmtomsTempList.join("") + " "),
                         "$sypmtoms",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
@@ -694,24 +702,26 @@ class _AddLogPageState extends State<AddLogPage> {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          InkWell(
-            onTap: () {
-              medicineList.removeAt(index);
-              setState(() {});
-            },
-            child: Container(
-              padding: EdgeInsets.all(2),
-              alignment: Alignment.center,
-              child: Icon(
-                Icons.delete,
-                size: 16,
-                color: Colors.red,
-              ),
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.grey, width: 1)),
-            ),
-          ),
+          // InkWell(
+          //   onTap: () {
+          //     medicineList.removeAt(index);
+          //     setState(() {});
+          //     Utility.showSnackBar(_scaffoldKey,
+          //         'Medicine successfully removed from log.', context);
+          //   },
+          //   child: Container(
+          //     padding: EdgeInsets.all(2),
+          //     alignment: Alignment.center,
+          //     child: Icon(
+          //       Icons.delete,
+          //       size: 16,
+          //       color: Colors.red,
+          //     ),
+          //     decoration: BoxDecoration(
+          //         shape: BoxShape.circle,
+          //         border: Border.all(color: Colors.grey, width: 1)),
+          //   ),
+          // ),
           SizedBox(
             width: 10,
           ),
@@ -740,11 +750,31 @@ class _AddLogPageState extends State<AddLogPage> {
           SizedBox(
             width: 10,
           ),
-          Icon(
-            Icons.arrow_forward_ios,
-            color: AppTheme.arrowIconsColor.withOpacity(0.25),
-            size: globals.deviceType == 'phone' ? 15 : 23,
-          ),
+          InkWell(
+            onTap: () {
+              medicineList.removeAt(index);
+              setState(() {});
+              Utility.showSnackBar(_scaffoldKey,
+                  'Medicine successfully removed from log.', context);
+            },
+            child: Container(
+              padding: EdgeInsets.all(2),
+              alignment: Alignment.center,
+              child: Icon(
+                Icons.delete_outline,
+                size: 20,
+                color: Colors.red,
+              ),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.grey, width: 1)),
+            ),
+          )
+          // Icon(
+          //   Icons.arrow_forward_ios,
+          //   color: AppTheme.arrowIconsColor.withOpacity(0.25),
+          //   size: globals.deviceType == 'phone' ? 15 : 23,
+          // ),
         ],
       ),
     );
@@ -910,16 +940,41 @@ class _AddLogPageState extends State<AddLogPage> {
                               controlAffinity: ListTileControlAffinity.leading,
                               onChanged: (bool val) {
                                 setState(() {
+                                  print(data.displayId);
+                                  print(data.checked);
                                   data.checked = !data.checked;
+
+                                  print(data.checked);
 
                                   if (sypmtomsTempList.length < 3) {
                                     sypmtomsTempList.add(data.displayId);
-                                    distinctIds =
-                                        sypmtomsTempList.toSet().toList();
+
+                                    if (data.checked == false) {
+                                      print("yeeee");
+                                      // distinctIds = ' ';
+                                      distinctIds = null;
+                                    } else {
+                                      print("8888");
+                                      distinctIds =
+                                          sypmtomsTempList.toSet().toList();
+                                    }
+
                                     sypmtomsTempList.length;
+
+                                    // print(sypmtomsTempList)
                                   }
                                 });
-                                state2(() {});
+                                state2(() {
+                                  //   sypmtomsTempList.length;
+                                  //   data.checked = !data.checked;
+
+                                  //   if (sypmtomsTempList.length < 3) {
+                                  //     sypmtomsTempList.add(data.displayId);
+                                  //     distinctIds =
+                                  //         sypmtomsTempList.toSet().toList();
+                                  //     sypmtomsTempList.length;
+                                  //   }
+                                });
                               },
                             ),
                           ],
@@ -939,14 +994,19 @@ class _AddLogPageState extends State<AddLogPage> {
 
   void _closeModal(void value) {
     for (int i = 0; i < completeSymptomsList.length; i++) {
-      if (completeSymptomsList[i].checked) {
-        completeSymptomsList[i].checked = false;
-      }
+      if (completeSymptomsList[i].checked == false) {
+        // completeSymptomsList[i].checked = false;
+        sypmtoms = " ";
+      } else {}
     }
     setState(() {
       sypmtoms = '';
+      print("ooooooooooooo");
+
       sypmtoms = distinctIds != null ? distinctIds.join(', ') : '';
       distinctIds = [];
+      print(distinctIds);
+      print(sypmtoms);
       // sypmtomsTempList = [];
     });
   }

@@ -322,10 +322,35 @@ class HomeScreenState extends State<HomeScreen> {
                   : SettingPage(),
       floatingActionButton: selectedIndex == 0
           ?
-          //  Container(
-          //     child: bubble(
-          //       context,
-          //       _secondButtonKey,
+          // InkWell(
+          //     onTap: () async {
+          //       // Navigator.push(
+          //       //     context,
+          //       //     MaterialPageRoute(
+          //       //         builder: (context) =>
+          //       //             // DatePickerTimeLine(title: "this dateTimePicker")
+
+          //       //             GoogleFit()));
+
+          //       int index = await Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => AddLogPage(
+          //                   fromHomePage: true,
+          //                 )),
+          //       );
+
+          //       if (index != null) {
+          //         setState(() {
+          //           selectedIndex = index;
+          //         });
+          //       }
+          //     },
+          //     child: Container(
+          //       child: bubble(
+          //         context,
+          //         _secondButtonKey,
+          //       ),
           //     ),
           //   )
           GestureDetector(

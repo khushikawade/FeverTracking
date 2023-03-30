@@ -15,12 +15,27 @@ import 'package:mobile_app/src/widgets/timeago.dart';
 
 class LogPage extends StatefulWidget {
   Function onUpdateWidget;
-  LogPage({Key key, this.onUpdateWidget}) : super(key: key);
+  bool deleteLog;
+  LogPage({Key key, this.onUpdateWidget, this.deleteLog = false})
+      : super(key: key);
   @override
   _LogPageState createState() => _LogPageState();
 }
 
 class _LogPageState extends State<LogPage> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  Future<bool> deleteLog(index) async {
+    bool isSuccess = await DbServices().deleteData(Strings.hiveLogName, index);
+    if (isSuccess != null && isSuccess) {
+      Utility.showSnackBar(_scaffoldKey, 'Log deleted successfully', context);
+
+      setState(() {
+        widget.deleteLog = false;
+      });
+    }
+    return isSuccess;
+  }
+
   var logsList;
   static GlobalKey previewContainer = new GlobalKey();
   @override
@@ -287,6 +302,8 @@ class _LogPageState extends State<LogPage> {
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         Text(
                           "Symptoms: ",
@@ -298,18 +315,63 @@ class _LogPageState extends State<LogPage> {
                                   globals.deviceType == 'phone' ? 14 : 22),
                         ),
                         Expanded(
-                          child: Text(
-                            items[index].symptoms != null &&
-                                    items[index].symptoms.isNotEmpty
-                                ? items[index].symptoms
-                                : '',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: AppTheme.subtitleTextColor,
-                                fontFamily: "SF UI Display Regular",
-                                fontSize:
-                                    globals.deviceType == 'phone' ? 14 : 22),
+                          child: SizedBox(
+                            width: 100,
+                            child: Text(
+                              items[index].symptoms != null &&
+                                      items[index].symptoms.isNotEmpty
+                                  ? items[index].symptoms
+                                  : '',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: AppTheme.subtitleTextColor,
+                                  fontFamily: "SF UI Display Regular",
+                                  fontSize:
+                                      globals.deviceType == 'phone' ? 14 : 22),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            bool result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddLogPage(
+                                          fromHomePage: false,
+                                        )));
+
+                            if (result != null && result) {
+                              widget.onUpdateWidget(true);
+                              setState(() {});
+                              //getList();
+                            }
+                          },
+                          child: Icon(
+                            const IconData(0xe802,
+                                fontFamily: "FeverTrackingIcons"),
+                            // color:AppTheme.iconColor,
+                            color: Colors.black54,
+                            size: 24,
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        InkWell(
+                          onTap: () {
+                            deleteLog(index);
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.all(2),
+                            child: Icon(
+                              Icons.delete_outline,
+                              size: 20,
+                              color: Colors.red,
+                            ),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border:
+                                    Border.all(color: Colors.grey, width: 1)),
                           ),
                         ),
                       ],

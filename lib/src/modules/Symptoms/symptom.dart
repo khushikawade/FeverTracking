@@ -10,14 +10,32 @@ import 'package:mobile_app/src/modules/medicines/add_medicine.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
+import 'package:mobile_app/src/utils/utility.dart';
 import 'package:mobile_app/src/widgets/loaderWidget.dart';
 
 class SymptomsListPage extends StatefulWidget {
+  bool deleteSymptoms;
+  SymptomsListPage({Key key, this.deleteSymptoms = false}) : super(key: key);
   @override
   _SymptomsListPageState createState() => _SymptomsListPageState();
 }
 
 class _SymptomsListPageState extends State<SymptomsListPage> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  Future<bool> deleteSymptoms(index) async {
+    bool isSuccess =
+        await DbServices().deleteData(Strings.createSymptoms, index);
+    if (isSuccess != null && isSuccess) {
+      Utility.showSnackBar(
+          _scaffoldKey, 'Symptoms deleted successfully', context);
+
+      setState(() {
+        widget.deleteSymptoms = false;
+      });
+    }
+    return isSuccess;
+  }
+
   // List<String> symptoms = [
   //   "Sweating",
   //   "Chills and Shivering",
@@ -175,11 +193,36 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
               },
               child: Container(
                 padding: EdgeInsets.only(right: 0),
-                child: Icon(
-                  const IconData(0xe802, fontFamily: "FeverTrackingIcons"),
-                  // color:AppTheme.iconColor,
-                  color: Colors.black54,
-                  size: 24,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      const IconData(0xe802, fontFamily: "FeverTrackingIcons"),
+                      // color:AppTheme.iconColor,
+                      color: Colors.black54,
+                      size: 24,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        deleteSymptoms(index);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.delete_outline,
+                          size: 20,
+                          color: Colors.red,
+                        ),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey, width: 1)),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
