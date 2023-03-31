@@ -64,6 +64,7 @@ class _AddLogPageState extends State<AddLogPage> {
   bool ClickAddLog = false;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<CheckBoxModel> completeSymptomsList = new List();
+  List<String> newList = [];
 
   TimeOfDay _time = TimeOfDay.now().replacing(minute: 30);
   bool iosStyle = true;
@@ -480,6 +481,7 @@ class _AddLogPageState extends State<AddLogPage> {
                           : MediaQuery.of(context).size.width * 0.40,
                       child: Text(
                         // (sypmtomsTempList.join("") + " "),
+                        // ("$newList"),
                         "$sypmtoms",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
@@ -940,29 +942,30 @@ class _AddLogPageState extends State<AddLogPage> {
                               controlAffinity: ListTileControlAffinity.leading,
                               onChanged: (bool val) {
                                 setState(() {
-                                  print(data.displayId);
-                                  print(data.checked);
                                   data.checked = !data.checked;
 
-                                  print(data.checked);
+                                  completeSymptomsList.forEach((element) {
+                                    // ... Do something here with items here
+                                    print(element.checked);
 
-                                  if (sypmtomsTempList.length < 3) {
-                                    sypmtomsTempList.add(data.displayId);
-
-                                    if (data.checked == false) {
-                                      print("yeeee");
-                                      // distinctIds = ' ';
-                                      distinctIds = null;
-                                    } else {
-                                      print("8888");
+                                    if (element.checked == true) {
+                                      sypmtomsTempList = [];
+                                      sypmtomsTempList.add(data.displayId);
                                       distinctIds =
                                           sypmtomsTempList.toSet().toList();
                                     }
+                                  });
 
-                                    sypmtomsTempList.length;
+                                  // if (sypmtomsTempList.length < 3) {
+                                  //   if (data.checked) {
+                                  //     sypmtomsTempList = [];
+                                  //     sypmtomsTempList.add(data.displayId);
+                                  //     distinctIds =
+                                  //         sypmtomsTempList.toSet().toList();
+                                  //   }
 
-                                    // print(sypmtomsTempList)
-                                  }
+                                  //   sypmtomsTempList.length;
+                                  // }
                                 });
                                 state2(() {
                                   //   sypmtomsTempList.length;
@@ -994,14 +997,12 @@ class _AddLogPageState extends State<AddLogPage> {
 
   void _closeModal(void value) {
     for (int i = 0; i < completeSymptomsList.length; i++) {
-      if (completeSymptomsList[i].checked == false) {
-        // completeSymptomsList[i].checked = false;
-        sypmtoms = " ";
+      if (completeSymptomsList[i].checked) {
       } else {}
     }
+
     setState(() {
       sypmtoms = '';
-      print("ooooooooooooo");
 
       sypmtoms = distinctIds != null ? distinctIds.join(', ') : '';
       distinctIds = [];

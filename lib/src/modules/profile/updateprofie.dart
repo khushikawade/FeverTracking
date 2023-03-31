@@ -15,6 +15,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
 
 class UpdateProfielPage extends StatefulWidget {
+  final String imagePath;
+
+  UpdateProfielPage({
+    Key key,
+    @required this.imagePath,
+  }) : super(key: key);
   @override
   _UpdateProfielPageState createState() => _UpdateProfielPageState();
 }
@@ -40,7 +46,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
     });
   }
 
-  final TextEditingController _Namecontroller = new TextEditingController();
+  TextEditingController namecontroller = TextEditingController();
   final TextEditingController _Adresscontroller = new TextEditingController();
   final TextEditingController _Phonecontroller = new TextEditingController();
   final TextEditingController _agecontroller = new TextEditingController();
@@ -66,10 +72,18 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
     if (isSuccess != null && isSuccess) {
       SharedPreferences pref = await SharedPreferences.getInstance();
       pref.setBool("ISPROFILE_UPDATED", true);
+      Utility.saveImageToPreferences(log.path);
       Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
 
       Future.delayed(const Duration(seconds: 1), () {
-        Navigator.of(context).pop(true);
+        Navigator.of(context).pop(0);
+        // Navigator.pushReplacement(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (BuildContext context) => SettingPage(
+        //         imagePath: log.path,
+        //       ),
+        //     ));
       });
     }
   }
@@ -90,23 +104,15 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
           _scaffoldKey, 'Profile Update Successfully', context);
 
       Future.delayed(const Duration(seconds: 3), () {
-        // Navigator.of(context).pop(log.path);
-
-        // String image = Utility.getImageFromPreferences().toString();
-        // print(image.);
-        // Utility.getImageFromPreferences().then((value) {
-        //   print(" Path++++         " + value);
-        // });
-
-        // Navigator.of(context).pop(true);
+        Navigator.of(context).pop(0);
         // Navigator.pop(context, log.path);
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (BuildContext context) => SettingPage(
-                imagePath: log.path,
-              ),
-            ));
+        // Navigator.pushReplacement(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (BuildContext context) => SettingPage(
+        //         imagePath: log.path,
+        //       ),
+        //     ));
       });
     }
   }
@@ -184,7 +190,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
     selectedImage = globals.userObj != null && globals.userObj.length > 0
         ? globals.userObj[0].path
         : null;
-    _Namecontroller.text = globals.userObj != null && globals.userObj.length > 0
+    namecontroller.text = globals.userObj != null && globals.userObj.length > 0
         ? globals.userObj[0].name
         : '';
     _Adresscontroller.text =
@@ -202,6 +208,9 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
     _genderRadioBtnVal = globals.userObj != null && globals.userObj.length > 0
         ? globals.userObj[0].gender.toString()
         : 'Male';
+
+    // namecontroller = new TextEditingController(text: widget.Name);
+    // _image = widget.imagePath;
   }
 
   @override
@@ -227,7 +236,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
               Future.delayed(
                 Duration.zero,
                 () {
-                  Navigator.of(context).pop(false);
+                  Navigator.pop(context);
                 },
               );
             },
@@ -351,7 +360,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                   left: 20, right: 20, top: 10, bottom: 10),
                               child: TextFormField(
                                 cursorColor: AppTheme.textColor2,
-                                controller: _Namecontroller,
+                                controller: namecontroller,
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
                                 inputFormatters: [

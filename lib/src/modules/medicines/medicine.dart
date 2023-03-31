@@ -201,8 +201,10 @@ class _MedicinesPageState extends State<MedicinesPage> {
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              addToLogButton(
-                  widget.fromHomePage, _scaffoldKey, index, items, context),
+              widget.fromHomePage
+                  ? Container()
+                  : addToLogButton(
+                      widget.fromHomePage, _scaffoldKey, index, items, context),
               SizedBox(
                 width: 10,
               ),

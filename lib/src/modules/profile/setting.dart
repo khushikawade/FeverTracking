@@ -64,12 +64,44 @@ class _SettingPageState extends State<SettingPage> {
           : null;
     }
 
+    getUserDetail();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        // appBar: AppBar(
+        //   elevation: 5,
+        //   backgroundColor: Theme.of(context).primaryColor,
+        //   centerTitle: true,
+        //   title: Text(
+        //     'Settings',
+        //     textAlign: TextAlign.center,
+        //     style: TextStyle(
+        //         color: AppTheme.titleColor,
+        //         letterSpacing: 0,
+        //         fontSize: globals.deviceType == 'phone' ? 20 : 28,
+        //         fontFamily: 'SF UI Display Semibold',
+        //         fontWeight: FontWeight.w600),
+        //   ),
+        //   leading: InkWell(
+        //     onTap: () {
+        //       Future.delayed(
+        //         Duration.zero,
+        //         () {
+        //           Navigator.of(context).pop(false);
+        //         },
+        //       );
+        //     },
+        //     child: Icon(
+        //       Icons.close,
+        //       size: 30.0,
+        //       color: AppTheme.iconColor,
+        //     ),
+        //   ),
+        // ),
         body: ListView(children: [
       Container(
         color: Theme.of(context).backgroundColor,
@@ -241,7 +273,7 @@ class _SettingPageState extends State<SettingPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children:
-          
+
               // <Widget>
               [
             SizedBox(
@@ -257,6 +289,13 @@ class _SettingPageState extends State<SettingPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => UpdateProfielPage()));
+
+                        if (result != null && result) {
+                          print("999999");
+                          print(result);
+                          setState(() {});
+                        }
+                        setState(() {});
                       },
                       child: Container(
                           width: 80,
