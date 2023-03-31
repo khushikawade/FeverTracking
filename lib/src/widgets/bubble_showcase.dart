@@ -69,7 +69,7 @@
 //               child: Padding(
 //                 padding: const EdgeInsets.all(10),
 //                 child: Text(
-//                   'Add Log',
+//                   '',
 //                   style: textStyle.copyWith(
 //                     fontSize: 18,
 //                     fontWeight: FontWeight.bold,
@@ -157,6 +157,7 @@ class BubbleShowcaseDemoApp extends StatelessWidget {
         ),
       );
 }
+
 /// The main demo widget.
 class _BubbleShowcaseDemoWidget extends StatelessWidget {
   final GlobalKey _titleKey = GlobalKey();

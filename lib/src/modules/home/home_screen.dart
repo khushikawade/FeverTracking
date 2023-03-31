@@ -148,11 +148,11 @@ class HomeScreenState extends State<HomeScreen> {
                             fontFamily: 'SF UI Display Regular',
                             fontWeight: FontWeight.normal),
                       ),
-                      Icon(
-                        Icons.arrow_drop_down,
-                        color: AppTheme.dropdowniconColor,
-                        size: 18,
-                      )
+                      // Icon(
+                      //   Icons.arrow_drop_down,
+                      //   color: AppTheme.dropdowniconColor,
+                      //   size: 18,
+                      // )
                     ],
                   )
                 ],

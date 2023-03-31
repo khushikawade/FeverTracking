@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/modules/Symptoms/editsymptoms.dart';
 import 'package:mobile_app/src/modules/medicines/add_medicine.dart';
 import 'package:mobile_app/src/modules/medicines/editMedicine.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
@@ -27,6 +28,8 @@ class MedicinesPage extends StatefulWidget {
 
 class _MedicinesPageState extends State<MedicinesPage> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<NavigatorState> navigatorKey =
+      new GlobalKey<NavigatorState>();
   Future<bool> deleteMedicine(index) async {
     bool isSuccess =
         await DbServices().deleteData(Strings.createMedicineName, index);
@@ -39,6 +42,10 @@ class _MedicinesPageState extends State<MedicinesPage> {
       });
     }
     return isSuccess;
+  }
+
+  void initState() {
+    super.initState();
   }
 
   Widget build(BuildContext context) {
@@ -115,7 +122,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
                     padding: EdgeInsets.only(top: 10, bottom: 100),
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return itemWidget1(index, snapshot.data);
+                      return itemWidget1(index, snapshot.data, context);
                     },
                   )
                 : Center(
@@ -153,7 +160,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
     //       );
   }
 
-  Widget itemWidget1(int index, items) {
+  Widget itemWidget1(int index, items, context) {
     return Container(
       color: AppTheme.listbackGroundColor,
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -224,7 +231,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
               SizedBox(
                 width: 10,
               ),
-              iconWidget(index),
+              iconWidget(index, items, context),
             ],
           ),
           selected: true,
@@ -251,28 +258,179 @@ class _MedicinesPageState extends State<MedicinesPage> {
     );
   }
 
-  Widget iconWidget(int index) {
+  Widget iconWidget(int index, items, context) {
     {
       return
-          // widget.deleteMedicine == false
-          //     ?
-          InkWell(
-        onTap: () {
-          deleteMedicine(index);
-        },
+          // popup menu button
+
+          PopupMenuButton<int>(
+        position: PopupMenuPosition.under,
+        constraints: BoxConstraints.expand(width: 130, height: 100),
+        // padding: EdgeInsets.only(left: 50, right: 50),
+        offset: Offset(100, 15),
+
+        color: AppTheme.subHeadingbackgroundcolor,
+
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         child: Container(
-          padding: EdgeInsets.all(2),
-          alignment: Alignment.center,
-          child: Icon(
-            Icons.delete_outline,
-            size: 20,
-            color: Colors.red,
-          ),
+          height: 40,
+          width: 40,
           decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.grey, width: 1)),
+              // color: const Color(0xff334155),
+              border: Border.all(
+                color: AppTheme.subHeadingbackgroundcolor2,
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(100))),
+          child: Center(
+            child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.more_vert,
+                  color: AppTheme.subHeadingbackgroundcolor2,
+                )),
+          ),
         ),
+        itemBuilder: (context) => [
+          // popupmenu item 1
+          PopupMenuItem(
+              onTap: () {
+                WidgetsBinding.instance?.addPostFrameCallback((_) async {
+                  // Write your code here
+                  bool result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddMedicine(
+                                medicineItem: items[index].medicineName,
+                                text: "edit",
+                                index: index,
+                              )));
+
+                  if (result != null && result) {
+                    print("kjljljljljljljljljljljljljljljljljljl");
+                    print(result);
+                    setState(() {});
+                    //getList();
+                  }
+                  setState(() {});
+                });
+
+                // WidgetsBinding.instance
+                //     .addPostFrameCallback((_) => Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //             builder: (context) {
+                //               return AddMedicine(
+                //                 medicineItem: items[index].medicineName,
+                //                 text: "edit",
+                //                 index: index,
+                //               );
+                //             },
+                //           ),
+                //         ));
+
+                // bool result = await Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => AddMedicine(
+                //               medicineItem: items[index].medicineName,
+                //               text: "edit",
+                //               index: index,
+                //             )));
+
+                // if (result != null && result) {
+                //   print("kjljljljljljljljljljljljljljljljljljl");
+                //   print(result);
+                //   setState(() {});
+                //   //getList();
+                // }
+
+                // WidgetsBinding.instance.addPostFrameCallback((_) {});
+                // bool result = await Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => AddMedicine(
+                //               medicineItem: items[index].medicineName,
+                //               text: "edit",
+                //               index: index,
+                //             )));
+
+                // if (result != null && result) {
+                //   print("kjljljljljljljljljljljljljljljljljljl");
+                //   print(result);
+                //   setState(() {});
+                //   //getList();
+                // }
+              },
+              padding: EdgeInsets.zero,
+              value: 1,
+              child: StatefulBuilder(builder: (context, setState) {
+                return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          IconData(0xe802, fontFamily: 'FeverTrackingIcons'),
+                          color: AppTheme.textColor2,
+                        ),
+                        SizedBox(
+                          // sized box with width 10
+                          width: 15,
+                        ),
+                        Text("Edit",
+                            style: TextStyle(color: AppTheme.textColor2))
+                      ],
+                    ));
+              })),
+
+          // popupmenu item 2
+          PopupMenuItem(
+            onTap: () {
+              deleteMedicine(index);
+            },
+            padding: EdgeInsets.zero,
+            value: 2,
+            // row has two child icon and text
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.delete_outline,
+                    color: AppTheme.textColor2,
+                  ),
+                  SizedBox(
+                    // sized box with width 10
+                    width: 15,
+                  ),
+                  Text("Delete", style: TextStyle(color: AppTheme.textColor2))
+                ],
+              ),
+            ),
+          ),
+        ],
+
+        elevation: 2,
       );
+
+      // widget.deleteMedicine == false
+      //     ?
+      //     InkWell(
+      //   onTap: () {
+      //     deleteMedicine(index);
+      //   },
+      //   child: Container(
+      //     padding: EdgeInsets.all(2),
+      //     alignment: Alignment.center,
+      //     child: Icon(
+      //       Icons.delete_outline,
+      //       size: 20,
+      //       color: Colors.red,
+      //     ),
+      //     decoration: BoxDecoration(
+      //         shape: BoxShape.circle,
+      //         border: Border.all(color: Colors.grey, width: 1)),
+      //   ),
+      // );
       //     IconButton(
       //   icon: Icon(Icons.delete_outline),
       //   iconSize: 25,
@@ -284,7 +442,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
       // Container(
       //     padding: EdgeInsets.only(right: 12),
       //     child: Icon(
-      //       const IconData(0xe815, fontFamily: 'FeverTrackingIcons'),
+      //       const IconData(0xe802, fontFamily: 'FeverTrackingIcons'),
       //       color: AppTheme.tralingIconColor,
       //       size: 9,
       //     ),

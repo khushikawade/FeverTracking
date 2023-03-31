@@ -23,8 +23,15 @@ List<String> frequencyList = [
 List<String> unitList = ["cc", "g", "mcg", "mg", "ml", "oz"];
 
 class AddMedicine extends StatefulWidget {
+  final String text;
+  final String medicineItem;
+  final int index;
+
   AddMedicine({
     Key key,
+    @required this.text,
+    @required this.medicineItem,
+    @required this.index,
   }) : super(key: key);
   @override
   _AddMedicineState createState() => _AddMedicineState();
@@ -35,6 +42,7 @@ class _AddMedicineState extends State<AddMedicine> {
   String selectedUnit = "";
   String selectedFrequency = "";
   String addNoteText = '';
+
   TextEditingController medicineController = TextEditingController();
   TextEditingController dosageController = TextEditingController();
   FocusNode dosageFocus = new FocusNode();
@@ -48,9 +56,19 @@ class _AddMedicineState extends State<AddMedicine> {
   @override
   void initState() {
     super.initState();
-
+    widget.text == "edit"
+        ? medicineController =
+            new TextEditingController(text: widget.medicineItem)
+        : null;
     selectedUnit = unitList[0];
     selectedFrequency = frequencyList[0];
+  }
+
+  var logsList;
+  getList() async {
+    logsList = await DbServices().getListData(Strings.createMedicineName);
+
+    // setState(() {});
   }
 
   void addMedicine(MedicineModel log) async {
@@ -63,6 +81,27 @@ class _AddMedicineState extends State<AddMedicine> {
       Future.delayed(const Duration(seconds: 3), () {
         Navigator.of(context).pop(true);
       });
+    }
+  }
+
+  updateMedicineList(index, value) async {
+    bool isSuccess = await DbServices().updateListData(
+      Strings.createMedicineName,
+      index,
+      value,
+    );
+
+    if (isSuccess != null && isSuccess) {
+      Utility.showSnackBar(
+          _scaffoldKey, 'Medicine updated successfully', context);
+
+      Future.delayed(const Duration(seconds: 1), () {
+        // Navigator.of(context).pop(1);
+        // Navigator.of(context).pop();
+        Navigator.of(context).pop(true);
+        // Navigator.pop(context, true);
+      });
+      // setState(() {});
     }
   }
 
@@ -95,7 +134,7 @@ class _AddMedicineState extends State<AddMedicine> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Add Medicine',
+              widget.text == "edit" ? 'Edit Medicine' : 'Add Medicine',
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: AppTheme.title,
@@ -109,6 +148,7 @@ class _AddMedicineState extends State<AddMedicine> {
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);
+            getList();
           },
           child: Icon(
             Icons.close,
@@ -492,6 +532,7 @@ class _AddMedicineState extends State<AddMedicine> {
                 ),
                 child: GestureDetector(
                   onTap: () {
+                    // _submit();
                     _submit();
                   },
                   child: Padding(
@@ -505,7 +546,9 @@ class _AddMedicineState extends State<AddMedicine> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             new Text(
-                              "Add Medicine",
+                              widget.text == "edit"
+                                  ? "Edit Medicine"
+                                  : "Add Medicine",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "SF UI Display",
@@ -532,19 +575,47 @@ class _AddMedicineState extends State<AddMedicine> {
     if (form.validate()) {
       String medicineName = medicineController.text;
       String dosage = dosageController.text;
-      if (medicineName != null && medicineName.isNotEmpty) {
-        final medicineModel = MedicineModel(
-            medicineName,
-            '${dosage} $selectedUnit',
-            selectedUnit,
-            selectedFrequency,
-            addNoteText);
-        addMedicine(medicineModel);
+
+      if (widget.text == "edit") {
+        final updateItem = MedicineModel(
+            medicineName, dosage, selectedUnit, selectedFrequency, addNoteText);
+        updateMedicineList(widget.index, updateItem);
       } else {
-        Utility.showSnackBar(
-            _scaffoldKey, 'Please Fill All Required Field ', context);
+        if (medicineName != null && medicineName.isNotEmpty) {
+          final medicineModel = MedicineModel(
+              medicineName,
+              '${dosage} $selectedUnit',
+              selectedUnit,
+              selectedFrequency,
+              addNoteText);
+          addMedicine(medicineModel);
+        } else {
+          Utility.showSnackBar(
+              _scaffoldKey, 'Please Fill All Required Field ', context);
+        }
       }
+
       form.save();
+    }
+
+    void _submit1(index) {
+      final form = _formKey.currentState;
+      String dosage = dosageController.text;
+      if (form.validate()) {
+        if ((medicineController != null) && (medicineController.text.isNotEmpty)
+            // &&
+            // (symptomsController.text != widget.sysmptomsItem)
+
+            ) {
+          String item = medicineController.text;
+
+          final updateItem = MedicineModel(
+              item, dosage, selectedUnit, selectedFrequency, addNoteText);
+          updateMedicineList(index, updateItem);
+        }
+
+        form.save();
+      }
     }
   }
 

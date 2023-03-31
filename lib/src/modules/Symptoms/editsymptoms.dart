@@ -31,12 +31,12 @@ class _EditSymptomsPageState extends State<EditSymptomsPage> {
     symptomsController = new TextEditingController(text: widget.sysmptomsItem);
   }
 
-  var logsList;
-  getList() async {
-    logsList = await DbServices().getListData(Strings.createSymptoms);
+  // var logsList;
+  // getList() async {
+  //   logsList = await DbServices().getListData(Strings.createSymptoms);
 
-    setState(() {});
-  }
+  //   setState(() {});
+  // }
 
   updateSysmptomsList(index, value) async {
     bool isSuccess = await DbServices().updateListData(

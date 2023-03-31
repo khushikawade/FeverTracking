@@ -88,7 +88,7 @@ Widget addToLogButton(fromHomePage, _scaffoldKey, index, items, context) {
           height: 30,
           decoration: BoxDecoration(
             border: Border.all(
-              color: AppTheme.textColor2,
+              color: AppTheme.subHeadingbackgroundcolor2,
               style: BorderStyle.solid,
               width: 1.0,
             ),
@@ -100,15 +100,15 @@ Widget addToLogButton(fromHomePage, _scaffoldKey, index, items, context) {
               ),
             ],
             // color: Colors.transparent,
-            color: AppTheme.textColor2,
-            borderRadius: BorderRadius.circular(10.0),
+            color: AppTheme.subHeadingbackgroundcolor,
+            borderRadius: BorderRadius.circular(5.0),
           ),
           child: Center(
             child: Text(
               "Add To Log",
               textAlign: TextAlign.center,
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: AppTheme.textColor2, fontWeight: FontWeight.bold),
             ),
           )),
     ),

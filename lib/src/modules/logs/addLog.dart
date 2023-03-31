@@ -48,7 +48,7 @@ class _AddLogPageState extends State<AddLogPage> {
   String time;
   List<String> sypmtomsTempList = [];
 
-  String sypmtoms = "xyz";
+  String sypmtoms = "";
 
   final DateFormat timeformatter = DateFormat('Hms');
 
