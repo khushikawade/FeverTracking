@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/utilities/strings.dart';
 
 class MenuScreen extends StatefulWidget {
   int selectedIndex;
@@ -21,13 +23,26 @@ class _MenuScreenState extends State<MenuScreen> {
   int index = 0;
   String selectedImage;
 
-  @override
-  void initState() {
-    super.initState();
+  getUserDetail() async {
+    var userData = await DbServices().getListData(Strings.updateProile);
+
+    globals.userObj = userData;
 
     selectedImage = globals.userObj != null && globals.userObj.length > 0
         ? globals.userObj[0].path
         : null;
+
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    selectedImage = globals.userObj != null && globals.userObj.length > 0
+        ? globals.userObj[0].path
+        : null;
+
+    getUserDetail();
+    super.initState();
   }
 
   @override

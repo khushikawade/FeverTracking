@@ -45,6 +45,7 @@ class AddLogPage extends StatefulWidget {
 }
 
 class _AddLogPageState extends State<AddLogPage> {
+  final ValueNotifier<String> _sypmtoms = ValueNotifier<String>("");
   String time;
   List<String> sypmtomsTempList = [];
 
@@ -479,16 +480,23 @@ class _AddLogPageState extends State<AddLogPage> {
                       width: sypmtomsTempList.length == 1
                           ? MediaQuery.of(context).size.width * 0.20
                           : MediaQuery.of(context).size.width * 0.40,
-                      child: Text(
-                        // (sypmtomsTempList.join("") + " "),
-                        // ("$newList"),
-                        "$sypmtoms",
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: AppTheme.textColor2,
-                            fontFamily: "SF UI Display Regular",
-                            fontSize: globals.deviceType == "phone" ? 17 : 25),
+                      child: ValueListenableBuilder<String>(
+                        builder:
+                            (BuildContext context, String value, Widget child) {
+                          return Text(
+                            // (sypmtomsTempList.join("") + " "),
+                            // ("$newList"),
+                            "$sypmtoms",
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: TextStyle(
+                                color: AppTheme.textColor2,
+                                fontFamily: "SF UI Display Regular",
+                                fontSize:
+                                    globals.deviceType == "phone" ? 17 : 25),
+                          );
+                        },
+                        valueListenable: _sypmtoms,
                       )),
                   SizedBox(
                     width: 10,
@@ -943,41 +951,11 @@ class _AddLogPageState extends State<AddLogPage> {
                               onChanged: (bool val) {
                                 setState(() {
                                   data.checked = !data.checked;
-
-                                  completeSymptomsList.forEach((element) {
-                                    // ... Do something here with items here
-                                    print(element.checked);
-
-                                    if (element.checked == true) {
-                                      sypmtomsTempList = [];
-                                      sypmtomsTempList.add(data.displayId);
-                                      distinctIds =
-                                          sypmtomsTempList.toSet().toList();
-                                    }
-                                  });
-
-                                  // if (sypmtomsTempList.length < 3) {
-                                  //   if (data.checked) {
-                                  //     sypmtomsTempList = [];
-                                  //     sypmtomsTempList.add(data.displayId);
-                                  //     distinctIds =
-                                  //         sypmtomsTempList.toSet().toList();
-                                  //   }
-
-                                  //   sypmtomsTempList.length;
-                                  // }
+                                  sypmtomsTempList.add(data.displayId);
+                                  distinctIds =
+                                      sypmtomsTempList.toSet().toList();
                                 });
-                                state2(() {
-                                  //   sypmtomsTempList.length;
-                                  //   data.checked = !data.checked;
-
-                                  //   if (sypmtomsTempList.length < 3) {
-                                  //     sypmtomsTempList.add(data.displayId);
-                                  //     distinctIds =
-                                  //         sypmtomsTempList.toSet().toList();
-                                  //     sypmtomsTempList.length;
-                                  //   }
-                                });
+                                state2(() {});
                               },
                             ),
                           ],
@@ -996,19 +974,27 @@ class _AddLogPageState extends State<AddLogPage> {
   }
 
   void _closeModal(void value) {
-    for (int i = 0; i < completeSymptomsList.length; i++) {
-      if (completeSymptomsList[i].checked) {
-      } else {}
-    }
-
+    // for (int i = 0; i < completeSymptomsList.length; i++) {
+    //   if (completeSymptomsList[i].checked) {
+    //   } else {}
+    // }
     setState(() {
-      sypmtoms = '';
+      sypmtoms = "";
 
-      sypmtoms = distinctIds != null ? distinctIds.join(', ') : '';
-      distinctIds = [];
-      print(distinctIds);
-      print(sypmtoms);
-      // sypmtomsTempList = [];
+      sypmtoms = distinctIds != null ? distinctIds.join(',') : '';
+
+      String originalString = sypmtoms;
+      for (int i = 0; i < completeSymptomsList.length; i++) {
+        if (sypmtoms.contains(completeSymptomsList[i].displayId)) {
+          print(completeSymptomsList[i].displayId);
+          originalString = originalString
+              .trim()
+              .replaceAll(completeSymptomsList[i].displayId + ',', "");
+          sypmtoms = originalString;
+          print(sypmtoms);
+        } else {}
+      }
     });
   }
+  // sypmtoms = distinctIds != null ? distinctIds.join(', ') : '';
 }

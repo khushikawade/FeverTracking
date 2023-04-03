@@ -56,13 +56,14 @@ class _SettingPageState extends State<SettingPage> {
   initState() {
     print("path");
     print(widget.imagePath);
-    if (widget.imagePath != null) {
-      _image = widget.imagePath;
-    } else {
-      _image = globals.userObj != null && globals.userObj.length > 0
-          ? globals.userObj[0].path
-          : null;
-    }
+    // if (widget.imagePath != null) {
+    //   _image = widget.imagePath;
+    // } else {
+
+    _image = globals.userObj != null && globals.userObj.length > 0
+        ? globals.userObj[0].path
+        : null;
+    // }
 
     getUserDetail();
 

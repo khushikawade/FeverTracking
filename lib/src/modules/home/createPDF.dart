@@ -169,22 +169,18 @@ downloadPDfFile(String docname, Document pdf) async {
   }
   String _fileName = docname;
   final downloadsDir = (Platform.isAndroid
-      ? await _getDownloadDirectoryAndroid()
+      ? (await getExternalStorageDirectory()).path
+      // await _getDownloadDirectoryAndroid()
       : (await _getDownloadDirectoryIos()).path);
-
-  //File('$downloadsDir/$_fileName.pdf').writeAsBytesSync();
-
-  File file =
-      await File('$downloadsDir/$_fileName.pdf').writeAsBytes(await pdf.save());
-
-  //await File('$downloadsDir/$_fileName.pdf').writeAsBytes(await pdf.save());
-
+  // final directory = (await getExternalStorageDirectory()).path;
+  File file = File('$downloadsDir/$_fileName');
+  await file.writeAsBytes(await pdf.save());
   return file;
 }
 
 Future<String> _getPathToDownload() async {
-  return ExtStorage.getExternalStoragePublicDirectory(
-      ExtStorage.DIRECTORY_DOWNLOADS);
+  // return ExtStorage.getExternalStoragePublicDirectory(
+  //     ExtStorage.DIRECTORY_DOWNLOADS);
 }
 
 Future<Directory> _getDownloadDirectoryIos() async {

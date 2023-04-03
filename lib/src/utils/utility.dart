@@ -133,7 +133,7 @@ class Utility {
     bool result = await downloadFile(pngBytes, 'screenshot.png');
     // File imgFile = new File('$directory/screenshot.png');
     // imgFile.writeAsBytes(pngBytes);
-    return result;
+    // return result;
   }
 
   downloadFile(Uint8List pngBytes, String docname) async {
@@ -143,7 +143,8 @@ class Utility {
     }
     String _fileName = docname;
     final downloadsDir = (Platform.isAndroid
-        ? await _getDownloadDirectoryAndroid()
+        ? (await getExternalStorageDirectory()).path
+        // await _getDownloadDirectoryAndroid()
         : (await _getDownloadDirectoryIos()).path);
 
     // String time =

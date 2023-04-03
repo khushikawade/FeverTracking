@@ -49,7 +49,7 @@ class HomeScreenState extends State<HomeScreen> {
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   static GlobalKey previewContainer = new GlobalKey();
-  GlobalKey _secondButtonKey = GlobalKey();
+  // GlobalKey _secondButtonKey = GlobalKey();
   @override
   void initState() {
     getLogs();
@@ -223,16 +223,16 @@ class HomeScreenState extends State<HomeScreen> {
                       child: IconButton(
                         onPressed: () async {
                           bottomsheet();
-                          // bool result =
-                          //     await Utility().takeScreenShot(previewContainer);
-                          // if (result != null && result) {
-                          //   Utility.showSnackBar(
-                          //       _scaffoldKey,
-                          //       Platform.isAndroid
-                          //           ? 'The Report has been downloaded to the Download folder.'
-                          //           : 'The Report has been downloaded to the Files folder.',
-                          //       context);
-                          // }
+                          bool result =
+                              await Utility().takeScreenShot(previewContainer);
+                          if (result != null && result) {
+                            Utility.showSnackBar(
+                                _scaffoldKey,
+                                Platform.isAndroid
+                                    ? 'The Report has been downloaded to the Download folder.'
+                                    : 'The Report has been downloaded to the Files folder.',
+                                context);
+                          }
                         },
                         icon: Icon(
                           Icons.share,

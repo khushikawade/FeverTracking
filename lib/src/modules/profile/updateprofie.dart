@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/modules/home/home_screen.dart';
 import 'package:mobile_app/src/modules/profile/Model/profilemodel.dart';
 import 'package:mobile_app/src/modules/profile/setting.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
@@ -76,7 +77,9 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
       Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
 
       Future.delayed(const Duration(seconds: 1), () {
-        Navigator.of(context).pop(0);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        // Navigator.of(context).pop(0);
         // Navigator.pushReplacement(
         //     context,
         //     MaterialPageRoute(
@@ -104,7 +107,9 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
           _scaffoldKey, 'Profile Update Successfully', context);
 
       Future.delayed(const Duration(seconds: 3), () {
-        Navigator.of(context).pop(0);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        // Navigator.of(context).pop(0);
         // Navigator.pop(context, log.path);
         // Navigator.pushReplacement(
         //     context,
