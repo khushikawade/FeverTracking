@@ -48,6 +48,7 @@ class _AddLogPageState extends State<AddLogPage> {
   final ValueNotifier<String> _sypmtoms = ValueNotifier<String>("");
   String time;
   List<String> sypmtomsTempList = [];
+  List<String> tempList = [];
 
   String sypmtoms = "";
 
@@ -57,6 +58,7 @@ class _AddLogPageState extends State<AddLogPage> {
 
   DateTime finaldate;
   var distinctIds;
+  var distinctIds1;
   DateTime dateTime = DateTime.now();
   String timeString;
   String addNoteText = "";
@@ -951,9 +953,12 @@ class _AddLogPageState extends State<AddLogPage> {
                               onChanged: (bool val) {
                                 setState(() {
                                   data.checked = !data.checked;
-                                  sypmtomsTempList.add(data.displayId);
-                                  distinctIds =
-                                      sypmtomsTempList.toSet().toList();
+                                  if (sypmtomsTempList
+                                      .contains(data.displayId)) {
+                                    print("not added");
+                                  } else {
+                                    sypmtomsTempList.add(data.displayId);
+                                  }
                                 });
                                 state2(() {});
                               },
@@ -970,31 +975,81 @@ class _AddLogPageState extends State<AddLogPage> {
         );
       },
     );
-    future.then((void value) => _closeModal(value));
+    future.then((void value) => _closeModal(sypmtomsTempList));
   }
 
-  void _closeModal(void value) {
-    // for (int i = 0; i < completeSymptomsList.length; i++) {
-    //   if (completeSymptomsList[i].checked) {
-    //   } else {}
-    // }
+  void _closeModal(sypmtomsTempList) {
     setState(() {
-      sypmtoms = "";
+      distinctIds = sypmtomsTempList.toSet().toList();
 
       sypmtoms = distinctIds != null ? distinctIds.join(',') : '';
+      // sypmtoms = "";
+      // if (sypmtoms.isNotEmpty) {
+      //   sypmtomsTempList.asMap().forEach((i, element) {
+      //     if (sypmtoms.contains(element)) {
+      //       if (sypmtomsTempList[i] == element) {
+      //         sypmtomsTempList.remove(element);
+      //         distinctIds = sypmtomsTempList.toSet().toList();
+      //       }
+      //     }
+      //   });
+      // } else {
+      //   distinctIds = sypmtomsTempList.toSet().toList();
+      // }
+      // sypmtoms = distinctIds != null ? distinctIds.join(',') : '';
+      // bool check = false;
+      // sypmtoms = "";
+      // print(distinctIds);
+      // print(sypmtomsTempList.length);
 
-      String originalString = sypmtoms;
-      for (int i = 0; i < completeSymptomsList.length; i++) {
-        if (sypmtoms.contains(completeSymptomsList[i].displayId)) {
-          print(completeSymptomsList[i].displayId);
-          originalString = originalString
-              .trim()
-              .replaceAll(completeSymptomsList[i].displayId + ',', "");
-          sypmtoms = originalString;
-          print(sypmtoms);
-        } else {}
-      }
+      // if (distinctIds == distinctIds1) {
+      //   sypmtoms = "";
+      //   print("7889");
+      //   print(sypmtoms);
+      // }
+
+      // String originalString = sypmtoms;
+      // sypmtomsTempList.asMap().forEach((i, element) {
+      //   if (sypmtoms.contains(element)) {
+      //     if (sypmtomsTempList[i] == element) {
+      //       check = true;
+      //       var rep = element;
+      //       originalString = originalString.trim().replaceAll(rep.trim(), "");
+      //       print(originalString);
+      //       if (originalString.contains(',')) {
+      //         originalString = originalString.replaceAll(',', '');
+      //       }
+      //       print(originalString);
+      //       sypmtoms = originalString;
+      //       print(sypmtoms);
+      //     }
+      //     return true;
+      //   }
+      // });
+
+      // print(sypmtoms);
+      // print(sypmtoms);
+
+      // if (sypmtoms.isNotEmpty) {
+      //   sypmtomsTempList.asMap().forEach((i, element) {
+      //     if (sypmtoms.contains(element)) {
+      //       if (sypmtomsTempList[i] == element) {
+      //         sypmtomsTempList.remove(element);
+      //         print(sypmtomsTempList[i]);
+      //         print("8888888");
+      //         distinctIds = sypmtomsTempList.toSet().toList();
+      //         print(distinctIds);
+      //       }
+      //     }
+      //   });
+      // } else {
+      //   distinctIds = sypmtomsTempList.toSet().toList();
+      // }
     });
+    print("sypmtoms" + sypmtoms);
+    print(distinctIds);
+
+    print("sypmtoms   =>  " + sypmtoms);
+    print(distinctIds);
   }
-  // sypmtoms = distinctIds != null ? distinctIds.join(', ') : '';
 }

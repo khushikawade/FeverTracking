@@ -133,7 +133,7 @@ class Utility {
     bool result = await downloadFile(pngBytes, 'screenshot.png');
     // File imgFile = new File('$directory/screenshot.png');
     // imgFile.writeAsBytes(pngBytes);
-    // return result;
+    return result;
   }
 
   downloadFile(Uint8List pngBytes, String docname) async {
