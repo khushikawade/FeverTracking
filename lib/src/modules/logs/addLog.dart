@@ -953,12 +953,30 @@ class _AddLogPageState extends State<AddLogPage> {
                               onChanged: (bool val) {
                                 setState(() {
                                   data.checked = !data.checked;
+
                                   if (sypmtomsTempList
                                       .contains(data.displayId)) {
                                     print("not added");
                                   } else {
                                     sypmtomsTempList.add(data.displayId);
+                                    distinctIds =
+                                        sypmtomsTempList.toSet().toList();
                                   }
+                                  distinctIds.asMap().forEach((i, element) {
+                                    if (sypmtoms.contains(element)) {
+                                      print("element ----------$element");
+                                      if (element == data.displayId) {
+                                        print(
+                                            "sypmtomsTempList ---------$sypmtomsTempList");
+                                        sypmtomsTempList.remove(element);
+                                        print(
+                                            "sypmtomsTempList  after removing---------$sypmtomsTempList");
+                                        distinctIds =
+                                            sypmtomsTempList.toSet().toList();
+                                        print(distinctIds);
+                                      }
+                                    }
+                                  });
                                 });
                                 state2(() {});
                               },
@@ -979,12 +997,10 @@ class _AddLogPageState extends State<AddLogPage> {
   }
 
   void _closeModal(sypmtomsTempList) {
+    // print("sypmtomsTempList       ================$sypmtomsTempList ");
     setState(() {
-      distinctIds = sypmtomsTempList.toSet().toList();
-
-      sypmtoms = distinctIds != null ? distinctIds.join(',') : '';
-      // sypmtoms = "";
       // if (sypmtoms.isNotEmpty) {
+      //   print(sypmtoms);
       //   sypmtomsTempList.asMap().forEach((i, element) {
       //     if (sypmtoms.contains(element)) {
       //       if (sypmtomsTempList[i] == element) {
@@ -993,10 +1009,11 @@ class _AddLogPageState extends State<AddLogPage> {
       //       }
       //     }
       //   });
-      // } else {
+      // }
+      // else {
       //   distinctIds = sypmtomsTempList.toSet().toList();
       // }
-      // sypmtoms = distinctIds != null ? distinctIds.join(',') : '';
+      sypmtoms = distinctIds != null ? distinctIds.join(',') : '';
       // bool check = false;
       // sypmtoms = "";
       // print(distinctIds);
@@ -1046,10 +1063,10 @@ class _AddLogPageState extends State<AddLogPage> {
       //   distinctIds = sypmtomsTempList.toSet().toList();
       // }
     });
-    print("sypmtoms" + sypmtoms);
-    print(distinctIds);
+    // print("sypmtoms" + sypmtoms);
+    // print(distinctIds);
 
-    print("sypmtoms   =>  " + sypmtoms);
-    print(distinctIds);
+    // print("sypmtoms   =>  " + sypmtoms);
+    // print(distinctIds);
   }
 }
