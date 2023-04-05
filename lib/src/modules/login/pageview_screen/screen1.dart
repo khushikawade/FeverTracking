@@ -82,14 +82,16 @@ class Screen1State extends State<Screen1> {
         // SizedBox(
         //   height: 100,
         // ),
-        Image.asset(
-          'assets/images/welcome_01.png',
+        SizedBox(
+          child: Image.asset(
+            'assets/images/secure.png',
+          ),
         ),
         SizedBox(
           height: 25,
         ),
         Text(
-          'Easy way to track health parameters',
+          'Our Commitment to Your Security',
           textAlign: TextAlign.center,
           style: TextStyle(
               color: AppTheme.contentColor1,
@@ -99,10 +101,11 @@ class Screen1State extends State<Screen1> {
               fontWeight: FontWeight.bold),
         ),
         SizedBox(
-          height: 16,
+          height: 26,
         ),
         Text(
-          'Running a fever during the onset of Monsoon could have been passed off as the seasonal flu or viral fever earlier.',
+          // 'Running a fever during the onset of Monsoon could have been passed off as the seasonal flu or viral fever earlier.',
+          'Your privacy is important to us. We do not collect any type of data from our users. You can use our app with confidence, knowing that your personal information is safe and secure.',
           textAlign: TextAlign.center,
           style: TextStyle(
               color: AppTheme.contentColor2,

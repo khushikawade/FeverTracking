@@ -18,6 +18,7 @@ String registractionToken;
 String token;
 String pushNotification;
 var userObj;
+var logObj;
 var patient; // TO store patient and provider info both
 var client; // To sotre client info
 var provider; // for chat lobby

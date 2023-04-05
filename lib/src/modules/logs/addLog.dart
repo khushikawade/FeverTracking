@@ -1,3 +1,4 @@
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/modules/logs/addnote.dart';
 import 'package:mobile_app/src/modules/logs/model/checkboxmodel.dart';
@@ -32,6 +33,10 @@ List<CheckBoxModel> checkBoxModelList = [
   new CheckBoxModel(displayId: 'Runny Noise ', checked: false),
   new CheckBoxModel(displayId: 'Sore Throat ', checked: false),
 ];
+List<DateTime> _dialogCalendarPickerValue = [
+  // DateTime(2023, 2, 10),
+  DateTime.now(),
+];
 
 class AddLogPage extends StatefulWidget {
   bool fromHomePage;
@@ -57,12 +62,14 @@ class _AddLogPageState extends State<AddLogPage> {
   var medicineList = [];
 
   DateTime finaldate;
+
   var distinctIds;
   var distinctIds1;
   DateTime dateTime = DateTime.now();
   String timeString;
   String addNoteText = "";
   String postion = "";
+  String date = "";
   String temp = "";
   bool ClickAddLog = false;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -77,6 +84,8 @@ class _AddLogPageState extends State<AddLogPage> {
       _time = newTime;
     });
   }
+
+  final String formatted = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
 //  List<String> namesList =sypmtomsTempList.map((e) => e["Name"].toString()).toList();
 // print(namesList);
@@ -118,15 +127,22 @@ class _AddLogPageState extends State<AddLogPage> {
 
   @override
   void initState() {
-    super.initState();
     timeString = timeformatter.format(DateTime.now());
     postion = globals.postionList[3];
     temp = globals.tempertureList[0];
+    // sypmtoms = checkBoxModelList[0].displayId;
     getsymptomsDetail();
+    // getList();
+    super.initState();
   }
 
   getList() async {
     var logsList = await DbServices().getListData(Strings.hiveLogName);
+    globals.logObj = logsList;
+
+    sypmtoms = globals.logObj != null && globals.logObj.length > 0
+        ? globals.logObj[0].symptoms
+        : null;
 
     setState(() {});
   }
@@ -168,18 +184,28 @@ class _AddLogPageState extends State<AddLogPage> {
 
   getcurrentdate() {
     String dateString;
-    if (globals.getdatefromslider != null) {
-      String date = "${globals.getdatefromslider}".split(' ')[0];
-      var dateAndTimeString = "$date $timeString";
-      print(dateAndTimeString);
 
+    // if (globals.getdatefromslider != null) {
+    // String date = "${globals.getdatefromslider}".split(' ')[0];
+    print("999");
+    print(date);
+    print(timeString);
+    var dateAndTimeString;
+    if (date == null || date.isEmpty) {
+      dateAndTimeString = "$formatted $timeString";
       finaldate =
           new DateFormat("yyyy-MM-dd hh:mm:ss").parse("$dateAndTimeString");
-
-      print("FINALDATE $finaldate");
     } else {
-      Utility.showSnackBar(_scaffoldKey, 'Please Select Month & Date', context);
+      dateAndTimeString = "$date$timeString";
+      finaldate =
+          new DateFormat("yyyy-MM-dd hh:mm:ss").parse("$dateAndTimeString");
     }
+
+    print("FINALDATE $finaldate");
+    // }
+    // else {
+    //   Utility.showSnackBar(_scaffoldKey, 'Please Select Month & Date', context);
+    // }
   }
 
   @override
@@ -210,6 +236,11 @@ class _AddLogPageState extends State<AddLogPage> {
         ),
         leading: InkWell(
           onTap: () {
+            for (int i = 0; i < checkBoxModelList.length; i++) {
+              if (checkBoxModelList[i].checked) {
+                checkBoxModelList[i].checked = false;
+              }
+            }
             Navigator.pop(context);
           },
           child: Icon(
@@ -255,17 +286,19 @@ class _AddLogPageState extends State<AddLogPage> {
       body: Container(
         color: Theme.of(context).backgroundColor,
         child: ListView(children: [
-          SizedBox(
-            // width: 200.0,
-            height: MediaQuery.of(context).size.height * .22,
-            child: MonthSlider(
-              onUpdateWidget: (bool result) {
-                print(" called ...... ");
-                // setState(() {});
-              },
-              isdefaultcall: true,
-            ),
-          ),
+          // SizedBox(
+          //   // width: 200.0,
+          //   height: MediaQuery.of(context).size.height * .22,
+          //   child: MonthSlider(
+          //     onUpdateWidget: (bool result) {
+          //       print(" called ...... ");
+          //       // setState(() {});
+          //     },
+          //     isdefaultcall: true,
+          //   ),
+          // ),
+          _buildCalendarDialogButton(),
+
           Container(
             height: 1,
             // margin: EdgeInsets.only(left: 20),
@@ -649,9 +682,21 @@ class _AddLogPageState extends State<AddLogPage> {
             onTap: () {
               setState(() {
                 ClickAddLog = true;
+                // var dateAndTimeString = "$date$timeString";
+                // print(dateAndTimeString);
+                // // finaldate = DateTime.parse(dateAndTimeString);
+
+                // finaldate = new DateFormat("yyyy-MM-dd hh:mm:ss")
+                //     .parse("$dateAndTimeString");
+
+                // print("FINALDATE $finaldate");
+                // finaldate =
+                //     new DateFormat("dd-MM-y hh:mm:ss").parse(dateAndTimeString);
+                // print(dt);
                 getcurrentdate();
-                if ((finaldate != null) &&
-                    (postion.isNotEmpty) &&
+                print("FINALDATE $finaldate");
+
+                if ((postion.isNotEmpty) &&
                     (temp.isNotEmpty) &&
                     (sypmtoms.isNotEmpty) &&
                     (medicineList.isNotEmpty)) {
@@ -665,8 +710,8 @@ class _AddLogPageState extends State<AddLogPage> {
                       addNoteText);
                   addLog(log);
                 } else {
-                  // Utility.showSnackBar(
-                  //     _scaffoldKey, 'Please Fill All Required Field ', context);
+                  Utility.showSnackBar(
+                      _scaffoldKey, 'Please Fill All Required Field ', context);
                 }
               });
             },
@@ -997,76 +1042,201 @@ class _AddLogPageState extends State<AddLogPage> {
   }
 
   void _closeModal(sypmtomsTempList) {
-    // print("sypmtomsTempList       ================$sypmtomsTempList ");
     setState(() {
-      // if (sypmtoms.isNotEmpty) {
-      //   print(sypmtoms);
-      //   sypmtomsTempList.asMap().forEach((i, element) {
-      //     if (sypmtoms.contains(element)) {
-      //       if (sypmtomsTempList[i] == element) {
-      //         sypmtomsTempList.remove(element);
-      //         distinctIds = sypmtomsTempList.toSet().toList();
-      //       }
-      //     }
-      //   });
-      // }
-      // else {
-      //   distinctIds = sypmtomsTempList.toSet().toList();
-      // }
       sypmtoms = distinctIds != null ? distinctIds.join(',') : '';
-      // bool check = false;
-      // sypmtoms = "";
-      // print(distinctIds);
-      // print(sypmtomsTempList.length);
-
-      // if (distinctIds == distinctIds1) {
-      //   sypmtoms = "";
-      //   print("7889");
-      //   print(sypmtoms);
-      // }
-
-      // String originalString = sypmtoms;
-      // sypmtomsTempList.asMap().forEach((i, element) {
-      //   if (sypmtoms.contains(element)) {
-      //     if (sypmtomsTempList[i] == element) {
-      //       check = true;
-      //       var rep = element;
-      //       originalString = originalString.trim().replaceAll(rep.trim(), "");
-      //       print(originalString);
-      //       if (originalString.contains(',')) {
-      //         originalString = originalString.replaceAll(',', '');
-      //       }
-      //       print(originalString);
-      //       sypmtoms = originalString;
-      //       print(sypmtoms);
-      //     }
-      //     return true;
-      //   }
-      // });
-
-      // print(sypmtoms);
-      // print(sypmtoms);
-
-      // if (sypmtoms.isNotEmpty) {
-      //   sypmtomsTempList.asMap().forEach((i, element) {
-      //     if (sypmtoms.contains(element)) {
-      //       if (sypmtomsTempList[i] == element) {
-      //         sypmtomsTempList.remove(element);
-      //         print(sypmtomsTempList[i]);
-      //         print("8888888");
-      //         distinctIds = sypmtomsTempList.toSet().toList();
-      //         print(distinctIds);
-      //       }
-      //     }
-      //   });
-      // } else {
-      //   distinctIds = sypmtomsTempList.toSet().toList();
-      // }
     });
-    // print("sypmtoms" + sypmtoms);
-    // print(distinctIds);
+  }
 
-    // print("sypmtoms   =>  " + sypmtoms);
-    // print(distinctIds);
+  _buildCalendarDialogButton() {
+    const dayTextStyle =
+        TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
+    final weekendTextStyle =
+        TextStyle(color: Colors.grey[500], fontWeight: FontWeight.w600);
+    final anniversaryTextStyle = TextStyle(
+      color: Colors.red[400],
+      fontWeight: FontWeight.w700,
+      decoration: TextDecoration.underline,
+    );
+    final config = CalendarDatePicker2WithActionButtonsConfig(
+      lastDate: DateTime.now(),
+      dayTextStyle: dayTextStyle,
+      calendarType: CalendarDatePicker2Type.range,
+      selectedDayHighlightColor: AppTheme.textColor2,
+      closeDialogOnCancelTapped: true,
+      firstDayOfWeek: 1,
+      weekdayLabelTextStyle: const TextStyle(
+        color: Colors.black87,
+        fontWeight: FontWeight.bold,
+      ),
+      controlsTextStyle: const TextStyle(
+        color: Colors.black,
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+      ),
+      centerAlignModePicker: true,
+      customModePickerIcon: const SizedBox(),
+      selectedDayTextStyle: dayTextStyle.copyWith(color: Colors.white),
+      dayTextStylePredicate: ({date}) {
+        TextStyle textStyle;
+        if (date.weekday == DateTime.saturday ||
+            date.weekday == DateTime.sunday) {
+          textStyle = weekendTextStyle;
+        }
+        if (DateUtils.isSameDay(date, DateTime(2021, 1, 25))) {
+          textStyle = anniversaryTextStyle;
+        }
+        return textStyle;
+      },
+      dayBuilder: ({
+        date,
+        textStyle,
+        decoration,
+        isSelected,
+        isDisabled,
+        isToday,
+      }) {
+        Widget dayWidget;
+        if (date.day % 3 == 0 && date.day % 9 != 0) {
+          dayWidget = Container(
+            decoration: decoration,
+            child: Center(
+              child: Stack(
+                alignment: AlignmentDirectional.center,
+                children: [
+                  Text(
+                    MaterialLocalizations.of(context).formatDecimal(date.day),
+                    style: textStyle,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 27.5),
+                    child: Container(
+                      height: 4,
+                      width: 4,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: isSelected == true
+                            ? Colors.white
+                            : Colors.grey[500],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+        return dayWidget;
+      },
+      yearBuilder: ({
+        year,
+        decoration,
+        isCurrentYear,
+        isDisabled,
+        isSelected,
+        textStyle,
+      }) {
+        return Center(
+          child: Container(
+            decoration: decoration,
+            height: 36,
+            width: 72,
+            child: Center(
+              child: Semantics(
+                selected: isSelected,
+                button: true,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      year.toString(),
+                      style: textStyle,
+                    ),
+                    if (isCurrentYear == true)
+                      Container(
+                        padding: const EdgeInsets.all(5),
+                        margin: const EdgeInsets.only(left: 5),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.redAccent,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+    return ListTile(
+      leading: Text(
+        "Open calendar",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            color: AppTheme.textColor1,
+            fontFamily: "SF UI Display Regular Bold",
+            fontSize: globals.deviceType == "phone" ? 17 : 25),
+      ),
+      trailing: Wrap(
+        alignment: WrapAlignment.center,
+        children: <Widget>[
+          Text(
+            date == null || date.isEmpty ? formatted : "$date",
+            style: TextStyle(
+                color: AppTheme.textColor2,
+                fontFamily: "SF UI Display Regular",
+                fontSize: globals.deviceType == "phone" ? 17 : 25),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 02),
+            child: Icon(
+              Icons.arrow_forward_ios,
+              color: AppTheme.arrowIconsColor.withOpacity(0.2),
+              size: globals.deviceType == 'phone' ? 15 : 23,
+            ),
+          ),
+        ],
+      ),
+      selected: true,
+      onTap: () async {
+        final values = await showCalendarDatePicker2Dialog(
+          context: context,
+          config: config,
+          dialogSize: const Size(325, 400),
+          borderRadius: BorderRadius.circular(15),
+          value: _dialogCalendarPickerValue,
+          dialogBackgroundColor: Colors.white,
+        );
+        if (values != null) {
+          // ignore: avoid_print
+          print(_getValueText(
+            config.calendarType,
+            values,
+          ));
+          date = _getValueText(
+            config.calendarType,
+            values,
+          );
+          setState(() {
+            _dialogCalendarPickerValue = values;
+          });
+        }
+      },
+    );
+  }
+
+  String _getValueText(
+    CalendarDatePicker2Type datePickerType,
+    List<DateTime> values,
+  ) {
+    values =
+        values.map((e) => e != null ? DateUtils.dateOnly(e) : null).toList();
+    var valueText = (values.isNotEmpty ? values[0] : null)
+        .toString()
+        .replaceAll('00:00:00.000', '');
+    return valueText;
   }
 }

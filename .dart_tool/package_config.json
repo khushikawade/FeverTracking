@@ -98,6 +98,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "calendar_date_picker2",
+      "rootUri": "file:///C:/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/calendar_date_picker2-0.4.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "characters",
       "rootUri": "file:///C:/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/characters-1.2.1",
       "packageUri": "lib/",
@@ -800,7 +806,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2023-04-04T13:34:42.327138Z",
+  "generated": "2023-04-05T12:13:53.393291Z",
   "generator": "pub",
   "generatorVersion": "2.19.5"
 }

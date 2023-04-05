@@ -46,31 +46,31 @@ class DbServices {
         for (int i = 0; i < list.length; i++) {
           // print(logsList[i].dateTime);
 
-          String logTemp1 = "${list[i].dateTime}".split(' ')[0];
-          String logTemp2 = "${globals.getdatefromslider}".split(' ')[0];
+          // String logTemp1 = "${list[i].dateTime}".split(' ')[0];
+          // String logTemp2 = "${globals.getdatefromslider}".split(' ')[0];
 
-          if (logTemp1 == logTemp2) {
-            // DateTime dateTime = logsList[i].dateTime;
-            // String position;
-            // String temprature;
-            // String symptoms;
-            // var addMedinceLog;
-            // String addNotehere;
-            var item = LogsModel(
-                list[i].dateTime,
-                list[i].position,
-                list[i].temprature,
-                list[i].symptoms,
-                list[i].addMedinceLog,
-                list[i].addNotehere);
+          // if (logTemp1 == logTemp2) {
+          // DateTime dateTime = logsList[i].dateTime;
+          // String position;
+          // String temprature;
+          // String symptoms;
+          // var addMedinceLog;
+          // String addNotehere;
+          var item = LogsModel(
+              list[i].dateTime,
+              list[i].position,
+              list[i].temprature,
+              list[i].symptoms,
+              list[i].addMedinceLog,
+              list[i].addNotehere);
 
-            listofSelectedDate.add(item);
+          listofSelectedDate.add(item);
 
-            // var filteredUsers = logsList.values
-            //     .where((LogsModel) => LogsModel.dateTime == "")
-            //     .toList();
-            // print(filteredUsers.length);
-          }
+          // var filteredUsers = logsList.values
+          //     .where((LogsModel) => LogsModel.dateTime == "")
+          //     .toList();
+          // print(filteredUsers.length);
+          // }
         }
       }
 

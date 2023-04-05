@@ -22,6 +22,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
   int index = 0;
   String selectedImage;
+  String name;
 
   getUserDetail() async {
     var userData = await DbServices().getListData(Strings.updateProile);
@@ -30,6 +31,9 @@ class _MenuScreenState extends State<MenuScreen> {
 
     selectedImage = globals.userObj != null && globals.userObj.length > 0
         ? globals.userObj[0].path
+        : null;
+    name = globals.userObj != null && globals.userObj.length > 0
+        ? globals.userObj[0].name
         : null;
 
     setState(() {});
@@ -80,11 +84,16 @@ class _MenuScreenState extends State<MenuScreen> {
             SizedBox(
               height: 30,
             ),
-            CircleAvatar(
-              radius: 56.47,
-              backgroundImage: selectedImage != null
-                  ? new FileImage(File(selectedImage))
-                  : ExactAssetImage('assets/images/profileimage.png'),
+            InkWell(
+              onTap: () {
+                Navigator.of(context).pop(3);
+              },
+              child: CircleAvatar(
+                radius: 56.47,
+                backgroundImage: selectedImage != null
+                    ? new FileImage(File(selectedImage))
+                    : ExactAssetImage('assets/images/profileimage.png'),
+              ),
             ),
             SizedBox(
               height: 20,
@@ -96,7 +105,7 @@ class _MenuScreenState extends State<MenuScreen> {
               children: [
                 Expanded(
                   child: Text(
-                    "Default Profile",
+                    name != null ? name : "Default Profile",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontWeight: FontWeight.w800,

@@ -223,29 +223,30 @@ class HomeScreenState extends State<HomeScreen> {
                       child: IconButton(
                         onPressed: () async {
                           bottomsheet();
-                          bool result =
-                              await Utility().takeScreenShot(previewContainer);
-                          if (result != null && result) {
-                            Utility.showSnackBar(
-                                _scaffoldKey,
-                                Platform.isAndroid
-                                    ? 'The Report has been downloaded to the Download folder.'
-                                    : 'The Report has been downloaded to the Files folder.',
-                                context);
-                          }
+                          // bool result =
+                          //     await Utility().takeScreenShot(previewContainer);
+                          // if (result != null && result) {
+                          //   Utility.showSnackBar(
+                          //       _scaffoldKey,
+                          //       Platform.isAndroid
+                          //           ? 'The Report has been downloaded to the Download folder.'
+                          //           : 'The Report has been downloaded to the Files folder.',
+                          //       context);
+                          // }
                         },
+                        // icon: Icon(
+                        //   Icons.share,
+                        //   // Icons.more_vert,
+                        //   size: 24,
+                        //   color: AppTheme.iconColor,
+                        // ),
                         icon: Icon(
-                          Icons.share,
-                          // Icons.more_vert,
-                          size: 24,
+                          const IconData(0xe809,
+                              fontFamily: "FeverTrackingIcons"),
+                          // color:AppTheme.iconColor,
+                          size: 22,
                           color: AppTheme.iconColor,
                         ),
-                        // icon: Icon(
-                        //   const IconData(0xe800,
-                        //       fontFamily: "FeverTrackingIcons"),
-                        //   // color:AppTheme.iconColor,
-                        //   size: 24,
-                        // ),
                       ),
                     )
                   : selectedIndex == 1
@@ -270,19 +271,19 @@ class HomeScreenState extends State<HomeScreen> {
                         )
                       : Padding(
                           padding: const EdgeInsets.only(right: 5),
-                          child: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                deletemedicine = !deletemedicine;
-                              });
-                            },
-                            icon: Icon(
-                              const IconData(0xe802,
-                                  fontFamily: "FeverTrackingIcons"),
-                              // color:AppTheme.iconColor,
-                              size: 24,
-                            ),
-                          ),
+                          // child: IconButton(
+                          //   onPressed: () {
+                          //     setState(() {
+                          //       deletemedicine = !deletemedicine;
+                          //     });
+                          //   },
+                          //   icon: Icon(
+                          //     const IconData(0xe802,
+                          //         fontFamily: "FeverTrackingIcons"),
+                          //     // color:AppTheme.iconColor,
+                          //     size: 24,
+                          //   ),
+                          // ),
                         )
         ],
       ),
@@ -517,7 +518,7 @@ class HomeScreenState extends State<HomeScreen> {
       }
     } else {
       showSuccessDialog(context);
-      //Utility.showSnackBar(_scaffoldKey, 'Please Update Your Profile', context);
+      Utility.showSnackBar(_scaffoldKey, 'Please Update Your Profile', context);
     }
   }
 
@@ -533,43 +534,43 @@ class HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.only(
-                        left: 5, right: 10, bottom: 5, top: 5),
-                    child: ListTile(
-                        leading: Container(
-                          padding: const EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            border:
-                                Border.all(width: 0.0, color: Colors.white54),
-                            borderRadius: BorderRadius.all(Radius.circular(
-                                    14.0) //                 <--- border radius here
-                                ),
-                          ),
-                          child: Icon(
-                            const IconData(0xe800,
-                                fontFamily: "FeverTrackingIcons"),
-                            // color:AppTheme.iconColor,
-                            size: 22,
-                            color: AppTheme.iconColor,
-                          ),
-                        ),
-                        title: Text(
-                          "Take Screenshot",
-                          style: TextStyle(
-                              fontFamily: 'SF UI Display Bold',
-                              fontWeight: FontWeight.w700,
-                              color: AppTheme.buttomSheetTextColor,
-                              fontSize:
-                                  globals.deviceType == 'phone' ? 17 : 25),
-                        ),
-                        selected: true,
-                        onTap: () {
-                          Navigator.pop(context);
-                          takeScreenshot();
-                        }),
-                  ),
+                  // Container(
+                  //   padding: const EdgeInsets.only(
+                  //       left: 5, right: 10, bottom: 5, top: 5),
+                  //   child: ListTile(
+                  //       leading: Container(
+                  //         padding: const EdgeInsets.all(10.0),
+                  //         decoration: BoxDecoration(
+                  //           color: Theme.of(context).primaryColor,
+                  //           border:
+                  //               Border.all(width: 0.0, color: Colors.white54),
+                  //           borderRadius: BorderRadius.all(Radius.circular(
+                  //                   14.0) //                 <--- border radius here
+                  //               ),
+                  //         ),
+                  //         child: Icon(
+                  //           const IconData(0xe800,
+                  //               fontFamily: "FeverTrackingIcons"),
+                  //           // color:AppTheme.iconColor,
+                  //           size: 22,
+                  //           color: AppTheme.iconColor,
+                  //         ),
+                  //       ),
+                  //       title: Text(
+                  //         "Take Screenshot",
+                  //         style: TextStyle(
+                  //             fontFamily: 'SF UI Display Bold',
+                  //             fontWeight: FontWeight.w700,
+                  //             color: AppTheme.buttomSheetTextColor,
+                  //             fontSize:
+                  //                 globals.deviceType == 'phone' ? 17 : 25),
+                  //       ),
+                  //       selected: true,
+                  //       onTap: () {
+                  //         Navigator.pop(context);
+                  //         takeScreenshot();
+                  //       }),
+                  // ),
                   Container(
                     padding: const EdgeInsets.only(
                         left: 5, right: 10, bottom: 0, top: 0),

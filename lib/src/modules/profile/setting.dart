@@ -27,6 +27,7 @@ class _SettingPageState extends State<SettingPage> {
   bool isSwitched = false;
   var logsList;
   String _image;
+  String _name;
 
   void toggleSwitch(bool value) {
     if (isSwitched == false) {
@@ -47,6 +48,10 @@ class _SettingPageState extends State<SettingPage> {
 
     _image = globals.userObj != null && globals.userObj.length > 0
         ? globals.userObj[0].path
+        : null;
+
+    _name = globals.userObj != null && globals.userObj.length > 0
+        ? globals.userObj[0].name
         : null;
 
     setState(() {});
@@ -335,7 +340,7 @@ class _SettingPageState extends State<SettingPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        "Default Profile",
+                        _name != null ? _name : "Default Profile",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,

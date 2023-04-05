@@ -34,6 +34,7 @@ class _StartupPageState extends State<StartupPage> {
   checklogin() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     bool isResult = pref.getBool('INTRODUCTION_WATCHED');
+
     if (isResult != null && isResult) {
       Future.delayed(const Duration(seconds: 5), () {
         Navigator.pushReplacement(

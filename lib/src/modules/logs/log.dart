@@ -40,8 +40,15 @@ class _LogPageState extends State<LogPage> {
   static GlobalKey previewContainer = new GlobalKey();
   @override
   void initState() {
+    getLogs();
     super.initState();
-    // getLogs();
+  }
+
+  // get Logs List
+  getLogs() async {
+    logsList = await DbServices().getListData(Strings.hiveLogName);
+
+    setState(() {});
   }
 
   Widget build(BuildContext context) {
@@ -50,7 +57,7 @@ class _LogPageState extends State<LogPage> {
         body: Container(
           color: Theme.of(context).backgroundColor,
           child: ListView(children: [
-            makeSliders(),
+            // makeSliders(),
             Container(
               height: 1,
               decoration: BoxDecoration(
@@ -316,7 +323,7 @@ class _LogPageState extends State<LogPage> {
                         ),
                         Expanded(
                           child: SizedBox(
-                            width: 100,
+                            width: 150,
                             child: Text(
                               items[index].symptoms != null &&
                                       items[index].symptoms.isNotEmpty
@@ -332,48 +339,6 @@ class _LogPageState extends State<LogPage> {
                             ),
                           ),
                         ),
-                        InkWell(
-                          onTap: () async {
-                            bool result = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AddLogPage(
-                                          fromHomePage: false,
-                                        )));
-
-                            if (result != null && result) {
-                              widget.onUpdateWidget(true);
-                              setState(() {});
-                              //getList();
-                            }
-                          },
-                          child: Icon(
-                            const IconData(0xe802,
-                                fontFamily: "FeverTrackingIcons"),
-                            // color:AppTheme.iconColor,
-                            color: Colors.black54,
-                            size: 24,
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        InkWell(
-                          onTap: () {
-                            deleteLog(index);
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.all(2),
-                            child: Icon(
-                              Icons.delete_outline,
-                              size: 20,
-                              color: Colors.red,
-                            ),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border:
-                                    Border.all(color: Colors.grey, width: 1)),
-                          ),
-                        ),
                       ],
                     ),
                   ]),
@@ -381,25 +346,80 @@ class _LogPageState extends State<LogPage> {
             SizedBox(
               width: 10,
             ),
-            Container(
-              child: Text(
-                items[index].dateTime != null
-                    //? Utility.timeAgoSinceDate(items[index].dateTime)
-                    ? DateFormat('HH:mm').format(items[index].dateTime) ==
-                            DateFormat('HH:mm').format(DateTime.now())
-                        ? 'Just Now'
-                        : DateFormat('yyyy-MM-dd')
-                                    .format(items[index].dateTime) ==
-                                DateFormat('yyyy-MM-dd').format(DateTime.now())
-                            ? DateFormat.MMMEd().format(items[index].dateTime)
-                            : DateFormat.jm().format(items[index].dateTime)
-                    : '',
-                style: TextStyle(
-                    color: AppTheme.textColor2,
-                    fontWeight: FontWeight.normal,
-                    fontFamily: "SF UI Display Regular",
-                    fontSize: globals.deviceType == 'phone' ? 12 : 20),
-              ),
+
+            Column(
+              children: [
+                Container(
+                  child: Text(
+                    items[index].dateTime != null
+                        //? Utility.timeAgoSinceDate(items[index].dateTime)
+                        ? DateFormat('HH:mm').format(items[index].dateTime) ==
+                                DateFormat('HH:mm').format(DateTime.now())
+                            ? 'Just Now'
+                            : DateFormat('yyyy-MM-dd')
+                                        .format(items[index].dateTime) ==
+                                    DateFormat('yyyy-MM-dd')
+                                        .format(DateTime.now())
+                                ? DateFormat.MMMEd()
+                                    .format(items[index].dateTime)
+                                : DateFormat.jm().format(items[index].dateTime)
+                        : '',
+                    style: TextStyle(
+                        color: AppTheme.textColor2,
+                        fontWeight: FontWeight.normal,
+                        fontFamily: "SF UI Display Regular",
+                        fontSize: globals.deviceType == 'phone' ? 12 : 20),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    // InkWell(
+                    //   onTap: () async {
+                    //     bool result = await Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //             builder: (context) => AddLogPage(
+                    //                   fromHomePage: false,
+                    //                 )));
+
+                    //     if (result != null && result) {
+                    //       widget.onUpdateWidget(true);
+                    //       setState(() {});
+                    //       // getList();
+                    //     }
+                    //   },
+                    //   child: Icon(
+                    //     const IconData(0xe802,
+                    //         fontFamily: "FeverTrackingIcons"),
+                    //     // color:AppTheme.iconColor,
+                    //     color: Colors.black54,
+                    //     size: 24,
+                    //   ),
+                    // ),
+                    SizedBox(width: 10),
+                    InkWell(
+                      onTap: () {
+                        deleteLog(index);
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(2),
+                        child: Icon(
+                          Icons.delete_outline,
+                          size: 17,
+                          color: Colors.red,
+                        ),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey, width: 1)),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ));
