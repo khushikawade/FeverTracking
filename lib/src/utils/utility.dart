@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
+import 'package:bubble_showcase/bubble_showcase.dart';
 import 'package:mobile_app/src/modules/home/home_screen.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -12,6 +13,8 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../widgets/bubble_showcase.dart';
 
 class Utility {
   static Size displaySize(BuildContext context) {
@@ -183,5 +186,21 @@ class Utility {
 
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => HomeScreen()));
+  }
+
+  static getStringValuesSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String stringValue = prefs.getString('stringValue');
+    print(stringValue);
+    return stringValue;
+  }
+
+  static double fahrenheitToCelsius(double fahrenheit) {
+    return (fahrenheit - 32) * 5 / 9;
+  }
+
+  static double CelsiusTofahrenheit(double fahrenheit) {
+    return (fahrenheit * 9 / 5) + 32;
   }
 }

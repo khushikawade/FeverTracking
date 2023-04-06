@@ -19,19 +19,7 @@ class Screen4State extends State<Screen4> {
         alignment: Alignment.center,
         color: Theme.of(context).backgroundColor,
         padding: EdgeInsets.only(left: 30, right: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            SizedBox(
-              height: 60,
-            ),
-            SkipButton(),
-            SizedBox(
-              height: 100,
-            ),
-            makeWidget(),
-          ],
-        ),
+        child: makeWidget(),
       ),
     );
   }
@@ -44,13 +32,13 @@ class Screen4State extends State<Screen4> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/images/undraw_Safe_re_kiil.png',
+          'assets/images/welcome_01.png',
         ),
         SizedBox(
           height: 25,
         ),
         Text(
-          'User privacy policy',
+          'Easy way to track health parameters',
           textAlign: TextAlign.center,
           style: TextStyle(
               color: AppTheme.contentColor1,
@@ -63,7 +51,8 @@ class Screen4State extends State<Screen4> {
           height: 16,
         ),
         Text(
-          "FeverTracking app doesn't communicate with any server, so your details are fully secured in your phone.",
+          'Running a fever during the onset of Monsoon could have been passed off as the seasonal flu or viral fever earlier.',
+          // "FeverTracking app doesn't communicate with any server, so your details are fully secured in your phone.",
           textAlign: TextAlign.center,
           style: TextStyle(
               color: AppTheme.contentColor2,

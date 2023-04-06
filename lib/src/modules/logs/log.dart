@@ -46,7 +46,7 @@ class _LogPageState extends State<LogPage> {
 
   // get Logs List
   getLogs() async {
-    logsList = await DbServices().getListData(Strings.hiveLogName);
+    logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
 
     setState(() {});
   }
@@ -72,7 +72,10 @@ class _LogPageState extends State<LogPage> {
             bool result = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => AddLogPage(
+                    builder: (
+                  context,
+                ) =>
+                        AddLogPage(
                           fromHomePage: false,
                         )));
 
@@ -348,27 +351,33 @@ class _LogPageState extends State<LogPage> {
             ),
 
             Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Container(
                   child: Text(
                     items[index].dateTime != null
-                        //? Utility.timeAgoSinceDate(items[index].dateTime)
-                        ? DateFormat('HH:mm').format(items[index].dateTime) ==
-                                DateFormat('HH:mm').format(DateTime.now())
-                            ? 'Just Now'
-                            : DateFormat('yyyy-MM-dd')
-                                        .format(items[index].dateTime) ==
-                                    DateFormat('yyyy-MM-dd')
-                                        .format(DateTime.now())
-                                ? DateFormat.MMMEd()
-                                    .format(items[index].dateTime)
-                                : DateFormat.jm().format(items[index].dateTime)
+                        ? DateFormat('dd-MM-yyyy')
+                                .format(items[index].dateTime) +
+                            "  " +
+                            DateFormat.jm().format(items[index].dateTime)
+                        // items[index].dateTime : '',
+                        // ? Utility.timeAgoSinceDate(items[index].dateTime)
+                        // ? DateFormat('HH:mm').format(items[index].dateTime) ==
+                        //         DateFormat('HH:mm').format(DateTime.now())
+                        //     ? 'Just Now'
+                        //     : DateFormat('yyyy-MM-dd')
+                        //                 .format(items[index].dateTime) ==
+                        //             DateFormat('yyyy-MM-dd')
+                        //                 .format(DateTime.now())
+                        //         ? DateFormat.yMMMEd()
+                        //             .format(items[index].dateTime)
+                        //         : DateFormat.jm().format(items[index].dateTime)
                         : '',
                     style: TextStyle(
                         color: AppTheme.textColor2,
                         fontWeight: FontWeight.normal,
                         fontFamily: "SF UI Display Regular",
-                        fontSize: globals.deviceType == 'phone' ? 12 : 20),
+                        fontSize: globals.deviceType == 'phone' ? 13 : 20),
                   ),
                 ),
                 SizedBox(

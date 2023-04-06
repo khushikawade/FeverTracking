@@ -105,7 +105,7 @@ Widget addToLogButton(fromHomePage, _scaffoldKey, index, items, context) {
           ),
           child: Center(
             child: Text(
-              "Add To Log",
+              "Add to log",
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: AppTheme.textColor2, fontWeight: FontWeight.bold),

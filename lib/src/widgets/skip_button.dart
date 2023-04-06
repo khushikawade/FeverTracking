@@ -50,7 +50,7 @@ class _SkipButtonState extends State<SkipButton> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text("Skip", textAlign: TextAlign.center),
-                  Icon(Icons.arrow_forward,
+                  Icon(Icons.arrow_forward_ios_outlined,
                       color: Theme.of(context).accentColor, size: 15)
                 ],
               ),

@@ -41,11 +41,8 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   void initState() {
-    selectedImage = globals.userObj != null && globals.userObj.length > 0
-        ? globals.userObj[0].path
-        : null;
-
     getUserDetail();
+
     super.initState();
   }
 

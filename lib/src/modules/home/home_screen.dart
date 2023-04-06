@@ -29,6 +29,7 @@ import 'dart:io';
 
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:speech_bubble/speech_bubble.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -48,18 +49,19 @@ class HomeScreenState extends State<HomeScreen> {
   bool monthIndex = false;
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  static GlobalKey previewContainer = new GlobalKey();
+  GlobalKey previewContainer = new GlobalKey();
+  static GlobalKey _titleKey = GlobalKey();
   // GlobalKey _secondButtonKey = GlobalKey();
   @override
   void initState() {
     getLogs();
+    getUserDetail();
     super.initState();
   }
 
   // get Logs List
   getLogs() async {
-    logsList = await DbServices().getListData(Strings.hiveLogName);
-
+    logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
     setState(() {});
   }
 
@@ -348,7 +350,7 @@ class HomeScreenState extends State<HomeScreen> {
           //       }
           //     },
           //     child: Container(
-          //       child: bubble(
+          //       child: (
           //         context,
           //         _secondButtonKey,
           //       ),
@@ -378,29 +380,109 @@ class HomeScreenState extends State<HomeScreen> {
                   });
                 }
               },
-              child: Container(
-                padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(100),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromARGB(250, 164, 95, 60),
-                      spreadRadius: 0,
-                      blurRadius: 10,
-                      offset: Offset(0, 4),
+              child: BubbleShowcase(
+                bubbleShowcaseId: 'my_bubble_showcase',
+                bubbleShowcaseVersion: 1,
+                bubbleSlides: [
+                  RelativeBubbleSlide(
+                    shape: const Oval(
+                      spreadRadius: 12,
                     ),
-                  ],
-                ),
-                child: Icon(
-                  const IconData(0xe806, fontFamily: 'FeverTrackingIcons'),
-                  color: AppTheme.iconColor,
-                  size: 25,
+                    widgetKey: _titleKey,
+                    child: RelativeBubbleSlideChild(
+                      direction: AxisDirection.right,
+                      widget: SpeechBubble(
+                        padding: EdgeInsets.only(right: 10, left: 10),
+                        nipLocation: NipLocation.RIGHT,
+                        color: AppTheme.textColor2,
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            'Please click the button to add a log.',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // AbsoluteBubbleSlide(
+                  //   shape: const Oval(
+                  //     spreadRadius: 30,
+                  //   ),
+                  //   positionCalculator: (size) => Position(
+                  //     top: 0,
+                  //     right: 0,
+                  //     bottom: 30,
+                  //     left: 0,
+                  //   ),
+                  //   child: AbsoluteBubbleSlideChild(
+                  //     positionCalculator: (size) => Position(
+                  //       top: 50,
+                  //       left: 0,
+                  //     ),
+                  //     widget: SpeechBubble(
+                  //       nipLocation: NipLocation.RIGHT,
+                  //       color: Colors.blue,
+                  //       child: Padding(
+                  //         padding: EdgeInsets.all(10),
+                  //         child: Text(
+                  //           'This is the top left corner of your app.',
+                  //           style: TextStyle(color: Colors.white),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+                child: Container(
+                  key: _titleKey,
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).accentColor,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(250, 164, 95, 60),
+                        spreadRadius: 0,
+                        blurRadius: 10,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    const IconData(0xe806, fontFamily: 'FeverTrackingIcons'),
+                    color: AppTheme.iconColor,
+                    size: 25,
+                  ),
                 ),
               ),
             )
+
+          //     child: Container(
+          //     padding: EdgeInsets.all(15),
+          //     decoration: BoxDecoration(
+          //       color: Theme.of(context).accentColor,
+          //       borderRadius: BorderRadius.all(
+          //         Radius.circular(100),
+          //       ),
+          //       boxShadow: [
+          //         BoxShadow(
+          //           color: Color.fromARGB(250, 164, 95, 60),
+          //           spreadRadius: 0,
+          //           blurRadius: 10,
+          //           offset: Offset(0, 4),
+          //         ),
+          //       ],
+          //     ),
+          //     child: Icon(
+          //       const IconData(0xe806, fontFamily: 'FeverTrackingIcons'),
+          //       color: AppTheme.iconColor,
+          //       size: 25,
+          //     ),
+          //   ),
+          // )
           : Container(
               height: 0,
               width: 0,
@@ -432,7 +514,7 @@ class HomeScreenState extends State<HomeScreen> {
           return RegistrationSuccessDialog();
         });
     if (result != null && result) {
-      bool isValue = await Navigator.push(context,
+      bool isValue = await Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => UpdateProfielPage()));
 
       if (isValue != null && isValue) {
@@ -511,6 +593,8 @@ class HomeScreenState extends State<HomeScreen> {
     bool isResult = pref.getBool('ISPROFILE_UPDATED');
 
     if (isResult != null && isResult) {
+      logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
+
       if (logsList != null && logsList.length > 0) {
         generatePDFFile();
       } else {

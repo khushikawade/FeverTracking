@@ -12,6 +12,7 @@ import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class SettingPage extends StatefulWidget {
@@ -486,6 +487,13 @@ class _SettingPageState extends State<SettingPage> {
                       onValueChanged: (value) {
                         setState(() {
                           _selectedIndexValue = value;
+                          if (_selectedIndexValue == 0) {
+                            addIntToSF('C');
+                          } else if (_selectedIndexValue == 1) {
+                            addIntToSF('F');
+                          } else {}
+
+                          globals.calculateTemp();
                         });
                       },
                     ),
@@ -495,5 +503,10 @@ class _SettingPageState extends State<SettingPage> {
             ),
           ]),
     );
+  }
+
+  addIntToSF(value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('stringValue', value);
   }
 }

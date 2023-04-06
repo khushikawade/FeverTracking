@@ -1,5 +1,6 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:mobile_app/src/db/db_services.dart';
+import 'package:mobile_app/src/modules/Symptoms/addsymptoms.dart';
 import 'package:mobile_app/src/modules/logs/addnote.dart';
 import 'package:mobile_app/src/modules/logs/model/checkboxmodel.dart';
 import 'package:mobile_app/src/modules/logs/model/logsmodel.dart';
@@ -53,7 +54,7 @@ class _AddLogPageState extends State<AddLogPage> {
   final ValueNotifier<String> _sypmtoms = ValueNotifier<String>("");
   String time;
   List<String> sypmtomsTempList = [];
-  List<String> tempList = [];
+
 
   String sypmtoms = "";
 
@@ -97,6 +98,11 @@ class _AddLogPageState extends State<AddLogPage> {
     if (isSuccess != null && isSuccess) {
       Utility.showSnackBar(
           _scaffoldKey, 'Log data added successfully', context);
+      for (int i = 0; i < checkBoxModelList.length; i++) {
+        if (checkBoxModelList[i].checked) {
+          checkBoxModelList[i].checked = false;
+        }
+      }
       Future.delayed(const Duration(seconds: 2), () {
         if (widget.fromHomePage != null && widget.fromHomePage) {
           Navigator.of(context).pop(1);
@@ -104,6 +110,7 @@ class _AddLogPageState extends State<AddLogPage> {
           Navigator.of(context).pop(true);
         }
       });
+      setState(() {});
     }
   }
 
@@ -976,62 +983,111 @@ class _AddLogPageState extends State<AddLogPage> {
 
   void _showSymtomModalSheet() {
     Future<void> future = showModalBottomSheet<void>(
+      enableDrag: true,
+      isDismissible: true,
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter state2) {
             return SingleChildScrollView(
-              child: LimitedBox(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: completeSymptomsList.map<Widget>(
-                    (data) {
-                      return Container(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            CheckboxListTile(
-                              value: data.checked,
-                              title: Text(data.displayId),
-                              controlAffinity: ListTileControlAffinity.leading,
-                              onChanged: (bool val) {
-                                setState(() {
-                                  data.checked = !data.checked;
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  LimitedBox(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: completeSymptomsList.map<Widget>(
+                        (data) {
+                          return Container(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                CheckboxListTile(
+                                  value: data.checked,
+                                  title: Text(data.displayId),
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  onChanged: (bool val) {
+                                    setState(() {
+                                      data.checked = !data.checked;
+                                      print(data.displayId);
 
-                                  if (sypmtomsTempList
-                                      .contains(data.displayId)) {
-                                    print("not added");
-                                  } else {
-                                    sypmtomsTempList.add(data.displayId);
-                                    distinctIds =
-                                        sypmtomsTempList.toSet().toList();
-                                  }
-                                  distinctIds.asMap().forEach((i, element) {
-                                    if (sypmtoms.contains(element)) {
-                                      print("element ----------$element");
-                                      if (element == data.displayId) {
-                                        print(
-                                            "sypmtomsTempList ---------$sypmtomsTempList");
-                                        sypmtomsTempList.remove(element);
-                                        print(
-                                            "sypmtomsTempList  after removing---------$sypmtomsTempList");
+                                      if (sypmtomsTempList
+                                          .contains(data.displayId)) {
+                                        print("not added");
+                                      } else {
+                                        sypmtomsTempList.add(data.displayId);
                                         distinctIds =
                                             sypmtomsTempList.toSet().toList();
-                                        print(distinctIds);
                                       }
-                                    }
-                                  });
-                                });
-                                state2(() {});
-                              },
+                                      distinctIds.asMap().forEach((i, element) {
+                                        if (sypmtoms.contains(element)) {
+                                          if (element == data.displayId) {
+                                            sypmtomsTempList.remove(element);
+
+                                            distinctIds = sypmtomsTempList
+                                                .toSet()
+                                                .toList();
+                                            print(distinctIds);
+                                          }
+                                        }
+                                      });
+                                    });
+                                    state2(() {});
+                                  },
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      );
+                          );
+                        },
+                      ).toList(),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddSymptomsPage()));
+
+                      //
                     },
-                  ).toList(),
-                ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 32, right: 16, top: 16, bottom: 16),
+                      child: Container(
+                          width: 100,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppTheme.subHeadingbackgroundcolor2,
+                              style: BorderStyle.solid,
+                              width: 1.0,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.white,
+                                offset: Offset(0.0, 2.0), //(x,y)
+                                blurRadius: 6.0,
+                              ),
+                            ],
+                            // color: Colors.transparent,
+                            color: AppTheme.subHeadingbackgroundcolor,
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Add More",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: AppTheme.textColor2,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          )),
+                    ),
+                  )
+                ],
               ),
             );
           },
@@ -1042,8 +1098,30 @@ class _AddLogPageState extends State<AddLogPage> {
   }
 
   void _closeModal(sypmtomsTempList) {
+    bool check = false;
     setState(() {
+      print("sypmtoms" + sypmtoms);
       sypmtoms = distinctIds != null ? distinctIds.join(',') : '';
+      // if (sypmtoms.contains("Add More")) {
+      //   check = true;
+      //   print("sypmtoms list " + sypmtoms);
+
+      //   var rep = "Add More";
+      //   sypmtoms = sypmtoms.trim().replaceAll(rep.trim(), ""); // removes commas
+
+      //   print("After removing sypmtoms list " + sypmtoms);
+      //   Navigator.push(context,
+      //       MaterialPageRoute(builder: (context) => AddSymptomsPage()));
+      // String i = "Add More";
+      // for (int i = 0; i < checkBoxModelList.length; i++) {
+      //   if (checkBoxModelList[i].checked) {
+      //     checkBoxModelList[i].checked = false;
+      //   }
+      //   if (checkBoxModelList[i].displayId.toString() == i.toString()) {
+      //     print("kklglkghlkh");
+      //   }
+      // }
+      // }
     });
   }
 

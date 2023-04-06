@@ -84,7 +84,7 @@ class Screen1State extends State<Screen1> {
         // ),
         SizedBox(
           child: Image.asset(
-            'assets/images/secure.png',
+            'assets/images/undraw_Safe_re_kiil.png',
           ),
         ),
         SizedBox(

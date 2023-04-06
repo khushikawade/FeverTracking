@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/modules/Symptoms/model/symptomsmodel.dart';
+import 'package:mobile_app/src/modules/Symptoms/symptom.dart';
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/utilities/strings.dart';
@@ -32,6 +33,8 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
           _scaffoldKey, 'Symptoms added successfully', context);
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.of(context).pop();
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => SymptomsListPage()));
         //   if (widget.fromHomePage != null && widget.fromHomePage) {
         //     Navigator.of(context).pop(1);
         //   } else {

@@ -1,4 +1,5 @@
 import 'package:mobile_app/src/modules/logs/model/checkboxmodel.dart';
+import 'package:mobile_app/src/utils/utility.dart';
 import 'package:mobile_app/src/widgets/custom-loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -269,6 +270,30 @@ final List<String> tempertureList = [
   "105.1",
 ];
 
+List<double> Celsiuslist = [];
+
+calculateTemp() {
+  print("tempertureList");
+
+  print(tempertureList.length);
+  for (int i = 0; i < tempertureList.length; i++) {
+    double num = double.parse(tempertureList[i]);
+    double Celsius = Utility.fahrenheitToCelsius(num);
+
+    // print(Celsius);
+    Celsiuslist.add(Celsius);
+
+    // double fahrenheit =  Utility.CelsiusTofahrenheit(Celsius);
+  }
+  print("Celsiuslist");
+  print(Celsiuslist.length);
+
+  for (int i = 0; i < Celsiuslist.length; i++) {
+    double fahrenheit = Utility.CelsiusTofahrenheit(Celsiuslist[i]);
+    print(fahrenheit);
+  }
+}
+
 List<String> postionList = [
   " Ear ",
   " ForeHead ",
@@ -340,4 +365,5 @@ List<Image> postionListIcon = [
 //   new CheckBoxModel(id: '12', displayId: 'Runny Noise ', checked: false),
 //   new CheckBoxModel(id: '13', displayId: 'Sore Throat ', checked: false),
 // ];
+
 
