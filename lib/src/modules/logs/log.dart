@@ -23,6 +23,8 @@ class LogPage extends StatefulWidget {
 }
 
 class _LogPageState extends State<LogPage> {
+  bool celsius = false;
+  String temp;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Future<bool> deleteLog(index) async {
     bool isSuccess = await DbServices().deleteData(Strings.hiveLogName, index);
@@ -40,6 +42,13 @@ class _LogPageState extends State<LogPage> {
   static GlobalKey previewContainer = new GlobalKey();
   @override
   void initState() {
+    Utility.getStringValuesSF().then((value) {
+      if (value == "C") {
+        celsius = true;
+      } else {
+        celsius = false;
+      }
+    });
     getLogs();
     super.initState();
   }
@@ -47,7 +56,6 @@ class _LogPageState extends State<LogPage> {
   // get Logs List
   getLogs() async {
     logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
-
     setState(() {});
   }
 
@@ -56,16 +64,18 @@ class _LogPageState extends State<LogPage> {
         backgroundColor: AppTheme.screenbackGroundColor,
         body: Container(
           color: Theme.of(context).backgroundColor,
-          child: ListView(children: [
-            // makeSliders(),
-            Container(
-              height: 1,
-              decoration: BoxDecoration(
-                color: AppTheme.dividerColor.withOpacity(0.25),
+          child: Center(
+            child: ListView(children: [
+              // makeSliders(),
+              Container(
+                height: 1,
+                decoration: BoxDecoration(
+                  color: AppTheme.dividerColor.withOpacity(0.25),
+                ),
               ),
-            ),
-            makeWidget(),
-          ]),
+              makeWidget(),
+            ]),
+          ),
         ),
         floatingActionButton: GestureDetector(
           onTap: () async {
@@ -194,12 +204,12 @@ class _LogPageState extends State<LogPage> {
                 //       return itemWidget(index, snapshot.data);
                 //     },
                 //   )
-                : Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(25.0),
+                : Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Center(
                       child: Text(
                         'No Data Found.',
-                        textAlign: TextAlign.end,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: AppTheme.textColor1,
@@ -268,7 +278,9 @@ class _LogPageState extends State<LogPage> {
                     Text(
                       items[index].temprature != null &&
                               items[index].temprature.isNotEmpty
-                          ? '${items[index].temprature} ${Strings.feranahiteString}'
+                          ? celsius
+                              ? '${items[index].temprature} ${Strings.celsiusString}'
+                              : '${items[index].temprature} ${Strings.feranahiteString}'
                           : '',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,

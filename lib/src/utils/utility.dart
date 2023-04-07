@@ -188,11 +188,11 @@ class Utility {
         context, MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 
-  static getStringValuesSF() async {
+  static Future<String> getStringValuesSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
     String stringValue = prefs.getString('stringValue');
-    print(stringValue);
+    // print(stringValue);
     return stringValue;
   }
 

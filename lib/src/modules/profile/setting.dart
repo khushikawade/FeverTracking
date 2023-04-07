@@ -492,7 +492,6 @@ class _SettingPageState extends State<SettingPage> {
                           } else if (_selectedIndexValue == 1) {
                             addIntToSF('F');
                           } else {}
-
                           globals.calculateTemp();
                         });
                       },

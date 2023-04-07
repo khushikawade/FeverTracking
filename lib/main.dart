@@ -23,3 +23,4 @@ void main() async {
     ..registerAdapter(ProfileModelAdapter());
   runApp(AppTemplate());
 }
+

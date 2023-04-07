@@ -55,7 +55,6 @@ class _AddLogPageState extends State<AddLogPage> {
   String time;
   List<String> sypmtomsTempList = [];
 
-
   String sypmtoms = "";
 
   final DateFormat timeformatter = DateFormat('Hms');
@@ -122,7 +121,6 @@ class _AddLogPageState extends State<AddLogPage> {
       for (int i = 0; i < symptomsData.length; i++) {
         var item = CheckBoxModel(
             displayId: '${symptomsData[i].symptomName}', checked: false);
-
         itemList.add(item);
       }
 
@@ -136,6 +134,7 @@ class _AddLogPageState extends State<AddLogPage> {
   void initState() {
     timeString = timeformatter.format(DateTime.now());
     postion = globals.postionList[3];
+
     temp = globals.tempertureList[0];
     // sypmtoms = checkBoxModelList[0].displayId;
     getsymptomsDetail();
@@ -482,6 +481,24 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
               selected: true,
               onTap: () {
+                
+                // String value = Utility.getStringValuesSF();
+                // print(value);
+
+                // Future<String> s = Utility.getStringValuesSF();
+                // print(s);
+                // Utility.getStringValuesSF().then((value) {
+                //   print(value);
+                //   if (value == "C") {
+                //     globals.calculateTemp();
+                //     postionAndTemperatureBottomSheet(context,
+                //         globals.Celsiuslist, 1, globals.postionListIcon);
+                //   } else {
+                //     postionAndTemperatureBottomSheet(context,
+                //         globals.tempertureList, 1, globals.postionListIcon);
+                //   }
+
+                // });
                 postionAndTemperatureBottomSheet(context,
                     globals.tempertureList, 1, globals.postionListIcon);
               },
@@ -714,7 +731,7 @@ class _AddLogPageState extends State<AddLogPage> {
                       temp,
                       sypmtoms,
                       medicineList != null ? medicineList[0] : null,
-                      addNoteText);
+                      addNoteText,"");
                   addLog(log);
                 } else {
                   Utility.showSnackBar(

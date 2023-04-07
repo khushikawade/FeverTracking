@@ -270,28 +270,51 @@ final List<String> tempertureList = [
   "105.1",
 ];
 
-List<double> Celsiuslist = [];
+List<String> Celsiuslist = [];
 
 calculateTemp() {
-  print("tempertureList");
+  Utility.getStringValuesSF().then((value) {
+    if (value == 'C') {
+      for (int i = 0; i < tempertureList.length; i++) {
+        double num = double.parse(tempertureList[i]);
+        double Celsius = Utility.fahrenheitToCelsius(num);
+        String cel = Celsius.toStringAsFixed(2);
+        Celsiuslist.add(cel);
+      }
+      tempertureList.clear();
+      for (int i = 0; i < Celsiuslist.length; i++) {
+        tempertureList.add(Celsiuslist[i]);
+      }
+      Celsiuslist.clear();
+    } 
+    else {
+      for (int i = 0; i < tempertureList.length; i++) {
+        double num = double.parse(tempertureList[i]);
+        double fahrenheit = Utility.CelsiusTofahrenheit(num);
+        String cel = fahrenheit.toStringAsFixed(2);
+        Celsiuslist.add(cel);
+      }
+      tempertureList.clear();
+      for (int i = 0; i < Celsiuslist.length; i++) {
+        tempertureList.add(Celsiuslist[i]);
+      }
+      Celsiuslist.clear();
+    }
+    print(Celsiuslist);
+    print(tempertureList);
+  });
 
-  print(tempertureList.length);
-  for (int i = 0; i < tempertureList.length; i++) {
-    double num = double.parse(tempertureList[i]);
-    double Celsius = Utility.fahrenheitToCelsius(num);
-
-    // print(Celsius);
-    Celsiuslist.add(Celsius);
-
-    // double fahrenheit =  Utility.CelsiusTofahrenheit(Celsius);
-  }
-  print("Celsiuslist");
-  print(Celsiuslist.length);
-
-  for (int i = 0; i < Celsiuslist.length; i++) {
-    double fahrenheit = Utility.CelsiusTofahrenheit(Celsiuslist[i]);
-    print(fahrenheit);
-  }
+  // for (int i = 0; i < tempertureList.length; i++) {
+  //   double num = double.parse(tempertureList[i]);
+  //   double Celsius = Utility.fahrenheitToCelsius(num);
+  //   String cel = Celsius.toStringAsFixed(2);
+  //   Celsiuslist.add(cel);
+  // }
+  // for (int i = 0; i < Celsiuslist.length; i++) {
+  //   double num = double.parse(tempertureList[i]);
+  //   double fahrenheit = Utility.CelsiusTofahrenheit(num);
+  //   print(fahrenheit);
+  // }
 }
 
 List<String> postionList = [
