@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
 
+part 'logsmodel.g.dart';
+
 @HiveType(typeId: 0)
 @HiveType()
 class LogsModel {
@@ -18,6 +20,8 @@ class LogsModel {
   @HiveField(6)
   String value;
 
-  LogsModel(this.dateTime, this.position, this.temprature, this.symptoms,
+  LogsModel(
+    this.dateTime, 
+    this.position, this.temprature, this.symptoms,
       this.addMedinceLog, this.addNotehere, this.value);
 }

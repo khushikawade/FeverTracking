@@ -29,6 +29,7 @@ class _SettingPageState extends State<SettingPage> {
   var logsList;
   String _image;
   String _name;
+  String tempValue;
 
   void toggleSwitch(bool value) {
     if (isSwitched == false) {
@@ -72,6 +73,7 @@ class _SettingPageState extends State<SettingPage> {
     // }
 
     getUserDetail();
+    // getLogs();
 
     super.initState();
   }
@@ -492,6 +494,7 @@ class _SettingPageState extends State<SettingPage> {
                           } else if (_selectedIndexValue == 1) {
                             addIntToSF('F');
                           } else {}
+                          // getLogs();
                           globals.calculateTemp();
                         });
                       },
@@ -507,5 +510,23 @@ class _SettingPageState extends State<SettingPage> {
   addIntToSF(value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('stringValue', value);
+  }
+
+  getLogs() async {
+    var logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
+    globals.logObj = logsList;
+    for (int i = 0; i < globals.logObj.length; i++) {
+      if (globals.logObj[i].value == 'C') {
+        globals.calculateTemp();
+
+        bool isSuccess = await DbServices().updateListData(
+          Strings.hiveLogName,
+          i,
+          globals.logObj,
+        );
+      } else {}
+    }
+    print(tempValue);
+    setState(() {});
   }
 }

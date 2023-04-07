@@ -44,7 +44,7 @@ class DbServices {
 
       if (list != null && list.length > 0) {
         for (int i = 0; i < list.length; i++) {
-          // print(logsList[i].dateTime);
+          // print(list[i].dateTime);
 
           // String logTemp1 = "${list[i].dateTime}".split(' ')[0];
           // String logTemp2 = "${globals.getdatefromslider}".split(' ')[0];
@@ -62,7 +62,8 @@ class DbServices {
               list[i].temprature,
               list[i].symptoms,
               list[i].addMedinceLog,
-              list[i].addNotehere);
+              list[i].addNotehere,
+              list[i].value);
 
           listofSelectedDate.add(item);
 

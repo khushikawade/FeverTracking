@@ -75,6 +75,7 @@ class _AddLogPageState extends State<AddLogPage> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<CheckBoxModel> completeSymptomsList = new List();
   List<String> newList = [];
+  String tempValue = 'F';
 
   TimeOfDay _time = TimeOfDay.now().replacing(minute: 30);
   bool iosStyle = true;
@@ -136,6 +137,9 @@ class _AddLogPageState extends State<AddLogPage> {
     postion = globals.postionList[3];
 
     temp = globals.tempertureList[0];
+    Utility.getStringValuesSF().then((value) {
+      tempValue = value;
+    });
     // sypmtoms = checkBoxModelList[0].displayId;
     getsymptomsDetail();
     // getList();
@@ -481,7 +485,6 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
               selected: true,
               onTap: () {
-                
                 // String value = Utility.getStringValuesSF();
                 // print(value);
 
@@ -731,7 +734,8 @@ class _AddLogPageState extends State<AddLogPage> {
                       temp,
                       sypmtoms,
                       medicineList != null ? medicineList[0] : null,
-                      addNoteText,"");
+                      addNoteText,
+                      tempValue != null ? tempValue : 'F');
                   addLog(log);
                 } else {
                   Utility.showSnackBar(
