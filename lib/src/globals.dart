@@ -277,63 +277,8 @@ final List<String> tempertureList = [
 List<String> Celsiuslist = [];
 
 calculateTemp() async {
-  // var logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
-  // for (int i = 0; i < tempertureList.length; i++) {
-  //   Utility.getStringValuesSF().then((value) async {
-  //     if (value == 'C') {
-  //       for (int i = 0; i < logsList.length; i++) {
-  //         if (logsList[i].temprature == 'F') {
-  //           double num = double.parse(logsList[i].temprature);
-  //           double Celsius = Utility.fahrenheitToCelsius(num);
-  //           String cel = Celsius.toStringAsFixed(2);
-  //           logsList[i].temprature = cel;
-  //           Celsiuslist.add(cel);
-  //           final updateItem = LogsModel(
-  //               logsList[i].dateTime,
-  //               logsList[i].position,
-  //               logsList[i].temprature,
-  //               logsList[i].symptoms,
-  //               logsList[i].addMedinceLog,
-  //               logsList[i].addNotehere,
-  //               logsList[i].value);
-  //           bool isSuccess = await DbServices().updateListData(
-  //             Strings.hiveLogName,
-  //             i,
-  //             updateItem,
-  //           );
-  //         }
-  //       }
-  //     } else {
-  //       for (int i = 0; i < logsList.length; i++) {
-  //         double num = double.parse(logsList[i].temprature);
-  //         double Celsius = Utility.CelsiusTofahrenheit(num);
-  //         String cel = Celsius.toStringAsFixed(2);
-  //         logsList[i].temprature = cel;
-  //         Celsiuslist.add(cel);
-  //         final updateItem = LogsModel(
-  //             logsList[i].dateTime,
-  //             logsList[i].position,
-  //             logsList[i].temprature,
-  //             logsList[i].symptoms,
-  //             logsList[i].addMedinceLog,
-  //             logsList[i].addNotehere,
-  //             logsList[i].value);
-  //         bool isSuccess = await DbServices().updateListData(
-  //           Strings.hiveLogName,
-  //           i,
-  //           updateItem,
-  //         );
-  //       }
-  //     }
-  //     tempertureList.clear();
-  //     for (int i = 0; i < Celsiuslist.length; i++) {
-  //       tempertureList.add(Celsiuslist[i]);
-  //     }
-  //     Celsiuslist.clear();
-  //   });
-  // }
-
   Utility.getStringValuesSF().then((value) async {
+    print(value);
     if (value == 'C') {
       for (int i = 0; i < tempertureList.length; i++) {
         double num = double.parse(tempertureList[i]);
@@ -345,33 +290,6 @@ calculateTemp() async {
       for (int i = 0; i < Celsiuslist.length; i++) {
         tempertureList.add(Celsiuslist[i]);
       }
-      var logsList =
-          await DbServices().getSelectedDateData(Strings.hiveLogName);
-      for (int i = 0; i < logsList.length; i++) {
-        if (logsList[i].value == 'F') {
-          double num = double.parse(logsList[i].temprature);
-          double Celsius = Utility.fahrenheitToCelsius(num);
-          String cel = Celsius.toStringAsFixed(2);
-
-          logsList[i].temprature = cel;
-          final updateItem = LogsModel(
-              logsList[i].dateTime,
-              logsList[i].position,
-              logsList[i].temprature,
-              logsList[i].symptoms,
-              logsList[i].addMedinceLog,
-              logsList[i].addNotehere,
-              logsList[i].value);
-
-          bool isSuccess = await DbServices().updateListData(
-            Strings.hiveLogName,
-            i,
-            updateItem,
-          );
-          print(isSuccess);
-        }
-      }
-
       Celsiuslist.clear();
     } else {
       for (int i = 0; i < tempertureList.length; i++) {
@@ -384,52 +302,43 @@ calculateTemp() async {
       for (int i = 0; i < Celsiuslist.length; i++) {
         tempertureList.add(Celsiuslist[i]);
       }
-      var logsList =
-          await DbServices().getSelectedDateData(Strings.hiveLogName);
-      for (int i = 0; i < logsList.length; i++) {
-        if (logsList[i].value == 'F') {
-          print("pppppppppppppppppppppppppp999999999999");
-          double num = double.parse(tempertureList[i]);
-          double fahrenheit = Utility.CelsiusTofahrenheit(num);
-          String cel = fahrenheit.toStringAsFixed(2);
-
-          logsList[i].temprature = cel;
-          print("pppppppppppppppppppppppppp");
-          final updateItem = LogsModel(
-              logsList[i].dateTime,
-              logsList[i].position,
-              logsList[i].temprature,
-              logsList[i].symptoms,
-              logsList[i].addMedinceLog,
-              logsList[i].addNotehere,
-              logsList[i].value);
-
-          bool isSuccess = await DbServices().updateListData(
-            Strings.hiveLogName,
-            i,
-            updateItem,
-          );
-          print(isSuccess);
-        } else {
-          print("kfgjlkfhhhhhhhhhhhhhhhhhhhhhh");
-        }
-      }
       Celsiuslist.clear();
     }
     print(Celsiuslist);
     print(tempertureList);
   });
+  updatedDatabase();
+}
 
-  for (int i = 0; i < tempertureList.length; i++) {
-    double num = double.parse(tempertureList[i]);
-    double Celsius = Utility.fahrenheitToCelsius(num);
-    String cel = Celsius.toStringAsFixed(2);
-    Celsiuslist.add(cel);
-  }
-  for (int i = 0; i < Celsiuslist.length; i++) {
-    double num = double.parse(tempertureList[i]);
-    double fahrenheit = Utility.CelsiusTofahrenheit(num);
-    print(fahrenheit);
+updatedDatabase() async {
+  var logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
+  for (int i = 0; i < logsList.length; i++) {
+    if (logsList[i].value == 'F') {
+      double num = double.parse(logsList[i].temprature);
+      double fahrenheit = Utility.fahrenheitToCelsius(num);
+      String cel = fahrenheit.toStringAsFixed(2);
+      logsList[i].temprature = cel;
+      logsList[i].value = 'C';
+    } else {
+      double num = double.parse(logsList[i].temprature);
+      double fahrenheit = Utility.CelsiusTofahrenheit(num);
+      String cel = fahrenheit.toStringAsFixed(2);
+      logsList[i].temprature = cel;
+      logsList[i].value = 'F';
+    }
+    final updateItem = LogsModel(
+        logsList[i].dateTime,
+        logsList[i].position,
+        logsList[i].temprature,
+        logsList[i].symptoms,
+        logsList[i].addMedinceLog,
+        logsList[i].addNotehere,
+        logsList[i].value);
+    bool isSuccess = await DbServices().updateListData(
+      Strings.hiveLogName,
+      i,
+      updateItem,
+    );
   }
 }
 

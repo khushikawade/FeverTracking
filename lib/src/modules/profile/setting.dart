@@ -71,7 +71,13 @@ class _SettingPageState extends State<SettingPage> {
         ? globals.userObj[0].path
         : null;
     // }
-
+    Utility.getStringValuesSF().then((value) {
+      if (value == "C") {
+        _selectedIndexValue = 0;
+      } else {
+        _selectedIndexValue = 1;
+      }
+    });
     getUserDetail();
     // getLogs();
 

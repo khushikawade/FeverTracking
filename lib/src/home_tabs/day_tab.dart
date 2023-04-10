@@ -5,6 +5,7 @@ import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
+import 'package:mobile_app/src/utils/utility.dart';
 import 'package:mobile_app/src/widgets/heart_graph.dart';
 import 'package:mobile_app/src/widgets/loaderWidget.dart';
 import 'package:mobile_app/src/widgets/model/heart_data_model.dart';
@@ -26,10 +27,18 @@ class _DayTab extends State<DayTab> {
   List<charts.Series> seriesList;
   List<charts.Series> seriesListSecond;
   bool isLoading = false;
+  bool celsius = false;
 
   @override
   void initState() {
     super.initState();
+    Utility.getStringValuesSF().then((value) {
+      if (value == "C") {
+        celsius = true;
+      } else {
+        celsius = false;
+      }
+    });
     print('Init Callled --------------day graph-----------');
     getList();
   }
@@ -60,7 +69,6 @@ class _DayTab extends State<DayTab> {
             print("Length : ${newLogsList[counter].dateTime}");
           }
           // print("Length : ${newLogsList.length}");
-
         }
       }
 
@@ -188,7 +196,10 @@ class _DayTab extends State<DayTab> {
             children: <Widget>[
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text(
-                  'Temperature \u00B0F',
+                  celsius
+                      ? 'Temperature ${Strings.celsiusString}'
+                      : 'Temperature ${Strings.feranahiteString}',
+                  // 'Temperature \u00B0F',
                   style: TextStyle(
                       fontFamily: "SF UI Display Regular",
                       fontSize: globals.deviceType == 'phone' ? 10 : 18,
@@ -286,7 +297,10 @@ class _DayTab extends State<DayTab> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    '  Range  (\u2109) ',
+                    celsius
+                        ? 'Range (${Strings.celsiusString})'
+                        : 'Range (${Strings.feranahiteString})',
+                    // '  Range  () ',
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       fontFamily: "SF UI Display Regular",

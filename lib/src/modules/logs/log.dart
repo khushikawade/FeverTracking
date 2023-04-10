@@ -56,6 +56,33 @@ class _LogPageState extends State<LogPage> {
   // get Logs List
   getLogs() async {
     logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
+    // for (int i = 0; i < logsList.length; i++) {
+    //   if (logsList[i].value == 'F') {
+    //     double num = double.parse(logsList[i].temprature);
+    //     double fahrenheit = Utility.fahrenheitToCelsius(num);
+    //     String cel = fahrenheit.toStringAsFixed(2);
+    //     logsList[i].temprature = cel;
+    //   } else {
+    //     double num = double.parse(logsList[i].temprature);
+    //     double fahrenheit = Utility.CelsiusTofahrenheit(num);
+    //     String cel = fahrenheit.toStringAsFixed(2);
+    //     logsList[i].temprature = cel;
+    //   }
+    //   final updateItem = LogsModel(
+    //       logsList[i].dateTime,
+    //       logsList[i].position,
+    //       logsList[i].temprature,
+    //       logsList[i].symptoms,
+    //       logsList[i].addMedinceLog,
+    //       logsList[i].addNotehere,
+    //       logsList[i].value);
+    //   bool isSuccess = await DbServices().updateListData(
+    //     Strings.hiveLogName,
+    //     i,
+    //     updateItem,
+    //   );
+    // }
+
     setState(() {});
   }
 
@@ -445,5 +472,4 @@ class _LogPageState extends State<LogPage> {
           ],
         ));
   }
-  
 }

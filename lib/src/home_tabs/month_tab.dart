@@ -5,6 +5,7 @@ import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/db/db_services.dart';
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
+import 'package:mobile_app/src/utils/utility.dart';
 import 'package:mobile_app/src/widgets/heart_graph.dart';
 import 'package:mobile_app/src/widgets/loaderWidget.dart';
 import 'package:mobile_app/src/widgets/model/heart_data_model.dart';
@@ -24,9 +25,17 @@ class _MonthTab extends State<MonthTab> {
   List<charts.Series> seriesList;
   List<charts.Series> seriesListSecond;
   bool isLoading = false;
+  bool celsius = false;
 
   @override
   void initState() {
+    Utility.getStringValuesSF().then((value) {
+      if (value == "C") {
+        celsius = true;
+      } else {
+        celsius = false;
+      }
+    });
     super.initState();
     // print('Init Callled -------------------------');
     getList();
@@ -177,7 +186,10 @@ class _MonthTab extends State<MonthTab> {
             children: <Widget>[
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text(
-                  'Temperature \u00B0F',
+                  // 'Temperature \u00B0F',
+                  celsius
+                      ? 'Temperature ${Strings.celsiusString}'
+                      : 'Temperature ${Strings.feranahiteString}',
                   style: TextStyle(
                       fontFamily: "SF UI Display Regular",
                       fontSize: globals.deviceType == 'phone' ? 10 : 18,
@@ -275,7 +287,10 @@ class _MonthTab extends State<MonthTab> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    '  Range  (\u2109) ',
+                    // '  Range  (\u2109) ',
+                    celsius
+                        ? 'Range (${Strings.celsiusString})'
+                        : 'Range (${Strings.feranahiteString})',
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       fontFamily: "SF UI Display Regular",

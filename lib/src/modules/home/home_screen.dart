@@ -47,6 +47,7 @@ class HomeScreenState extends State<HomeScreen> {
   DateTime pervious30days;
   bool dayIndex = false;
   bool monthIndex = false;
+  bool celsius = false;
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey previewContainer = new GlobalKey();
@@ -54,6 +55,7 @@ class HomeScreenState extends State<HomeScreen> {
   // GlobalKey _secondButtonKey = GlobalKey();
   @override
   void initState() {
+  
     getLogs();
     getUserDetail();
     super.initState();
