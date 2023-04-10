@@ -1,0 +1,16 @@
+# Referenced at C:\feverTracking_mobile_app\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:24
+-keep class android.app.Application { <init>(); }
+# Referenced at C:\feverTracking_mobile_app\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:24
+-keep class androidx.core.app.CoreComponentFactory { <init>(); }
+# Referenced at C:\feverTracking_mobile_app\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:30
+-keep class com.feverTracking.app.MainActivity { <init>(); }
+# Referenced at C:\feverTracking_mobile_app\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:107
+-keep class com.google.android.gms.auth.api.signin.RevocationBoundService { <init>(); }
+# Referenced at C:\feverTracking_mobile_app\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:98
+-keep class com.google.android.gms.auth.api.signin.internal.SignInHubActivity { <init>(); }
+# Referenced at C:\feverTracking_mobile_app\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:113
+-keep class com.google.android.gms.common.api.GoogleApiActivity { <init>(); }
+# Referenced at C:\feverTracking_mobile_app\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:72
+-keep class io.flutter.plugins.imagepicker.ImagePickerFileProvider { <init>(); }
+# Referenced at C:\feverTracking_mobile_app\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:81
+-keep class io.flutter.plugins.share.ShareFileProvider { <init>(); }

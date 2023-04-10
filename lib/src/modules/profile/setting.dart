@@ -76,6 +76,7 @@ class _SettingPageState extends State<SettingPage> {
         _selectedIndexValue = 0;
       } else {
         _selectedIndexValue = 1;
+        
       }
     });
     getUserDetail();

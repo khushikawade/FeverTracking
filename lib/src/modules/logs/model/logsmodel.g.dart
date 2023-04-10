@@ -17,18 +17,20 @@ class LogsModelAdapter extends TypeAdapter<LogsModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return LogsModel(
-        fields[0] as DateTime,
-        fields[1] as String,
-        fields[2] as String,
-        fields[3] as String,
-        fields[4] as dynamic,
-        fields[5] as String,
-        fields[6] as String);
+      fields[0] as DateTime,
+      fields[1] as String,
+      fields[2] as String,
+      fields[3] as String,
+      fields[4] as dynamic,
+      fields[5] as String,
+      fields[6] as String,
+    );
   }
 
   @override
   void write(BinaryWriter writer, LogsModel obj) {
     writer
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.dateTime)
       ..writeByte(1)

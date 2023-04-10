@@ -89,21 +89,7 @@ class _LogPageState extends State<LogPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppTheme.screenbackGroundColor,
-        body: Container(
-          color: Theme.of(context).backgroundColor,
-          child: Center(
-            child: ListView(children: [
-              // makeSliders(),
-              Container(
-                height: 1,
-                decoration: BoxDecoration(
-                  color: AppTheme.dividerColor.withOpacity(0.25),
-                ),
-              ),
-              makeWidget(),
-            ]),
-          ),
-        ),
+        body: makeWidget(),
         floatingActionButton: GestureDetector(
           onTap: () async {
             bool result = await Navigator.push(
