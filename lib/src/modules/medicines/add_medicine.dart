@@ -9,6 +9,7 @@ import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
+import 'package:mobile_app/src/widgets/model/button_widget.dart';
 
 List<String> frequencyList = [
   "Once per day",
@@ -531,36 +532,45 @@ class _AddMedicineState extends State<AddMedicine> {
                   ],
                 ),
                 child: GestureDetector(
-                  onTap: () {
-                    // _submit();
-                    _submit();
-                  },
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(left: 20, right: 20, top: 100),
-                    child: new Container(
-                      padding: const EdgeInsets.all(16),
-                      alignment: Alignment.center,
-                      color: Theme.of(context).primaryColor,
-                      child: new Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            new Text(
-                              widget.text == "edit"
-                                  ? "Edit Medicine"
-                                  : "Add Medicine",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "SF UI Display",
-                                color: Colors.white,
-                                fontSize:
-                                    globals.deviceType == "phone" ? 17 : 25,
-                              ),
-                            )
-                          ]),
+                    onTap: () {
+                      // _submit();
+                      _submit();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 100),
+                      child: buttonWidget(
+                        context,
+                        widget.text == "edit"
+                            ? "Edit Medicine"
+                            : "Add Medicine",
+                      ),
+                    )
+                    // child: Padding(
+                    //   padding:
+                    //       const EdgeInsets.only(left: 20, right: 20, top: 100),
+                    //   child: new Container(
+                    //     padding: const EdgeInsets.all(16),
+                    //     alignment: Alignment.center,
+                    //     color: Theme.of(context).primaryColor,
+                    //     child: new Column(
+                    //         mainAxisAlignment: MainAxisAlignment.center,
+                    //         children: [
+                    //           new Text(
+                    //             widget.text == "edit"
+                    //                 ? "Edit Medicine"
+                    //                 : "Add Medicine",
+                    //             style: TextStyle(
+                    //               fontWeight: FontWeight.bold,
+                    //               fontFamily: "SF UI Display",
+                    //               color: Colors.white,
+                    //               fontSize:
+                    //                   globals.deviceType == "phone" ? 17 : 25,
+                    //             ),
+                    //           )
+                    //         ]),
+                    //   ),
+                    // ),
                     ),
-                  ),
-                ),
               ),
             ]),
           ),

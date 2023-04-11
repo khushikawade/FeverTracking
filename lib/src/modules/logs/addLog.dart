@@ -18,6 +18,7 @@ import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
 import 'package:day_night_time_picker/day_night_time_picker.dart';
+import 'package:mobile_app/src/widgets/model/button_widget.dart';
 
 List<CheckBoxModel> checkBoxModelList = [
   new CheckBoxModel(displayId: 'Sweating', checked: false),
@@ -144,6 +145,17 @@ class _AddLogPageState extends State<AddLogPage> {
     getsymptomsDetail();
     // getList();
     super.initState();
+  }
+
+  getLogDetails() async {
+    var logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
+    for (int i = 0; i < logsList.length; i++) {
+      if (logsList[i].value == 'F') {
+      } else {
+        globals.addIntToSF('C');
+        globals.calculateTemp();
+      }
+    }
   }
 
   getList() async {
@@ -743,36 +755,8 @@ class _AddLogPageState extends State<AddLogPage> {
                 }
               });
             },
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 20, right: 20, top: 10, bottom: 20),
-              child: new Container(
-                padding: const EdgeInsets.all(16),
-                alignment: Alignment.center,
-                color: Theme.of(context).primaryColor,
-                child: new Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      new Text(
-                        "Add Log",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "SF UI Display",
-                          color: Colors.white,
-                          fontSize: globals.deviceType == "phone" ? 17 : 25,
-                        ),
-                      )
-                    ]),
-              ),
-            ),
+            child: buttonWidget(context, "Add Log"),
           ),
-          // Container(
-          //   height: 1,
-          //   margin: EdgeInsets.only(left: 20),
-          //   decoration: BoxDecoration(
-          //     color: AppTheme.dividerColor.withOpacity(0.25),
-          //   ),
-          // ),
         ]),
       ),
     );
@@ -1159,7 +1143,7 @@ class _AddLogPageState extends State<AddLogPage> {
     final config = CalendarDatePicker2WithActionButtonsConfig(
       lastDate: DateTime.now(),
       dayTextStyle: dayTextStyle,
-      calendarType: CalendarDatePicker2Type.range,
+      calendarType: CalendarDatePicker2Type.single,
       selectedDayHighlightColor: AppTheme.textColor2,
       closeDialogOnCancelTapped: true,
       firstDayOfWeek: 1,

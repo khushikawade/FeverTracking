@@ -48,7 +48,7 @@
 //                   child: Column(
 //                     children: [
 //                       Text(
-//                         'Add log !',
+//                         ' !',
 //                         style: textStyle.copyWith(
 //                           fontSize: 18,
 //                           fontWeight: FontWeight.bold,

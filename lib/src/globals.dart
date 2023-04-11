@@ -342,6 +342,11 @@ updatedDatabase() async {
   }
 }
 
+addIntToSF(value) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('stringValue', value);
+}
+
 List<String> postionList = [
   " Ear ",
   " ForeHead ",

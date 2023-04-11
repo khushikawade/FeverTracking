@@ -55,7 +55,6 @@ class HomeScreenState extends State<HomeScreen> {
   // GlobalKey _secondButtonKey = GlobalKey();
   @override
   void initState() {
-  
     getLogs();
     getUserDetail();
     super.initState();
@@ -385,6 +384,7 @@ class HomeScreenState extends State<HomeScreen> {
               child: BubbleShowcase(
                 bubbleShowcaseId: 'my_bubble_showcase',
                 bubbleShowcaseVersion: 1,
+                doNotReopenOnClose: true,
                 bubbleSlides: [
                   RelativeBubbleSlide(
                     shape: const Oval(
@@ -516,7 +516,7 @@ class HomeScreenState extends State<HomeScreen> {
           return RegistrationSuccessDialog();
         });
     if (result != null && result) {
-      bool isValue = await Navigator.pushReplacement(context,
+      bool isValue = await Navigator.push(context,
           MaterialPageRoute(builder: (context) => UpdateProfielPage()));
 
       if (isValue != null && isValue) {

@@ -9,6 +9,7 @@ import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
+import 'package:mobile_app/src/widgets/model/button_widget.dart';
 
 class AddSymptomsPage extends StatefulWidget {
   final bool fromHomePage;
@@ -199,31 +200,35 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
                 ),
               )),
           InkWell(
-            onTap: () {
-              _submit();
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 100),
-              child: new Container(
-                padding: const EdgeInsets.all(16),
-                alignment: Alignment.center,
-                color: Theme.of(context).primaryColor,
-                child: new Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      new Text(
-                        "Add Symptoms",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "SF UI Display",
-                          color: Colors.white,
-                          fontSize: globals.deviceType == "phone" ? 17 : 25,
-                        ),
-                      )
-                    ]),
+              onTap: () {
+                _submit();
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 100),
+                child: buttonWidget(context, "Add Symptoms"),
+              )
+              // child: Padding(
+              //   padding: const EdgeInsets.only(left: 20, right: 20, top: 100),
+              //   child: new Container(
+              //     padding: const EdgeInsets.all(16),
+              //     alignment: Alignment.center,
+              //     color: Theme.of(context).primaryColor,
+              //     child: new Column(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: [
+              //           new Text(
+              //             "Add Symptoms",
+              //             style: TextStyle(
+              //               fontWeight: FontWeight.bold,
+              //               fontFamily: "SF UI Display",
+              //               color: Colors.white,
+              //               fontSize: globals.deviceType == "phone" ? 17 : 25,
+              //             ),
+              //           )
+              //         ]),
+              //   ),
+              // ),
               ),
-            ),
-          ),
         ]),
       ),
     );

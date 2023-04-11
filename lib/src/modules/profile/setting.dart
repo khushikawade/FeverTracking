@@ -76,7 +76,6 @@ class _SettingPageState extends State<SettingPage> {
         _selectedIndexValue = 0;
       } else {
         _selectedIndexValue = 1;
-        
       }
     });
     getUserDetail();
@@ -497,11 +496,11 @@ class _SettingPageState extends State<SettingPage> {
                         setState(() {
                           _selectedIndexValue = value;
                           if (_selectedIndexValue == 0) {
-                            addIntToSF('C');
+                            globals.addIntToSF('C');
                           } else if (_selectedIndexValue == 1) {
-                            addIntToSF('F');
+                            globals.addIntToSF('F');
                           } else {}
-                          // getLogs();
+
                           globals.calculateTemp();
                         });
                       },
@@ -514,26 +513,26 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 
-  addIntToSF(value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('stringValue', value);
-  }
+  // addIntToSF(value) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setString('stringValue', value);
+  // }
 
-  getLogs() async {
-    var logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
-    globals.logObj = logsList;
-    for (int i = 0; i < globals.logObj.length; i++) {
-      if (globals.logObj[i].value == 'C') {
-        globals.calculateTemp();
+  // getLogs() async {
+  //   var logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
+  //   globals.logObj = logsList;
+  //   for (int i = 0; i < globals.logObj.length; i++) {
+  //     if (globals.logObj[i].value == 'C') {
+  //       globals.calculateTemp();
 
-        bool isSuccess = await DbServices().updateListData(
-          Strings.hiveLogName,
-          i,
-          globals.logObj,
-        );
-      } else {}
-    }
-    print(tempValue);
-    setState(() {});
-  }
+  //       bool isSuccess = await DbServices().updateListData(
+  //         Strings.hiveLogName,
+  //         i,
+  //         globals.logObj,
+  //       );
+  //     } else {}
+  //   }
+  //   print(tempValue);
+  //   setState(() {});
+  // }
 }

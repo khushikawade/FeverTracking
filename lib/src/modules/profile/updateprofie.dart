@@ -238,12 +238,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
           ),
           leading: InkWell(
             onTap: () {
-              Future.delayed(
-                Duration.zero,
-                () {
-                  Navigator.pop(context);
-                },
-              );
+              Navigator.pop(context);
             },
             child: Icon(
               Icons.close,
