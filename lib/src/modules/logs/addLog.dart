@@ -63,6 +63,7 @@ class _AddLogPageState extends State<AddLogPage> {
   var medicineList = [];
 
   DateTime finaldate;
+  bool clickAddMore = false;
 
   var distinctIds;
   var distinctIds1;
@@ -135,6 +136,7 @@ class _AddLogPageState extends State<AddLogPage> {
   @override
   void initState() {
     timeString = timeformatter.format(DateTime.now());
+    // getLogDetails();
     postion = globals.postionList[3];
 
     temp = globals.tempertureList[0];
@@ -143,6 +145,7 @@ class _AddLogPageState extends State<AddLogPage> {
     });
     // sypmtoms = checkBoxModelList[0].displayId;
     getsymptomsDetail();
+
     // getList();
     super.initState();
   }
@@ -151,9 +154,12 @@ class _AddLogPageState extends State<AddLogPage> {
     var logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
     for (int i = 0; i < logsList.length; i++) {
       if (logsList[i].value == 'F') {
+        print("Value1");
+      } else if (logsList[i].value == 'C') {
+        print("Value2");
+        print(logsList[i].value);
       } else {
-        globals.addIntToSF('C');
-        globals.calculateTemp();
+        print("Noooooooooo");
       }
     }
   }
@@ -529,6 +535,7 @@ class _AddLogPageState extends State<AddLogPage> {
           InkWell(
             onTap: () {
               setState(() {
+                // getsymptomsDetail();
                 _showSymtomModalSheet();
                 print(sypmtomsTempList.length);
               });
@@ -826,9 +833,6 @@ class _AddLogPageState extends State<AddLogPage> {
                 globals.medicineNameList.removeAt(index);
               }
               medicineList.removeAt(index);
-              // print("lljlkjlh");
-
-              // print(globals.medicineNameList);
 
               setState(() {});
               Utility.showSnackBar(_scaffoldKey,
@@ -1026,7 +1030,7 @@ class _AddLogPageState extends State<AddLogPage> {
                                     setState(() {
                                       data.checked = !data.checked;
                                       print(data.displayId);
-
+                                      print(data.checked);
                                       if (sypmtomsTempList
                                           .contains(data.displayId)) {
                                         print("not added");
@@ -1060,12 +1064,11 @@ class _AddLogPageState extends State<AddLogPage> {
                   ),
                   InkWell(
                     onTap: () {
+                      // Navigator.pop(context);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => AddSymptomsPage()));
-
-                      //
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -1108,14 +1111,14 @@ class _AddLogPageState extends State<AddLogPage> {
         );
       },
     );
-    future.then((void value) => _closeModal(sypmtomsTempList));
+    future.then((void value) => _closeModal());
   }
 
-  void _closeModal(sypmtomsTempList) {
-    bool check = false;
+  void _closeModal() {
     setState(() {
-      print("sypmtoms" + sypmtoms);
+      print("sypmtoms      " + sypmtoms);
       sypmtoms = distinctIds != null ? distinctIds.join(',') : '';
+
       // if (sypmtoms.contains("Add More")) {
       //   check = true;
       //   print("sypmtoms list " + sypmtoms);

@@ -74,6 +74,7 @@ class _SettingPageState extends State<SettingPage> {
     Utility.getStringValuesSF().then((value) {
       if (value == "C") {
         _selectedIndexValue = 0;
+        // globals.calculateTemp();
       } else {
         _selectedIndexValue = 1;
       }

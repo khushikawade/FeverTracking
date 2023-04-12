@@ -278,36 +278,36 @@ final List<String> tempertureList = [
 List<String> Celsiuslist = [];
 
 calculateTemp() async {
-  Utility.getStringValuesSF().then((value) async {
-    print(value);
-    if (value == 'C') {
-      for (int i = 0; i < tempertureList.length; i++) {
-        double num = double.parse(tempertureList[i]);
-        double Celsius = Utility.fahrenheitToCelsius(num);
-        String cel = Celsius.toStringAsFixed(2);
-        Celsiuslist.add(cel);
-      }
-      tempertureList.clear();
-      for (int i = 0; i < Celsiuslist.length; i++) {
-        tempertureList.add(Celsiuslist[i]);
-      }
-      Celsiuslist.clear();
-    } else {
-      for (int i = 0; i < tempertureList.length; i++) {
-        double num = double.parse(tempertureList[i]);
-        double fahrenheit = Utility.CelsiusTofahrenheit(num);
-        String cel = fahrenheit.toStringAsFixed(2);
-        Celsiuslist.add(cel);
-      }
-      tempertureList.clear();
-      for (int i = 0; i < Celsiuslist.length; i++) {
-        tempertureList.add(Celsiuslist[i]);
-      }
-      Celsiuslist.clear();
-    }
-    print(Celsiuslist);
-    print(tempertureList);
-  });
+  // Utility.getStringValuesSF().then((value) async {
+  //   print(value);
+  //   if (value == 'C') {
+  //     for (int i = 0; i < tempertureList.length; i++) {
+  //       double num = double.parse(tempertureList[i]);
+  //       double Celsius = Utility.fahrenheitToCelsius(num);
+  //       String cel = Celsius.toStringAsFixed(2);
+  //       Celsiuslist.add(cel);
+  //     }
+  //     tempertureList.clear();
+  //     for (int i = 0; i < Celsiuslist.length; i++) {
+  //       tempertureList.add(Celsiuslist[i]);
+  //     }
+  //     Celsiuslist.clear();
+  //   } else {
+  //     for (int i = 0; i < tempertureList.length; i++) {
+  //       double num = double.parse(tempertureList[i]);
+  //       double fahrenheit = Utility.CelsiusTofahrenheit(num);
+  //       String cel = fahrenheit.toStringAsFixed(2);
+  //       Celsiuslist.add(cel);
+  //     }
+  //     tempertureList.clear();
+  //     for (int i = 0; i < Celsiuslist.length; i++) {
+  //       tempertureList.add(Celsiuslist[i]);
+  //     }
+  //     Celsiuslist.clear();
+  //   }
+  //   // print(Celsiuslist);
+  //   // print(tempertureList);
+  // });
   updatedDatabase();
 }
 

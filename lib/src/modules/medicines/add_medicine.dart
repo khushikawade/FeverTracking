@@ -248,6 +248,7 @@ class _AddMedicineState extends State<AddMedicine> {
                     Expanded(
                       flex: 3,
                       child: TextField(
+                        maxLength: 1,
                         textAlign: TextAlign.end,
                         controller: dosageController,
                         focusNode: dosageFocus,
@@ -255,7 +256,7 @@ class _AddMedicineState extends State<AddMedicine> {
                             TextInputType.numberWithOptions(decimal: true),
                         decoration: InputDecoration(
                           hintText: '1',
-
+                          counterText: '',
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: AppTheme.textColor2, width: 1),
