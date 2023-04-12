@@ -27,6 +27,7 @@ class MedicinesPage extends StatefulWidget {
 }
 
 class _MedicinesPageState extends State<MedicinesPage> {
+
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<NavigatorState> navigatorKey =
       new GlobalKey<NavigatorState>();
@@ -204,6 +205,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
               widget.fromHomePage
                   ? Container()
                   : addToLogButton(
+                 
                       widget.fromHomePage, _scaffoldKey, index, items, context),
               SizedBox(
                 width: 10,

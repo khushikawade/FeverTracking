@@ -1,21 +1,33 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utils/utility.dart';
+import 'package:mobile_app/src/globals.dart' as globals;
 
 Widget addToLogButton(fromHomePage, _scaffoldKey, index, items, context) {
   return InkWell(
     onTap: () {
       fromHomePage
           ? print("fromhomepage")
-          : Future.delayed(const Duration(seconds: 0), () {
-              Utility.showSnackBar(
-                  _scaffoldKey, 'Medicine successfully added to log', context);
-              Future.delayed(const Duration(seconds: 2), () {
-                Navigator.of(context).pop(items[index]);
-              });
+          : Future.delayed(const Duration(seconds: 1), () {
+              if (globals.medicineNameList
+                  .contains(items[index].medicineName)) {
+                print("already have");
+                Utility.showSnackBar(
+                    _scaffoldKey, 'Medicine already added to log', context);
+                Future.delayed(const Duration(seconds: 1), () {
+                  Navigator.pop(context);
+                });
+              } else {
+                globals.medicineNameList.add(items[index].medicineName);
+                Utility.showSnackBar(_scaffoldKey,
+                    'Medicine successfully added to log', context);
+                Future.delayed(const Duration(seconds: 2), () {
+                  Navigator.of(context).pop(items[index]);
+                });
+              }
             });
+
       //
     },
     child: Material(

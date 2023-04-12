@@ -821,7 +821,15 @@ class _AddLogPageState extends State<AddLogPage> {
           ),
           InkWell(
             onTap: () {
+              if (globals.medicineNameList
+                  .contains(medicineList[index].medicineName)) {
+                globals.medicineNameList.removeAt(index);
+              }
               medicineList.removeAt(index);
+              // print("lljlkjlh");
+
+              // print(globals.medicineNameList);
+
               setState(() {});
               Utility.showSnackBar(_scaffoldKey,
                   'Medicine successfully removed from log.', context);
@@ -868,6 +876,7 @@ class _AddLogPageState extends State<AddLogPage> {
           ),
           selected: true,
           onTap: () async {
+            print(medicineList);
             var medicineModel = await Navigator.push(
                 context,
                 MaterialPageRoute(

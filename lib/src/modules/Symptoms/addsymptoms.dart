@@ -77,7 +77,7 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
             Navigator.pop(context, 1);
           },
           child: Icon(
-            Icons.close,
+            Icons.arrow_back,
             size: 30.0,
             color: AppTheme.iconColor,
           ),

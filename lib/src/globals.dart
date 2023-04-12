@@ -62,6 +62,7 @@ var PharmacyHistory;
 String currentRoute = "chatlobby";
 
 int selectedMonthIndex = 0;
+List<String> medicineNameList = [];
 
 void printWrapped(String text) {
   final pattern = new RegExp('.{1,800}'); // 800 is the size of each chunk
