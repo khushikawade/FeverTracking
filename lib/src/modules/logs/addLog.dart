@@ -150,20 +150,6 @@ class _AddLogPageState extends State<AddLogPage> {
     super.initState();
   }
 
-  getLogDetails() async {
-    var logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
-    for (int i = 0; i < logsList.length; i++) {
-      if (logsList[i].value == 'F') {
-        print("Value1");
-      } else if (logsList[i].value == 'C') {
-        print("Value2");
-        print(logsList[i].value);
-      } else {
-        print("Noooooooooo");
-      }
-    }
-  }
-
   getList() async {
     var logsList = await DbServices().getListData(Strings.hiveLogName);
     globals.logObj = logsList;
@@ -760,6 +746,7 @@ class _AddLogPageState extends State<AddLogPage> {
                   Utility.showSnackBar(
                       _scaffoldKey, 'Please Fill All Required Field ', context);
                 }
+                globals.medicineNameList = [];
               });
             },
             child: buttonWidget(context, "Add Log"),
@@ -828,9 +815,11 @@ class _AddLogPageState extends State<AddLogPage> {
           ),
           InkWell(
             onTap: () {
-              if (globals.medicineNameList
-                  .contains(medicineList[index].medicineName)) {
-                globals.medicineNameList.removeAt(index);
+              if (globals.medicineNameList.isNotEmpty) {
+                if (globals.medicineNameList
+                    .contains(medicineList[index].medicineName)) {
+                  globals.medicineNameList.removeAt(index);
+                }
               }
               medicineList.removeAt(index);
 

@@ -29,6 +29,17 @@ class _StartupPageState extends State<StartupPage> {
     getDeviceType();
     getUserDetail();
     checklogin();
+    getLogDetails();
+  }
+
+  getLogDetails() async {
+    var logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
+    for (int i = 0; i < logsList.length; i++) {
+      if (logsList[i].value == 'F') {
+      } else if (logsList[i].value == 'C') {
+        globals.calculateTemp2();
+      } else {}
+    }
   }
 
   checklogin() async {

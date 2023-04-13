@@ -64,6 +64,20 @@ String currentRoute = "chatlobby";
 int selectedMonthIndex = 0;
 List<String> medicineNameList = [];
 
+// ignore: camel_case_types
+// class medicineNameListModel {
+//   String medicineName;
+//   int index;
+
+//   medicineNameListModel({
+//     @required this.medicineName,  @required  this.index});
+// }
+
+// List<medicineNameListModel> medicineNameList = [
+//   // friendModel(userId: "1gw3t2s", name: "Luke"),
+//   // friendModel(userId: "hjerhew", name: "Joda"),
+// ];
+
 void printWrapped(String text) {
   final pattern = new RegExp('.{1,800}'); // 800 is the size of each chunk
   pattern.allMatches(text).forEach((match) => print(match.group(0)));
@@ -278,37 +292,73 @@ final List<String> tempertureList = [
 List<String> Celsiuslist = [];
 
 calculateTemp() async {
-  // Utility.getStringValuesSF().then((value) async {
-  //   print(value);
-  //   if (value == 'C') {
-  //     for (int i = 0; i < tempertureList.length; i++) {
-  //       double num = double.parse(tempertureList[i]);
-  //       double Celsius = Utility.fahrenheitToCelsius(num);
-  //       String cel = Celsius.toStringAsFixed(2);
-  //       Celsiuslist.add(cel);
-  //     }
-  //     tempertureList.clear();
-  //     for (int i = 0; i < Celsiuslist.length; i++) {
-  //       tempertureList.add(Celsiuslist[i]);
-  //     }
-  //     Celsiuslist.clear();
-  //   } else {
-  //     for (int i = 0; i < tempertureList.length; i++) {
-  //       double num = double.parse(tempertureList[i]);
-  //       double fahrenheit = Utility.CelsiusTofahrenheit(num);
-  //       String cel = fahrenheit.toStringAsFixed(2);
-  //       Celsiuslist.add(cel);
-  //     }
-  //     tempertureList.clear();
-  //     for (int i = 0; i < Celsiuslist.length; i++) {
-  //       tempertureList.add(Celsiuslist[i]);
-  //     }
-  //     Celsiuslist.clear();
-  //   }
-  //   // print(Celsiuslist);
-  //   // print(tempertureList);
-  // });
+  Utility.getStringValuesSF().then((value) async {
+    print(value);
+    if (value == 'C') {
+      for (int i = 0; i < tempertureList.length; i++) {
+        double num = double.parse(tempertureList[i]);
+        double Celsius = Utility.fahrenheitToCelsius(num);
+        String cel = Celsius.toStringAsFixed(2);
+        Celsiuslist.add(cel);
+      }
+      tempertureList.clear();
+      for (int i = 0; i < Celsiuslist.length; i++) {
+        tempertureList.add(Celsiuslist[i]);
+      }
+      Celsiuslist.clear();
+    } else if (value == 'F') {
+      for (int i = 0; i < tempertureList.length; i++) {
+        double num = double.parse(tempertureList[i]);
+        double fahrenheit = Utility.CelsiusTofahrenheit(num);
+        String cel = fahrenheit.toStringAsFixed(2);
+        Celsiuslist.add(cel);
+      }
+      tempertureList.clear();
+      for (int i = 0; i < Celsiuslist.length; i++) {
+        tempertureList.add(Celsiuslist[i]);
+      }
+      Celsiuslist.clear();
+    } else {
+      print("Nothing--------------------------");
+    }
+    // print(Celsiuslist);
+    // print(tempertureList);
+  });
   updatedDatabase();
+}
+
+calculateTemp2() async {
+  Utility.getStringValuesSF().then((value) async {
+    print(value);
+    if (value == 'C') {
+      for (int i = 0; i < tempertureList.length; i++) {
+        double num = double.parse(tempertureList[i]);
+        double Celsius = Utility.fahrenheitToCelsius(num);
+        String cel = Celsius.toStringAsFixed(2);
+        Celsiuslist.add(cel);
+      }
+      tempertureList.clear();
+      for (int i = 0; i < Celsiuslist.length; i++) {
+        tempertureList.add(Celsiuslist[i]);
+      }
+      Celsiuslist.clear();
+    } else {
+      for (int i = 0; i < tempertureList.length; i++) {
+        double num = double.parse(tempertureList[i]);
+        double fahrenheit = Utility.CelsiusTofahrenheit(num);
+        String cel = fahrenheit.toStringAsFixed(2);
+        Celsiuslist.add(cel);
+      }
+      tempertureList.clear();
+      for (int i = 0; i < Celsiuslist.length; i++) {
+        tempertureList.add(Celsiuslist[i]);
+      }
+      Celsiuslist.clear();
+
+      // print(Celsiuslist);
+      // print(tempertureList);
+    }
+  });
 }
 
 updatedDatabase() async {
