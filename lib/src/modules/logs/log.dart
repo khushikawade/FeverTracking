@@ -319,7 +319,7 @@ class _LogPageState extends State<LogPage> {
                         Expanded(
                           child: Text(
                             items[index].addMedinceLog != null
-                                ? '${items[index].addMedinceLog.medicineName}, ${items[index].addMedinceLog.dosage}'
+                                ? '${items[index].addMedinceLog.medicineName}, ${items[index].addMedinceLog.dosage},  ${items[index].addMedinceLog.medicineUnit}'
                                 : '',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,

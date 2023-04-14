@@ -289,7 +289,7 @@ class _EditMedicinePageState extends State<EditMedicinePage> {
                           fontFamily: 'SF UI Display Bold',
                           color: AppTheme.textColor1,
                         ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        // contentPadding: EdgeInsets.symmetric(horizontal: 10),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color: AppTheme.textColor2, width: 1.5),
@@ -344,8 +344,7 @@ class _EditMedicinePageState extends State<EditMedicinePage> {
                           ),
                           // errorBorder: InputBorder.none,
                           // disabledBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                              left: 0, bottom: 0, top: 0, right: 0),
+                        
                           hintStyle: TextStyle(
                               color: AppTheme.subHeadingTextColor,
                               fontFamily: "SF UI Display Regular",

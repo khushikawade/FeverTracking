@@ -127,12 +127,12 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
                 ? ListView.separated(
                     separatorBuilder: (context, index) {
                       return Container(
-                        margin: EdgeInsets.only(left: 20),
-                        height: 0.4,
-                        color: Color.fromRGBO(0, 0, 0, 0.25),
-                      );
+                          // margin: EdgeInsets.only(left: 20),
+                          // height: 0.4,
+                          // color: Color.fromRGBO(0, 0, 0, 0.25),
+                          );
                     },
-                    padding: EdgeInsets.only(top: 10, bottom: 100),
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
                       return itemWidget1(index, snapshot.data);
@@ -156,85 +156,90 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
   }
 
   Widget itemWidget1(int index, items) {
-    return Container(
-      color: AppTheme.listbackGroundColor,
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Container(
-          padding: EdgeInsets.all(20),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Container(
-              child: Text(
-                items[index].symptomName != null &&
-                        items[index].symptomName.isNotEmpty
-                    ? items[index].symptomName
-                    : '',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0,
-                    color: AppTheme.textColor1,
-                    fontFamily: "SF UI Display Bold",
-                    fontSize: globals.deviceType == 'phone' ? 17 : 25),
-              ),
-            ),
-            InkWell(
-              onTap: () async {
-                {
-                  print(items.length);
-                  var get = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EditSymptomsPage(
-                              index: index,
-                              sysmptomsItem: items[index].symptomName)));
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Container(
+            padding: EdgeInsets.all(20),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    child: Text(
+                      items[index].symptomName != null &&
+                              items[index].symptomName.isNotEmpty
+                          ? items[index].symptomName
+                          : '',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0,
+                          color: AppTheme.textColor1,
+                          fontFamily: "SF UI Display Bold",
+                          fontSize: globals.deviceType == 'phone' ? 17 : 25),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      {
+                        print(items.length);
+                        var get = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditSymptomsPage(
+                                    index: index,
+                                    sysmptomsItem: items[index].symptomName)));
 
-                  setState(() {});
-                }
-              },
-              child: Container(
-                padding: EdgeInsets.only(right: 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      const IconData(0xe802, fontFamily: "FeverTrackingIcons"),
-                      // color:AppTheme.iconColor,
-                      color: Colors.black54,
-                      size: 24,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        deleteSymptoms(index);
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(2),
-                        alignment: Alignment.center,
-                        child: Icon(
-                          Icons.delete_outline,
-                          size: 20,
-                          color: Colors.red,
-                        ),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.grey, width: 1)),
+                        setState(() {});
+                      }
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(right: 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            const IconData(0xe802,
+                                fontFamily: "FeverTrackingIcons"),
+                            // color:AppTheme.iconColor,
+                            color: Colors.black54,
+                            size: 24,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              deleteSymptoms(index);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(2),
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.delete_outline,
+                                size: 20,
+                                color: Colors.red,
+                              ),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border:
+                                      Border.all(color: Colors.grey, width: 1)),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ]),
-        ),
-        index == (items.length - 1)
-            ? Container(
-                height: 1,
-                color: Color.fromRGBO(0, 0, 0, 0.25),
-              )
-            : Container()
-      ]),
+                  ),
+                ]),
+          ),
+          // index == (items.length - 1)
+          //     ? Container(
+          //         height: 1,
+          //         color: Color.fromRGBO(0, 0, 0, 0.25),
+          //       )
+          //     : Container()
+        ]),
+      ),
     );
   }
 }

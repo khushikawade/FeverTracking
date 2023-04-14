@@ -33,7 +33,7 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
       Utility.showSnackBar(
           _scaffoldKey, 'Symptoms added successfully', context);
       Future.delayed(const Duration(seconds: 1), () {
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(true);
         // Navigator.push(context,
         //     MaterialPageRoute(builder: (context) => SymptomsListPage()));
         //   if (widget.fromHomePage != null && widget.fromHomePage) {
@@ -186,7 +186,7 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
                         fontFamily: 'SF UI Display Bold',
                         color: AppTheme.textColor1,
                       ),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                      // contentPadding: EdgeInsets.symmetric(horizontal: 10),
                       focusedBorder: UnderlineInputBorder(
                         borderSide:
                             BorderSide(color: AppTheme.textColor2, width: 1.5),

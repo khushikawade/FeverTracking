@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/src/modules/medicines/model/medicinemodel.dart';
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
+import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
 
+import '../../db/db_services.dart';
+
 class AddNote extends StatefulWidget {
+  final String notetext;
+  AddNote({Key key, @required this.notetext});
   @override
   _AddNoteState createState() => _AddNoteState();
 }
 
 class _AddNoteState extends State<AddNote> {
   FocusNode _descriptionFocus;
+  TextEditingController textController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     _descriptionFocus = FocusNode();
+    textController = TextEditingController(text: widget.notetext);
     super.initState();
   }
 
@@ -26,7 +34,6 @@ class _AddNoteState extends State<AddNote> {
 
   @override
   Widget build(BuildContext context) {
-    final textController = TextEditingController();
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -138,6 +145,7 @@ class _AddNoteState extends State<AddNote> {
                           const EdgeInsets.only(left: 20, right: 20, top: 100),
                       child: InkWell(
                         onTap: () {
+                          // _submit();
                           final form = _formKey.currentState;
 
                           if (form.validate()) {
@@ -181,5 +189,47 @@ class _AddNoteState extends State<AddNote> {
     );
   }
 
-  void _submit() {}
+  void _submit() {
+    final form = _formKey.currentState;
+
+    if (form.validate()) {
+      if ((textController != null) && (textController.text.isNotEmpty)) {
+        String item = textController.text;
+
+        final log = MedicineModel(
+          '',
+          '',
+          '',
+          '',
+          item,
+        );
+        addLog(log);
+      } else {
+        Utility.showSnackBar(
+            _scaffoldKey, 'Please Enter Required Value ', context);
+      }
+
+      form.save();
+    }
+  }
+
+  void addLog(MedicineModel log) async {
+    bool isSuccess =
+        await DbServices().addData(log, Strings.createMedicineName);
+
+    if (isSuccess != null && isSuccess) {
+      Utility.showSnackBar(_scaffoldKey, 'Note added successfully', context);
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pop(context, textController.text);
+        // });
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => SymptomsListPage()));
+        //   if (widget.fromHomePage != null && widget.fromHomePage) {
+        //     Navigator.of(context).pop(1);
+        //   } else {
+        //     Navigator.of(context).pop(true);
+        //   }
+      });
+    }
+  }
 }

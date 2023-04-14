@@ -520,11 +520,11 @@ class _AddLogPageState extends State<AddLogPage> {
           ),
           InkWell(
             onTap: () {
-              setState(() {
-                // getsymptomsDetail();
-                _showSymtomModalSheet();
-                print(sypmtomsTempList.length);
-              });
+              // getsymptomsDetail();
+              // setState(() {
+              _showSymtomModalSheet();
+              print(sypmtomsTempList.length);
+              // });
             },
             child: Container(
               padding: EdgeInsets.all(20),
@@ -800,10 +800,24 @@ class _AddLogPageState extends State<AddLogPage> {
                   fontSize: globals.deviceType == "phone" ? 13 : 21),
             ),
           ),
+
           Text(
             medicineItems[index].dosage != null &&
                     medicineItems[index].dosage.isNotEmpty
                 ? medicineItems[index].dosage
+                : '',
+            style: TextStyle(
+                color: AppTheme.textColor2,
+                fontFamily: "SF UI Display Regular Bold",
+                fontSize: globals.deviceType == "phone" ? 13 : 21),
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Text(
+            medicineItems[index].medicineUnit != null &&
+                    medicineItems[index].medicineUnit.isNotEmpty
+                ? medicineItems[index].medicineUnit
                 : '',
             style: TextStyle(
                 color: AppTheme.textColor2,
@@ -1052,12 +1066,18 @@ class _AddLogPageState extends State<AddLogPage> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       // Navigator.pop(context);
-                      Navigator.push(
+                      bool result = await Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => AddSymptomsPage()));
+                      if (result != null && result) {
+                        print("result------------$result");
+                        state2(() {
+                          getsymptomsDetail();
+                        });
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(

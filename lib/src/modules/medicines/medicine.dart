@@ -4,6 +4,7 @@ import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/modules/Symptoms/editsymptoms.dart';
 import 'package:mobile_app/src/modules/medicines/add_medicine.dart';
 import 'package:mobile_app/src/modules/medicines/editMedicine.dart';
+import 'package:mobile_app/src/modules/medicines/model/medicinemodel.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
@@ -27,7 +28,6 @@ class MedicinesPage extends StatefulWidget {
 }
 
 class _MedicinesPageState extends State<MedicinesPage> {
-
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<NavigatorState> navigatorKey =
       new GlobalKey<NavigatorState>();
@@ -115,7 +115,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
                 ? ListView.separated(
                     separatorBuilder: (context, index) {
                       return Container(
-                        margin: EdgeInsets.only(left: 20),
+                        margin: EdgeInsets.only(left: 20, right: 20),
                         height: 0.6,
                         color: Color.fromRGBO(0, 0, 0, 0.25),
                       );
@@ -205,7 +205,6 @@ class _MedicinesPageState extends State<MedicinesPage> {
               widget.fromHomePage
                   ? Container()
                   : addToLogButton(
-                 
                       widget.fromHomePage, _scaffoldKey, index, items, context),
               SizedBox(
                 width: 10,
@@ -300,17 +299,21 @@ class _MedicinesPageState extends State<MedicinesPage> {
               onTap: () {
                 WidgetsBinding.instance?.addPostFrameCallback((_) async {
                   // Write your code here
+
                   bool result = await Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => AddMedicine(
-                                medicineItem: items[index].medicineName,
                                 text: "edit",
                                 index: index,
+                                dosage: items[index].dosage,
+                                medicineFrequency:
+                                    items[index].medicineFrequency,
+                                medicineItem: items[index].medicineName,
+                                medicineUnit: items[index].medicineUnit,
                               )));
 
                   if (result != null && result) {
-                    print("kjljljljljljljljljljljljljljljljljljl");
                     print(result);
                     setState(() {});
                     //getList();

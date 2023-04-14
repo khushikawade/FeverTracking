@@ -22,16 +22,23 @@ List<String> frequencyList = [
 ];
 
 List<String> unitList = ["cc", "g", "mcg", "mg", "ml", "oz"];
+List<String> dosageList = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
 class AddMedicine extends StatefulWidget {
   final String text;
   final String medicineItem;
+  final String medicineUnit;
+  final String medicineFrequency;
+  final String dosage;
   final int index;
 
   AddMedicine({
     Key key,
     @required this.text,
     @required this.medicineItem,
+    @required this.medicineUnit,
+    @required this.medicineFrequency,
+    @required this.dosage,
     @required this.index,
   }) : super(key: key);
   @override
@@ -43,9 +50,10 @@ class _AddMedicineState extends State<AddMedicine> {
   String selectedUnit = "";
   String selectedFrequency = "";
   String addNoteText = '';
+  String selectedDosage = "";
 
   TextEditingController medicineController = TextEditingController();
-  TextEditingController dosageController = TextEditingController();
+  // TextEditingController dosageController = TextEditingController();
   FocusNode dosageFocus = new FocusNode();
   FocusNode medicineFocus = new FocusNode();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -57,12 +65,18 @@ class _AddMedicineState extends State<AddMedicine> {
   @override
   void initState() {
     super.initState();
-    widget.text == "edit"
-        ? medicineController =
-            new TextEditingController(text: widget.medicineItem)
-        : null;
-    selectedUnit = unitList[0];
-    selectedFrequency = frequencyList[0];
+    if (widget.text == "edit") {
+      medicineController = new TextEditingController(text: widget.medicineItem);
+      selectedUnit = widget.medicineUnit;
+      selectedFrequency = widget.medicineFrequency;
+      selectedDosage = widget.dosage;
+      // dosageController = new TextEditingController(text: widget.dosage);
+    } else {
+      selectedUnit = unitList[0];
+
+      selectedFrequency = frequencyList[0];
+      selectedDosage = dosageList[0];
+    }
   }
 
   var logsList;
@@ -211,7 +225,7 @@ class _AddMedicineState extends State<AddMedicine> {
                           fontFamily: 'SF UI Display Bold',
                           color: AppTheme.textColor1,
                         ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        // contentPadding: EdgeInsets.symmetric(horizontal: 10),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color: AppTheme.textColor2, width: 1.5),
@@ -224,106 +238,167 @@ class _AddMedicineState extends State<AddMedicine> {
                     ),
                   )),
               Container(
-                padding:
-                    EdgeInsets.only(top: 2.5, bottom: 2.5, left: 16, right: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 0,
-                      child: Text(
-                        "Dosage",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: AppTheme.textColor1,
-                            fontFamily: "SF UI Display Regular Bold",
-                            fontSize: globals.deviceType == "phone" ? 17 : 25),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 209,
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: TextField(
-                        maxLength: 1,
-                        textAlign: TextAlign.end,
-                        controller: dosageController,
-                        focusNode: dosageFocus,
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
-                        decoration: InputDecoration(
-                          hintText: '1',
-                          counterText: '',
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: AppTheme.textColor2, width: 1),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: AppTheme.subtitleTextColor, width: 1),
-                          ),
-                          // errorBorder: InputBorder.none,
-                          // disabledBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                              left: 0, bottom: 0, top: 0, right: 0),
-                          hintStyle: TextStyle(
-                              color: AppTheme.subHeadingTextColor,
-                              fontFamily: "SF UI Display Regular",
-                              fontSize:
-                                  globals.deviceType == "phone" ? 16 : 24),
-                        ),
-                        style: TextStyle(
-                            color: AppTheme.textColor2,
-                            fontFamily: "SF UI Display Regular",
-                            fontSize: globals.deviceType == "phone" ? 16 : 24),
-                      ),
-                    ),
-
-                    SizedBox(
-                      width: 10,
-                    ),
-                    // Expanded(
-                    //   flex: 0,
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.only(top: 02),
-                    //     child: Text(
-                    //       "${selectedUnit}",
-                    //       style: TextStyle(
-                    //         color: AppTheme.textColor2,
-                    //         fontFamily: "SF UI Display Regular",
-                    //         fontSize: globals.deviceType == "phone" ? 15 : 23,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    Expanded(
-                      flex: 5,
-                      child: DropdownButton<String>(
-                        value: dropdownValue,
-                        icon: const Icon(Icons.arrow_drop_down),
-                        // elevation: 0,
-                        style: const TextStyle(color: AppTheme.textColor2),
-                        onChanged: (String value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValue = value;
-                            print(dropdownValue);
-                          });
-                        },
-                        items: unitList
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    )
-                  ],
+                height: 1,
+                margin: EdgeInsets.only(left: 10, right: 10),
+                decoration: BoxDecoration(
+                  color: AppTheme.dividerColor.withOpacity(0.25),
                 ),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
+                child: ListTile(
+                  leading: Text(
+                    "Dosage",
+                    style: TextStyle(
+                        color: AppTheme.textColor1,
+                        fontFamily: "SF UI Display Regular",
+                        fontSize: globals.deviceType == "phone" ? 17 : 25),
+                  ),
+                  trailing: DropdownButton<String>(
+                    menuMaxHeight: 200,
+                    isDense: true,
+                    value: selectedDosage,
+                    icon: const Icon(Icons.arrow_drop_down),
+                    // elevation: 0,
+                    style: const TextStyle(color: AppTheme.textColor2),
+                    onChanged: (String value) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        selectedDosage = value;
+                        print(selectedDosage);
+                      });
+                    },
+                    items: dosageList
+                        .map<DropdownMenuItem<String>>((String selectedDosage) {
+                      return DropdownMenuItem<String>(
+                        value: selectedDosage,
+                        child: Text(selectedDosage),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+              Container(
+                height: 1,
+                margin: EdgeInsets.only(left: 10, right: 10),
+                decoration: BoxDecoration(
+                  color: AppTheme.dividerColor.withOpacity(0.25),
+                ),
+              ),
+              Container(
+                child: ListTile(
+                  leading: Text(
+                    "Unit",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        color: AppTheme.textColor1,
+                        fontFamily: "SF UI Display Regular Bold",
+                        fontSize: globals.deviceType == "phone" ? 17 : 25),
+                  ),
+                  trailing: DropdownButton<String>(
+                    value: selectedUnit,
+                    icon: const Icon(Icons.arrow_drop_down),
+                    // elevation: 0,
+                    style: const TextStyle(color: AppTheme.textColor2),
+                    onChanged: (String value) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        selectedUnit = value;
+                        print(selectedUnit);
+                      });
+                    },
+                    items: unitList
+                        .map<DropdownMenuItem<String>>((String selectedUnit) {
+                      return DropdownMenuItem<String>(
+                        value: selectedUnit,
+                        child: Text(selectedUnit),
+                      );
+                    }).toList(),
+                  ),
+                ),
+
+                // SizedBox(
+                //   width: 209,
+                // ),
+                // Expanded(
+                //   flex: 3,
+                //   child: TextField(
+                //     maxLength: 1,
+                //     textAlign: TextAlign.end,
+                //     controller: dosageController,
+                //     focusNode: dosageFocus,
+                //     keyboardType:
+                //         TextInputType.numberWithOptions(decimal: true),
+                //     decoration: InputDecoration(
+                //       hintText: '1',
+                //       counterText: '',
+                //       focusedBorder: UnderlineInputBorder(
+                //         borderSide: BorderSide(
+                //             color: AppTheme.textColor2, width: 1),
+                //       ),
+                //       enabledBorder: UnderlineInputBorder(
+                //         borderSide: BorderSide(
+                //             color: AppTheme.subtitleTextColor, width: 1),
+                //       ),
+                //       // errorBorder: InputBorder.none,
+                //       // disabledBorder: InputBorder.none,
+                //       contentPadding: EdgeInsets.only(
+                //           left: 0, bottom: 0, top: 0, right: 0),
+                //       hintStyle: TextStyle(
+                //           color: AppTheme.subHeadingTextColor,
+                //           fontFamily: "SF UI Display Regular",
+                //           fontSize:
+                //               globals.deviceType == "phone" ? 16 : 24),
+                //     ),
+                //     style: TextStyle(
+                //         color: AppTheme.textColor2,
+                //         fontFamily: "SF UI Display Regular",
+                //         fontSize: globals.deviceType == "phone" ? 16 : 24),
+                //   ),
+                // ),
+
+                // SizedBox(
+                //   width: 10,
+                // ),
+                // Expanded(
+                //   flex: 0,
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(top: 02),
+                //     child: Text(
+                //       "${selectedUnit}",
+                //       style: TextStyle(
+                //         color: AppTheme.textColor2,
+                //         fontFamily: "SF UI Display Regular",
+                //         fontSize: globals.deviceType == "phone" ? 15 : 23,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // Expanded(
+                //   flex: 5,
+                //   child: DropdownButton<String>(
+                //     value: selectedUnit,
+                //     icon: const Icon(Icons.arrow_drop_down),
+                //     // elevation: 0,
+                //     style: const TextStyle(color: AppTheme.textColor2),
+                //     onChanged: (String value) {
+                //       // This is called when the user selects an item.
+                //       setState(() {
+                //         selectedUnit = value;
+                //         print(selectedUnit);
+                //       });
+                //     },
+                //     items: unitList.map<DropdownMenuItem<String>>(
+                //         (String selectedUnit) {
+                //       return DropdownMenuItem<String>(
+                //         value: selectedUnit,
+                //         child: Text(selectedUnit),
+                //       );
+                //     }).toList(),
+                //   ),
+                // )
+                //   ],
+                // ),
               ),
               // Padding(
               //   padding: const EdgeInsets.only(right: 70),
@@ -336,17 +411,14 @@ class _AddMedicineState extends State<AddMedicine> {
               //     ),
               //   ),
               // ),
-              SizedBox(
-                height: 10,
-              ),
 
-              Container(
-                height: 1,
-                margin: EdgeInsets.only(left: 20),
-                decoration: BoxDecoration(
-                  color: AppTheme.dividerColor.withOpacity(0.25),
-                ),
-              ),
+              // Container(
+              //   height: 1,
+              //   margin: EdgeInsets.only(left: 20),
+              //   decoration: BoxDecoration(
+              //     color: AppTheme.dividerColor.withOpacity(0.25),
+              //   ),
+              // ),
               // Container(
               //   padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
               //   child: ListTile(
@@ -389,9 +461,10 @@ class _AddMedicineState extends State<AddMedicine> {
               //     },
               //   ),
               // ),
+
               Container(
                 height: 1,
-                margin: EdgeInsets.only(left: 20),
+                margin: EdgeInsets.only(left: 10, right: 10),
                 decoration: BoxDecoration(
                   color: AppTheme.dividerColor.withOpacity(0.25),
                 ),
@@ -478,7 +551,11 @@ class _AddMedicineState extends State<AddMedicine> {
                   medicineFocus.unfocus();
                   var result = await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddNote()),
+                    MaterialPageRoute(
+                        builder: (context) => AddNote(
+                              notetext:
+                                  addNoteText.isNotEmpty ? addNoteText : '',
+                            )),
                   );
                   setState(() {
                     addNoteText = result;
@@ -585,20 +662,15 @@ class _AddMedicineState extends State<AddMedicine> {
 
     if (form.validate()) {
       String medicineName = medicineController.text;
-      String dosage = dosageController.text;
 
       if (widget.text == "edit") {
-        final updateItem = MedicineModel(
-            medicineName, dosage, selectedUnit, selectedFrequency, addNoteText);
+        final updateItem = MedicineModel(medicineName, selectedDosage,
+            selectedUnit, selectedFrequency, addNoteText);
         updateMedicineList(widget.index, updateItem);
       } else {
         if (medicineName != null && medicineName.isNotEmpty) {
-          final medicineModel = MedicineModel(
-              medicineName,
-              '${dosage} $selectedUnit',
-              selectedUnit,
-              selectedFrequency,
-              addNoteText);
+          final medicineModel = MedicineModel(medicineName, selectedDosage,
+              selectedUnit, selectedFrequency, addNoteText);
           addMedicine(medicineModel);
         } else {
           Utility.showSnackBar(
@@ -611,7 +683,7 @@ class _AddMedicineState extends State<AddMedicine> {
 
     void _submit1(index) {
       final form = _formKey.currentState;
-      String dosage = dosageController.text;
+      // String dosage = dosageController.text;
       if (form.validate()) {
         if ((medicineController != null) && (medicineController.text.isNotEmpty)
             // &&
@@ -620,8 +692,8 @@ class _AddMedicineState extends State<AddMedicine> {
             ) {
           String item = medicineController.text;
 
-          final updateItem = MedicineModel(
-              item, dosage, selectedUnit, selectedFrequency, addNoteText);
+          final updateItem = MedicineModel(item, selectedDosage, selectedUnit,
+              selectedFrequency, addNoteText);
           updateMedicineList(index, updateItem);
         }
 

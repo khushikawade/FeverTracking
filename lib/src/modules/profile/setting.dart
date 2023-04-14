@@ -22,6 +22,8 @@ class SettingPage extends StatefulWidget {
   _SettingPageState createState() => _SettingPageState();
 }
 
+GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
 class _SettingPageState extends State<SettingPage> {
   bool _lights = false;
   int _selectedIndexValue = 1;
@@ -30,6 +32,8 @@ class _SettingPageState extends State<SettingPage> {
   String _image;
   String _name;
   String tempValue;
+  bool f = false;
+  bool c = false;
 
   void toggleSwitch(bool value) {
     if (isSwitched == false) {
@@ -80,9 +84,21 @@ class _SettingPageState extends State<SettingPage> {
       }
     });
     getUserDetail();
+    getLogDetails();
     // getLogs();
 
     super.initState();
+  }
+
+  getLogDetails() async {
+    var logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
+    for (int i = 0; i < logsList.length; i++) {
+      if (logsList[i].value == 'F') {
+        f = true;
+      } else if (logsList[i].value == 'C') {
+        c = true;
+      } else {}
+    }
   }
 
   @override
@@ -495,6 +511,7 @@ class _SettingPageState extends State<SettingPage> {
                       },
                       onValueChanged: (value) {
                         setState(() {
+                          print("value----------------$_selectedIndexValue");
                           _selectedIndexValue = value;
                           if (_selectedIndexValue == 0) {
                             globals.addIntToSF('C');
@@ -502,7 +519,15 @@ class _SettingPageState extends State<SettingPage> {
                             globals.addIntToSF('F');
                           } else {}
 
-                          globals.calculateTemp();
+                          if (_selectedIndexValue == 1 && f) {
+                            Utility.showSnackBar(_scaffoldKey,
+                                'fahrenheit value already selected ', context);
+                          } else if (_selectedIndexValue == 0 && c) {
+                            Utility.showSnackBar(_scaffoldKey,
+                                'Celcius value already selected ', context);
+                          } else {
+                            globals.calculateTemp();
+                          }
                         });
                       },
                     ),
@@ -513,27 +538,16 @@ class _SettingPageState extends State<SettingPage> {
           ]),
     );
   }
-
-  // addIntToSF(value) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setString('stringValue', value);
-  // }
-
-  // getLogs() async {
-  //   var logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
-  //   globals.logObj = logsList;
-  //   for (int i = 0; i < globals.logObj.length; i++) {
-  //     if (globals.logObj[i].value == 'C') {
-  //       globals.calculateTemp();
-
-  //       bool isSuccess = await DbServices().updateListData(
-  //         Strings.hiveLogName,
-  //         i,
-  //         globals.logObj,
-  //       );
-  //     } else {}
-  //   }
-  //   print(tempValue);
-  //   setState(() {});
-  // }
 }
+
+// getLogDetails() async {
+//   var logsList = await DbServices().getSelectedDateData(Strings.hiveLogName);
+//   for (int i = 0; i < logsList.length; i++) {
+//     if (logsList[i].value == 'F') {
+//       print("F");
+//     } else if (logsList[i].value == 'C') {
+//       print("C");
+//     } else {}
+//   }
+// }
+
