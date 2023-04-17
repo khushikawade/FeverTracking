@@ -78,7 +78,7 @@ class _SymptomsListPageState extends State<SymptomsListPage> {
               getList();
             },
             child: Icon(
-              Icons.close,
+              Icons.arrow_back,
               size: 30.0,
               color: AppTheme.iconColor,
             ),

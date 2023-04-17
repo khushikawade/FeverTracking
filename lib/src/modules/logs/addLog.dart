@@ -258,7 +258,7 @@ class _AddLogPageState extends State<AddLogPage> {
             Navigator.pop(context);
           },
           child: Icon(
-            Icons.close,
+            Icons.arrow_back,
             size: 30.0,
             color: AppTheme.iconColor,
           ),
@@ -967,6 +967,7 @@ class _AddLogPageState extends State<AddLogPage> {
         backgroundColor: Theme.of(context).backgroundColor,
         builder: (BuildContext bc) {
           return ListView.builder(
+              physics: BouncingScrollPhysics(),
               itemCount: 6,
               itemBuilder: (context, index) {
                 return Padding(

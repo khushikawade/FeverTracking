@@ -16,13 +16,16 @@ Widget addToLogButton(fromHomePage, _scaffoldKey, index, items, context) {
                 Utility.showSnackBar(
                     _scaffoldKey, 'Medicine already added to log', context);
                 Future.delayed(const Duration(seconds: 1), () {
-                  Navigator.pop(context);
+                  Navigator.of(context).pop();
+                  print(
+                      "Items -----------------already------after added ${index}");
                 });
               } else {
                 globals.medicineNameList.add(items[index].medicineName);
                 Utility.showSnackBar(_scaffoldKey,
                     'Medicine successfully added to log', context);
-                Future.delayed(const Duration(seconds: 2), () {
+                Future.delayed(const Duration(seconds: 1), () {
+                  print("Items -----------------------after added ${index}");
                   Navigator.of(context).pop(items[index]);
                 });
               }

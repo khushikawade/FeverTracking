@@ -318,7 +318,7 @@ class _MedicinesPageState extends State<MedicinesPage> {
                     setState(() {});
                     //getList();
                   }
-                  setState(() {});
+                  // setState(() {});
                 });
 
                 // WidgetsBinding.instance

@@ -37,6 +37,7 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                 height: 44,
                 color: Theme.of(context).primaryColor,
                 child: TabBar(
+                  // isScrollable: true,
                   onTap: (int index) {
                     setState(() {
                       selectedTabIndex = index;
@@ -47,7 +48,6 @@ class _UserTemperaturePageState extends State<UserTemperaturePage> {
                   tabs: tabcontent,
                   indicatorColor: Theme.of(context).accentColor,
                   indicatorWeight: 4,
-
                   // labelColor: Colors.white,
                   labelStyle: TextStyle(
                       fontSize: globals.deviceType == 'phone' ? 14 : 22,

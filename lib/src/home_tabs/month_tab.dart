@@ -14,7 +14,10 @@ import 'package:mobile_app/src/widgets/selection_callback_state.dart';
 
 class MonthTab extends StatefulWidget {
   int selectedTabIndex;
-  MonthTab({Key key, this.selectedTabIndex}) : super(key: key);
+  MonthTab({
+    Key key,
+    this.selectedTabIndex,
+  }) : super(key: key);
   @override
   _MonthTab createState() => _MonthTab();
 }
@@ -37,6 +40,9 @@ class _MonthTab extends State<MonthTab> {
       }
     });
     super.initState();
+    print(' --------------month');
+    print(
+        'widget.selectedTabIndex------------------${widget.selectedTabIndex}');
     // print('Init Callled -------------------------');
     getList();
   }

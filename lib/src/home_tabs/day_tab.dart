@@ -13,8 +13,10 @@ import 'package:mobile_app/src/widgets/model/temperature_model.dart';
 import 'package:mobile_app/src/widgets/selection_callback_state.dart';
 
 class DayTab extends StatefulWidget {
+
   int selectedTabIndex;
-  DayTab({Key key, this.selectedTabIndex}) : super(key: key);
+  DayTab({Key key, this.selectedTabIndex,})
+      : super(key: key);
   @override
   _DayTab createState() => _DayTab();
 }
@@ -39,8 +41,11 @@ class _DayTab extends State<DayTab> {
         celsius = false;
       }
     });
-    print('Init Callled --------------day graph-----------');
+    print(' --------------day');
+    print(
+        'widget.selectedTabIndex------------------${widget.selectedTabIndex}');
     getList();
+   
   }
 
   getList() async {
@@ -68,7 +73,6 @@ class _DayTab extends State<DayTab> {
             // ++counter;
             print("Length : ${newLogsList[counter].dateTime}");
           }
-          // print("Length : ${newLogsList.length}");
         }
       }
 
@@ -87,6 +91,7 @@ class _DayTab extends State<DayTab> {
         });
       }
     }
+    print("week list");
   }
 
   List<charts.Series<TemperatureDataClass, DateTime>> _createSampleData(

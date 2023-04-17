@@ -37,6 +37,9 @@ class _WeekTab extends State<WeekTab> {
       }
     });
     super.initState();
+    print(' --------------week');
+    print(
+        'widget.selectedTabIndex------------------${widget.selectedTabIndex}');
     // print('Init Callled -------------------------');
     getList();
   }
@@ -81,6 +84,7 @@ class _WeekTab extends State<WeekTab> {
         });
       }
     }
+    print("week list");
   }
 
   List<charts.Series<TemperatureDataClass, DateTime>> _createSampleData(

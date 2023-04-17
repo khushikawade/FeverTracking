@@ -37,7 +37,7 @@ class _CustomTab extends State<CustomTab> {
         celsius = false;
       }
     });
-    print('Init Callled -------------------------');
+    print('-------------------------All');
     getList();
   }
 

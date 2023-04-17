@@ -18,9 +18,7 @@ class ProfileModelAdapter extends TypeAdapter<ProfileModel> {
     };
     return ProfileModel(
       fields[0] as String,
-      fields[6] as String,
       fields[1] as int,
-      fields[2] as int,
       fields[3] as String,
       fields[4] as String,
       fields[5] as String,
@@ -33,8 +31,6 @@ class ProfileModelAdapter extends TypeAdapter<ProfileModel> {
       ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
-      ..writeByte(1)
-      ..write(obj.phonenumber)
       ..writeByte(2)
       ..write(obj.age)
       ..writeByte(3)
@@ -42,9 +38,7 @@ class ProfileModelAdapter extends TypeAdapter<ProfileModel> {
       ..writeByte(4)
       ..write(obj.imageName)
       ..writeByte(5)
-      ..write(obj.path)
-      ..writeByte(6)
-      ..write(obj.address);
+      ..write(obj.path);
   }
 
   @override

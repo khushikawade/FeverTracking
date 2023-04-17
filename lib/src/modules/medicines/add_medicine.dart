@@ -53,7 +53,7 @@ class _AddMedicineState extends State<AddMedicine> {
   String selectedDosage = "";
 
   TextEditingController medicineController = TextEditingController();
-  // TextEditingController dosageController = TextEditingController();
+  TextEditingController dosageController = TextEditingController();
   FocusNode dosageFocus = new FocusNode();
   FocusNode medicineFocus = new FocusNode();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -70,7 +70,7 @@ class _AddMedicineState extends State<AddMedicine> {
       selectedUnit = widget.medicineUnit;
       selectedFrequency = widget.medicineFrequency;
       selectedDosage = widget.dosage;
-      // dosageController = new TextEditingController(text: widget.dosage);
+      dosageController = new TextEditingController(text: widget.dosage);
     } else {
       selectedUnit = unitList[0];
 
@@ -93,7 +93,7 @@ class _AddMedicineState extends State<AddMedicine> {
     if (isSuccess != null && isSuccess) {
       Utility.showSnackBar(
           _scaffoldKey, 'Medicine added successfully', context);
-      Future.delayed(const Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 2), () {
         Navigator.of(context).pop(true);
       });
     }
@@ -166,7 +166,7 @@ class _AddMedicineState extends State<AddMedicine> {
             getList();
           },
           child: Icon(
-            Icons.close,
+            Icons.arrow_back,
             size: 30.0,
             color: AppTheme.iconColor,
           ),
@@ -193,7 +193,7 @@ class _AddMedicineState extends State<AddMedicine> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 20, right: 20, bottom: 30, top: 20),
+                        left: 20, right: 20, bottom: 10, top: 20),
                     child: TextFormField(
                       cursorColor: AppTheme.textColor2,
                       focusNode: medicineFocus,
@@ -237,54 +237,108 @@ class _AddMedicineState extends State<AddMedicine> {
                       ),
                     ),
                   )),
+              // Container(
+              //   height: 1,
+              //   margin: EdgeInsets.only(left: 10, right: 10),
+              //   decoration: BoxDecoration(
+              //     color: AppTheme.dividerColor.withOpacity(0.25),
+              //   ),
+              // ),
               Container(
-                height: 1,
-                margin: EdgeInsets.only(left: 10, right: 10),
-                decoration: BoxDecoration(
-                  color: AppTheme.dividerColor.withOpacity(0.25),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
-                child: ListTile(
-                  leading: Text(
-                    "Dosage",
-                    style: TextStyle(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: AppTheme.subHeadingbackgroundcolor,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20, right: 20, bottom: 30, top: 0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      cursorColor: AppTheme.textColor2,
+                      focusNode: dosageFocus,
+                      controller: dosageController,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      inputFormatters: [
+                        //Only letters are allowed
+                        // FilteringTextInputFormatter.allow(
+                        //     RegExp("[a-zA-Z_\\s-]")),
+                        FilteringTextInputFormatter.allow((RegExp("[0-9]"))),
+                      ],
+                      validator: (val) {
+                        if (val.isEmpty) {
+                          return 'Dosage  is required   ';
+                        } else {
+                          return null;
+                        }
+                      },
+                      // onSaved: (val) => _username = val,
+
+                      style: TextStyle(
                         color: AppTheme.textColor1,
-                        fontFamily: "SF UI Display Regular",
-                        fontSize: globals.deviceType == "phone" ? 17 : 25),
-                  ),
-                  trailing: DropdownButton<String>(
-                    menuMaxHeight: 200,
-                    isDense: true,
-                    value: selectedDosage,
-                    icon: const Icon(Icons.arrow_drop_down),
-                    // elevation: 0,
-                    style: const TextStyle(color: AppTheme.textColor2),
-                    onChanged: (String value) {
-                      // This is called when the user selects an item.
-                      setState(() {
-                        selectedDosage = value;
-                        print(selectedDosage);
-                      });
-                    },
-                    items: dosageList
-                        .map<DropdownMenuItem<String>>((String selectedDosage) {
-                      return DropdownMenuItem<String>(
-                        value: selectedDosage,
-                        child: Text(selectedDosage),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-              Container(
-                height: 1,
-                margin: EdgeInsets.only(left: 10, right: 10),
-                decoration: BoxDecoration(
-                  color: AppTheme.dividerColor.withOpacity(0.25),
-                ),
-              ),
+                        fontFamily: 'SF UI Display Bold',
+                        fontSize: globals.deviceType == "phone" ? 16.0 : 24,
+                      ),
+                      decoration: InputDecoration(
+                        labelText: 'Enter Dosage Number',
+                        labelStyle: TextStyle(
+                          fontSize: globals.deviceType == "phone" ? 16.0 : 24,
+                          fontFamily: 'SF UI Display Bold',
+                          color: AppTheme.textColor1,
+                        ),
+                        // contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: AppTheme.textColor2, width: 1.5),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: AppTheme.subHeadingTextColor, width: 1.5),
+                        ),
+                      ),
+                    ),
+                  )),
+
+              // Container(
+              //   padding: EdgeInsets.only(top: 2.5, bottom: 2.5),
+              //   child: ListTile(
+              //     leading: Text(
+              //       "Dosage",
+              //       style: TextStyle(
+              //           color: AppTheme.textColor1,
+              //           fontFamily: "SF UI Display Regular",
+              //           fontSize: globals.deviceType == "phone" ? 17 : 25),
+              //     ),
+              //     trailing: DropdownButton<String>(
+              //       menuMaxHeight: 200,
+              //       isDense: true,
+              //       value: selectedDosage,
+              //       icon: const Icon(Icons.arrow_drop_down),
+              //       // elevation: 0,
+              //       style: const TextStyle(color: AppTheme.textColor2),
+              //       onChanged: (String value) {
+              //         // This is called when the user selects an item.
+              //         setState(() {
+              //           selectedDosage = value;
+              //           print(selectedDosage);
+              //         });
+              //       },
+              //       items: dosageList
+              //           .map<DropdownMenuItem<String>>((String selectedDosage) {
+              //         return DropdownMenuItem<String>(
+              //           value: selectedDosage,
+              //           child: Text(selectedDosage),
+              //         );
+              //       }).toList(),
+              //     ),
+              //   ),
+              // ),
+              // Container(
+              //   height: 1,
+              //   margin: EdgeInsets.only(left: 10, right: 10),
+              //   decoration: BoxDecoration(
+              //     color: AppTheme.dividerColor.withOpacity(0.25),
+              //   ),
+              // ),
               Container(
                 child: ListTile(
                   leading: Text(
@@ -662,14 +716,15 @@ class _AddMedicineState extends State<AddMedicine> {
 
     if (form.validate()) {
       String medicineName = medicineController.text;
+      String dosage = dosageController.text;
 
       if (widget.text == "edit") {
-        final updateItem = MedicineModel(medicineName, selectedDosage,
-            selectedUnit, selectedFrequency, addNoteText);
+        final updateItem = MedicineModel(
+            medicineName, dosage, selectedUnit, selectedFrequency, addNoteText);
         updateMedicineList(widget.index, updateItem);
       } else {
         if (medicineName != null && medicineName.isNotEmpty) {
-          final medicineModel = MedicineModel(medicineName, selectedDosage,
+          final medicineModel = MedicineModel(medicineName, dosage,
               selectedUnit, selectedFrequency, addNoteText);
           addMedicine(medicineModel);
         } else {
@@ -681,25 +736,25 @@ class _AddMedicineState extends State<AddMedicine> {
       form.save();
     }
 
-    void _submit1(index) {
-      final form = _formKey.currentState;
-      // String dosage = dosageController.text;
-      if (form.validate()) {
-        if ((medicineController != null) && (medicineController.text.isNotEmpty)
-            // &&
-            // (symptomsController.text != widget.sysmptomsItem)
+    // void _submit1(index) {
+    //   final form = _formKey.currentState;
+    //   // String dosage = dosageController.text;
+    //   if (form.validate()) {
+    //     if ((medicineController != null) && (medicineController.text.isNotEmpty)
+    //         // &&
+    //         // (symptomsController.text != widget.sysmptomsItem)
 
-            ) {
-          String item = medicineController.text;
+    //         ) {
+    //       String item = medicineController.text;
 
-          final updateItem = MedicineModel(item, selectedDosage, selectedUnit,
-              selectedFrequency, addNoteText);
-          updateMedicineList(index, updateItem);
-        }
+    //       final updateItem = MedicineModel(item, selectedDosage, selectedUnit,
+    //           selectedFrequency, addNoteText);
+    //       updateMedicineList(index, updateItem);
+    //     }
 
-        form.save();
-      }
-    }
+    //     form.save();
+    //   }
+    // }
   }
 
   _settingModalBottomSheet(context, obj, int value) {

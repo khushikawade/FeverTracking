@@ -8,6 +8,7 @@ import 'package:mobile_app/src/modules/profile/Model/profilemodel.dart';
 import 'package:mobile_app/src/modules/profile/setting.dart';
 import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
+import 'package:mobile_app/src/widgets/model/button_widget.dart';
 import 'package:regexpattern/regexpattern.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
@@ -29,6 +30,8 @@ class UpdateProfielPage extends StatefulWidget {
 class _UpdateProfielPageState extends State<UpdateProfielPage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  FocusNode nameFocus = new FocusNode();
+  FocusNode ageFocus = new FocusNode();
   // final GlobalKey<ScaffoldState> _scaffoldstate =
   //     new GlobalKey<ScaffoldState>();
   String fileName;
@@ -76,7 +79,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
       Utility.saveImageToPreferences(log.path);
       Utility.showSnackBar(_scaffoldKey, 'Data Added Successfully', context);
 
-      Future.delayed(const Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomeScreen()));
         // Navigator.of(context).pop(0);
@@ -106,7 +109,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
       Utility.showSnackBar(
           _scaffoldKey, 'Profile Update Successfully', context);
 
-      Future.delayed(const Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomeScreen()));
         // Navigator.of(context).pop(0);
@@ -144,8 +147,6 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
   void _getitem() {
     final item = ProfileModel(
         _username,
-        address,
-        _phone,
         age,
         _genderRadioBtnVal,
         _image != null
@@ -158,7 +159,13 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
             : globals.userObj != null && globals.userObj.length > 0
                 ? globals.userObj[0].path
                 : null);
-    _isprofileUpdate(item);
+
+    if (_image == null) {
+      Utility.showSnackBar(
+          _scaffoldKey, 'Please update profile image', context);
+    } else {
+      _isprofileUpdate(item);
+    }
 
     // print(item.address);
     // print(item.imageName);
@@ -241,7 +248,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
               Navigator.pop(context);
             },
             child: Icon(
-              Icons.close,
+              Icons.arrow_back,
               size: 30.0,
               color: AppTheme.iconColor,
             ),
@@ -359,6 +366,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               padding: const EdgeInsets.only(
                                   left: 20, right: 20, top: 10, bottom: 10),
                               child: TextFormField(
+                                focusNode: nameFocus,
+                                autofocus: true,
                                 cursorColor: AppTheme.textColor2,
                                 controller: namecontroller,
                                 autovalidateMode:
@@ -374,7 +383,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 // ],
                                 validator: (val) {
                                   if (val.isEmpty) {
-                                    return 'This field is required   ';
+                                    return 'Please enter the user name  ';
                                   }
                                   // else if (val.length > 0 && val.length < 4) {
                                   //   return 'Please Enter a Valid Name ';
@@ -505,6 +514,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                             padding: const EdgeInsets.only(
                                 left: 20, right: 20, top: 10, bottom: 10),
                             child: TextFormField(
+                              focusNode: ageFocus,
+                              autofocus: true,
                               cursorColor: AppTheme.textColor2,
                               controller: _agecontroller,
                               autovalidateMode:
@@ -524,10 +535,10 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                               onSaved: (val) => age = num.tryParse(val),
                               validator: (val) {
                                 if (val.isEmpty) {
-                                  return 'This field is required ';
+                                  return "Please enter the user's age ";
                                 } else if (int.parse(val) <= 0 ||
                                     int.parse(val) >= 100) {
-                                  return 'Please Enter a Valid Age ';
+                                  return 'Please enter a valid age ';
                                 }
                                 // else if (int.parse(val) < 0 ||
                                 //     int.parse(val) > 100) {
@@ -624,33 +635,37 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                                 alignment: FractionalOffset.bottomCenter,
                                 child: GestureDetector(
                                   onTap: () {
+                                    nameFocus.unfocus();
+                                    ageFocus.unfocus();
                                     _submit();
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.all(20),
-                                    child: new Container(
-                                      padding: const EdgeInsets.all(16),
-                                      alignment: Alignment.center,
-                                      color: Theme.of(context).primaryColor,
-                                      child: new Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            new Text(
-                                              "Update Profile",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontFamily: "SF UI Display",
-                                                color: Colors.white,
-                                                fontSize: globals.deviceType ==
-                                                        "phone"
-                                                    ? 17
-                                                    : 25,
-                                              ),
-                                            )
-                                          ]),
-                                    ),
-                                  ),
+                                      padding: const EdgeInsets.all(20),
+                                      child: buttonWidget(
+                                          context, 'Update Profile')
+                                      // new Container(
+                                      //   padding: const EdgeInsets.all(16),
+                                      //   alignment: Alignment.center,
+                                      //   color: Theme.of(context).primaryColor,
+                                      //   child: new Column(
+                                      //       mainAxisAlignment:
+                                      //           MainAxisAlignment.center,
+                                      //       children: [
+                                      //         new Text(
+                                      //           "Update Profile",
+                                      //           style: TextStyle(
+                                      //             fontWeight: FontWeight.bold,
+                                      //             fontFamily: "SF UI Display",
+                                      //             color: Colors.white,
+                                      //             fontSize: globals.deviceType ==
+                                      //                     "phone"
+                                      //                 ? 17
+                                      //                 : 25,
+                                      //           ),
+                                      //         )
+                                      //       ]),
+                                      // ),
+                                      ),
                                 )),
                           ],
                         ),

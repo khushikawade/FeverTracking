@@ -297,7 +297,7 @@ class HomeScreenState extends State<HomeScreen> {
                 onUpdateWidget: (int index) {
                   if (index != null) {
                     getdate(index);
-                    print(index);
+                    print("index--------------------------------------$index");
                     setState(() {
                       // selectedDate = DateTime.now();
                     });
@@ -385,6 +385,7 @@ class HomeScreenState extends State<HomeScreen> {
                 bubbleShowcaseId: 'my_bubble_showcase',
                 bubbleShowcaseVersion: 1,
                 doNotReopenOnClose: true,
+                showCloseButton: false,
                 bubbleSlides: [
                   RelativeBubbleSlide(
                     shape: const Oval(
@@ -407,34 +408,6 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  // AbsoluteBubbleSlide(
-                  //   shape: const Oval(
-                  //     spreadRadius: 30,
-                  //   ),
-                  //   positionCalculator: (size) => Position(
-                  //     top: 0,
-                  //     right: 0,
-                  //     bottom: 30,
-                  //     left: 0,
-                  //   ),
-                  //   child: AbsoluteBubbleSlideChild(
-                  //     positionCalculator: (size) => Position(
-                  //       top: 50,
-                  //       left: 0,
-                  //     ),
-                  //     widget: SpeechBubble(
-                  //       nipLocation: NipLocation.RIGHT,
-                  //       color: Colors.blue,
-                  //       child: Padding(
-                  //         padding: EdgeInsets.all(10),
-                  //         child: Text(
-                  //           'This is the top left corner of your app.',
-                  //           style: TextStyle(color: Colors.white),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
                 child: Container(
                   key: _titleKey,
@@ -600,7 +573,8 @@ class HomeScreenState extends State<HomeScreen> {
       if (logsList != null && logsList.length > 0) {
         generatePDFFile();
       } else {
-        Utility.showSnackBar(_scaffoldKey, 'No Logs Found', context);
+        Utility.showSnackBar(
+            _scaffoldKey, 'Please add a log then share report', context);
       }
     } else {
       showSuccessDialog(context);

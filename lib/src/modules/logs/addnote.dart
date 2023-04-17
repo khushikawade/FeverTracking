@@ -4,6 +4,7 @@ import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/globals.dart' as globals;
 import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
+import 'package:mobile_app/src/widgets/model/button_widget.dart';
 
 import '../../db/db_services.dart';
 
@@ -62,7 +63,7 @@ class _AddNoteState extends State<AddNote> {
             Navigator.pop(context, '');
           },
           child: Icon(
-            Icons.close,
+            Icons.arrow_back,
             size: 30.0,
             color: AppTheme.iconColor,
           ),
@@ -141,8 +142,7 @@ class _AddNoteState extends State<AddNote> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 20, top: 100),
+                      padding: const EdgeInsets.only(top: 60),
                       child: InkWell(
                         onTap: () {
                           // _submit();
@@ -153,30 +153,12 @@ class _AddNoteState extends State<AddNote> {
 
                             Utility.showSnackBar(_scaffoldKey,
                                 'Note added successfully', context);
-                            Future.delayed(const Duration(seconds: 2), () {
+                            Future.delayed(const Duration(seconds: 0), () {
                               Navigator.pop(context, textController.text);
                             });
                           }
                         },
-                        child: new Container(
-                          padding: const EdgeInsets.all(16),
-                          alignment: Alignment.center,
-                          color: Theme.of(context).primaryColor,
-                          child: new Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                new Text(
-                                  "Add Note",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "SF UI Display",
-                                    color: Colors.white,
-                                    fontSize:
-                                        globals.deviceType == "phone" ? 17 : 25,
-                                  ),
-                                )
-                              ]),
-                        ),
+                        child: buttonWidget(context, "Add Note"),
                       ),
                     ),
                   ],
@@ -219,7 +201,7 @@ class _AddNoteState extends State<AddNote> {
 
     if (isSuccess != null && isSuccess) {
       Utility.showSnackBar(_scaffoldKey, 'Note added successfully', context);
-      Future.delayed(const Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 0), () {
         Navigator.pop(context, textController.text);
         // });
         // Navigator.push(context,
