@@ -54,6 +54,7 @@ dependencies:
   permission_handler: ^10.2.0
   pdf: ^3.8.4
   calendar_date_picker2: ^0.4.9
+  numberpicker: ^2.1.2
   # day_night_time_picker: ^1.2.0+2
   # image_picker: ^0.8.7
   # regexpattern: ^2.1.0

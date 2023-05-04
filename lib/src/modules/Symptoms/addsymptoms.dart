@@ -74,7 +74,7 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
         ),
         leading: InkWell(
           onTap: () {
-            Navigator.pop(context, 1);
+            Navigator.pop(context, true);
           },
           child: Icon(
             Icons.arrow_back,
@@ -206,9 +206,7 @@ class _AddSymptomsPageState extends State<AddSymptomsPage> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 50),
                 child: buttonWidget(context, "Add Symptoms"),
-              )
-           
-              ),
+              )),
         ]),
       ),
     );

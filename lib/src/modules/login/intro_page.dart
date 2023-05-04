@@ -8,6 +8,7 @@ import 'package:mobile_app/src/modules/login/pageview_screen/screen4.dart';
 import 'package:mobile_app/src/overrides.dart' as overrides;
 import 'package:mobile_app/src/styles/theme.dart';
 import 'package:mobile_app/src/utils/utility.dart';
+import 'package:mobile_app/src/widgets/skip_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroPage extends StatefulWidget {
@@ -62,19 +63,31 @@ class IntroPageState extends State<IntroPage> {
                 ? Container(
                     margin: EdgeInsets.only(bottom: 50),
                     child: getStartedButton())
-                : Container(
-                    margin: EdgeInsets.only(bottom: 35),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        for (int i = 0; i < introWidgetsList.length; i++)
-                          if (i == currentPageValue) ...[
-                            circleBar(true, i)
-                          ] else
-                            circleBar(false, i),
-                      ],
-                    ),
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30),
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 50),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              for (int i = 0; i < introWidgetsList.length; i++)
+                                if (i == currentPageValue) ...[
+                                  circleBar(true, i)
+                                ] else
+                                  circleBar(false, i),
+                              SizedBox(
+                                  width: MediaQuery.of(context).size.width / 3 +
+                                      50),
+                              SkipButton()
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
           ],
         )

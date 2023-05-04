@@ -48,7 +48,7 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   getUserDetail() async {
-    var userData = await DbServices().getListData(Strings.updateProile);
+    var userData = await DbServices().getListData(Strings.updateProfile);
 
     globals.userObj = userData;
 

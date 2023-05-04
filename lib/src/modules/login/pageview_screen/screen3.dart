@@ -19,19 +19,7 @@ class Screen3State extends State<Screen3> {
         alignment: Alignment.center,
         color: Theme.of(context).backgroundColor,
         padding: EdgeInsets.only(left: 30, right: 30),
-       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            SizedBox(
-              height: 60,
-            ),
-            SkipButton(),
-            SizedBox(
-              height: 100,
-            ),
-            makeWidget(),
-          ],
-        ),
+      child: makeWidget(),
       ),
     );
   }

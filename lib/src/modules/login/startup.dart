@@ -58,7 +58,7 @@ class _StartupPageState extends State<StartupPage> {
 
   getUserDetail() async {
     // final log = SymptomsModel("vomatining");
-    var userData = await DbServices().getListData(Strings.updateProile);
+    var userData = await DbServices().getListData(Strings.updateProfile);
 
     globals.userObj = userData;
   }

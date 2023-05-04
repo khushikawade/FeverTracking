@@ -25,7 +25,7 @@ class _MenuScreenState extends State<MenuScreen> {
   String name;
 
   getUserDetail() async {
-    var userData = await DbServices().getListData(Strings.updateProile);
+    var userData = await DbServices().getListData(Strings.updateProfile);
 
     globals.userObj = userData;
 

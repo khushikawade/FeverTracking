@@ -27,7 +27,7 @@ class _SkipButtonState extends State<SkipButton> {
         borderRadius: BorderRadius.circular(30.0),
         child: Container(
             width: 70,
-            height: 25,
+            height: 28,
             decoration: BoxDecoration(
               border: Border.all(
                 color: Colors.grey.shade400,

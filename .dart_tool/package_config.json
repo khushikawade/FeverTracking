@@ -380,6 +380,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "infinite_listview",
+      "rootUri": "file:///C:/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/infinite_listview-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "intl",
       "rootUri": "file:///C:/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.17.0",
       "packageUri": "lib/",
@@ -456,6 +462,12 @@
       "rootUri": "file:///C:/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/mime-1.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "numberpicker",
+      "rootUri": "file:///C:/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/numberpicker-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "package_config",
@@ -806,7 +818,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2023-04-14T14:04:10.978071Z",
+  "generated": "2023-05-04T10:33:06.323642Z",
   "generator": "pub",
   "generatorVersion": "2.19.5"
 }

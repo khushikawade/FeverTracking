@@ -473,7 +473,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   getUserDetail() async {
-    var userData = await DbServices().getListData(Strings.updateProile);
+    var userData = await DbServices().getListData(Strings.updateProfile);
 
     globals.userObj = userData;
 

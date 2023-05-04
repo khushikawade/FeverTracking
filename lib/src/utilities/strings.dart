@@ -3,7 +3,7 @@ class Strings {
   static final String hiveLogName = "LOGS";
 
   static final String createSymptoms = "Symptoms";
-  static final String updateProile = "Profile";
+  static final String updateProfile = "Profile";
   static final String createMedicineName = "MEDICINES";
   static final String feranahiteString = "\u2109";
   static final String celsiusString = "\u2103";

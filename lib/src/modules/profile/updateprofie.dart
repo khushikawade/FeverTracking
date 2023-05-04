@@ -36,8 +36,6 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
   //     new GlobalKey<ScaffoldState>();
   String fileName;
   String _username;
-  String address;
-  int _phone;
   int age;
   var _image;
   String selectedImage;
@@ -71,7 +69,8 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
     print(log);
     bool isSuccess;
     print("inside add*******");
-    isSuccess = await DbServices().addData(log, Strings.updateProile);
+
+    isSuccess = await DbServices().addData(log, Strings.updateProfile);
 
     if (isSuccess != null && isSuccess) {
       SharedPreferences pref = await SharedPreferences.getInstance();
@@ -97,7 +96,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
   void updateLog(ProfileModel log) async {
     print(log.path);
     bool isSuccess = await DbServices().updateListData(
-      Strings.updateProile,
+      Strings.updateProfile,
       0,
       log,
     );
@@ -160,12 +159,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
                 ? globals.userObj[0].path
                 : null);
 
-    if (_image == null) {
-      Utility.showSnackBar(
-          _scaffoldKey, 'Please update profile image', context);
-    } else {
-      _isprofileUpdate(item);
-    }
+    _isprofileUpdate(item);
 
     // print(item.address);
     // print(item.imageName);
@@ -182,7 +176,12 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
     if (result != null && result) {
       updateLog(log);
     } else {
-      addLog(log);
+      if (log.path == null || log.imageName == null) {
+        Utility.showSnackBar(
+            _scaffoldKey, 'Please select profile image', context);
+      } else {
+        addLog(log);
+      }
     }
   }
 
@@ -198,6 +197,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
   @override
   void initState() {
     super.initState();
+    // _getitem();
 
     selectedImage = globals.userObj != null && globals.userObj.length > 0
         ? globals.userObj[0].path
@@ -205,14 +205,7 @@ class _UpdateProfielPageState extends State<UpdateProfielPage> {
     namecontroller.text = globals.userObj != null && globals.userObj.length > 0
         ? globals.userObj[0].name
         : '';
-    _Adresscontroller.text =
-        globals.userObj != null && globals.userObj.length > 0
-            ? globals.userObj[0].address
-            : '';
-    _Phonecontroller.text =
-        globals.userObj != null && globals.userObj.length > 0
-            ? globals.userObj[0].phonenumber.toString()
-            : '';
+
     _agecontroller.text = globals.userObj != null && globals.userObj.length > 0
         ? globals.userObj[0].age.toString()
         : '';

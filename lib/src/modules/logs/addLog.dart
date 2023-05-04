@@ -19,6 +19,7 @@ import 'package:mobile_app/src/utilities/strings.dart';
 import 'package:mobile_app/src/utils/utility.dart';
 import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:mobile_app/src/widgets/model/button_widget.dart';
+import 'package:mobile_app/src/widgets/numberPicker.dart';
 
 List<CheckBoxModel> checkBoxModelList = [
   new CheckBoxModel(displayId: 'Sweating', checked: false),
@@ -435,6 +436,7 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
               selected: true,
               onTap: () {
+                // DecimalExample();
                 postionAndTemperatureBottomSheet(
                     context, globals.postionList, 0, globals.postionListIcon);
               },
@@ -489,6 +491,22 @@ class _AddLogPageState extends State<AddLogPage> {
               ),
               selected: true,
               onTap: () {
+                // TemperatureBottomSheet();
+
+                // onUpdateWidget: (int index) {
+                //   if (index != null) {
+                //     getdate(index);
+                //     print("index--------------------------------------$index");
+                //     setState(() {
+                //       // selectedDate = DateTime.now();
+                //     });
+                //   } else {
+                //     getdate(0);
+                //     setState(() {
+                //       // selectedDate = DateTime.now();
+                //     });
+                //   }
+                // },
                 // String value = Utility.getStringValuesSF();
                 // print(value);
 
@@ -506,6 +524,7 @@ class _AddLogPageState extends State<AddLogPage> {
                 //   }
 
                 // });
+
                 postionAndTemperatureBottomSheet(context,
                     globals.tempertureList, 1, globals.postionListIcon);
               },
@@ -968,7 +987,7 @@ class _AddLogPageState extends State<AddLogPage> {
         builder: (BuildContext bc) {
           return ListView.builder(
               physics: BouncingScrollPhysics(),
-              itemCount: 6,
+              itemCount: 20,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -989,6 +1008,32 @@ class _AddLogPageState extends State<AddLogPage> {
                   ),
                 );
               });
+        });
+  }
+
+  TemperatureBottomSheet() {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+            // <-- SEE HERE
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25.0),
+                topRight: Radius.circular(25.0))),
+        context: context,
+        isDismissible: true,
+        enableDrag: true,
+        backgroundColor: Theme.of(context).backgroundColor,
+        builder: (BuildContext bc) {
+          return FractionallySizedBox(
+            heightFactor: 0.7,
+            child: DecimalExample(
+              onUpdateWidgetForTemp: (double index) {
+                setState(() {
+                  print("temp-------------------> $index");
+                  temp = index.toString();
+                });
+              },
+            ),
+          );
         });
   }
 

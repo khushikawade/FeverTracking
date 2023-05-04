@@ -195,14 +195,17 @@ class _AddMedicineState extends State<AddMedicine> {
                     padding: const EdgeInsets.only(
                         left: 20, right: 20, bottom: 10, top: 20),
                     child: TextFormField(
+                      keyboardType: TextInputType.text,
                       cursorColor: AppTheme.textColor2,
                       focusNode: medicineFocus,
                       controller: medicineController,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       inputFormatters: [
-                        //Only letters are allowed
+                        //   //Only letters are allowed
+                        //   FilteringTextInputFormatter.allow(
+                        //       RegExp("[a-zA-Z_\\s-]")),
                         FilteringTextInputFormatter.allow(
-                            RegExp("[a-zA-Z_\\s-]")),
+                            (RegExp(r'^[a-zA-Z0-9]+$')))
                       ],
                       validator: (val) {
                         if (val.isEmpty) {

@@ -28,10 +28,10 @@ class ProfileModelAdapter extends TypeAdapter<ProfileModel> {
   @override
   void write(BinaryWriter writer, ProfileModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
-      ..writeByte(2)
+      ..writeByte(1)
       ..write(obj.age)
       ..writeByte(3)
       ..write(obj.gender)
