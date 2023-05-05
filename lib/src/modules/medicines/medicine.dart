@@ -318,6 +318,12 @@ class _MedicinesPageState extends State<MedicinesPage> {
                     setState(() {});
                     //getList();
                   }
+
+                  if (globals.medicineNameList.isNotEmpty) {
+                    for (int i = 0; i < globals.medicineNameList.length; i++) {
+                      print(globals.medicineNameList);
+                    }
+                  }
                   // setState(() {});
                 });
 

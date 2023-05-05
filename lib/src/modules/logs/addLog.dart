@@ -54,6 +54,7 @@ class AddLogPage extends StatefulWidget {
 
 class _AddLogPageState extends State<AddLogPage> {
   final ValueNotifier<String> _sypmtoms = ValueNotifier<String>("");
+  final ValueNotifier<int> _position = ValueNotifier<int>(3);
   String time;
   List<String> sypmtomsTempList = [];
 
@@ -72,6 +73,7 @@ class _AddLogPageState extends State<AddLogPage> {
   String timeString;
   String addNoteText = "";
   String postion = "";
+  int selectedIndexForPosition;
   String date = "";
   String temp = "";
   bool ClickAddLog = false;
@@ -902,7 +904,7 @@ class _AddLogPageState extends State<AddLogPage> {
           ),
           selected: true,
           onTap: () async {
-            print(medicineList);
+            print(medicineList.length);
             var medicineModel = await Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -978,7 +980,7 @@ class _AddLogPageState extends State<AddLogPage> {
   //       });
   // }
 
-  postionAndTemperatureBottomSheet(context, obj, int value, icon) {
+  postionAndTemperatureBottomSheet(context, obj, int value1, icon) {
     showModalBottomSheet(
         context: context,
         isDismissible: true,
@@ -987,24 +989,32 @@ class _AddLogPageState extends State<AddLogPage> {
         builder: (BuildContext bc) {
           return ListView.builder(
               physics: BouncingScrollPhysics(),
-              itemCount: 20,
+              itemCount: value1 == 0 ? 6 : 20,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Card(
-                    child: ListTile(
-                      trailing: value == 1 ? null : icon[index],
-                      title: new Text(
-                        obj[index],
-                        style: TextStyle(
-                          color: AppTheme.textColor1,
-                          fontSize: globals.deviceType == 'phone' ? 17.0 : 25.0,
-                          fontFamily: 'SF UI Display Regular',
-                          fontWeight: FontWeight.w600,
+                  child: ValueListenableBuilder<int>(
+                    builder: (BuildContext context, int value, Widget child) {
+                      return Card(
+                        color:
+                            index == value ? Colors.deepPurple : Colors.white,
+                        child: ListTile(
+                          trailing: value1 == 1 ? null : icon[index],
+                          title: new Text(
+                            obj[index],
+                            style: TextStyle(
+                              color: AppTheme.textColor1,
+                              fontSize:
+                                  globals.deviceType == 'phone' ? 17.0 : 25.0,
+                              fontFamily: 'SF UI Display Regular',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          onTap: () => _selectTemp(obj[index], value, index),
                         ),
-                      ),
-                      onTap: () => _selectTemp(obj[index], value),
-                    ),
+                      );
+                    },
+                    valueListenable: _position,
                   ),
                 );
               });
@@ -1037,13 +1047,18 @@ class _AddLogPageState extends State<AddLogPage> {
         });
   }
 
-  void _selectTemp(String t, int value) {
+  void _selectTemp(String t, int value, int index) {
     Navigator.pop(context);
     setState(() {
       if (value == 1) {
         temp = t;
       } else {
+        print("-----------------------$index");
         postion = t;
+        print(postion);
+        selectedIndexForPosition = index;
+        print("-----------------------$selectedIndexForPosition");
+        _position.value = selectedIndexForPosition;
       }
     });
   }
